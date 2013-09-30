@@ -3029,8 +3029,10 @@ static int a3xx_rb_init(struct adreno_device *adreno_dev,
 	GSL_RB_WRITE(rb->device, cmds, cmds_gpu, 0x00000001);
 	GSL_RB_WRITE(rb->device, cmds, cmds_gpu, 0x00000000);
 	GSL_RB_WRITE(rb->device, cmds, cmds_gpu, 0x00000000);
-	/* Enable protected mode */
+	/* Protected mode control - turned off for A3XX/A4XX */
+	GSL_RB_WRITE(rb->device, cmds, cmds_gpu, 0x00000000);
 	GSL_RB_WRITE(rb->device, cmds, cmds_gpu, 0x20000000);
+
 	GSL_RB_WRITE(rb->device, cmds, cmds_gpu, 0x00000000);
 	GSL_RB_WRITE(rb->device, cmds, cmds_gpu, 0x00000000);
 
@@ -4147,7 +4149,7 @@ static void a3xx_protect_init(struct kgsl_device *device)
 	adreno_set_protected_registers(device, &index, 0xCC0, 0);
 
 	/* VBIF registers */
-	adreno_set_protected_registers(device, &index, 0x3000, 6);
+	kgsl_regwrite(device, A3XX_CP_PROTECT_REG_C, 0x6B00C000);
 
 	/* SMMU registers */
 	adreno_set_protected_registers(device, &index, 0x4000, 14);
