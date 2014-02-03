@@ -4149,7 +4149,7 @@ static void a3xx_protect_init(struct kgsl_device *device)
 	adreno_set_protected_registers(device, &index, 0xCC0, 0);
 
 	/* VBIF registers */
-	kgsl_regwrite(device, A3XX_CP_PROTECT_REG_C, 0x6B00C000);
+	adreno_set_protected_registers(device, &index, 0x3000, 11);
 
 	/* SMMU registers */
 	adreno_set_protected_registers(device, &index, 0x4000, 14);
