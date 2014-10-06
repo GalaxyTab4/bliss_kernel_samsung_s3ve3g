@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012 The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
@@ -24,6 +25,32 @@
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
  */
+=======
+  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+  *
+  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+  *
+  *
+  * Permission to use, copy, modify, and/or distribute this software for
+  * any purpose with or without fee is hereby granted, provided that the
+  * above copyright notice and this permission notice appear in all
+  * copies.
+  *
+  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+  * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+  * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+  * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+  * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  * PERFORMANCE OF THIS SOFTWARE.
+*/
+/*
+* Copyright (c) 2012 Qualcomm Atheros, Inc.
+* All Rights Reserved.
+* Qualcomm Atheros Confidential and Proprietary.
+*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /** ------------------------------------------------------------------------- *
     ------------------------------------------------------------------------- *
@@ -37,6 +64,11 @@
 
     $Id$
 
+<<<<<<< HEAD
+=======
+    Copyright (C) 2006 Airgo Networks, Incorporated
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    ========================================================================== */
 
@@ -110,6 +142,7 @@ typedef enum
 #define NV_VERSION_11N_11AC_COUPER_TYPE    0
 #define NV_VERSION_11N_11AC_FW_CONFIG      1
 #define NV_VERSION_LPDC_FW_CONFIG          2
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_CH144
 #define NV_VERSION_CH144_CONFIG            3
 #endif /* FEATURE_WLAN_CH144 */
@@ -120,6 +153,11 @@ typedef enum
 #else
 #define WLAN_NV_VERSION     NV_VERSION_LPDC_FW_CONFIG
 #endif /* FEATURE_WLAN_CH144 */
+=======
+
+#ifdef WCN_PRONTO
+#define WLAN_NV_VERSION     NV_VERSION_LPDC_FW_CONFIG
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #else //WCN_PRONTO
 #define WLAN_NV_VERSION     NV_VERSION_11N_11AC_FW_CONFIG
 #endif //WCN_PRONTO
@@ -233,6 +271,7 @@ typedef enum
 {
     //2.4GHz Band
     RF_CHAN_1                 = 0,
+<<<<<<< HEAD
     RF_CHAN_2,
     RF_CHAN_3,
     RF_CHAN_4,
@@ -327,6 +366,97 @@ typedef enum
     RF_CHAN_BOND_155,
     RF_CHAN_BOND_159,
     RF_CHAN_BOND_163,
+=======
+    RF_CHAN_2                 = 1,
+    RF_CHAN_3                 = 2,
+    RF_CHAN_4                 = 3,
+    RF_CHAN_5                 = 4,
+    RF_CHAN_6                 = 5,
+    RF_CHAN_7                 = 6,
+    RF_CHAN_8                 = 7,
+    RF_CHAN_9                 = 8,
+    RF_CHAN_10                = 9,
+    RF_CHAN_11                = 10,
+    RF_CHAN_12                = 11,
+    RF_CHAN_13                = 12,
+    RF_CHAN_14                = 13,
+
+    //4.9GHz Band
+    RF_CHAN_240               = 14,
+    RF_CHAN_244               = 15,
+    RF_CHAN_248               = 16,
+    RF_CHAN_252               = 17,
+    RF_CHAN_208               = 18,
+    RF_CHAN_212               = 19,
+    RF_CHAN_216               = 20,
+
+    //5GHz Low & Mid U-NII Band
+    RF_CHAN_36                = 21,
+    RF_CHAN_40                = 22,
+    RF_CHAN_44                = 23,
+    RF_CHAN_48                = 24,
+    RF_CHAN_52                = 25,
+    RF_CHAN_56                = 26,
+    RF_CHAN_60                = 27,
+    RF_CHAN_64                = 28,
+
+    //5GHz Mid Band - ETSI & FCC
+    RF_CHAN_100               = 29,
+    RF_CHAN_104               = 30,
+    RF_CHAN_108               = 31,
+    RF_CHAN_112               = 32,
+    RF_CHAN_116               = 33,
+    RF_CHAN_120               = 34,
+    RF_CHAN_124               = 35,
+    RF_CHAN_128               = 36,
+    RF_CHAN_132               = 37,
+    RF_CHAN_136               = 38,
+    RF_CHAN_140               = 39,
+
+    //5GHz High U-NII Band
+    RF_CHAN_149               = 40,
+    RF_CHAN_153               = 41,
+    RF_CHAN_157               = 42,
+    RF_CHAN_161               = 43,
+    RF_CHAN_165               = 44,
+
+    //CHANNEL BONDED CHANNELS
+    RF_CHAN_BOND_3            = 45,
+    RF_CHAN_BOND_4            = 46,
+    RF_CHAN_BOND_5            = 47,
+    RF_CHAN_BOND_6            = 48,
+    RF_CHAN_BOND_7            = 49,
+    RF_CHAN_BOND_8            = 50,
+    RF_CHAN_BOND_9            = 51,
+    RF_CHAN_BOND_10           = 52,
+    RF_CHAN_BOND_11           = 53,
+    RF_CHAN_BOND_242          = 54,    //4.9GHz Band
+    RF_CHAN_BOND_246          = 55,
+    RF_CHAN_BOND_250          = 56,
+    RF_CHAN_BOND_210          = 57,
+    RF_CHAN_BOND_214          = 58,
+    RF_CHAN_BOND_38           = 59,    //5GHz Low & Mid U-NII Band
+    RF_CHAN_BOND_42           = 60,
+    RF_CHAN_BOND_46           = 61,
+    RF_CHAN_BOND_50           = 62,
+    RF_CHAN_BOND_54           = 63,
+    RF_CHAN_BOND_58           = 64,
+    RF_CHAN_BOND_62           = 65,
+    RF_CHAN_BOND_102          = 66,    //5GHz Mid Band - ETSI & FCC
+    RF_CHAN_BOND_106          = 67,
+    RF_CHAN_BOND_110          = 68,
+    RF_CHAN_BOND_114          = 69,
+    RF_CHAN_BOND_118          = 70,
+    RF_CHAN_BOND_122          = 71,
+    RF_CHAN_BOND_126          = 72,
+    RF_CHAN_BOND_130          = 73,
+    RF_CHAN_BOND_134          = 74,
+    RF_CHAN_BOND_138          = 75,
+    RF_CHAN_BOND_151          = 76,    //5GHz High U-NII Band
+    RF_CHAN_BOND_155          = 77,
+    RF_CHAN_BOND_159          = 78,
+    RF_CHAN_BOND_163          = 79,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     NUM_RF_CHANNELS,
 
@@ -377,7 +507,11 @@ typedef enum
 // The above params are used for scripts.
    NUM_2_4GHZ_CHANNELS,
 }eRfChannels_2_4GHz;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 enum
 {
    NV_CHANNEL_DISABLE,
@@ -425,6 +559,7 @@ typedef enum
 
 #define HW_CAL_VALUES_VALID_BMAP_UNUSED                             0   //Value
 //Bit mask
+<<<<<<< HEAD
 #define HW_CAL_VALUES_VALID_BMAP_SLEEP_TIME_OVERHEAD_2G_MASK        0x1
 #define HW_CAL_VALUES_VALID_BMAP_SLEEP_TIME_OVERHEAD_5G_MASK        0x2
 #define HW_CAL_VALUES_VALID_BMAP_SLEEP_TIME_OVERHEAD_xLNA_5G_MASK   0x4
@@ -433,6 +568,15 @@ typedef enum
 #define HW_CAL_VALUES_VALID_CUSTOM_TCXO_REG9_MASK                   0x20
 #define HW_CAL_VALUES_VALID_ANTENNA_DIVERSITY_ENABLED_MASK          0x40
 #define HW_CAL_VALUES_VALID_CUSTOM_RC_DELAY_MASK                    0x80
+=======
+#define HW_VAL_VALUES_VALID_BMAP_SLEEP_TIME_OVERHEAD_2G_MASK        0x1
+#define HW_VAL_VALUES_VALID_BMAP_SLEEP_TIME_OVERHEAD_5G_MASK        0x2
+#define HW_VAL_VALUES_VALID_BMAP_SLEEP_TIME_OVERHEAD_xLNA_5G_MASK   0x4
+#define HW_VAL_VALUES_VALID_TXBBF_SEL_9MHZ_MASK                     0x8
+#define HW_VAL_VALUES_VALID_CUSTOM_TCXO_REG8_MASK                   0x10
+#define HW_VAL_VALUES_VALID_CUSTOM_TCXO_REG9_MASK                   0x20
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 //From wlanfw/inc/halPhyCalMemory.h
 typedef PACKED_PRE struct PACKED_POST
@@ -707,6 +851,7 @@ typedef PACKED_PRE struct PACKED_POST
 #define EXT_PA_CTRL_POLARITY_ZERO      0X1
 #define EXT_PA_CTRL_POLARITY_ONE       0X2
 
+<<<<<<< HEAD
 #define GF_TX_PWR_ADJUST_2G_MASK          0XF0000
 #define GF_TX_PWR_ADJUST_2G_OFFSET        16
 #define GF_TX_PWR_ADJUST_5G_LOW_MASK      0XF00000
@@ -717,6 +862,8 @@ typedef PACKED_PRE struct PACKED_POST
 #define GF_TX_PWR_ADJUST_5G_HIGH_OFFSET   28
 
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef PACKED_PRE struct PACKED_POST
 {
     uint8 skuID; 

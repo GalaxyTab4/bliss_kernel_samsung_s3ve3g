@@ -1,5 +1,42 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+
+
+
+/*
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -20,15 +57,8 @@
  */
 
 /*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
-/*
+ * Airgo Networks, Inc proprietary. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file sirApi.h contains definitions exported by
  * Sirius software.
  * Author:        Chandra Modumudi
@@ -46,8 +76,13 @@
 #include "aniSystemDefs.h"
 #include "sirParams.h"
 
+<<<<<<< HEAD
 #if defined(FEATURE_WLAN_ESE) && !defined(FEATURE_WLAN_ESE_UPLOAD)
 #include "eseGlobal.h"
+=======
+#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+#include "ccxGlobal.h"
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 /// Maximum number of STAs allowed in the BSS
@@ -136,6 +171,7 @@ typedef tANI_U8 tSirVersionString[SIR_VERSION_STRING_LEN];
 #define PERIODIC_TX_PTRN_MAX_SIZE 1536
 #define MAXNUM_PERIODIC_TX_PTRNS 6
 
+<<<<<<< HEAD
 
 #ifdef WLAN_FEATURE_EXTSCAN
 
@@ -148,6 +184,8 @@ typedef tANI_U8 tSirVersionString[SIR_VERSION_STRING_LEN];
 
 #define WLAN_DISA_MAX_PAYLOAD_SIZE                1600
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 enum eSirHostMsgTypes
 {
     SIR_HAL_APP_SETUP_NTF = SIR_HAL_HOST_MSG_START,
@@ -176,7 +214,11 @@ enum eSirHostMsgTypes
 enum {
     SIR_BOOT_MODULE_ID = 1,
     SIR_HAL_MODULE_ID  = 0x10,
+<<<<<<< HEAD
     SIR_CFG_MODULE_ID = 0x12,
+=======
+    SIR_CFG_MODULE_ID,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     SIR_LIM_MODULE_ID,
     SIR_ARQ_MODULE_ID,
     SIR_SCH_MODULE_ID,
@@ -216,6 +258,10 @@ typedef enum eSirScanType
     eSIR_BEACON_TABLE,
 } tSirScanType;
 
+<<<<<<< HEAD
+=======
+/// Result codes Firmware return to Host SW
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef enum eSirResultCodes
 {
     eSIR_SME_SUCCESS,
@@ -254,7 +300,10 @@ typedef enum eSirResultCodes
     eSIR_SME_BSS_ALREADY_STARTED_OR_JOINED,
     eSIR_SME_LOST_LINK_WITH_PEER_RESULT_CODE,
     eSIR_SME_REFUSED,
+<<<<<<< HEAD
     eSIR_SME_JOIN_DEAUTH_FROM_AP_DURING_ADD_STA,
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     eSIR_SME_JOIN_TIMEOUT_RESULT_CODE,
     eSIR_SME_AUTH_TIMEOUT_RESULT_CODE,
     eSIR_SME_ASSOC_TIMEOUT_RESULT_CODE,
@@ -354,7 +403,10 @@ typedef enum eSirResultCodes
 #ifdef WLAN_FEATURE_GTK_OFFLOAD
     eSIR_SME_GTK_OFFLOAD_GETINFO_REQ_FAILED,
 #endif // WLAN_FEATURE_GTK_OFFLOAD
+<<<<<<< HEAD
     eSIR_SME_DEAUTH_STATUS,
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     eSIR_DONOT_USE_RESULT_CODE = SIR_MAX_ENUM_SIZE    
 } tSirResultCodes;
 
@@ -380,9 +432,12 @@ typedef enum eStaRateMode {
 #define IERATE_IS_BASICRATE(x)   ((x) & IERATE_BASICRATE_MASK)
 #define ANIENHANCED_TAURUS_RATEMAP_BITOFFSET_START  28
 
+<<<<<<< HEAD
 const char * lim_BssTypetoString(const v_U8_t bssType);
 const char * lim_ScanTypetoString(const v_U8_t scanType);
 const char * lim_BackgroundScanModetoString(const v_U8_t mode);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sSirSupportedRates {
     /*
     * For Self STA Entry: this represents Self Mode.
@@ -470,6 +525,7 @@ typedef struct sSirRemainOnChnReq
     tANI_U8  probeRspIe[1];
 }tSirRemainOnChnReq, *tpSirRemainOnChnReq;
 
+<<<<<<< HEAD
 /* Structure for vendor specific IE of debug marker frame
    to debug remain on channel issues */
 typedef struct publicVendorSpecific
@@ -479,6 +535,8 @@ typedef struct publicVendorSpecific
     tANI_U8 length;
 } publicVendorSpecific;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sSirRegisterMgmtFrame
 {
     tANI_U16 messageType;
@@ -662,11 +720,19 @@ typedef struct sSirSmeStartBssReq
     tAniAuthType            authType;
     tANI_U32                dtimPeriod;
     tANI_U8                 wps_state;
+<<<<<<< HEAD
     tANI_U8                 isCoalesingInIBSSAllowed; //Coalesing on/off knob
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tVOS_CON_MODE           bssPersona;
 
     tANI_U8                 txLdpcIniFeatureEnabled;
 
+<<<<<<< HEAD
+=======
+    tANI_U8                 oxygenNwkIniFeatureEnabled;
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tSirRSNie               rsnIE;             // RSN IE to be sent in
                                                // Beacon and Probe
                                                // Response frames
@@ -674,6 +740,7 @@ typedef struct sSirSmeStartBssReq
     tSirMacRateSet          operationalRateSet;// Has 11a or 11b rates
     tSirMacRateSet          extendedRateSet;    // Has 11g rates
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_11W
     tANI_BOOLEAN            pmfCapable;
     tANI_BOOLEAN            pmfRequired;
@@ -683,6 +750,12 @@ typedef struct sSirSmeStartBssReq
 
 #define GET_IE_LEN_IN_BSS(lenInBss) ( lenInBss + sizeof(lenInBss) - \
               ((uintptr_t)OFFSET_OF( tSirBssDescription, ieFields)))
+=======
+} tSirSmeStartBssReq, *tpSirSmeStartBssReq;
+
+#define GET_IE_LEN_IN_BSS(lenInBss) ( lenInBss + sizeof(lenInBss) - \
+              ((int) OFFSET_OF( tSirBssDescription, ieFields)))
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define WSCIE_PROBE_RSP_LEN (317 + 2)
 
@@ -714,7 +787,11 @@ typedef struct sSirBssDescription
     tANI_U8              mdiePresent;
     tANI_U8              mdie[SIR_MDIE_SIZE];                // MDIE for 11r, picked from the beacons
 #endif
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U16             QBSSLoad_present;
     tANI_U16             QBSSLoad_avail; 
 #endif
@@ -751,7 +828,11 @@ typedef struct sSirSmeStartBssRsp
 typedef struct sSirChannelList
 {
     tANI_U8          numChannels;
+<<<<<<< HEAD
     tANI_U8          channelNumber[SIR_ESE_MAX_MEAS_IE_REQS];
+=======
+    tANI_U8          channelNumber[SIR_CCX_MAX_MEAS_IE_REQS];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tSirChannelList, *tpSirChannelList;
 
 typedef struct sSirDFSChannelList
@@ -760,17 +841,29 @@ typedef struct sSirDFSChannelList
 
 } tSirDFSChannelList, *tpSirDFSChannelList;
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sTspecInfo {
     tANI_U8         valid;
     tSirMacTspecIE  tspec;
 } tTspecInfo;
 
+<<<<<<< HEAD
 #define SIR_ESE_MAX_TSPEC_IES   4
 typedef struct sESETspecTspecInfo {
     tANI_U8 numTspecs;
     tTspecInfo tspec[SIR_ESE_MAX_TSPEC_IES];
 } tESETspecInfo;
+=======
+#define SIR_CCX_MAX_TSPEC_IES   4
+typedef struct sCCXTspecTspecInfo {
+    tANI_U8 numTspecs;
+    tTspecInfo tspec[SIR_CCX_MAX_TSPEC_IES];
+} tCCXTspecInfo;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 
@@ -791,6 +884,11 @@ typedef enum eSirBackgroundScanMode
     eSIR_NORMAL_BACKGROUND_SCAN = 1,
     eSIR_ROAMING_SCAN = 2,
 } tSirBackgroundScanMode;
+<<<<<<< HEAD
+=======
+
+/// Two types of traffic check
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef enum eSirLinkTrafficCheck
 {
     eSIR_DONT_CHECK_LINK_TRAFFIC_BEFORE_SCAN = 0,
@@ -910,6 +1008,7 @@ typedef struct sSirSmeScanReq
       -----------------------------*/
 } tSirSmeScanReq, *tpSirSmeScanReq;
 
+<<<<<<< HEAD
 typedef struct sSirSmeScanAbortReq
 {
     tANI_U16        type;
@@ -925,6 +1024,8 @@ typedef struct sSirSmeScanChanReq
     tANI_U16        transcationId;
 } tSirSmeGetScanChanReq, *tpSirSmeGetScanChanReq;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_OEM_DATA_SUPPORT
 
 #ifndef OEM_DATA_REQ_SIZE
@@ -937,7 +1038,10 @@ typedef struct sSirSmeScanChanReq
 typedef struct sSirOemDataReq
 {
     tANI_U16              messageType; //eWNI_SME_OEM_DATA_REQ
+<<<<<<< HEAD
     tANI_U16              messageLen;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tSirMacAddr           selfMacAddr;
     tANI_U8               oemDataReq[OEM_DATA_REQ_SIZE];
 } tSirOemDataReq, *tpSirOemDataReq;
@@ -1049,7 +1153,11 @@ typedef struct sSirSmeJoinReq
     tSirMacRateSet      extendedRateSet;    // Has 11g rates
     tSirRSNie           rsnIE;                  // RSN IE to be sent in
                                                 // (Re) Association Request
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tSirCCKMie          cckmIE;             // CCMK IE to be included as handler for join and reassoc is 
                                             // the same. The join will never carry cckm, but will be set to
                                             // 0. 
@@ -1072,6 +1180,7 @@ typedef struct sSirSmeJoinReq
 #ifdef WLAN_FEATURE_VOWIFI_11R
     tAniBool            is11Rconnection;
 #endif
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
     tAniBool            isESEFeatureIniEnabled;
     tAniBool            isESEconnection;
@@ -1079,6 +1188,15 @@ typedef struct sSirSmeJoinReq
 #endif
     
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#ifdef FEATURE_WLAN_CCX
+    tAniBool            isCCXFeatureIniEnabled;
+    tAniBool            isCCXconnection;
+    tCCXTspecInfo       ccxTspecInfo;
+#endif
+    
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tAniBool            isFastTransitionEnabled;
 #endif
 #ifdef FEATURE_WLAN_LFR
@@ -1089,7 +1207,10 @@ typedef struct sSirSmeJoinReq
 #ifdef WLAN_FEATURE_11AC
     tANI_U8             txBFIniFeatureEnabled;
     tANI_U8             txBFCsnValue;
+<<<<<<< HEAD
     tANI_U8             txMuBformee;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
     tANI_U8             isAmsduSupportInAMPDU;
     tAniBool            isWMEenabled;
@@ -1121,7 +1242,11 @@ typedef struct sSirSmeJoinRsp
 #ifdef WLAN_FEATURE_VOWIFI_11R
     tANI_U32        parsedRicRspLen;
 #endif
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U32        tspecIeLen;
 #endif
     tANI_U32        staId;//Station ID for peer
@@ -1134,9 +1259,12 @@ typedef struct sSirSmeJoinRsp
     /*Broadcast DPU signature*/
     tANI_U8            bcastSig;
 
+<<<<<<< HEAD
     /*to report MAX link-speed populate rate-flags from ASSOC RSP frame*/
     tANI_U32           maxRateFlags;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U8         frames[ 1 ];
 } tSirSmeJoinRsp, *tpSirSmeJoinRsp;
 
@@ -2158,7 +2286,11 @@ typedef struct sAniGetSnrReq
     void                    *pDevContext; //device context
 } tAniGetSnrReq, *tpAniGetSnrReq;
 
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sAniGetRoamRssiRsp
 {
     // Common for all types are responses
@@ -2174,7 +2306,11 @@ typedef struct sAniGetRoamRssiRsp
 
 #endif
 
+<<<<<<< HEAD
 #if defined(FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_ESE_UPLOAD)
+=======
+#if defined(FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_CCX_UPLOAD)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 typedef struct sSirTsmIE
 {
@@ -2226,22 +2362,39 @@ typedef struct sAniGetTsmStatsRsp
     void               *tsmStatsReq; //tsm stats request backup
 } tAniGetTsmStatsRsp, *tpAniGetTsmStatsRsp;
 
+<<<<<<< HEAD
 typedef struct sSirEseBcnReportBssInfo
+=======
+typedef struct sSirCcxBcnReportBssInfo
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     tBcnReportFields  bcnReportFields;
     tANI_U8           ieLen;
     tANI_U8           *pBuf;
+<<<<<<< HEAD
 } tSirEseBcnReportBssInfo, *tpSirEseBcnReportBssInfo;
 
 typedef struct sSirEseBcnReportRsp
+=======
+} tSirCcxBcnReportBssInfo, *tpSirCcxBcnReportBssInfo;
+
+typedef struct sSirCcxBcnReportRsp
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     tANI_U16    measurementToken;
     tANI_U8     flag;     /* Flag to report measurement done and more data */
     tANI_U8     numBss;
+<<<<<<< HEAD
     tSirEseBcnReportBssInfo bcnRepBssInfo[SIR_BCN_REPORT_MAX_BSS_DESC];
 } tSirEseBcnReportRsp, *tpSirEseBcnReportRsp;
 
 #endif /* FEATURE_WLAN_ESE || FEATURE_WLAN_ESE_UPLOAD */
+=======
+    tSirCcxBcnReportBssInfo bcnRepBssInfo[SIR_BCN_REPORT_MAX_BSS_DESC];
+} tSirCcxBcnReportRsp, *tpSirCcxBcnReportRsp;
+
+#endif /* FEATURE_WLAN_CCX || FEATURE_WLAN_CCX_UPLOAD */
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /* Change country code request MSG structure */
 typedef struct sAniChangeCountryCodeReq
@@ -2251,7 +2404,10 @@ typedef struct sAniChangeCountryCodeReq
     tANI_U16                msgLen;     // length of the entire request
     tANI_U8                 countryCode[WNI_CFG_COUNTRY_CODE_LEN];   //3 char country code
     tAniBool                countryFromUserSpace;
+<<<<<<< HEAD
     tAniBool                sendRegHint;  //TRUE if we want to send hint to NL80211
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     void                    *changeCCCallback;
     void                    *pDevContext; //device context
     void                    *pVosContext; //voss context
@@ -2529,6 +2685,7 @@ typedef __ani_attr_pre_packed struct sSirTclasInfo
 } __ani_attr_packed tSirTclasInfo;
 
 
+<<<<<<< HEAD
 #if defined(FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_ESE_UPLOAD)
 #define TSRS_11AG_RATE_6MBPS   0xC
 #define TSRS_11B_RATE_5_5MBPS  0xB
@@ -2540,11 +2697,28 @@ typedef struct sSirMacESETSRSIE
 } tSirMacESETSRSIE;
 
 typedef struct sSirMacESETSMIE
+=======
+#if defined(FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_CCX_UPLOAD)
+#define TSRS_11AG_RATE_6MBPS   0xC
+#define TSRS_11B_RATE_5_5MBPS  0xB
+
+typedef struct sSirMacCCXTSRSIE
+{
+    tANI_U8      tsid;
+    tANI_U8      rates[8];
+} tSirMacCCXTSRSIE;
+
+typedef struct sSirMacCCXTSMIE
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     tANI_U8      tsid;
     tANI_U8      state;
     tANI_U16     msmt_interval;
+<<<<<<< HEAD
 } tSirMacESETSMIE;
+=======
+} tSirMacCCXTSMIE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 typedef struct sTSMStats
 {
@@ -2553,6 +2727,7 @@ typedef struct sTSMStats
     tTrafStrmMetrics  tsmMetrics;
 } tTSMStats, *tpTSMStats;
 
+<<<<<<< HEAD
 typedef struct sEseTSMContext
 {
    tANI_U8           tid;
@@ -2570,6 +2745,25 @@ typedef struct sEsePEContext
 
 
 #endif /* FEATURE_WLAN_ESE && FEATURE_WLAN_ESE_UPLOAD */
+=======
+typedef struct sCcxTSMContext
+{
+   tANI_U8           tid;
+   tSirMacCCXTSMIE   tsmInfo;
+   tTrafStrmMetrics  tsmMetrics;
+} tCcxTSMContext, *tpCcxTSMContext;
+
+typedef struct sCcxPEContext
+{
+#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+   tCcxMeasReq       curMeasReq;
+#endif
+   tCcxTSMContext    tsm;
+} tCcxPEContext, *tpCcxPEContext;
+
+
+#endif /* FEATURE_WLAN_CCX && FEATURE_WLAN_CCX_UPLOAD */
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 typedef struct sSirAddtsReqInfo
@@ -2580,8 +2774,13 @@ typedef struct sSirAddtsReqInfo
     tANI_U8               numTclas; // number of Tclas elements
     tSirTclasInfo    tclasInfo[SIR_MAC_TCLASIE_MAXNUM];
     tANI_U8               tclasProc;
+<<<<<<< HEAD
 #if defined(FEATURE_WLAN_ESE)
     tSirMacESETSRSIE      tsrsIE;
+=======
+#if defined(FEATURE_WLAN_CCX)
+    tSirMacCCXTSRSIE      tsrsIE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U8               tsrsPresent:1;
 #endif
     tANI_U8               wmeTspecPresent:1;
@@ -2601,8 +2800,13 @@ typedef struct sSirAddtsRspInfo
     tSirTclasInfo      tclasInfo[SIR_MAC_TCLASIE_MAXNUM];
     tANI_U8                 tclasProc;
     tSirMacScheduleIE  schedule;
+<<<<<<< HEAD
 #if defined(FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_ESE_UPLOAD)
     tSirMacESETSMIE    tsmIE;
+=======
+#if defined(FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_CCX_UPLOAD)
+    tSirMacCCXTSMIE    tsmIE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U8                 tsmPresent:1;
 #endif
     tANI_U8                 wmeTspecPresent:1;
@@ -2669,7 +2873,11 @@ typedef struct sSirDeltsRsp
     tSirDeltsReqInfo        rsp;
 } tSirDeltsRsp, *tpSirDeltsRsp;
 
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define SIR_QOS_NUM_TSPEC_MAX 2
 #define SIR_QOS_NUM_AC_MAX 4
@@ -2706,7 +2914,11 @@ typedef struct sSirAggrQosRsp
     tSirAggrQosRspInfo      aggrInfo;
 } tSirAggrQosRsp, *tpSirAggrQosRsp;
 
+<<<<<<< HEAD
 #endif/*WLAN_FEATURE_VOWIFI_11R || FEATURE_WLAN_ESE*/
+=======
+#endif/*WLAN_FEATURE_VOWIFI_11R || FEATURE_WLAN_CCX*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 typedef struct sSirSetTxPowerReq
 {
@@ -2749,6 +2961,7 @@ typedef struct sSirGetNoiseRsp
     tSirMacNoise        noise;
 } tSirGetNoiseRsp, *tpSirGetNoiseRsp;
 
+<<<<<<< HEAD
 typedef struct sSirQosMapSet
 {
     tANI_U8      present;
@@ -2756,6 +2969,8 @@ typedef struct sSirQosMapSet
     tANI_U8      dscp_exceptions[21][2];
     tANI_U8      dscp_range[8][2];
 } tSirQosMapSet, *tpSirQosMapSet;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 //
 // PMC --> PE --> HAL
@@ -3418,6 +3633,7 @@ typedef struct sSirChangeBIParams
     tANI_U8        sessionId;      // Session ID
 } tSirChangeBIParams, *tpSirChangeBIParams;
 
+<<<<<<< HEAD
 typedef struct sSirOBSSHT40Param
 {
    tANI_U16 OBSSScanPassiveDwellTime;
@@ -3429,6 +3645,8 @@ typedef struct sSirOBSSHT40Param
    tANI_U16 OBSSScanActivityThreshold;
 }tSirOBSSHT40Param, *tpOBSSHT40Param;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define SIR_WPS_UUID_LEN 16
 #define SIR_WPS_PBC_WALK_TIME   120  // 120 Second
 
@@ -3477,7 +3695,11 @@ typedef struct sSirUpdateAPWPARSNIEsReq
 } tSirUpdateAPWPARSNIEsReq, *tpSirUpdateAPWPARSNIEsReq;
 
 #ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
+<<<<<<< HEAD
 #define SIR_ROAM_MAX_CHANNELS            80
+=======
+#define SIR_ROAM_MAX_CHANNELS            NUM_RF_CHANNELS
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define SIR_ROAM_SCAN_MAX_PB_REQ_SIZE    450
 #define CHANNEL_LIST_STATIC                   1 /* Occupied channel list remains static */
 #define CHANNEL_LIST_DYNAMIC_INIT             2 /* Occupied channel list can be learnt after init */
@@ -3485,6 +3707,7 @@ typedef struct sSirUpdateAPWPARSNIEsReq
 #define CHANNEL_LIST_DYNAMIC_UPDATE           4 /* Occupied channel list can be learnt after update */
 #define SIR_ROAM_SCAN_24G_DEFAULT_CH     1
 #define SIR_ROAM_SCAN_5G_DEFAULT_CH      36
+<<<<<<< HEAD
 
 /*Adaptive Thresholds to be used for FW based scanning*/
 #define LFR_SENSITIVITY_THR_1MBPS             -89
@@ -3509,6 +3732,9 @@ typedef struct sSirUpdateAPWPARSNIEsReq
 #define LFR_LOOKUP_THR_24MBPS_5G              -74
 #define LFR_SENSITIVITY_THR_DEFAULT             0
 #define LFR_LOOKUP_THR_DEFAULT                -78
+=======
+#define SIR_ROAM_SCAN_RESERVED_BYTES     61
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif //WLAN_FEATURE_ROAM_SCAN_OFFLOAD
 
 // SME -> HAL - This is the host offload request. 
@@ -3612,9 +3838,12 @@ typedef struct sSirSmeDelStaSelfRsp
 #define SIR_COEX_IND_TYPE_SCAN_NOT_COMPROMISED (3)
 #define SIR_COEX_IND_TYPE_DISABLE_AGGREGATION_IN_2p4 (4)
 #define SIR_COEX_IND_TYPE_ENABLE_AGGREGATION_IN_2p4 (5)
+<<<<<<< HEAD
 #define SIR_COEX_IND_TYPE_ENABLE_UAPSD (6)
 #define SIR_COEX_IND_TYPE_DISABLE_UAPSD (7)
 #define SIR_COEX_IND_TYPE_CXM_FEATURES_NOTIFICATION (8)
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 typedef struct sSirSmeCoexInd
 {
@@ -3729,6 +3958,7 @@ typedef struct
   tSirScanTimer  aTimerValues[SIR_PNO_MAX_SCAN_TIMERS]; 
 } tSirScanTimersType;
 
+<<<<<<< HEAD
 /*Pref Net Req status */
 typedef void(*PNOReqStatusCb)(void *callbackContext, VOS_STATUS status);
 
@@ -3741,13 +3971,27 @@ typedef struct sSirPNOScanReq
   eSirPNOMode         modePNO;
   tANI_U8             ucNetworksCount; 
   tSirNetworkType     *aNetworks;
+=======
+typedef struct sSirPNOScanReq
+{
+  tANI_U8             enable;
+  eSirPNOMode         modePNO;
+  tANI_U8             ucNetworksCount; 
+  tSirNetworkType     aNetworks[SIR_PNO_MAX_SUPP_NETWORKS];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   tSirScanTimersType  scanTimers;
   
   /*added by SME*/
   tANI_U16  us24GProbeTemplateLen; 
+<<<<<<< HEAD
   tANI_U8   *p24GProbeTemplate;
   tANI_U16  us5GProbeTemplateLen; 
   tANI_U8   *p5GProbeTemplate;
+=======
+  tANI_U8   p24GProbeTemplate[SIR_PNO_MAX_PB_REQ_SIZE];
+  tANI_U16  us5GProbeTemplateLen; 
+  tANI_U8   p5GProbeTemplate[SIR_PNO_MAX_PB_REQ_SIZE]; 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tSirPNOScanReq, *tpSirPNOScanReq;
 
 typedef struct sSirSetRSSIFilterReq
@@ -3811,7 +4055,10 @@ typedef struct sSirRoamOffloadScanReq
   eAniBoolean RoamScanOffloadEnabled;
   eAniBoolean MAWCEnabled;
   tANI_S8     LookupThreshold;
+<<<<<<< HEAD
   tANI_S8     RxSensitivityThreshold;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   tANI_U8     RoamRssiDiff;
   tANI_U8     ChannelCacheType;
   tANI_U8     Command;
@@ -3823,11 +4070,28 @@ typedef struct sSirRoamOffloadScanReq
   tANI_U16    EmptyRefreshScanPeriod;
   tANI_U8     ValidChannelCount;
   tANI_U8     ValidChannelList[SIR_ROAM_MAX_CHANNELS];
+<<<<<<< HEAD
   eAniBoolean IsESEEnabled;
+=======
+  eAniBoolean IsCCXEnabled;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   tANI_U16  us24GProbeTemplateLen;
   tANI_U8   p24GProbeTemplate[SIR_ROAM_SCAN_MAX_PB_REQ_SIZE];
   tANI_U16  us5GProbeTemplateLen;
   tANI_U8   p5GProbeTemplate[SIR_ROAM_SCAN_MAX_PB_REQ_SIZE];
+<<<<<<< HEAD
+=======
+  tANI_U8     ReservedBytes[SIR_ROAM_SCAN_RESERVED_BYTES];
+  /*ReservedBytes is to add any further params in future
+    without changing the interface params on Host
+    and firmware.The firmware right now checks
+    if the size of this structure matches and then
+    proceeds with the processing of the command.
+    So, in future, if there is any need to add
+    more params, pick the memory from reserved
+    bytes and keep deducting the reserved bytes
+    by the amount of bytes picked.*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   tANI_U8   nProbes;
   tANI_U16  HomeAwayTime;
   tSirRoamNetworkType ConnectedNetwork;
@@ -4085,7 +4349,10 @@ typedef struct sSirTdlsSendMgmtReq
     tANI_U8             dialog;
     tANI_U16            statusCode;
     tANI_U8             responder;
+<<<<<<< HEAD
     tANI_U32            peerCapability;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tSirMacAddr         bssid;         // For multi-session, for PE to locate peSession ID
     tSirMacAddr         peerMac;
     tANI_U8             addIe[1];      //Variable lenght. Dont add any field after this.
@@ -4145,6 +4412,7 @@ typedef struct
     tANI_U8             uapsdQueues;   // Peer's uapsd Queues Information
     tANI_U8             maxSp;         // Peer's Supported Maximum Service Period
     tANI_U8             isBufSta;      // Does Peer Support as Buffer Station.
+<<<<<<< HEAD
     tANI_U8             isOffChannelSupported;    // Does Peer Support as TDLS Off Channel.
     tANI_U8             isResponder;   // Is Peer a responder.
     tSirMacAddr         bssid;         // For multi-session, for PE to locate peSession ID
@@ -4153,6 +4421,11 @@ typedef struct
     tANI_U8             supportedChannels[SIR_MAC_MAX_SUPP_CHANNELS];
     tANI_U8             supportedOperClassesLen;
     tANI_U8             supportedOperClasses[SIR_MAC_MAX_SUPP_OPER_CLASSES];
+=======
+    tANI_U8             isResponder;   // Is Peer a responder.
+    tSirMacAddr         bssid;         // For multi-session, for PE to locate peSession ID
+    tSirMacAddr         peerMac;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }tSirTdlsLinkEstablishReq, *tpSirTdlsLinkEstablishReq;
 
 /* TDLS Request struct SME-->PE */
@@ -4202,6 +4475,19 @@ typedef struct sSirTdlsDelAllPeerInd
    tANI_U16               length;
    tANI_U8                sessionId;     // Session ID
 } tSirTdlsDelAllPeerInd, *tpSirTdlsDelAllPeerInd;
+<<<<<<< HEAD
+=======
+#ifdef FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP
+typedef struct sSirTdlsDisappearAPInd
+{
+   tANI_U16               messageType;
+   tANI_U16               length;
+   tANI_U8                sessionId;     // Session ID
+   tANI_U16               staId;
+   tSirMacAddr            staAddr;
+} tSirTdlsDisappearAPInd, *tpSirTdlsDisappearAPInd;
+#endif
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sSirMgmtTxCompletionInd
 {
    tANI_U16               messageType;
@@ -4209,6 +4495,7 @@ typedef struct sSirMgmtTxCompletionInd
    tANI_U8                sessionId;     // Session ID
    tANI_U32               txCompleteStatus;
 } tSirMgmtTxCompletionInd, *tpSirMgmtTxCompletionInd;
+<<<<<<< HEAD
 
 //tdlsoffchan
 /* TDLS Channel Switch struct SME-->PE */
@@ -4235,6 +4522,8 @@ typedef struct
     tSirResultCodes        statusCode;
     tSirMacAddr            peerMac;
 }tSirTdlsChanSwitchReqRsp, *tpSirTdlsChanSwitchReqRsp;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif /* FEATURE_WLAN_TDLS */
 
 #ifdef FEATURE_WLAN_TDLS_INTERNAL
@@ -4405,6 +4694,7 @@ typedef struct sSirActiveModeSetBcnFilterReq
    tANI_U8                seesionId;
 } tSirSetActiveModeSetBncFilterReq, *tpSirSetActiveModeSetBncFilterReq;
 
+<<<<<<< HEAD
 typedef enum
 {
    HT40_OBSS_SCAN_PARAM_START,
@@ -4447,6 +4737,8 @@ typedef struct sSirHT40OBSSScanInd
 } tSirHT40OBSSScanInd, *tpSirHT40OBSSScanInd;
 
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 //Reset AP Caps Changed
 typedef struct sSirResetAPCapsChange
 {
@@ -4539,7 +4831,10 @@ typedef struct sSirUpdateChanParam
 {
     tANI_U8 chanId;
     tANI_U8 pwr;
+<<<<<<< HEAD
     tANI_BOOLEAN dfsSet;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tSirUpdateChanParam, *tpSirUpdateChanParam;
 
 typedef struct sSirUpdateChan
@@ -4577,8 +4872,11 @@ typedef struct sSirLPHBTcpParamStruct
    v_U16_t      timeout;
    v_U8_t       session;
    tSirMacAddr  gateway_mac;
+<<<<<<< HEAD
    uint16       timePeriodSec; // in seconds
    uint32       tcpSn;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tSirLPHBTcpParamStruct;
 
 typedef struct sSirLPHBTcpFilterStruct
@@ -4623,12 +4921,20 @@ typedef struct sSirLPHBReq
    } params;
 } tSirLPHBReq;
 
+<<<<<<< HEAD
 typedef struct sSirLPHBInd
+=======
+typedef struct sSirLPHBTimeoutInd
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
    v_U8_t sessionIdx;
    v_U8_t protocolType; /*TCP or UDP*/
    v_U8_t eventReason;
+<<<<<<< HEAD
 } tSirLPHBInd;
+=======
+} tSirLPHBTimeoutInd;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif /* FEATURE_WLAN_LPHB */
 
 typedef struct sSirAddPeriodicTxPtrn
@@ -4651,6 +4957,7 @@ typedef struct sSirDelPeriodicTxPtrn
     tANI_U32 ucPatternIdBitmap;
 } tSirDelPeriodicTxPtrn, *tpSirDelPeriodicTxPtrn;
 
+<<<<<<< HEAD
 typedef struct sSirRateUpdateInd
 {
     /* 0 implies RA, positive value implies fixed rate, -1 implies ignore this
@@ -4693,6 +5000,8 @@ typedef struct sSirRateUpdateInd
 
 } tSirRateUpdateInd, *tpSirRateUpdateInd;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_BATCH_SCAN
 // Set batch scan resposne from FW
 typedef struct
@@ -4731,9 +5040,15 @@ typedef struct
 typedef PACKED_PRE struct PACKED_POST
 {
     tANI_U8   bssid[6];     /* BSSID */
+<<<<<<< HEAD
     tANI_U8   ssid[33];     /* SSID */
     tANI_U8   ch;           /* Channel */
     tANI_S8   rssi;         /* RSSI or Level */
+=======
+    tANI_U8   ssid[32];     /* SSID */
+    tANI_U8   ch;           /* Channel */
+    tANI_U8   rssi;         /* RSSI or Level */
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     /*Timestamp when Network was found. Used to calculate age based on timestamp
       in GET_RSP msg header */
     tANI_U32  timestamp;
@@ -4763,6 +5078,7 @@ typedef PACKED_PRE struct PACKED_POST
 
 #endif // FEATURE_WLAN_BATCH_SCAN
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_CH_AVOID
 #define SIR_CH_AVOID_MAX_RANGE   4
 
@@ -5621,4 +5937,7 @@ typedef struct
    tANI_U16   mesgLen;
    tSetEncryptedDataRspParams   encryptedDataRsp;
 } tSirEncryptedDataRspParams, *tpSirEncryptedDataRspParams;
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif /* __SIR_API_H */

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,6 +22,7 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
@@ -26,6 +31,30 @@
  */
 
 /*
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+/*
+ * Airgo Networks, Inc proprietary. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limUtils.h contains the utility definitions
  * LIM uses.
  * Author:        Chandra Modumudi
@@ -54,10 +83,14 @@ typedef enum
 #define LIM_STA_ID_MASK                        0x00FF
 #define LIM_AID_MASK                              0xC000
 #define LIM_SPECTRUM_MANAGEMENT_BIT_MASK          0x0100
+<<<<<<< HEAD
 #define LIM_RRM_BIT_MASK                          0x1000
 #define LIM_SHORT_PREAMBLE_BIT_MASK               0x0020
 #define LIM_IMMEDIATE_BLOCK_ACK_MASK              0x8000
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
+=======
+#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define LIM_MAX_REASSOC_RETRY_LIMIT            2
 #endif
 
@@ -87,6 +120,7 @@ typedef struct sAddBaCandidate
     tAddBaInfo baInfo[STACFG_MAX_TC];
 }tAddBaCandidate, *tpAddBaCandidate;
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_11W
 typedef union uPmfSaQueryTimerId
 {
@@ -112,6 +146,8 @@ typedef struct op_class_map {
     offset_t    offset;
     tANI_U8 channels[15];
 }op_class_map_t;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 // LIM utility functions
 void limGetBssidFromPkt(tpAniSirGlobal, tANI_U8 *, tANI_U8 *, tANI_U32 *);
 char * limMlmStateStr(tLimMlmStates state);
@@ -126,7 +162,11 @@ void limPrintMsgName(tpAniSirGlobal pMac, tANI_U16 logLevel, tANI_U32 msgType);
 void limPrintMsgInfo(tpAniSirGlobal pMac, tANI_U16 logLevel, tSirMsgQ *msg);
 char* limBssTypeStr(tSirBssType bssType);
 
+<<<<<<< HEAD
 #if defined FEATURE_WLAN_ESE || defined WLAN_FEATURE_VOWIFI
+=======
+#if defined FEATURE_WLAN_CCX || defined WLAN_FEATURE_VOWIFI
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 extern tSirRetStatus limSendSetMaxTxPowerReq ( tpAniSirGlobal pMac, 
                                   tPowerdBm txPower, 
                                   tpPESession pSessionEntry );
@@ -201,8 +241,12 @@ tSirRetStatus limStartChannelSwitch(tpAniSirGlobal pMac, tpPESession psessionEnt
 void limUpdateChannelSwitch(tpAniSirGlobal, tpSirProbeRespBeacon, tpPESession psessionEntry);
 void limProcessQuietTimeout(tpAniSirGlobal);
 void limProcessQuietBssTimeout(tpAniSirGlobal);
+<<<<<<< HEAD
 void limInitOBSSScanParams(tpAniSirGlobal pMac,
                                    tpPESession psessionEntry);
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if 0
 void limProcessWPSOverlapTimeout(tpAniSirGlobal pMac);
 #endif
@@ -363,8 +407,12 @@ tSirRetStatus limPostSMStateUpdate(tpAniSirGlobal pMac,
 
 void limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg);
 void limProcessAddBaInd(tpAniSirGlobal pMac, tpSirMsgQ limMsg);
+<<<<<<< HEAD
 void limDeleteBASessions(tpAniSirGlobal pMac, tpPESession pSessionEntry,
                          tANI_U32 baDirection, tSirMacReasonCodes baReasonCode);
+=======
+void limDeleteBASessions(tpAniSirGlobal pMac, tpPESession pSessionEntry, tANI_U32 baDirection);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 void limDelPerBssBASessionsBtc(tpAniSirGlobal pMac);
 void limDelAllBASessions(tpAniSirGlobal pMac);
 void limDeleteDialogueTokenList(tpAniSirGlobal pMac);
@@ -413,6 +461,7 @@ tANI_BOOLEAN limIsconnectedOnDFSChannel(tANI_U8 currentChannel);
 tANI_U8 limGetCurrentOperatingChannel(tpAniSirGlobal pMac);
 
 #ifdef WLAN_FEATURE_11AC
+<<<<<<< HEAD
 tANI_BOOLEAN limCheckVHTOpModeChange( tpAniSirGlobal pMac,
                                       tpPESession psessionEntry, tANI_U8 chanWidth, tANI_U8 staId);
 #endif
@@ -421,6 +470,12 @@ tANI_BOOLEAN limCheckHTChanBondModeChange(tpAniSirGlobal pMac,
                                                   tANI_U8 beaconSecChanWidth,
                                                   tANI_U8 currentSecChanWidth,
                                                   tANI_U8 staId);
+=======
+tANI_BOOLEAN limCheckVHTOpModeChange( tpAniSirGlobal pMac, 
+                                      tpPESession psessionEntry, tANI_U8 chanWidth, tANI_U8 staId);
+#endif
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_DIAG_SUPPORT
 
 typedef enum
@@ -514,13 +569,18 @@ void limTdlsDelLinkPeer(tpAniSirGlobal pMac, tSirMacAddr peerMac);
 void limStartTdlsTimer(tpAniSirGlobal pMac, tANI_U8 sessionId, TX_TIMER *timer, tANI_U32 timerId, 
                                       tANI_U16 timerType, tANI_U32 timerMsg);
 #endif
+<<<<<<< HEAD
 void limGetShortSlotFromPhyMode(tpAniSirGlobal pMac, tpPESession psessionEntry, tANI_U32 phyMode,
                                 tANI_U8 *pShortSlotEnable);
+=======
+tANI_U8 limGetShortSlotFromPhyMode(tpAniSirGlobal pMac, tpPESession psessionEntry, tANI_U32 phyMode);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 void limCleanUpDisassocDeauthReq(tpAniSirGlobal pMac, tANI_U8 *staMac, tANI_BOOLEAN cleanRxPath);
 
 tANI_BOOLEAN limCheckDisassocDeauthAckPending(tpAniSirGlobal pMac, tANI_U8 *staMac);
 
+<<<<<<< HEAD
 
 void limUtilsframeshtons(tpAniSirGlobal  pCtx,
                             tANI_U8  *pOut,
@@ -551,4 +611,6 @@ void limParseBeaconForTim(tpAniSirGlobal pMac, tANI_U8* pRxPacketInfo,
                           tpPESession psessionEntry);
 
 void limDecrementPendingMgmtCount (tpAniSirGlobal pMac);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif /* __LIM_UTILS_H */

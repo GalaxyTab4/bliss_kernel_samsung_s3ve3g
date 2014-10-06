@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,12 +23,15 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
+<<<<<<< HEAD
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
  */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifndef __SYS_GLOBAL_H__
 #define __SYS_GLOBAL_H__
 
@@ -34,7 +41,10 @@ typedef struct sAniSirSys
 
     tANI_U32 gSysFrameCount[4][16];
     tANI_U32 gSysBbtReceived;
+<<<<<<< HEAD
     tANI_U32 gSysBbtPendingMgmtCount;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U32 gSysBbtPostedToLim;
     tANI_U32 gSysBbtPostedToSch;
     tANI_U32 gSysBbtPostedToPmm;
@@ -50,7 +60,10 @@ typedef struct sAniSirSys
     tANI_U32 gSysEnableLearnMode;
     tANI_U32 gSysEnableScanMode;
     tANI_U32 gSysEnableLinkMonitorMode;
+<<<<<<< HEAD
     vos_spin_lock_t lock;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tAniSirSys, *tpAniSirSys;
 
 #endif

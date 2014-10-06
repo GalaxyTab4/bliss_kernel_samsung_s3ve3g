@@ -1,5 +1,38 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,12 +52,8 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifndef WLAN_QCT_DXE_I_H
 #define WLAN_QCT_DXE_I_H
 
@@ -35,6 +64,12 @@
   @brief 
                
    This file contains the external API exposed by the wlan data transfer abstraction layer module.
+<<<<<<< HEAD
+=======
+   Copyright (c) 2011 Qualcomm Technologies, Inc.
+   All Rights Reserved.
+   Qualcomm Technologies Confidential and Proprietary
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 ========================================================================*/
 
 /*===========================================================================
@@ -80,6 +115,7 @@ when           who        what, where, why
 /* Start with base address */
 
 #ifdef WCN_PRONTO
+<<<<<<< HEAD
 #define WLANDXE_CCU_DXE_INT_SELECT        0x2050dc
 #define WLANDXE_CCU_DXE_INT_SELECT_STAT   0x2050e0
 #define WLANDXE_CCU_ASIC_INT_ENABLE       0x2050e4
@@ -94,6 +130,31 @@ when           who        what, where, why
 #define WLANDXE_BMU_AVAILABLE_BD_PDU      0x80084
 
 #define WLANDXE_REGISTER_BASE_ADDRESS     0x202000
+=======
+#define WLANDXE_CCU_DXE_INT_SELECT       0xfb2050dc
+#define WLANDXE_CCU_DXE_INT_SELECT_STAT  0xfb2050e0
+#define WLANDXE_CCU_ASIC_INT_ENABLE      0xfb2050e4
+#define WLANDXE_CCU_SOFT_RESET           0xfb204010
+#else
+#define WLANDXE_CCU_DXE_INT_SELECT       0x03200b10
+#define WLANDXE_CCU_DXE_INT_SELECT_STAT  0x03200b14
+#define WLANDXE_CCU_ASIC_INT_ENABLE      0x03200b18
+#endif
+
+#ifdef PAL_OS_TYPE_BMP
+#define WLANDXE_WCNSS_BASE_ADDRESS        0xCDD00000
+#else
+#ifdef WCN_PRONTO
+#define WLANDXE_WCNSS_BASE_ADDRESS        0xfb000000
+#else
+#define WLANDXE_WCNSS_BASE_ADDRESS        0x03000000
+#endif
+#endif /* PAL_OS_TYPE_BMP */
+
+#define WLANDXE_BMU_AVAILABLE_BD_PDU     (WLANDXE_WCNSS_BASE_ADDRESS + 0x80084)
+
+#define WLANDXE_REGISTER_BASE_ADDRESS    (WLANDXE_WCNSS_BASE_ADDRESS + 0x202000)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /* Common over the channels register addresses */
 #define WALNDEX_DMA_CSR_ADDRESS          (WLANDXE_REGISTER_BASE_ADDRESS + 0x00)
@@ -387,8 +448,11 @@ when           who        what, where, why
 #define WLANDXE_CH_STAT_INT_DONE_MASK   0x00008000
 #define WLANDXE_CH_STAT_INT_ERR_MASK    0x00004000
 #define WLANDXE_CH_STAT_INT_ED_MASK     0x00002000
+<<<<<<< HEAD
 #define WLANDXE_CH_STAT_ERR_CODE_MASK   0x000007c0
 #define WLANDXE_CH_STAT_ERR_CODE_OFFSET (6)
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define WLANDXE_CH_STAT_MASKED_MASK     0x00000008
 #define WLANDXE_CH_STAT_ENABLED_MASK    0x00000001
@@ -407,6 +471,7 @@ when           who        what, where, why
 
 #define WLANDXE_TX_LOW_RES_THRESHOLD     (5)
 
+<<<<<<< HEAD
 typedef enum {
    WLANDXE_ERROR_NONE                = 0,
    WLANDXE_ERROR_SAHB_ERR            = 1,
@@ -438,6 +503,8 @@ typedef enum {
    WLANDXE_ERROR_PDU_CNT_OVFL        = 27,
 }WLANDXE_ErrorCode;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* DXE Descriptor Endian swap macro */
 #ifdef WLANDXE_ENDIAN_SWAP_ENABLE
 #define WLANDXE_U32_SWAP_ENDIAN(a) (((a & 0x000000FF) << 24) |    \
@@ -544,7 +611,11 @@ typedef struct
    void                            *nextCtrlBlk;
    wpt_packet                      *xfrFrame;  
    WLANDXE_DescType                *linkedDesc;
+<<<<<<< HEAD
    wpt_uint32                       linkedDescPhyAddr;
+=======
+   unsigned int                    linkedDescPhyAddr;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    wpt_uint32                       ctrlBlkOrder;
 #ifdef FEATURE_R33D
    wpt_uint32                       shadowBufferVa;
@@ -631,7 +702,11 @@ typedef struct
    WLANDXE_DescType               *descriptorAllocation;
 #endif
    WLANDXE_DescType               *DescBottomLoc;
+<<<<<<< HEAD
    wpt_uint32                      descBottomLocPhyAddr;
+=======
+   unsigned int                    descBottomLocPhyAddr;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    wpt_uint32                      numDesc;
    wpt_uint32                      numFreeDesc;
    wpt_uint32                      numRsvdDesc;
@@ -639,7 +714,10 @@ typedef struct
    wpt_uint32                      numFragmentCurrentChain;
    wpt_uint32                      numFrameBeforeInt;
    wpt_uint32                      numTotalFrame;
+<<<<<<< HEAD
    wpt_uint32                      doneIntDisabled;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    wpt_mutex                       dxeChannelLock;
    wpt_boolean                     hitLowResource;
    WLANDXE_ChannelConfigType       channelConfig;
@@ -688,11 +766,15 @@ typedef struct
    wpt_boolean                     rxPalPacketUnavailable;
    wpt_boolean                     driverReloadInProcessing;
    wpt_boolean                     smsmToggled;
+<<<<<<< HEAD
    wpt_boolean                     txRingsEmpty;
 #ifdef WLAN_DXE_LOW_RESOURCE_TIMER
    wpt_timer                       rxResourceAvailableTimer;
 #endif
    wpt_timer                       dxeSSRTimer;
+=======
+   wpt_timer                       rxResourceAvailableTimer;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } WLANDXE_CtrlBlkType;
 
 /*==========================================================================

@@ -1,5 +1,39 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+/*
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -20,12 +54,8 @@
  */
 
 /*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/*
+ * Airgo Networks, Inc proprietary. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limUtils.cc contains the utility functions
  * LIM uses.
  * Author:        Chandra Modumudi
@@ -797,7 +827,10 @@ void limPostSmeSetKeysCnf( tpAniSirGlobal pMac,
 
 
   /// Free up buffer allocated for mlmSetKeysReq
+<<<<<<< HEAD
   vos_mem_zero(pMlmSetKeysReq, sizeof(tLimMlmSetKeysReq));
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   vos_mem_free( pMlmSetKeysReq );
   pMac->lim.gpLimMlmSetKeysReq = NULL;
 
@@ -1061,6 +1094,7 @@ tANI_U32 val = 0;
       }else {
           /*This case the keys are coming from upper layer so need to fill the 
           * key at the default wep key index and send to the HAL */
+<<<<<<< HEAD
           if (defWEPIdx >= SIR_MAC_MAX_NUM_OF_DEFAULT_KEYS)
           {
              limLog( pMac, LOGE, FL("WEPIdx length %d more than "
@@ -1073,6 +1107,11 @@ tANI_U32 val = 0;
                                   sizeof( pMlmSetKeysReq->key[0] ));
           pMlmSetKeysReq->numKeys = SIR_MAC_MAX_NUM_OF_DEFAULT_KEYS;
 
+=======
+          vos_mem_copy((tANI_U8 *) &pSetStaKeyParams->key[defWEPIdx],
+                             (tANI_U8 *) &pMlmSetKeysReq->key[0], sizeof( pMlmSetKeysReq->key[0] ));
+          pMlmSetKeysReq->numKeys = SIR_MAC_MAX_NUM_OF_DEFAULT_KEYS;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
       break;
   case eSIR_ED_TKIP:

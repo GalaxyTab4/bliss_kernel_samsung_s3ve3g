@@ -1,5 +1,38 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,12 +52,9 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
 
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**=========================================================================
   
   \file  wlan_qct_pal_timer.c
@@ -45,9 +75,12 @@
 #include "vos_threads.h"
 
 #include <linux/delay.h>
+<<<<<<< HEAD
 #if defined(ANI_OS_TYPE_ANDROID)
 #include <asm/arch_timer.h>
 #endif
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*---------------------------------------------------------------------------
  \brief wpalTimerCback - VOS timer callback function
@@ -64,9 +97,14 @@ static void wpalTimerCback( void * userData )
    }
    else
    {
+<<<<<<< HEAD
       WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_WARN,
                   " %s pTimer(%p) callback after deleted",
                   __func__, pTimer );
+=======
+      WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_WARN, " %s pTimer(%d) callback after deleted \n",
+         __func__, (wpt_uint32)pTimer );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 }/*wpalTimerCback*/
 
@@ -84,9 +122,14 @@ wpt_status wpalTimerInit(wpt_timer * pTimer, wpal_timer_callback callback, void 
    /* Sanity Checks */
    if( pTimer == NULL || callback == NULL )
    {
+<<<<<<< HEAD
       WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                   " %s Wrong param pTimer(%p) callback(%p)",
                   __func__, pTimer, callback );
+=======
+      WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, " %s Wrong param pTimer(%d) callback(%d)\n",
+         __func__, (wpt_uint32)pTimer, (wpt_uint32)callback );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
@@ -116,9 +159,14 @@ wpt_status wpalTimerDelete(wpt_timer *pTimer)
    /* Sanity Checks */
    if( pTimer == NULL )
    {
+<<<<<<< HEAD
       WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                   " %s Wrong param pTimer(%p)",
                   __func__, pTimer );
+=======
+      WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, " %s Wrong param pTimer(%d)\n",
+         __func__, (wpt_uint32)pTimer );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
@@ -148,9 +196,14 @@ wpt_status wpalTimerStart(wpt_timer * pTimer, wpt_uint32 timeout)
    /* Sanity Checks */
    if( pTimer == NULL )
    {
+<<<<<<< HEAD
       WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                   " %s Wrong param pTimer(%p)",
                   __func__, pTimer );
+=======
+      WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, " %s Wrong param pTimer(%d)\n",
+         __func__, (wpt_uint32)pTimer );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
    return ( WPAL_VOS_TO_WPAL_STATUS( vos_timer_start( &pTimer->timer.timerObj,
@@ -172,9 +225,14 @@ wpt_status wpalTimerStop(wpt_timer * pTimer)
    /* Sanity Checks */
    if( pTimer == NULL )
    {
+<<<<<<< HEAD
       WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                   " %s Wrong param pTimer(%p)",
                   __func__, pTimer );
+=======
+      WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, " %s Wrong param pTimer(%d)\n",
+         __func__, (wpt_uint32)pTimer );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
    return (WPAL_VOS_TO_WPAL_STATUS( vos_timer_stop( &pTimer->timer.timerObj )));
@@ -193,9 +251,14 @@ WPAL_TIMER_STATE wpalTimerGetCurStatus(wpt_timer * pTimer)
    /* Sanity Checks */
    if( pTimer == NULL )
    {
+<<<<<<< HEAD
       WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                   " %s Wrong param pTimer(%p)",
                   __func__, pTimer );
+=======
+      WPAL_TRACE( eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, " %s Wrong param pTimer(%d)\n",
+         __func__, (wpt_uint32)pTimer );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
    return vos_timer_getCurrentState( &pTimer->timer.timerObj );
@@ -213,6 +276,7 @@ wpt_uint32 wpalGetSystemTime(void)
 }/*wpalGetSystemTime*/
 
 /*---------------------------------------------------------------------------
+<<<<<<< HEAD
     \brief wpalGetArchCounterTime - Get time from physical counter
 
     \return
@@ -231,6 +295,8 @@ wpt_uint64 wpalGetArchCounterTime(void)
 #endif
 
 /*---------------------------------------------------------------------------
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalSleep - sleep for a specified interval
     Param:
         timeout - amount of time to sleep. In unit of milli-seconds.

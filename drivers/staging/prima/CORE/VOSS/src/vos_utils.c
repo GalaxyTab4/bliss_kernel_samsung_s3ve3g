@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,6 +22,7 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
@@ -25,6 +30,28 @@
  * to the Linux Foundation.
  */
 
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*============================================================================
   FILE:         vos_utils.c
 
@@ -126,7 +153,11 @@ VOS_STATUS vos_crypto_init( v_U32_t *phCryptProv )
     VOS_STATUS uResult = VOS_STATUS_E_FAILURE;
 
     // This implementation doesn't require a crypto context
+<<<<<<< HEAD
     *phCryptProv  = 0;
+=======
+    *phCryptProv  = (v_U32_t)NULL;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     uResult = VOS_STATUS_SUCCESS;
     return ( uResult );
 }
@@ -271,7 +302,11 @@ int hmac_sha1(v_U8_t *key, v_U8_t ksize, char *plaintext, v_U8_t psize,
     }
 
     memset(hash_result, 0, 64);
+<<<<<<< HEAD
     vos_mem_copy(hash_buff, plaintext, psize);
+=======
+    memcpy(hash_buff, plaintext, psize);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     sg_init_one(&sg, hash_buff, psize);
 
     if (ksize) {
@@ -298,8 +333,11 @@ int hmac_sha1(v_U8_t *key, v_U8_t ksize, char *plaintext, v_U8_t psize,
     case -EBUSY:
         ret = wait_for_completion_interruptible(&tresult.completion);
         if (!ret && !tresult.err) {
+<<<<<<< HEAD
             for (i=0; i< outlen; i++)
                 output[i] = hash_result[i];
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             INIT_COMPLETION(tresult.completion);
             break;
         } else {
@@ -428,7 +466,11 @@ int hmac_md5(v_U8_t *key, v_U8_t ksize, char *plaintext, v_U8_t psize,
     }
 
     memset(hash_result, 0, 64);
+<<<<<<< HEAD
     vos_mem_copy(hash_buff, plaintext, psize);
+=======
+    memcpy(hash_buff, plaintext, psize);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     sg_init_one(&sg, hash_buff, psize);
 
     if (ksize) {
@@ -455,10 +497,15 @@ int hmac_md5(v_U8_t *key, v_U8_t ksize, char *plaintext, v_U8_t psize,
         case -EBUSY:
              ret = wait_for_completion_interruptible(&tresult.completion);
              if (!ret && !tresult.err) {
+<<<<<<< HEAD
                  for (i=0; i< outlen; i++)
                      output[i] = hash_result[i];
                  INIT_COMPLETION(tresult.completion);
                  break;
+=======
+                  INIT_COMPLETION(tresult.completion);
+                  break;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
              } else {
                  VOS_TRACE(VOS_MODULE_ID_VOSS,VOS_TRACE_LEVEL_ERROR, "wait_for_completion_interruptible failed");
                  if (!ret)
@@ -717,6 +764,7 @@ err_tfm:
 
     return VOS_STATUS_SUCCESS;
 }
+<<<<<<< HEAD
 
 v_U8_t vos_chan_to_band(v_U32_t chan)
 {
@@ -1246,3 +1294,5 @@ void vos_dump_roam_time_log_service(void)
 }
 #endif /* DEBUG_ROAM_DELAY */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver

@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
@@ -25,6 +26,27 @@
  * to the Linux Foundation.
  */
 
+=======
+  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+  *
+  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+  *
+  *
+  * Permission to use, copy, modify, and/or distribute this software for
+  * any purpose with or without fee is hereby granted, provided that the
+  * above copyright notice and this permission notice appear in all
+  * copies.
+  *
+  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+  * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+  * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+  * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+  * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  * PERFORMANCE OF THIS SOFTWARE.
+*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifndef _WLAN_HDD_WMM_H
 #define _WLAN_HDD_WMM_H
 /*============================================================================
@@ -47,6 +69,14 @@
   TL.
 
   The remaining functions are utility functions for information hiding.
+<<<<<<< HEAD
+=======
+
+
+               Copyright (c) 2008-9 Qualcomm Technologies, Inc.
+               All Rights Reserved.
+               Qualcomm Technologies Confidential and Proprietary
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 ============================================================================*/
 /* $Header$ */
 
@@ -179,7 +209,11 @@ typedef struct
    v_U32_t                      wmmAcUapsdSuspensionInterval;
    sme_QosWmmDirType            wmmAcUapsdDirection;
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    // Inactivity time parameters for TSPEC
    v_U32_t                      wmmInactivityTime;
    v_U32_t                      wmmPrevTrafficCnt;
@@ -203,20 +237,31 @@ extern const v_U8_t hdd_QdiscAcToTlAC[];
 extern const v_U8_t hddWmmUpToAcMap[]; 
 extern const v_U8_t hddLinuxUpToAcMap[];
 
+<<<<<<< HEAD
 #define WLAN_HDD_MAX_DSCP 0x3f
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**============================================================================
   @brief hdd_wmm_init() - Function which will initialize the WMM configuation
   and status to an initial state.  The configuration can later be overwritten
   via application APIs
 
+<<<<<<< HEAD
   @param pAdapter : [in]  pointer to Adapter context
+=======
+  @param pHddCtx : [in]  pointer to HDD context
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   @return         : VOS_STATUS_SUCCESS if succssful
                   : other values if failure
 
   ===========================================================================*/
+<<<<<<< HEAD
 VOS_STATUS hdd_wmm_init ( hdd_adapter_t *pAdapter );
+=======
+VOS_STATUS hdd_wmm_init ( hdd_context_t* pHddCtx );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**============================================================================
   @brief hdd_wmm_adapter_init() - Function which will initialize the WMM configuation

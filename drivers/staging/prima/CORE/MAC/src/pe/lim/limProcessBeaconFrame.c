@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2011-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,15 +22,41 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
+<<<<<<< HEAD
+=======
+ * Airgo Networks, Inc proprietary. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limProcessBeaconFrame.cc contains the code
  * for processing Received Beacon Frame.
  * Author:        Chandra Modumudi
@@ -79,6 +109,10 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
     /* here is it required to increment session specific heartBeat beacon counter */  
 
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pHdr = WDA_GET_RX_MAC_HEADER(pRxPacketInfo);
 
 
@@ -120,6 +154,7 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
             // Received wrongly formatted/invalid Beacon.
             // Ignore it and move on.
             limLog(pMac, LOGW,
+<<<<<<< HEAD
                    FL("Received invalid Beacon in state %d"),
                    psessionEntry->limMlmState);
             limPrintMlmState(pMac, LOGW,  psessionEntry->limMlmState);
@@ -130,6 +165,15 @@ limProcessBeaconFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession ps
             vos_mem_free(pBeacon);
             return;
         }
+=======
+                   FL("Received invalid Beacon in state %X"),
+                   psessionEntry->limMlmState);
+            limPrintMlmState(pMac, LOGW,  psessionEntry->limMlmState);
+            vos_mem_free(pBeacon);
+            return;
+        }
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         /*during scanning, when any session is active, and beacon/Pr belongs to
           one of the session, fill up the following, TBD - HB couter */
         if ((!psessionEntry->lastBeaconDtimPeriod) &&
@@ -274,7 +318,11 @@ limProcessBeaconFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
         if (sirConvertBeaconFrame2Struct(pMac, (tANI_U8 *) pRxPacketInfo, pBeacon) != eSIR_SUCCESS)
         {
             // Received wrongly formatted/invalid Beacon. Ignore and move on. 
+<<<<<<< HEAD
             limLog(pMac, LOGW, FL("Received invalid Beacon in global MLM state %d"), pMac->lim.gLimMlmState);
+=======
+            limLog(pMac, LOGW, FL("Received invalid Beacon in global MLM state %X"), pMac->lim.gLimMlmState);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             limPrintMlmState(pMac, LOGW,  pMac->lim.gLimMlmState);
             vos_mem_free(pBeacon);
             return;
@@ -297,8 +345,12 @@ limProcessBeaconFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
     } // end of (eLIM_MLM_WT_PROBE_RESP_STATE) || (eLIM_MLM_PASSIVE_SCAN_STATE)
     else
     {
+<<<<<<< HEAD
         limLog(pMac, LOG1, FL("Rcvd Beacon in unexpected MLM state %s (%d)"),
                limMlmStateStr(pMac->lim.gLimMlmState), pMac->lim.gLimMlmState);
+=======
+        limLog(pMac, LOG1, FL("Rcvd Beacon in unexpected MLM state %d"), pMac->lim.gLimMlmState);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         limPrintMlmState(pMac, LOG1, pMac->lim.gLimMlmState);
 #ifdef WLAN_DEBUG                    
         pMac->lim.gLimUnexpBcnCnt++;

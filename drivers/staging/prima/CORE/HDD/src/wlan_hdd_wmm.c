@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*============================================================================
@@ -67,9 +93,13 @@
 #include <linux/semaphore.h>
 #include <wlan_hdd_hostapd.h>
 #include <wlan_hdd_softap_tx_rx.h>
+<<<<<<< HEAD
 #include <vos_sched.h>
 #include "sme_Api.h"
 #include "sapInternal.h"
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 // change logging behavior based upon debug flag
 #ifdef HDD_WMM_DEBUG
 #define WMM_TRACE_LEVEL_FATAL      VOS_TRACE_LEVEL_FATAL
@@ -94,7 +124,11 @@
 #define DHCP_SOURCE_PORT 0x4400
 #define DHCP_DESTINATION_PORT 0x4300
 
+<<<<<<< HEAD
 #define HDD_WMM_UP_TO_AC_MAP_SIZE 8
+=======
+static sme_QosWmmUpType hddWmmDscpToUpMap[WLAN_HDD_MAX_DSCP+1];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 const v_U8_t hddWmmUpToAcMap[] = {
    WLANTL_AC_BE,
@@ -230,8 +264,13 @@ static void hdd_wmm_enable_tl_uapsd (hdd_wmm_qos_context_t* pQosContext)
    pAc->wmmAcIsUapsdEnabled = psb;
 
    VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
              "%s: Enabled UAPSD in TL srv_int=%d "
              "susp_int=%d dir=%d AC=%d",
+=======
+             "%s: Enabled UAPSD in TL srv_int=%ld "
+             "susp_int=%ld dir=%d AC=%d",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
              __func__,
              service_interval,
              suspension_interval,
@@ -255,14 +294,19 @@ static void hdd_wmm_disable_tl_uapsd (hdd_wmm_qos_context_t* pQosContext)
    WLANTL_ACEnumType acType = pQosContext->acType;
    hdd_wmm_ac_status_t *pAc = &pAdapter->hddWmmStatus.wmmAcStatus[acType];
    VOS_STATUS status;
+<<<<<<< HEAD
    v_U32_t service_interval;
    v_U32_t suspension_interval;
    v_U8_t uapsd_mask;
    v_U8_t ActiveTspec = INVALID_TSPEC;
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    // have we previously enabled UAPSD?
    if (pAc->wmmAcUapsdInfoValid == VOS_TRUE)
    {
+<<<<<<< HEAD
       uapsd_mask = (WLAN_HDD_GET_CTX(pAdapter))->cfg_ini->UapsdMask;
 
       //Finding uapsd_mask as per AC
@@ -322,6 +366,26 @@ static void hdd_wmm_disable_tl_uapsd (hdd_wmm_qos_context_t* pQosContext)
                    __func__,
                    acType);
          }
+=======
+      status = WLANTL_DisableUAPSDForAC((WLAN_HDD_GET_CTX(pAdapter))->pvosContext,
+                                        (WLAN_HDD_GET_STATION_CTX_PTR(pAdapter))->conn_info.staId[0],
+                                        acType);
+
+      if ( !VOS_IS_STATUS_SUCCESS( status ) )
+      {
+         VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
+                    "%s: Failed to disable U-APSD for AC=%d",
+                    __func__, acType );
+      }
+      else
+      {
+         // TL no longer has valid UAPSD info
+         pAc->wmmAcUapsdInfoValid = VOS_FALSE;
+         VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_INFO,
+                   "%s: Disabled UAPSD in TL for AC=%d",
+                   __func__,
+                   acType);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
    }
 }
@@ -476,7 +540,11 @@ static v_BOOL_t hdd_wmm_is_access_allowed(hdd_adapter_t* pAdapter,
    return VOS_TRUE;
 }
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
   @brief hdd_wmm_inactivity_timer_cb() - timer handler function which is
   called for every inactivity interval per AC. This function gets the
@@ -505,7 +573,11 @@ void hdd_wmm_inactivity_timer_cb( v_PVOID_t pUserData )
     currentTrafficCnt = pAdapter->hdd_stats.hddTxRxStats.txXmitClassifiedAC[pQosContext->acType];
 
     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
             FL("WMM inactivity Timer for AC=%d, currentCnt=%d, prevCnt=%d"),
+=======
+            FL("WMM inactivity Timer for AC=%d, currentCnt=%d, prevCnt=%d\n"),
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             acType, (int)currentTrafficCnt, (int)pAc->wmmPrevTrafficCnt);
     if (pAc->wmmPrevTrafficCnt == currentTrafficCnt)
     {
@@ -617,7 +689,11 @@ VOS_STATUS hdd_wmm_disable_inactivity_timer(hdd_wmm_qos_context_t* pQosContext)
 
     return vos_status;
 }
+<<<<<<< HEAD
 #endif // FEATURE_WLAN_ESE
+=======
+#endif // FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**
   @brief hdd_wmm_sme_callback() - callback registered by HDD with SME for receiving
@@ -720,6 +796,7 @@ static eHalStatus hdd_wmm_sme_callback (tHalHandle hHal,
          hdd_wmm_notify_app(pQosContext);
       }
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
       // Check if the inactivity interval is specified
       if (pCurrentQosInfo && pCurrentQosInfo->inactivity_interval) {
@@ -729,6 +806,17 @@ static eHalStatus hdd_wmm_sme_callback (tHalHandle hHal,
          hdd_wmm_enable_inactivity_timer(pQosContext, pCurrentQosInfo->inactivity_interval);
       }
 #endif // FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+      // Check if the inactivity interval is specified
+      if (pCurrentQosInfo && pCurrentQosInfo->inactivity_interval) {
+         VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_INFO,
+                 "%s: Inactivity timer value = %d for AC=%d\n",
+                 __func__, pCurrentQosInfo->inactivity_interval, acType);
+         hdd_wmm_enable_inactivity_timer(pQosContext, pCurrentQosInfo->inactivity_interval);
+      }
+#endif // FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
       // notify TL to enable trigger frames if necessary
       hdd_wmm_enable_tl_uapsd(pQosContext);
@@ -874,7 +962,11 @@ static eHalStatus hdd_wmm_sme_callback (tHalHandle hHal,
 
    case SME_QOS_STATUS_SETUP_NOT_QOS_AP_RSP:
       VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                  "%s: Setup failed, not a QoS AP",
+=======
+                 "%s: Setup failed, not a QoS AP\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  __func__);
       if (!HDD_WMM_HANDLE_IMPLICIT == pQosContext->handle)
       {
@@ -1247,7 +1339,11 @@ static eHalStatus hdd_wmm_sme_callback (tHalHandle hHal,
 
    default:
       VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                  "%s: unexpected SME Status=%d",
+=======
+                 "%s: unexpected SME Status=%d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  __func__, smeStatus );
       VOS_ASSERT(0);
    }
@@ -1428,7 +1524,11 @@ static void hdd_wmm_do_implicit_qos(struct work_struct *work)
       qosInfo.suspension_interval = (WLAN_HDD_GET_CTX(pAdapter))->cfg_ini->InfraUapsdBkSuspIntv;
       break;
    }
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    qosInfo.inactivity_interval = (WLAN_HDD_GET_CTX(pAdapter))->cfg_ini->InfraInactivityInterval;
 #endif
    qosInfo.ts_info.burst_size_defn = (WLAN_HDD_GET_CTX(pAdapter))->cfg_ini->burstSizeDefinition;
@@ -1527,7 +1627,11 @@ static void hdd_wmm_do_implicit_qos(struct work_struct *work)
 
    default:
       VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                  "%s: unexpected SME Status=%d",
+=======
+                 "%s: unexpected SME Status=%d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  __func__, smeStatus );
       VOS_ASSERT(0);
    }
@@ -1540,6 +1644,7 @@ static void hdd_wmm_do_implicit_qos(struct work_struct *work)
   and status to an initial state.  The configuration can later be overwritten
   via application APIs
 
+<<<<<<< HEAD
   @param pAdapter : [in]  pointer to Adapter context
 
   @return         : VOS_STATUS_SUCCESS if successful
@@ -1549,6 +1654,16 @@ static void hdd_wmm_do_implicit_qos(struct work_struct *work)
 VOS_STATUS hdd_wmm_init ( hdd_adapter_t *pAdapter )
 {
    sme_QosWmmUpType* hddWmmDscpToUpMap = pAdapter->hddWmmDscpToUpMap;
+=======
+  @param pHddCtx : [in]  pointer to HDD context
+
+  @return         : VOS_STATUS_SUCCESS if succssful
+                  : other values if failure
+
+  ===========================================================================*/
+VOS_STATUS hdd_wmm_init ( hdd_context_t* pHddCtx )
+{
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    v_U8_t dscp;
 
    VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_INFO_LOW,
@@ -1663,6 +1778,7 @@ VOS_STATUS hdd_wmm_adapter_close ( hdd_adapter_t* pAdapter )
    {
       pQosContext = list_first_entry(&pAdapter->hddWmmStatus.wmmContextList,
                                      hdd_wmm_qos_context_t, node);
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
       hdd_wmm_disable_inactivity_timer(pQosContext);
 #endif
@@ -1673,6 +1789,13 @@ VOS_STATUS hdd_wmm_adapter_close ( hdd_adapter_t* pAdapter )
 
       cancel_work_sync(&pQosContext->wmmAcSetupImplicitQos);
    }
+=======
+#ifdef FEATURE_WLAN_CCX
+      hdd_wmm_disable_inactivity_timer(pQosContext);
+#endif
+#ifdef WLAN_OPEN_SOURCE
+      cancel_work_sync(&pQosContext->wmmAcSetupImplicitQos);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
       hdd_wmm_free_context(pQosContext);
    }
@@ -1823,7 +1946,11 @@ v_VOID_t hdd_wmm_classify_pkt ( hdd_adapter_t* pAdapter,
       }
 
       dscp = (tos>>2) & 0x3f;
+<<<<<<< HEAD
       userPri = pAdapter->hddWmmDscpToUpMap[dscp];
+=======
+      userPri = hddWmmDscpToUpMap[dscp];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #ifdef HDD_WMM_DEBUG
       VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_INFO,
@@ -1904,6 +2031,7 @@ v_U16_t hdd_hostapd_select_queue(struct net_device * dev, struct sk_buff *skb)
    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
    v_U8_t STAId;
    v_U8_t *pSTAId = (v_U8_t *)(((v_U8_t *)(skb->data)) - 1);
+<<<<<<< HEAD
    v_CONTEXT_t pVosContext = ( WLAN_HDD_GET_CTX(pAdapter))->pvosContext;
    ptSapContext pSapCtx = NULL;
    pSapCtx = VOS_GET_SAP_CB(pVosContext);
@@ -1913,6 +2041,9 @@ v_U16_t hdd_hostapd_select_queue(struct net_device * dev, struct sk_buff *skb)
        *pSTAId = HDD_WLAN_INVALID_STA_ID;
        goto done;
    }
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*Get the Station ID*/
    if (VOS_STATUS_SUCCESS != hdd_softap_GetStaId(pAdapter, pDestMacAddress, &STAId))
    {
@@ -1922,21 +2053,36 @@ v_U16_t hdd_hostapd_select_queue(struct net_device * dev, struct sk_buff *skb)
       goto done;
    }
 
+<<<<<<< HEAD
    spin_lock_bh( &pSapCtx->staInfo_lock );
    if (FALSE == vos_is_macaddr_equal(&pSapCtx->aStaInfo[STAId].macAddrSTA, pDestMacAddress))
    {
       VOS_TRACE( VOS_MODULE_ID_HDD_SOFTAP, VOS_TRACE_LEVEL_INFO,
+=======
+   spin_lock_bh( &pAdapter->staInfo_lock );
+   if (FALSE == vos_is_macaddr_equal(&pAdapter->aStaInfo[STAId].macAddrSTA, pDestMacAddress))
+   {
+      VOS_TRACE( VOS_MODULE_ID_HDD_SOFTAP, VOS_TRACE_LEVEL_ERROR,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    "%s: Station MAC address does not matching", __func__);
 
       *pSTAId = HDD_WLAN_INVALID_STA_ID;
       goto release_lock;
    }
+<<<<<<< HEAD
    if (pSapCtx->aStaInfo[STAId].isUsed && pSapCtx->aStaInfo[STAId].isQosEnabled && (HDD_WMM_USER_MODE_NO_QOS != pHddCtx->cfg_ini->WmmMode))
+=======
+   if (pAdapter->aStaInfo[STAId].isUsed && pAdapter->aStaInfo[STAId].isQosEnabled && (HDD_WMM_USER_MODE_NO_QOS != pHddCtx->cfg_ini->WmmMode))
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    {
       /* Get the user priority from IP header & corresponding AC */
       hdd_wmm_classify_pkt (pAdapter, skb, &ac, &up);
       //If 3/4th of Tx queue is used then place the DHCP packet in VOICE AC queue
+<<<<<<< HEAD
       if (pSapCtx->aStaInfo[STAId].vosLowResource && is_dhcp_packet(skb))
+=======
+      if (pAdapter->aStaInfo[STAId].vosLowResource && is_dhcp_packet(skb))
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       {
          VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_WARN,
                     "%s: Making priority of DHCP packet as VOICE", __func__);
@@ -1947,6 +2093,7 @@ v_U16_t hdd_hostapd_select_queue(struct net_device * dev, struct sk_buff *skb)
    *pSTAId = STAId;
 
 release_lock:
+<<<<<<< HEAD
     spin_unlock_bh( &pSapCtx->staInfo_lock );
 done:
    skb->priority = up;
@@ -1958,6 +2105,12 @@ done:
                  "%s: up=%d is going beyond max value", __func__, up);
       queueIndex = hddLinuxUpToAcMap[SME_QOS_WMM_UP_BE];
    }
+=======
+    spin_unlock_bh( &pAdapter->staInfo_lock );
+done:
+   skb->priority = up;
+   queueIndex = hddLinuxUpToAcMap[skb->priority];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    return queueIndex;
 }
@@ -1979,6 +2132,7 @@ v_U16_t hdd_wmm_select_queue(struct net_device * dev, struct sk_buff *skb)
    v_USHORT_t queueIndex;
    hdd_adapter_t *pAdapter =  WLAN_HDD_GET_PRIV_PTR(dev);
 
+<<<<<<< HEAD
    if (vos_is_logp_in_progress(VOS_MODULE_ID_HDD, NULL)) {
        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
                   FL("called during WDReset"));
@@ -1986,6 +2140,8 @@ v_U16_t hdd_wmm_select_queue(struct net_device * dev, struct sk_buff *skb)
        return HDD_LINUX_AC_BE;
    }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*Get the Station ID*/
    if (WLAN_HDD_IBSS == pAdapter->device_mode)
    {
@@ -1996,6 +2152,7 @@ v_U16_t hdd_wmm_select_queue(struct net_device * dev, struct sk_buff *skb)
             hdd_Ibss_GetStaId(&pAdapter->sessionCtx.station,
                                pDestMacAddress, pSTAId))
        {
+<<<<<<< HEAD
           *pSTAId = HDD_WLAN_INVALID_STA_ID;
           if ( !vos_is_macaddr_broadcast( pDestMacAddress ) &&
                              !vos_is_macaddr_group(pDestMacAddress))
@@ -2006,6 +2163,14 @@ v_U16_t hdd_wmm_select_queue(struct net_device * dev, struct sk_buff *skb)
                      MAC_ADDR_ARRAY(pDestMacAddress->bytes));
               goto done;
           }
+=======
+          VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+                     "%s: Failed to find right station pDestMacAddress: "
+                     MAC_ADDRESS_STR , __func__,
+                     MAC_ADDR_ARRAY(pDestMacAddress->bytes));
+          *pSTAId = HDD_WLAN_INVALID_STA_ID;
+          goto done;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        }
    }
    // if we don't want QoS or the AP doesn't support Qos
@@ -2017,14 +2182,19 @@ v_U16_t hdd_wmm_select_queue(struct net_device * dev, struct sk_buff *skb)
       if (pAdapter->isVosLowResource && is_dhcp_packet(skb))
       {
          VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                    "%s: BestEffort Tx Queue is 3/4th full"
                    " Make DHCP packet's pri as VO", __func__);
+=======
+                   "%s: Making priority of DHCP packet as VOICE", __func__);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          up = SME_QOS_WMM_UP_VO;
          ac = hddWmmUpToAcMap[up];
       }
    }
 done:
    skb->priority = up;
+<<<<<<< HEAD
    if(skb->priority < SME_QOS_WMM_UP_MAX)
          queueIndex = hddLinuxUpToAcMap[skb->priority];
    else
@@ -2033,6 +2203,9 @@ done:
                  "%s: up=%d is going beyond max value", __func__, up);
       queueIndex = hddLinuxUpToAcMap[SME_QOS_WMM_UP_BE];
    }
+=======
+   queueIndex = hddLinuxUpToAcMap[skb->priority];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    return queueIndex;
 }
@@ -2192,7 +2365,10 @@ VOS_STATUS hdd_wmm_assoc( hdd_adapter_t* pAdapter,
 {
    tANI_U8 uapsdMask;
    VOS_STATUS status;
+<<<<<<< HEAD
    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    // when we associate we need to notify TL if it needs to enable
    // UAPSD for any access categories
@@ -2277,6 +2453,7 @@ VOS_STATUS hdd_wmm_assoc( hdd_adapter_t* pAdapter,
       VOS_ASSERT( VOS_IS_STATUS_SUCCESS( status ));
    }
 
+<<<<<<< HEAD
    status = sme_UpdateDSCPtoUPMapping(pHddCtx->hHal,
        pAdapter->hddWmmDscpToUpMap, pAdapter->sessionId);
 
@@ -2285,6 +2462,8 @@ VOS_STATUS hdd_wmm_assoc( hdd_adapter_t* pAdapter,
        hdd_wmm_init( pAdapter );
    }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_INFO_LOW,
              "%s: Exiting", __func__);
 
@@ -2334,8 +2513,11 @@ VOS_STATUS hdd_wmm_connect( hdd_adapter_t* pAdapter,
    }
    else
    {
+<<<<<<< HEAD
       /* TODO: if a non-qos IBSS peer joins the group make qap and qosConnection false.
        */
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       qap = VOS_TRUE;
       qosConnection = VOS_TRUE;
       acmMask = 0x0;
@@ -2362,6 +2544,7 @@ VOS_STATUS hdd_wmm_connect( hdd_adapter_t* pAdapter,
          pAdapter->hddWmmStatus.wmmAcStatus[ac].wmmAcAccessRequired = VOS_TRUE;
          pAdapter->hddWmmStatus.wmmAcStatus[ac].wmmAcAccessAllowed = VOS_FALSE;
          pAdapter->hddWmmStatus.wmmAcStatus[ac].wmmAcAccessGranted = VOS_FALSE;
+<<<<<<< HEAD
 
          /* Making TSPEC invalid here so downgrading can be happen while roaming
           * It is expected this will be SET in hdd_wmm_sme_callback,once sme is
@@ -2399,6 +2582,8 @@ VOS_STATUS hdd_wmm_connect( hdd_adapter_t* pAdapter,
          {
             pAdapter->hddWmmStatus.wmmAcStatus[ac].wmmAcTspecValid = VOS_FALSE;
          }
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
       else
       {
@@ -2566,7 +2751,11 @@ hdd_wlan_wmm_status_e hdd_wmm_addts( hdd_adapter_t* pAdapter,
         default:
           // we didn't get back one of the SME_QOS_STATUS_MODIFY_* status codes
           VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                      "%s: unexpected SME Status=%d", __func__, smeStatus );
+=======
+                     "%s: unexpected SME Status=%d\n", __func__, smeStatus );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           VOS_ASSERT(0);
           return HDD_WLAN_WMM_STATUS_MODIFY_FAILED;
       }
@@ -2588,6 +2777,7 @@ hdd_wlan_wmm_status_e hdd_wmm_addts( hdd_adapter_t* pAdapter,
    // we assume the tspec has already been validated by the caller
 
    pQosContext->handle = handle;
+<<<<<<< HEAD
    if (pTspec->ts_info.up < HDD_WMM_UP_TO_AC_MAP_SIZE)
       pQosContext->acType = hddWmmUpToAcMap[pTspec->ts_info.up];
    else {
@@ -2598,6 +2788,9 @@ hdd_wlan_wmm_status_e hdd_wmm_addts( hdd_adapter_t* pAdapter,
                 HDD_WMM_UP_TO_AC_MAP_SIZE - 1, hddWmmUpToAcMap[0]);
       pQosContext->acType = hddWmmUpToAcMap[0];
    }
+=======
+   pQosContext->acType = hddWmmUpToAcMap[pTspec->ts_info.up];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    pQosContext->pAdapter = pAdapter;
    pQosContext->qosFlowId = 0;
    pQosContext->magic = HDD_WMM_CTX_MAGIC;
@@ -2653,7 +2846,11 @@ hdd_wlan_wmm_status_e hdd_wmm_addts( hdd_adapter_t* pAdapter,
       // we didn't get back one of the SME_QOS_STATUS_SETUP_* status codes
       hdd_wmm_free_context(pQosContext);
       VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                  "%s: unexpected SME Status=%d", __func__, smeStatus );
+=======
+                 "%s: unexpected SME Status=%d\n", __func__, smeStatus );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       VOS_ASSERT(0);
       return HDD_WLAN_WMM_STATUS_SETUP_FAILED;
    }
@@ -2735,7 +2932,11 @@ hdd_wlan_wmm_status_e hdd_wmm_delts( hdd_adapter_t* pAdapter,
       // need to tell TL to stop trigger timer, etc
       hdd_wmm_disable_tl_uapsd(pQosContext);
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       // disable the inactivity timer
       hdd_wmm_disable_inactivity_timer(pQosContext);
 #endif
@@ -2764,7 +2965,11 @@ hdd_wlan_wmm_status_e hdd_wmm_delts( hdd_adapter_t* pAdapter,
    default:
       // we didn't get back one of the SME_QOS_STATUS_RELEASE_* status codes
       VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                  "%s: unexpected SME Status=%d", __func__, smeStatus );
+=======
+                 "%s: unexpected SME Status=%d\n", __func__, smeStatus );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       VOS_ASSERT(0);
       status = HDD_WLAN_WMM_STATUS_RELEASE_FAILED;
    }

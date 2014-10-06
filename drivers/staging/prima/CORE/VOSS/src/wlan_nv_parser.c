@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2014 The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
@@ -25,6 +26,35 @@
  * to the Linux Foundation.
  */
 
+=======
+ * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *    * Redistributions of source code must retain the above copyright
+ *      notice, this list of conditions and the following disclaimer.
+ *    * Redistributions in binary form must reproduce the above
+ *      copyright notice, this list of conditions and the following
+ *      disclaimer in the documentation and/or other materials provided
+ *      with the distribution.
+ *    * Neither the name of The Linux Foundation nor the names of its
+ *      contributors may be used to endorse or promote products derived
+ *      from this software without specific prior written permission.
+ *
+ *THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+ *WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ *MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+ *ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+ *BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ *CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ *SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ *BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ *WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ *OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+ *IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*===========================================================================
                        EDIT HISTORY FOR FILE
 
@@ -50,8 +80,11 @@
 #include "wlan_nv_template_api.h"
 #include "wlan_nv_template_builtin.h"
 
+<<<<<<< HEAD
 extern void vos_mem_copy( void *pDst, const void *pSrc, unsigned int numBytes );
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define _RECURSIVE_DATA_TABLE_PARSING
 // Recursive/iterative switch !! Default iterative
 #define _RECURSIVE_VERSION
@@ -1120,7 +1153,11 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
                           FIELD_ID_TABLE_OR_ENUM_IDX_MASK];
 
    if (storageType == SINGULAR ) {
+<<<<<<< HEAD
       ptr = ((unsigned char*)gpnvData_t) + tableBaseOffset + addOffset;
+=======
+      ptr = (unsigned char*)((int)gpnvData_t + tableBaseOffset + addOffset);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       dptr = (unsigned char *)&pStream[*pos];
 
       if (IsFieldTypeBasicData(pTable[tableIdx][fieldId].fieldId)) {
@@ -1145,7 +1182,11 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
 
       offset = 0;
       for (i = 0; i < size1; i++) {
+<<<<<<< HEAD
          vos_mem_copy(&ptr[offset], &dptr[offset], sizeOneElem);
+=======
+         memcpy(&ptr[offset], &dptr[offset], sizeOneElem);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          offset = offset + sizeOneElem;
       }
 
@@ -1153,7 +1194,11 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
    }
    else {
       if (ARRAY_1 == storageType) {
+<<<<<<< HEAD
          ptr = ((unsigned char*)gpnvData_t) + tableBaseOffset + addOffset;
+=======
+         ptr = (unsigned char*)((int)gpnvData_t + tableBaseOffset + addOffset);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          dptr = (unsigned char *)&pStream[*pos];
 
          idx = _STORAGE_SIZE1(pTable[tableIdx][fieldId].fieldStorageSize1,
@@ -1192,11 +1237,19 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
                   index = index * sizeOneElem;
                   dindex = dindex * sizeOneElem;
 
+<<<<<<< HEAD
                   vos_mem_copy(&ptr[index], &dptr[dindex], sizeOneElem);
                }
             }
             else {
                vos_mem_copy(&ptr[offset], &dptr[offset], sizeOneElem);
+=======
+                  memcpy(&ptr[index], &dptr[dindex], sizeOneElem);
+               }
+            }
+            else {
+               memcpy(&ptr[offset], &dptr[offset], sizeOneElem);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                offset = offset + sizeOneElem;
             }
          }
@@ -1204,7 +1257,11 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
          *pos = *pos + (size1Bin * sizeOneElem);
       }
       else if (ARRAY_2 == storageType) {
+<<<<<<< HEAD
          ptr = ((unsigned char*)gpnvData_t) + tableBaseOffset + addOffset;
+=======
+         ptr = (unsigned char*)((int)gpnvData_t + tableBaseOffset + addOffset);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          dptr = (unsigned char *)&pStream[*pos];
 
          idx = _STORAGE_SIZE1(pTable[tableIdx][fieldId].fieldStorageSize1,
@@ -1287,7 +1344,11 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
                  index1 = dindex1 = j;
               }
 
+<<<<<<< HEAD
               vos_mem_copy(&ptr[(index1 + index * size2BuiltIn)*sizeOneElem],
+=======
+              memcpy(&ptr[(index1 + index * size2BuiltIn)*sizeOneElem],
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    &dptr[(dindex1+dindex*size2Bin)*sizeOneElem], sizeOneElem);
               offset = offset + sizeOneElem;
             }
@@ -1296,7 +1357,11 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
          *pos = *pos + size2Bin * size1Bin * sizeOneElem;
       }
       else if (ARRAY_3 == storageType) {
+<<<<<<< HEAD
          ptr = ((unsigned char*)gpnvData_t) + tableBaseOffset + addOffset;
+=======
+         ptr = (unsigned char*)((int)gpnvData_t + tableBaseOffset + addOffset);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          dptr = (unsigned char *)&pStream[*pos];
 
          idx = _STORAGE_SIZE1(pTable[tableIdx][fieldId].fieldStorageSize1,
@@ -1418,7 +1483,11 @@ static void copyDataToBuiltInFromBin(int tableIdx,int fieldId,
                     index2 = dindex2 = k;
                  }
 
+<<<<<<< HEAD
                  vos_mem_copy(&ptr[(index2 + (index1 * size2BuiltIn) +
+=======
+                 memcpy(&ptr[(index2 + (index1 * size2BuiltIn) +
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                           (index * size3BuiltIn * size2BuiltIn)) * sizeOneElem],
                         &dptr[(dindex2 + (dindex1 * size2Bin) +
                           (dindex * size3Bin * size2Bin))*sizeOneElem],

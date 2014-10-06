@@ -1,5 +1,42 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+
+
+
+/*
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -20,15 +57,8 @@
  */
 
 /*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
-/*
+ * Airgo Networks, Inc proprietary. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file sirParams.h contains the common parameter definitions, which
  * are not dependent on threadX API. These can be used by all Firmware
  * modules.
@@ -51,7 +81,11 @@
 #define SIR_MAX_NUM_CHANNELS    64
 #define SIR_MAX_NUM_STA_IN_IBSS 16
 #define SIR_MAX_NUM_STA_IN_BSS  256
+<<<<<<< HEAD
 #define SIR_ESE_MAX_MEAS_IE_REQS   8
+=======
+#define SIR_CCX_MAX_MEAS_IE_REQS   8
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 typedef enum
 {
@@ -83,20 +117,27 @@ typedef enum {
    TDLS = 6,
    P2P_GO_NOA_DECOUPLE_INIT_SCAN = 7,
    WLANACTIVE_OFFLOAD = 8,
+<<<<<<< HEAD
    RTT = 20,
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    WOW = 22,
 #ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
    WLAN_ROAM_SCAN_OFFLOAD = 23,
 #endif
    IBSS_HEARTBEAT_OFFLOAD = 26,
    WLAN_PERIODIC_TX_PTRN = 28,
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_TDLS
    ADVANCE_TDLS = 29,
 #endif
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #ifdef FEATURE_WLAN_BATCH_SCAN
    BATCH_SCAN = 30,
 #endif
+<<<<<<< HEAD
    FW_IN_TX_PATH = 31,
    EXTENDED_NSOFFLOAD_SLOT = 32,
    CH_SWITCH_V1           = 33,
@@ -127,6 +168,9 @@ typedef enum {
    FW_STATS              = 47,
    WPS_PRBRSP_TMPL       = 48,
    BCN_IE_FLT_DELTA      = 49,
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    //MAX_FEATURE_SUPPORTED = 128
 } placeHolderInCapBitmap;
 
@@ -174,6 +218,7 @@ typedef struct sSirMsgQ
      */
     void *bodyptr;
     tANI_U32 bodyval;
+<<<<<<< HEAD
 
     /*
      * Some messages provide a callback function.  The function signature
@@ -181,6 +226,8 @@ typedef struct sSirMsgQ
      */
     void *callback;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tSirMsgQ, *tpSirMsgQ;
 
 /// Mailbox Message Structure Define
@@ -573,7 +620,11 @@ typedef struct sSirMbMsgP2p
 #define SIR_HAL_GTK_OFFLOAD_GETINFO_RSP    (SIR_HAL_ITC_MSG_TYPES_BEGIN + 183)
 #endif //WLAN_FEATURE_GTK_OFFLOAD
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define SIR_HAL_TSM_STATS_REQ              (SIR_HAL_ITC_MSG_TYPES_BEGIN + 184)
 #define SIR_HAL_TSM_STATS_RSP              (SIR_HAL_ITC_MSG_TYPES_BEGIN + 185)
 #endif
@@ -613,6 +664,12 @@ typedef struct sSirMbMsgP2p
 #define SIR_HAL_TDLS_IND (SIR_HAL_ITC_MSG_TYPES_BEGIN + 199)
 #endif
 
+<<<<<<< HEAD
+=======
+#define SIR_HAL_START_SCAN_OFFLOAD_REQ     (SIR_HAL_ITC_MSG_TYPES_BEGIN + 197)
+#define SIR_HAL_START_SCAN_OFFLOAD_RSP     (SIR_HAL_ITC_MSG_TYPES_BEGIN + 198)
+#define SIR_HAL_UPDATE_CHAN_LIST_REQ       (SIR_HAL_ITC_MSG_TYPES_BEGIN + 199)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define SIR_HAL_UPDATE_CHAN_LIST_RSP       (SIR_HAL_ITC_MSG_TYPES_BEGIN + 200)
 #define SIR_HAL_STOP_SCAN_OFFLOAD_REQ      (SIR_HAL_ITC_MSG_TYPES_BEGIN + 201)
 #define SIR_HAL_STOP_SCAN_OFFLOAD_RSP      (SIR_HAL_ITC_MSG_TYPES_BEGIN + 202)
@@ -634,6 +691,7 @@ typedef struct sSirMbMsgP2p
 #define SIR_HAL_TRIGGER_BATCH_SCAN_RESULT_IND (SIR_HAL_ITC_MSG_TYPES_BEGIN + 213)
 #endif
 
+<<<<<<< HEAD
 #define SIR_HAL_RATE_UPDATE_IND            (SIR_HAL_ITC_MSG_TYPES_BEGIN + 217)
 #define SIR_HAL_START_SCAN_OFFLOAD_REQ     (SIR_HAL_ITC_MSG_TYPES_BEGIN + 218)
 #define SIR_HAL_START_SCAN_OFFLOAD_RSP     (SIR_HAL_ITC_MSG_TYPES_BEGIN + 219)
@@ -698,6 +756,10 @@ typedef struct sSirMbMsgP2p
 #define SIR_HAL_ENCRYPT_MSG_RSP               (SIR_HAL_ITC_MSG_TYPES_BEGIN + 262)
 
 #define SIR_HAL_MSG_TYPES_END              (SIR_HAL_MSG_TYPES_BEGIN + 0x1FF)
+=======
+
+#define SIR_HAL_MSG_TYPES_END              (SIR_HAL_ITC_MSG_TYPES_BEGIN + 0xFF)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 // CFG message types
 #define SIR_CFG_MSG_TYPES_BEGIN        (SIR_CFG_MODULE_ID << 8)
 #define SIR_CFG_ITC_MSG_TYPES_BEGIN    (SIR_CFG_MSG_TYPES_BEGIN+0xB0)
@@ -764,6 +826,10 @@ typedef struct sSirMbMsgP2p
 #define SIR_LIM_PROBE_HB_FAILURE_TIMEOUT (SIR_LIM_TIMEOUT_MSG_START + 0xB)
 #define SIR_LIM_ADDTS_RSP_TIMEOUT        (SIR_LIM_TIMEOUT_MSG_START + 0xC)
 #define SIR_LIM_LINK_TEST_DURATION_TIMEOUT (SIR_LIM_TIMEOUT_MSG_START + 0x13)
+<<<<<<< HEAD
+=======
+#define SIR_LIM_HASH_MISS_THRES_TIMEOUT  (SIR_LIM_TIMEOUT_MSG_START + 0x16)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define SIR_LIM_CNF_WAIT_TIMEOUT         (SIR_LIM_TIMEOUT_MSG_START + 0x17)
 #define SIR_LIM_KEEPALIVE_TIMEOUT        (SIR_LIM_TIMEOUT_MSG_START + 0x18)
 #define SIR_LIM_UPDATE_OLBC_CACHEL_TIMEOUT (SIR_LIM_TIMEOUT_MSG_START + 0x19)
@@ -785,7 +851,11 @@ typedef struct sSirMbMsgP2p
 #define SIR_LIM_BEACON_GEN_IND          (SIR_LIM_TIMEOUT_MSG_START + 0x23)
 #define SIR_LIM_PERIODIC_PROBE_REQ_TIMEOUT    (SIR_LIM_TIMEOUT_MSG_START + 0x24)
 
+<<<<<<< HEAD
 #define SIR_LIM_ESE_TSM_TIMEOUT        (SIR_LIM_TIMEOUT_MSG_START + 0x25)
+=======
+#define SIR_LIM_CCX_TSM_TIMEOUT        (SIR_LIM_TIMEOUT_MSG_START + 0x25)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define SIR_LIM_DISASSOC_ACK_TIMEOUT       (SIR_LIM_TIMEOUT_MSG_START + 0x26)
 #define SIR_LIM_DEAUTH_ACK_TIMEOUT       (SIR_LIM_TIMEOUT_MSG_START + 0x27)

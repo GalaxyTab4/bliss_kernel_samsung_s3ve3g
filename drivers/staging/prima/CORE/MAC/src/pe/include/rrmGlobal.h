@@ -1,5 +1,39 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2011-2012,2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -20,12 +54,8 @@
  */
 
 /*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
+ * */
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #if !defined( __RRMGLOBAL_H )
 #define __RRMGLOBAL_H
@@ -50,6 +80,7 @@ typedef enum eRrmRetStatus
     eRRM_FAILURE
 } tRrmRetStatus;
 
+<<<<<<< HEAD
 typedef enum eRrmMsgReqSource
 {
     eRRM_MSG_SOURCE_LEGACY_ESE  = 1, /* legacy ese */
@@ -57,6 +88,8 @@ typedef enum eRrmMsgReqSource
     eRRM_MSG_SOURCE_ESE_UPLOAD  = 3  /* ese upload approach */
 } tRrmMsgReqSource;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sSirChannelInfo
 {
    tANI_U8 regulatoryClass;
@@ -68,6 +101,7 @@ typedef struct sSirBeaconReportReqInd
    tANI_U16     messageType; // eWNI_SME_BEACON_REPORT_REQ_IND
    tANI_U16     length;
    tSirMacAddr  bssId;
+<<<<<<< HEAD
    tANI_U16     measurementDuration[SIR_ESE_MAX_MEAS_IE_REQS];   //ms
    tANI_U16     randomizationInterval; //ms
    tSirChannelInfo channelInfo;
@@ -77,6 +111,16 @@ typedef struct sSirBeaconReportReqInd
    tANI_U16      uDialogToken;
    tSirChannelList channelList; //From AP channel report.
    tRrmMsgReqSource msgSource;
+=======
+   tANI_U16     measurementDuration[SIR_CCX_MAX_MEAS_IE_REQS];   //ms
+   tANI_U16     randomizationInterval; //ms
+   tSirChannelInfo channelInfo;
+   tSirMacAddr      macaddrBssid;   //0: wildcard
+   tANI_U8      fMeasurementtype[SIR_CCX_MAX_MEAS_IE_REQS];  //0:Passive, 1: Active, 2: table mode
+   tAniSSID     ssId;              //May be wilcard.
+   tANI_U16      uDialogToken;
+   tSirChannelList channelList; //From AP channel report.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tSirBeaconReportReqInd, * tpSirBeaconReportReqInd;
 
 
@@ -125,7 +169,11 @@ typedef struct sSirNeighborBssDescription
                 tANI_U32      fMobilityDomain:1;
                 tANI_U32      reserved:21; 
          } rrmInfo;
+<<<<<<< HEAD
          struct _eseInfo {
+=======
+         struct _ccxInfo {
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 tANI_U32      channelBand:8;
                 tANI_U32      minRecvSigPower:8;
                 tANI_U32      apTxPower:8;
@@ -137,7 +185,11 @@ typedef struct sSirNeighborBssDescription
 
                 tANI_U32      beaconInterval:16;
                 tANI_U32      reserved: 16;
+<<<<<<< HEAD
          } eseInfo;
+=======
+         } ccxInfo;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    } bssidInfo;
  
    //Optional sub IEs....ignoring for now.
@@ -177,7 +229,10 @@ typedef struct sRRMReq
          tRRMBeaconReportRequestedIes reqIes;
       }Beacon;
    }request;
+<<<<<<< HEAD
    tANI_U8 sendEmptyBcnRpt;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }tRRMReq, *tpRRMReq;
 
 typedef struct sRRMCaps

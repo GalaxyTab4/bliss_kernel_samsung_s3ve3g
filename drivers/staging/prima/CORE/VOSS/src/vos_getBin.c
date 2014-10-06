@@ -1,5 +1,38 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,12 +52,15 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
+/**=============================================================================
+  vos_getBin.c
+  \brief
+  Description...
+   Copyright (c) 2012-2013 Qualcomm Atheros, Inc.
+   All Rights Reserved.
+   Qualcomm Atheros Confidential and Proprietary.
+  ==============================================================================*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* $HEADER$ */
 /**-----------------------------------------------------------------------------
   Include files
@@ -102,7 +138,11 @@ VOS_STATUS vos_get_binary_blob( VOS_BINARY_ID binaryId,
        if ( !VOS_IS_STATUS_SUCCESS( VosSts ))
        {
           VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                                     "%s : vos_open failed",__func__);
+=======
+                                    "%s : vos_open failed\n",__func__);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
           return VOS_STATUS_E_FAILURE;
        }
@@ -136,7 +176,11 @@ tVOS_CONCURRENCY_MODE vos_get_concurrency_mode( void )
     return con_mode;
 }
 
+<<<<<<< HEAD
 v_BOOL_t vos_concurrent_open_sessions_running(void)
+=======
+v_BOOL_t vos_concurrent_sessions_running(void)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     v_U8_t i=0;
     v_U8_t j=0;
@@ -150,7 +194,11 @@ v_BOOL_t vos_concurrent_open_sessions_running(void)
        {
           for (i=0; i < VOS_MAX_NO_OF_MODE; i++)
           {
+<<<<<<< HEAD
               j += pHddCtx->no_of_open_sessions[i];
+=======
+             j += pHddCtx->no_of_sessions[i];
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           }
        }
     }
@@ -158,6 +206,7 @@ v_BOOL_t vos_concurrent_open_sessions_running(void)
     return (j>1);
 }
 
+<<<<<<< HEAD
 /**---------------------------------------------------------------------------
  *
  *   \brief vos_max_concurrent_connections_reached()
@@ -195,3 +244,5 @@ v_BOOL_t vos_max_concurrent_connections_reached (void)
     return VOS_FALSE;
 }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver

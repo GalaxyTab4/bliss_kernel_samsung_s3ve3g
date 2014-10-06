@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,18 +23,26 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
+<<<<<<< HEAD
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
  */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /******************************************************************************
 *
 * Name:  wlan_hdd_packet_filtering.h
 *
 * Description: Packet Filter Definitions.
 *
+<<<<<<< HEAD
+=======
+* Copyright (c) 2011 Qualcomm Technologies, Inc. All Rights Reserved.
+* Qualcomm Technologies Proprietary and Confidential.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 *
 ******************************************************************************/
 

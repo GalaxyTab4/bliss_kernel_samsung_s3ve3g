@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,15 +22,41 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
+<<<<<<< HEAD
+=======
+ * Airgo Networks, Inc proprietary. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limProcessAssocRspFrame.cc contains the code
  * for processing Re/Association Response Frame.
  * Author:        Chandra Modumudi
@@ -52,8 +82,13 @@
 #include "limStaHashApi.h"
 #include "limSendMessages.h"
 
+<<<<<<< HEAD
 #if defined(FEATURE_WLAN_ESE) && !defined(FEATURE_WLAN_ESE_UPLOAD)
 #include "eseApi.h"
+=======
+#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+#include "ccxApi.h"
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 extern tSirRetStatus schBeaconEdcaProcess(tpAniSirGlobal pMac, tSirMacEdcaParamSetIE *edca, tpPESession psessionEntry);
@@ -116,6 +151,7 @@ void limUpdateAssocStaDatas(tpAniSirGlobal pMac, tpDphHashNode pStaDs, tpSirAsso
     
            if ( pAssocRsp->HTCaps.present ) {
                pStaDs->htGreenfield = ( tANI_U8 ) pAssocRsp->HTCaps.greenField;
+<<<<<<< HEAD
                if (psessionEntry->htSupportedChannelWidthSet)
                {
                    pStaDs->htSupportedChannelWidthSet = ( tANI_U8 ) (pAssocRsp->HTCaps.supportedChannelWidthSet ?
@@ -126,6 +162,11 @@ void limUpdateAssocStaDatas(tpAniSirGlobal pMac, tpDphHashNode pStaDs, tpSirAsso
                {
                    pStaDs->htSupportedChannelWidthSet = eHT_CHANNEL_WIDTH_20MHZ;
                }
+=======
+               pStaDs->htSupportedChannelWidthSet = ( tANI_U8 ) (pAssocRsp->HTCaps.supportedChannelWidthSet ? 
+                                                                               pAssocRsp->HTInfo.recommendedTxWidthSet : 
+                                                                               pAssocRsp->HTCaps.supportedChannelWidthSet );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pStaDs->htLsigTXOPProtection = ( tANI_U8 ) pAssocRsp->HTCaps.lsigTXOPProtection;
                    pStaDs->htMIMOPSState =  (tSirMacHTMIMOPowerSaveState)pAssocRsp->HTCaps.mimoPowerSave;
                    pStaDs->htMaxAmsduLength = ( tANI_U8 ) pAssocRsp->HTCaps.maximalAMSDUsize;
@@ -150,12 +191,19 @@ void limUpdateAssocStaDatas(tpAniSirGlobal pMac, tpDphHashNode pStaDs, tpSirAsso
        if(IS_DOT11_MODE_VHT(psessionEntry->dot11mode))
        {
            pStaDs->mlmStaContext.vhtCapability = pAssocRsp->VHTCaps.present;
+<<<<<<< HEAD
            if (pAssocRsp->VHTCaps.present && psessionEntry->htSupportedChannelWidthSet)
                pStaDs->vhtSupportedChannelWidthSet = pAssocRsp->VHTOperation.chanWidth;
        }
        if (limPopulatePeerRateSet(pMac, &pStaDs->supportedRates,
                                 pAssocRsp->HTCaps.supportedMCSSet,
                                 false,psessionEntry , &pAssocRsp->VHTCaps) != eSIR_SUCCESS)
+=======
+       }
+       if (limPopulatePeerRateSet(pMac, &pStaDs->supportedRates,
+                                pAssocRsp->HTCaps.supportedMCSSet,
+                                false,psessionEntry , &pAssocRsp->VHTCaps) != eSIR_SUCCESS) 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #else
        if (limPopulatePeerRateSet(pMac, &pStaDs->supportedRates, pAssocRsp->HTCaps.supportedMCSSet, false,psessionEntry) != eSIR_SUCCESS)
 #endif
@@ -327,6 +375,7 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     mlmAssocCnf.resultCode = eSIR_SME_SUCCESS;
     /* Update PE session Id*/
     mlmAssocCnf.sessionId = psessionEntry->peSessionId;
+<<<<<<< HEAD
     limLog(pMac, LOG1,
               FL("received Re/Assoc(%d) resp on sessionid: %d with systemrole: %d "
               "and mlmstate: %d RSSI %d from "MAC_ADDRESS_STR),subType,
@@ -334,11 +383,17 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
               psessionEntry->limSystemRole,psessionEntry->limMlmState,
               (uint)abs((tANI_S8)WDA_GET_RX_RSSI_DB(pRxPacketInfo)),
               MAC_ADDR_ARRAY(pHdr->sa));
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     pBeaconStruct = vos_mem_malloc(sizeof(tSchBeaconStruct));
     if (NULL == pBeaconStruct)
     {
+<<<<<<< HEAD
         limLog(pMac, LOGE, FL("Unable to allocate memory") );
+=======
+        limLog(pMac, LOGE, FL("Unable to allocate memory in limProcessAssocRspFrame") );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return;
     }
 
@@ -348,7 +403,11 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
         // Should not have received Re/Association Response
         // frame on AP. Log error
         limLog(pMac, LOGE,
+<<<<<<< HEAD
                FL("Should not recieved Re/Assoc Response in role %d "),
+=======
+               FL("received Re/Assoc response frame on role %d "),
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                psessionEntry->limSystemRole);
 
         vos_mem_free(pBeaconStruct);
@@ -363,7 +422,11 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
          (psessionEntry->limMlmState != eLIM_MLM_WT_ASSOC_RSP_STATE)) ||
         ((subType == LIM_REASSOC) &&
          ((psessionEntry->limMlmState != eLIM_MLM_WT_REASSOC_RSP_STATE) 
+<<<<<<< HEAD
 #if defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
+=======
+#if defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          && (psessionEntry->limMlmState != eLIM_MLM_WT_FT_REASSOC_RSP_STATE)
 #endif
          )))
@@ -371,13 +434,18 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
         /// Received unexpected Re/Association Response frame
 
 #ifdef WLAN_FEATURE_VOWIFI_11R_DEBUG
+<<<<<<< HEAD
         PELOG1(limLog(pMac, LOG1,  FL("Recieved Re/Assoc rsp in unexpected "
             "state %d on session=%d"),
+=======
+        PELOG1(limLog(pMac, LOG1,  FL("mlm state is set to %d session=%d"),
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             psessionEntry->limMlmState, psessionEntry->peSessionId);)
 #endif
         // Log error
         if (!pHdr->fc.retry)
         {
+<<<<<<< HEAD
             if ( !(pMac->lim.retryPacketCnt & 0xf))
             {
                 limLog(pMac, LOGE,
@@ -390,6 +458,11 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
                 pMac->lim.retryPacketCnt++;
             }
 
+=======
+            limLog(pMac, LOGE,
+               FL("received Re/Assoc rsp frame in unexpected state"));
+            limPrintMlmState(pMac, LOGE, psessionEntry->limMlmState);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
         vos_mem_free(pBeaconStruct);
         return;
@@ -453,6 +526,14 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
         return;
     }
    
+<<<<<<< HEAD
+=======
+   VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_DEBUG,
+             FL("Re/Assoc Resp Frame Received: BSSID " MAC_ADDRESS_STR " (RSSI %d)"),
+             MAC_ADDR_ARRAY(pHdr->bssId),
+             (uint)abs((tANI_S8)WDA_GET_RX_RSSI_DB(pRxPacketInfo)));
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     // Get pointer to Re/Association Response frame body
     pBody = WDA_GET_RX_MPDU_DATA(pRxPacketInfo);
 
@@ -461,12 +542,17 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
                         pMac, pBody, frameLen, pAssocRsp) == eSIR_FAILURE) 
     {
         vos_mem_free(pAssocRsp);
+<<<<<<< HEAD
         PELOGE(limLog(pMac, LOGE, FL("Parse error Assoc resp subtype %d,"
                                    "length=%d"), frameLen,subType);)
+=======
+        PELOGE(limLog(pMac, LOGE, FL("Parse error Assoc resp subtype %d, length=%d"), frameLen,subType);)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         vos_mem_free(pBeaconStruct);
 
         return;
     }
+<<<<<<< HEAD
     if(pAssocRsp->ExtCap.present)
     {
         limLog(pMac, LOGE, FL("Filling tdls prohibited in session entry"));
@@ -478,6 +564,12 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     if(!pAssocRsp->suppRatesPresent)
     {
         PELOGE(limLog(pMac, LOGE, FL("assoc response does not have supported rate set"));)
+=======
+
+    if(!pAssocRsp->suppRatesPresent)
+    {
+        PELOGE(limLog(pMac, LOGW, FL("assoc response does not have supported rate set"));)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         vos_mem_copy(&pAssocRsp->supportedRates,
                       &psessionEntry->rateSet, sizeof(tSirMacRateSet));
     }
@@ -486,8 +578,11 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
 
     if( psessionEntry->assocRsp != NULL )
     {
+<<<<<<< HEAD
         limLog(pMac, LOGW, FL("psessionEntry->assocRsp is not NULL freeing it "
         "and setting NULL"));
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         vos_mem_free(psessionEntry->assocRsp);
         psessionEntry->assocRsp = NULL;
     }
@@ -527,14 +622,21 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     }
     else
     {
+<<<<<<< HEAD
         limLog(pMac, LOG1, FL("Ric is not present Setting RICDataLen 0 and ricData "
         "as NULL"));
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         psessionEntry->RICDataLen = 0;
         psessionEntry->ricData = NULL;
     }
 #endif    
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX    
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (psessionEntry->tspecIes != NULL) 
     {
         vos_mem_free(psessionEntry->tspecIes);
@@ -600,7 +702,11 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
         limDeactivateAndChangeTimer(pMac, eLIM_ASSOC_FAIL_TIMER);
     else        // Stop Reassociation failure timer
     {
+<<<<<<< HEAD
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
+=======
+#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         pMac->lim.reAssocRetryAttempt = 0;
         if ((NULL != pMac->lim.pSessionEntry) && (NULL != pMac->lim.pSessionEntry->pLimMlmReassocRetryReq))
         {
@@ -643,8 +749,12 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
         // Re/Association response was received
         // with invalid AID value
         // Log error
+<<<<<<< HEAD
         PELOGW(limLog(pMac, LOGE, FL("received Re/AssocRsp frame with"
                                  "invalid aid %X"), pAssocRsp->aid);)
+=======
+        PELOGW(limLog(pMac, LOGW, FL("received Re/AssocRsp frame with invalid aid %X "),  pAssocRsp->aid);)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         mlmAssocCnf.resultCode = eSIR_SME_INVALID_ASSOC_RSP_RXED;
         mlmAssocCnf.protStatusCode = eSIR_MAC_UNSPEC_FAILURE_STATUS;
 
@@ -677,21 +787,36 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     {
         // Log success
         PELOG1(limLog(pMac, LOG1, FL("Successfully Reassociated with BSS"));)
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         {
             tANI_U8 cnt = 0;
             if (pAssocRsp->tsmPresent)
             {
+<<<<<<< HEAD
                 limLog(pMac, LOG1, "TSM IE Present in Reassoc Rsp");
+=======
+                limLog(pMac, LOGW, "TSM IE Present in Reassoc Rsp");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 // Start the TSM  timer only if the TSPEC Ie is present in the reassoc rsp
                 if (pAssocRsp->tspecPresent) {
                     // Find the TSPEC IE with VO user priority
                     for (cnt=0; cnt<pAssocRsp->num_tspecs; cnt++) {
                         if ( upToAc(pAssocRsp->TSPECInfo[cnt].user_priority) == EDCA_AC_VO) {
+<<<<<<< HEAD
                             psessionEntry->eseContext.tsm.tid = pAssocRsp->TSPECInfo[cnt].user_priority;
                             vos_mem_copy(&psessionEntry->eseContext.tsm.tsmInfo,
                                     &pAssocRsp->tsmIE, sizeof(tSirMacESETSMIE));
 #ifdef FEATURE_WLAN_ESE_UPLOAD
+=======
+                            psessionEntry->ccxContext.tsm.tid = pAssocRsp->TSPECInfo[cnt].user_priority;
+                            vos_mem_copy(&psessionEntry->ccxContext.tsm.tsmInfo,
+                                    &pAssocRsp->tsmIE, sizeof(tSirMacCCXTSMIE));
+#ifdef FEATURE_WLAN_CCX_UPLOAD
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                             limSendSmeTsmIEInd(pMac,
                                                psessionEntry,
                                                pAssocRsp->tsmIE.tsid,
@@ -699,9 +824,15 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
                                                pAssocRsp->tsmIE.msmt_interval);
 #else
                             limActivateTSMStatsTimer(pMac, psessionEntry);
+<<<<<<< HEAD
 #endif /* FEATURE_WLAN_ESE_UPLOAD */
                             if(psessionEntry->eseContext.tsm.tsmInfo.state) {
                                 psessionEntry->eseContext.tsm.tsmMetrics.RoamingCount++;
+=======
+#endif /* FEATURE_WLAN_CCX_UPLOAD */
+                            if(psessionEntry->ccxContext.tsm.tsmInfo.state) {
+                                psessionEntry->ccxContext.tsm.tsmMetrics.RoamingCount++;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                             }
                             break;
                         }
@@ -736,7 +867,11 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
             goto assocReject;
         }
 
+<<<<<<< HEAD
 #if defined(WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
+=======
+#if defined(WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         if (psessionEntry->limMlmState == eLIM_MLM_WT_FT_REASSOC_RSP_STATE)
         {
 #ifdef WLAN_FEATURE_VOWIFI_11R_DEBUG
@@ -783,10 +918,14 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
             pMac->lim.gUapsdPerAcTriggerEnableMask = 0;
 
             if (limCleanupRxPath(pMac, pStaDs,psessionEntry) != eSIR_SUCCESS)
+<<<<<<< HEAD
             {
                 PELOGE(limLog(pMac, LOGE, FL("Could not cleanup the rx path"));)
                 goto assocReject;
             }
+=======
+                goto assocReject;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
         vos_mem_free(pBeaconStruct);
 
@@ -796,10 +935,17 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     // Log success
     PELOG1(limLog(pMac, LOG1, FL("Successfully Associated with BSS "MAC_ADDRESS_STR),
            MAC_ADDR_ARRAY(pHdr->sa));)
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
     if(psessionEntry->eseContext.tsm.tsmInfo.state)
     {
         psessionEntry->eseContext.tsm.tsmMetrics.RoamingCount = 0;
+=======
+#ifdef FEATURE_WLAN_CCX
+    if(psessionEntry->ccxContext.tsm.tsmInfo.state)
+    {
+        psessionEntry->ccxContext.tsm.tsmMetrics.RoamingCount = 0;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 #endif
     /**
@@ -854,6 +1000,7 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
 #ifdef FEATURE_WLAN_DIAG_SUPPORT_LIM //FEATURE_WLAN_DIAG_SUPPORT
     limDiagEventReport(pMac, WLAN_PE_DIAG_CONNECTED, psessionEntry, 0, 0);
 #endif
+<<<<<<< HEAD
     if(pAssocRsp->OBSSScanParameters.present)
     {
         limUpdateOBSSScanParams(psessionEntry , &pAssocRsp->OBSSScanParameters);
@@ -869,6 +1016,9 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     {
        vos_mem_zero(&psessionEntry->QosMapSet, sizeof(tSirQosMapSet));
     }
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
      //Update the BSS Entry, this entry was added during preassoc.
     if( eSIR_SUCCESS == limStaSendAddBss( pMac, pAssocRsp,  pBeaconStruct,
@@ -880,7 +1030,10 @@ limProcessAssocRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tANI_U8 sub
     }
     else
     {
+<<<<<<< HEAD
         PELOGE(limLog(pMac, LOGE, FL("could not update the bss entry"));)
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         mlmAssocCnf.resultCode = eSIR_SME_RESOURCES_UNAVAILABLE;
         mlmAssocCnf.protStatusCode = eSIR_MAC_UNSPEC_FAILURE_STATUS;
     }
@@ -893,11 +1046,15 @@ assocReject:
                     || ((subType == LIM_REASSOC) && (psessionEntry->limMlmState == eLIM_MLM_WT_FT_REASSOC_RSP_STATE))
 #endif
        ) {
+<<<<<<< HEAD
         PELOGE(limLog(pMac, LOGE,  FL("Assoc Rejected by the peer. "
                     "mlmestate: %d sessionid %d Reason: %d MACADDR:"
                     MAC_ADDRESS_STR), psessionEntry->limMlmState,
                     psessionEntry->peSessionId, mlmAssocCnf.resultCode,
                     MAC_ADDR_ARRAY(pHdr->sa));)
+=======
+        PELOGE(limLog(pMac, LOGE,  FL("Assoc Rejected by the peer. Reason: %d"), mlmAssocCnf.resultCode);)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         psessionEntry->limMlmState = eLIM_MLM_IDLE_STATE;
         MTRACE(macTrace(pMac, TRACE_CODE_MLM_STATE, psessionEntry->peSessionId, psessionEntry->limMlmState));
 
@@ -925,7 +1082,10 @@ assocReject:
 
     /* CR: vos packet memory is leaked when assoc rsp timeouted/failed. */
     /* notify TL that association is failed so that TL can flush the cached frame  */
+<<<<<<< HEAD
     PELOG1(limLog(pMac, LOG1,  FL("notify TL that association is failed"));)
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     WLANTL_AssocFailed (psessionEntry->staId);
 
     vos_mem_free(pBeaconStruct);

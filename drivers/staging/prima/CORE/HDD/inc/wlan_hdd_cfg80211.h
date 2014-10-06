@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( HDD_CFG80211_H__ )
@@ -30,6 +56,7 @@
 
 
 /**===========================================================================
+<<<<<<< HEAD
 
   \file  wlan_hdd_cfg80211.h
 
@@ -37,11 +64,28 @@
 
   ==========================================================================*/
 
+=======
+  
+  \file  wlan_hdd_cfg80211.h
+  
+  \brief cfg80211 functions declarations
+    
+               Copyright 2008 (c) Qualcomm, Incorporated.
+               All Rights Reserved.
+               Qualcomm Confidential and Proprietary.
+  
+  ==========================================================================*/
+  
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* $HEADER$ */
 
 
 //value for initial part of frames and number of bytes to be compared
+<<<<<<< HEAD
 #define GAS_INITIAL_REQ "\x04\x0a"
+=======
+#define GAS_INITIAL_REQ "\x04\x0a"  
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define GAS_INITIAL_REQ_SIZE 2
 
 #define GAS_INITIAL_RSP "\x04\x0b"
@@ -53,7 +97,11 @@
 #define GAS_COMEBACK_RSP "\x04\x0d"
 #define GAS_COMEBACK_RSP_SIZE 2
 
+<<<<<<< HEAD
 #define P2P_PUBLIC_ACTION_FRAME "\x04\x09\x50\x6f\x9a\x09"
+=======
+#define P2P_PUBLIC_ACTION_FRAME "\x04\x09\x50\x6f\x9a\x09" 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define P2P_PUBLIC_ACTION_FRAME_SIZE 6
 
 #define P2P_ACTION_FRAME "\x7f\x50\x6f\x9a\x09"
@@ -71,9 +119,12 @@
 #define WNM_BSS_ACTION_FRAME "\x0a\x07"
 #define WNM_BSS_ACTION_FRAME_SIZE 2
 
+<<<<<<< HEAD
 #define WNM_NOTIFICATION_FRAME "\x0a\x1a"
 #define WNM_NOTIFICATION_FRAME_SIZE 2
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WPA_OUI_TYPE   "\x00\x50\xf2\x01"
 #define BLACKLIST_OUI_TYPE   "\x00\x50\x00\x00"
 #define WHITELIST_OUI_TYPE   "\x00\x50\x00\x01"
@@ -95,6 +146,7 @@
 #ifdef FEATURE_WLAN_TDLS
 #define WLAN_IS_TDLS_SETUP_ACTION(action) \
          ((SIR_MAC_TDLS_SETUP_REQ <= action) && (SIR_MAC_TDLS_SETUP_CNF >= action))
+<<<<<<< HEAD
 #if !defined (TDLS_MGMT_VERSION2)
 #define TDLS_MGMT_VERSION2 0
 #endif
@@ -102,6 +154,10 @@
 
 #define MAX_CHANNEL MAX_2_4GHZ_CHANNEL + NUM_5GHZ_CHANNELS
 
+=======
+#endif
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct {
    u8 element_id;
    u8 len;
@@ -113,6 +169,7 @@ typedef struct {
 }__attribute__((packed)) qcom_ie_age ;
 #endif
 
+<<<<<<< HEAD
 enum qca_nl80211_vendor_subcmds {
     QCA_NL80211_VENDOR_SUBCMD_UNSPEC = 0,
     QCA_NL80211_VENDOR_SUBCMD_TEST = 1,
@@ -893,6 +950,8 @@ typedef struct sHddAvoidFreqList
 } tHddAvoidFreqList;
 #endif /* FEATURE_WLAN_CH_AVOID */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 struct cfg80211_bss* wlan_hdd_cfg80211_update_bss_db( hdd_adapter_t *pAdapter,
                                       tCsrRoamInfo *pRoamInfo
                                       );
@@ -903,6 +962,7 @@ int wlan_hdd_cfg80211_pmksa_candidate_notify(
                     int index, bool preauth );
 #endif
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_LFR_METRICS
 VOS_STATUS wlan_hdd_cfg80211_roam_metrics_preauth(hdd_adapter_t *pAdapter,
                                                   tCsrRoamInfo *pRoamInfo);
@@ -914,6 +974,8 @@ VOS_STATUS wlan_hdd_cfg80211_roam_metrics_handover(hdd_adapter_t *pAdapter,
                                                    tCsrRoamInfo *pRoamInfo);
 #endif
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_WAPI
 void wlan_hdd_cfg80211_set_key_wapi(hdd_adapter_t* pAdapter,
               u8 key_index, const u8 *mac_addr, u8 *key , int key_Len);
@@ -926,17 +988,27 @@ int wlan_hdd_cfg80211_scan( struct wiphy *wiphy,
 #endif
                             struct cfg80211_scan_request *request);
 
+<<<<<<< HEAD
 int wlan_hdd_cfg80211_update_band(struct wiphy *wiphy, eCsrBand eBand);
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 int wlan_hdd_cfg80211_init(struct device *dev,
                                struct wiphy *wiphy,
                                hdd_config_t *pCfg
                                          );
 
 int wlan_hdd_cfg80211_register( struct wiphy *wiphy);
+<<<<<<< HEAD
 void wlan_hdd_cfg80211_register_frames(hdd_adapter_t* pAdapter);
 
 void wlan_hdd_cfg80211_deregister_frames(hdd_adapter_t* pAdapter);
+=======
+void wlan_hdd_cfg80211_post_voss_start(hdd_adapter_t* pAdapter);
+
+void wlan_hdd_cfg80211_pre_voss_stop(hdd_adapter_t* pAdapter);
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef CONFIG_ENABLE_LINUX_REG
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,9,0))
 void wlan_hdd_linux_reg_notifier(struct wiphy *wiphy, struct regulatory_request *request);
@@ -966,6 +1038,7 @@ void* wlan_hdd_change_country_code_cb(void *pAdapter);
 void hdd_select_cbmode( hdd_adapter_t *pAdapter,v_U8_t operationChannel);
 
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_CH_AVOID
 int wlan_hdd_send_avoid_freq_event(hdd_context_t *pHddCtx,
                                    tHddAvoidFreqList *pAvoidFreqList);
@@ -976,4 +1049,6 @@ void wlan_hdd_cfg80211_extscan_callback(void *ctx, const tANI_U16 evType,
                                       void *pMsg);
 #endif /* WLAN_FEATURE_EXTSCAN */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif

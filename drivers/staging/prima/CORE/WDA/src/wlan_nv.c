@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /** ------------------------------------------------------------------------- *
@@ -41,8 +67,14 @@
 #ifndef WLAN_NV_C
 #define WLAN_NV_C
 
+<<<<<<< HEAD
 #include "wlan_nv2.h"
 #include "wlan_hal_msg.h"
+=======
+#include "palTypes.h"
+#include "wlan_nv.h"
+//#include "wlan_hal_msg.h"
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 const sHalNv nvDefaults =
 {
@@ -304,7 +336,11 @@ const sHalNv nvDefaults =
                 {1250},    // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_CB_NGI_39_MBPS,
                 {1200},    // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_CB_NGI_52_MBPS,
                 {1100},    // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_CB_NGI_58_5_MBPS,
+<<<<<<< HEAD
                 {1000},    // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_CB_NGI_65_MBPS,
+=======
+                {1000,    // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_CB_NGI_65_MBPS,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 { 900},    // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_CB_NGI_78_MBPS,
 #ifdef WCN_PRONTO
                 { 800},     // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_NGI_86_5_MBPS,
@@ -745,6 +781,7 @@ const sHalNv nvDefaults =
                 {1600},    // HAL_PHY_RATE_11AC_DUP_24_MBPS,
                 {1550},    // HAL_PHY_RATE_11AC_DUP_36_MBPS,
                 {1550},    // HAL_PHY_RATE_11AC_DUP_48_MBPS,
+<<<<<<< HEAD
                 {1500},    // HAL_PHY_RATE_11AC_DUP_54_MBPS,
 
                ///11a c 20MHZ NG, SG
@@ -5850,6 +5887,9 @@ const sHalNvV2 nvDefaultsV2 =
                 {1550},    // HAL_PHY_RATE_11AC_DUP_36_MBPS,
                 {1550},    // HAL_PHY_RATE_11AC_DUP_48_MBPS,
                 {1500},    // HAL_PHY_RATE_11AC_DUP_54_MBPS,
+=======
+                {1500,,    // HAL_PHY_RATE_11AC_DUP_54_MBPS,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
                ///11a c 20MHZ NG, SG
                 {1400},    // HAL_PHY_RATE_VHT_20MHZ_MCS_1NSS_CB_NGI_6_5_MBPS,

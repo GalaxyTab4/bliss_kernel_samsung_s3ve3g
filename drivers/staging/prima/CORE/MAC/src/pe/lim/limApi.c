@@ -1,5 +1,42 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+
+
+
+/*
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -20,15 +57,8 @@
  */
 
 /*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
-/*
+ * Airgo Networks, Inc proprietary. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limApi.cc contains the functions that are
  * exported by LIM to other modules.
  *
@@ -203,12 +233,15 @@ static void __limInitStatsVars(tpAniSirGlobal pMac)
     // Heart-Beat interval value
     pMac->lim.gLimHeartBeatCount = 0;
 
+<<<<<<< HEAD
     vos_mem_zero(pMac->lim.gLimHeartBeatApMac[0],
             sizeof(tSirMacAddr));
     vos_mem_zero(pMac->lim.gLimHeartBeatApMac[1],
             sizeof(tSirMacAddr));
     pMac->lim.gLimHeartBeatApMacIndex = 0;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     // Statistics to keep track of no. beacons rcvd in heart beat interval
     vos_mem_set(pMac->lim.gLimHeartBeatBeaconStats,
                 sizeof(pMac->lim.gLimHeartBeatBeaconStats), 0);
@@ -349,8 +382,11 @@ static void __limInitVars(tpAniSirGlobal pMac)
 
     //Scan in Power Save Flag
     pMac->lim.gScanInPowersave = 0;
+<<<<<<< HEAD
     pMac->lim.probeCounter = 0;
     pMac->lim.maxProbe = 0;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 static void __limInitAssocVars(tpAniSirGlobal pMac)
@@ -367,7 +403,10 @@ static void __limInitAssocVars(tpAniSirGlobal pMac)
         limLog( pMac, LOGP, FL( "cfg get assoc sta limit failed" ));
     }
     pMac->lim.gLimAssocStaLimit = val;
+<<<<<<< HEAD
     pMac->lim.gLimIbssStaLimit = val;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // Place holder for current authentication request
     // being handled
@@ -387,13 +426,24 @@ static void __limInitAssocVars(tpAniSirGlobal pMac)
     // Place holder for Pre-authentication node list
     pMac->lim.pLimPreAuthList = NULL;
 
+<<<<<<< HEAD
+=======
+    // Send Disassociate frame threshold parameters
+    pMac->lim.gLimDisassocFrameThreshold = LIM_SEND_DISASSOC_FRAME_THRESHOLD;
+    pMac->lim.gLimDisassocFrameCredit = 0;
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     //One cache for each overlap and associated case.
     vos_mem_set(pMac->lim.protStaOverlapCache,
                 sizeof(tCacheParams) * LIM_PROT_STA_OVERLAP_CACHE_SIZE, 0);
     vos_mem_set(pMac->lim.protStaCache,
                 sizeof(tCacheParams) * LIM_PROT_STA_CACHE_SIZE, 0);
 
+<<<<<<< HEAD
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
+=======
+#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pMac->lim.pSessionEntry = NULL;
     pMac->lim.reAssocRetryAttempt = 0;
 #endif
@@ -575,7 +625,11 @@ static tSirRetStatus __limInitConfig( tpAniSirGlobal pMac )
       limHandleCFGparamUpdate do we want to update this? */
    if(wlan_cfgGetInt(pMac, WNI_CFG_SHORT_PREAMBLE, &val1) != eSIR_SUCCESS)
    {
+<<<<<<< HEAD
       limLog(pMac, LOGE, FL("cfg get short preamble failed"));
+=======
+      limLog(pMac, LOGP, FL("cfg get short preamble failed"));
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eSIR_FAILURE;
    }
 
@@ -630,6 +684,7 @@ static tSirRetStatus __limInitConfig( tpAniSirGlobal pMac )
        limLog(pMac, LOGP, FL("cfg get LimTDLSUapsdMask failed"));
        return eSIR_FAILURE;
    }
+<<<<<<< HEAD
    if(wlan_cfgGetInt(pMac, WNI_CFG_TDLS_OFF_CHANNEL_ENABLED,(tANI_U32 *) &pMac->lim.gLimTDLSOffChannelEnabled) != eSIR_SUCCESS)
    {
        limLog(pMac, LOGP, FL("cfg get LimTDLSUapsdMask failed"));
@@ -652,6 +707,9 @@ static tSirRetStatus __limInitConfig( tpAniSirGlobal pMac )
                  __func__);
         pMac->lim.gDebugP2pRemainOnChannel = 0;
    }
+=======
+#endif
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    return eSIR_SUCCESS;
 }
 
@@ -692,7 +750,11 @@ tSirRetStatus limStart(tpAniSirGlobal pMac)
       * other than OFFLINE. Return response to host and
       * log error
       */
+<<<<<<< HEAD
       limLog(pMac, LOGE, FL("Invalid SME state %d"),pMac->lim.gLimSmeState );
+=======
+      limLog(pMac, LOGE, FL("Invalid SME state %X"),pMac->lim.gLimSmeState );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       retCode = eSIR_FAILURE;
    }
    
@@ -788,6 +850,10 @@ limInitialize(tpAniSirGlobal pMac)
     
     vos_trace_setLevel(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR);
 #endif
+<<<<<<< HEAD
+=======
+    MTRACE(limTraceInit(pMac));
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     //Initialize the configurations needed by PE
     if( eSIR_FAILURE == __limInitConfig(pMac))
@@ -987,11 +1053,16 @@ limCleanup(tpAniSirGlobal pMac)
 
 tSirRetStatus peOpen(tpAniSirGlobal pMac, tMacOpenParameters *pMacOpenParam)
 {
+<<<<<<< HEAD
     if (eDRIVER_TYPE_MFG == pMacOpenParam->driverType)
         return eSIR_SUCCESS;
     pMac->lim.maxBssId = pMacOpenParam->maxBssId;
     pMac->lim.maxStation = pMacOpenParam->maxStation;
     vos_spin_lock_init( &pMac->sys.lock );
+=======
+    pMac->lim.maxBssId = pMacOpenParam->maxBssId;
+    pMac->lim.maxStation = pMacOpenParam->maxStation;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if ((pMac->lim.maxBssId == 0) || (pMac->lim.maxStation == 0))
     {
@@ -1053,6 +1124,7 @@ tSirRetStatus peOpen(tpAniSirGlobal pMac, tMacOpenParameters *pMacOpenParam)
     if( !VOS_IS_STATUS_SUCCESS( vos_lock_init( &pMac->lim.lkPeGlobalLock ) ) )
     {
         PELOGE(limLog(pMac, LOGE, FL("pe lock init failed!"));)
+<<<<<<< HEAD
         vos_mem_free(pMac->lim.limTimers.gpLimCnfWaitTimer);
         pMac->lim.limTimers.gpLimCnfWaitTimer = NULL;
         vos_mem_free(pMac->lim.gpSession);
@@ -1072,6 +1144,11 @@ tSirRetStatus peOpen(tpAniSirGlobal pMac, tMacOpenParameters *pMacOpenParam)
 #ifdef LIM_TRACE_RECORD
     MTRACE(limTraceInit(pMac));
 #endif
+=======
+        return eSIR_FAILURE;
+    }
+    pMac->lim.deauthMsgCnt = 0;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return eSIR_SUCCESS;
 }
 
@@ -1088,9 +1165,13 @@ tSirRetStatus peClose(tpAniSirGlobal pMac)
 
     if (ANI_DRIVER_TYPE(pMac) == eDRIVER_TYPE_MFG)
         return eSIR_SUCCESS;
+<<<<<<< HEAD
 
     vos_spin_lock_destroy( &pMac->sys.lock );
 
+=======
+    
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     for(i =0; i < pMac->lim.maxBssId; i++)
     {
         if(pMac->lim.gpSession[i].valid == TRUE)
@@ -1207,6 +1288,10 @@ tANI_U8 limIsTimerAllowedInPowerSaveState(tpAniSirGlobal pMac, tSirMsgQ *pMsg)
                 retStatus = FALSE;
                 break;
             /* May allow following timer messages in sleep mode */
+<<<<<<< HEAD
+=======
+            case SIR_LIM_HASH_MISS_THRES_TIMEOUT:
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
             /* Safe to allow as of today, this triggers background scan
              * which will not be started if the device is in power-save mode
@@ -1342,7 +1427,11 @@ tSirRetStatus peProcessMessages(tpAniSirGlobal pMac, tSirMsgQ* pMsg)
     return eSIR_SUCCESS;
 }
 
+<<<<<<< HEAD
 #define RSRVD_MGMT_RX_PACKETS 10
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 // ---------------------------------------------------------------------------
 /**
@@ -1416,6 +1505,7 @@ VOS_STATUS peHandleMgmtFrame( v_PVOID_t pvosGCtx, v_PVOID_t vosBuff)
     msg.bodyptr = vosBuff;
     msg.bodyval = 0;
 
+<<<<<<< HEAD
     vos_spin_lock_acquire( &pMac->sys.lock );
     if( pMac->sys.gSysBbtPendingMgmtCount > (vos_pkt_get_num_of_rx_raw_pkts()/4) )
     {
@@ -1444,17 +1534,22 @@ VOS_STATUS peHandleMgmtFrame( v_PVOID_t pvosGCtx, v_PVOID_t vosBuff)
     pMac->sys.gSysBbtPendingMgmtCount++;
     vos_spin_lock_release( &pMac->sys.lock );
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if( eSIR_SUCCESS != sysBbtProcessMessageCore( pMac,
                                                   &msg,
                                                   mHdr->fc.type,
                                                   mHdr->fc.subType ))
     {
         vos_pkt_return_packet(pVosPkt);
+<<<<<<< HEAD
 
         /* Decrement gSysBbtPendingMgmtCount if packet
          * is dropped before posting to LIM
          */
         limDecrementPendingMgmtCount(pMac);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         limLog( pMac, LOGW,
                 FL ( "sysBbtProcessMessageCore failed to process SIR_BB_XPORT_MGMT_MSG" ));
         return VOS_STATUS_E_FAILURE;
@@ -1701,7 +1796,11 @@ limUpdateOverlapStaParam(tpAniSirGlobal pMac, tSirMacAddr bssId, tpLimProtStaPar
 
     if (i == LIM_PROT_STA_OVERLAP_CACHE_SIZE)
     {
+<<<<<<< HEAD
         PELOG1(limLog(pMac, LOGW, FL("Overlap cache is full"));)
+=======
+        PELOG1(limLog(pMac, LOG1, FL("Overlap cache is full"));)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     else
     {
@@ -1745,11 +1844,15 @@ limHandleIBSScoalescing(
     tSirRetStatus   retCode;
 
     pHdr = WDA_GET_RX_MAC_HEADER(pRxPacketInfo);
+<<<<<<< HEAD
     if ( (!pBeacon->capabilityInfo.ibss) ||
          ( psessionEntry->privacy !=
                   (tANI_U8)pBeacon->capabilityInfo.privacy ) ||
          (limCmpSSid(pMac, &pBeacon->ssId,psessionEntry) != true) ||
          (psessionEntry->currentOperChannel != pBeacon->channelNumber) )
+=======
+    if ( (!pBeacon->capabilityInfo.ibss) || (limCmpSSid(pMac, &pBeacon->ssId,psessionEntry) != true) )
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         /* Received SSID does not match => Ignore received Beacon frame. */
         retCode =  eSIR_LIM_IGNORE_BEACON;
     else
@@ -1766,6 +1869,7 @@ limHandleIBSScoalescing(
     return retCode;
 } /*** end limHandleIBSScoalescing() ***/
 
+<<<<<<< HEAD
 tAniBool limEncTypeMatched(tpAniSirGlobal pMac, tpSchBeaconStruct  pBeacon,
                                       tpPESession    pSession)
 {
@@ -1819,6 +1923,8 @@ tAniBool limEncTypeMatched(tpAniSirGlobal pMac, tpSchBeaconStruct  pBeacon,
 
     return eSIR_FALSE;
 }
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 /**
@@ -1853,6 +1959,7 @@ limDetectChangeInApCapabilities(tpAniSirGlobal pMac,
     tSirSmeApNewCaps   apNewCaps;
     tANI_U8            newChannel;
     tSirRetStatus status = eSIR_SUCCESS;
+<<<<<<< HEAD
     tAniBool           securityCapsMatched = eSIR_TRUE;
 
     apNewCaps.capabilityInfo = limGetU16((tANI_U8 *) &pBeacon->capabilityInfo);
@@ -1902,6 +2009,84 @@ limDetectChangeInApCapabilities(tpAniSirGlobal pMac,
             }
             return;
         }
+=======
+    apNewCaps.capabilityInfo = limGetU16((tANI_U8 *) &pBeacon->capabilityInfo);
+    newChannel = (tANI_U8) pBeacon->channelNumber;
+
+    /* Some APs are not setting privacy bit when hidden ssid enabled.
+     * So LIM was keep on sending eSIR_SME_AP_CAPS_CHANGED event to SME */
+    if ((limIsNullSsid(&pBeacon->ssId) &&
+            (SIR_MAC_GET_PRIVACY(apNewCaps.capabilityInfo) !=
+             SIR_MAC_GET_PRIVACY(psessionEntry->limCurrentBssCaps))) ||
+            (SIR_MAC_GET_SHORT_PREAMBLE(apNewCaps.capabilityInfo) !=
+             SIR_MAC_GET_SHORT_PREAMBLE(psessionEntry->limCurrentBssCaps)) ||
+            (SIR_MAC_GET_QOS(apNewCaps.capabilityInfo) !=
+             SIR_MAC_GET_QOS(psessionEntry->limCurrentBssCaps))
+       )
+    {
+        /* If Hidden SSID and privacy bit is not matching with the current capability,
+         * then send unicast probe request to AP and take decision after
+         * receiving probe response */
+        if (psessionEntry->fIgnoreCapsChange == true)
+        {
+            limLog(pMac, LOGW, FL("Ignoring the Capability change as it is false alarm"));
+            return;
+        }
+        psessionEntry->fWaitForProbeRsp = true;
+        limLog(pMac, LOGW, FL("Hidden SSID and privacy bit is not matching,"
+                    " Or Short preamble bit is not matching ,"
+                    "sending directed probe request.. "));
+        status = limSendProbeReqMgmtFrame(pMac, &psessionEntry->ssId, psessionEntry->bssId,
+                psessionEntry->currentOperChannel,psessionEntry->selfMacAddr,
+                psessionEntry->dot11mode, 0, NULL);
+
+        if ( status != eSIR_SUCCESS)
+        {
+            limLog(pMac, LOGE, FL("send ProbeReq failed"));
+        }
+
+        return;
+    }
+    else
+    {
+        /* The control will come here if the frame is beacon with broadcast ssid
+         * or probe response frame */
+        if (psessionEntry->fWaitForProbeRsp == true)
+        {
+            if ((((!limIsNullSsid(&pBeacon->ssId)) &&
+                        (limCmpSSid(pMac, &pBeacon->ssId, psessionEntry) == true)) &&
+                    (SIR_MAC_GET_PRIVACY(apNewCaps.capabilityInfo) ==
+                     SIR_MAC_GET_PRIVACY(psessionEntry->limCurrentBssCaps))) &&
+                    (SIR_MAC_GET_SHORT_PREAMBLE(apNewCaps.capabilityInfo) ==
+                     SIR_MAC_GET_SHORT_PREAMBLE(psessionEntry->limCurrentBssCaps)) &&
+                    (SIR_MAC_GET_QOS(apNewCaps.capabilityInfo) ==
+                     SIR_MAC_GET_QOS(psessionEntry->limCurrentBssCaps))
+               )
+            {
+                /* Only for probe response frames the control will come here */
+                /* If beacon with broadcast ssid then fWaitForProbeRsp will be false,
+                   the control wll not come here*/
+                limLog(pMac, LOGW, FL("Privacy bit in probe response is"
+                            "matching with the current setting,"
+                            "Ignoring subsequent privacy bit capability"
+                            "mismatch"));
+                psessionEntry->fIgnoreCapsChange = true;
+                psessionEntry->fWaitForProbeRsp = false;
+            }
+        }
+    }
+
+    if ((psessionEntry->limSentCapsChangeNtf == false) &&
+        (((!limIsNullSsid(&pBeacon->ssId)) && (limCmpSSid(pMac, &pBeacon->ssId, psessionEntry) == false)) ||
+        ((SIR_MAC_GET_ESS(apNewCaps.capabilityInfo) != SIR_MAC_GET_ESS(psessionEntry->limCurrentBssCaps)) ||
+         (SIR_MAC_GET_PRIVACY(apNewCaps.capabilityInfo) !=   SIR_MAC_GET_PRIVACY(psessionEntry->limCurrentBssCaps)) ||
+         (SIR_MAC_GET_SHORT_PREAMBLE(apNewCaps.capabilityInfo) !=  SIR_MAC_GET_SHORT_PREAMBLE(psessionEntry->limCurrentBssCaps)) ||
+         (SIR_MAC_GET_QOS(apNewCaps.capabilityInfo) !=   SIR_MAC_GET_QOS(psessionEntry->limCurrentBssCaps)) ||
+         (newChannel !=  psessionEntry->currentOperChannel)
+         )))
+    {
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         /**
          * BSS capabilities have changed.
          * Inform Roaming.
@@ -1952,6 +2137,7 @@ limDetectChangeInApCapabilities(tpAniSirGlobal pMac,
                                     (tANI_U32 *) &apNewCaps,
                                     len, psessionEntry->smeSessionId);
     }
+<<<<<<< HEAD
     else if ( true == psessionEntry->fWaitForProbeRsp )
     {
         /* Only for probe response frames and matching capabilities the control
@@ -1966,6 +2152,8 @@ limDetectChangeInApCapabilities(tpAniSirGlobal pMac,
         psessionEntry->fWaitForProbeRsp = false;
      }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } /*** limDetectChangeInApCapabilities() ***/
 
 
@@ -2306,12 +2494,15 @@ tMgmtFrmDropReason limIsPktCandidateForDrop(tpAniSirGlobal pMac, tANI_U8 *pRxPac
             return eMGMT_DROP_NO_DROP;
         }
 #endif
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_EXTSCAN
         else if (WDA_GET_EXTSCANFULLSCANRESIND(pRxPacketInfo))
         {
             return eMGMT_DROP_NO_DROP;
         }
 #endif
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         else if (WDA_IS_RX_IN_SCAN(pRxPacketInfo))
         {
             return eMGMT_DROP_SCAN_MODE_FRAME;

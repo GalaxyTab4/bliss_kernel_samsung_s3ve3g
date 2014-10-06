@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,6 +22,7 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
@@ -25,6 +30,8 @@
  * to the Linux Foundation.
  */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifndef __HDD_TDSL_H
 #define __HDD_TDSL_H
 /**===========================================================================
@@ -32,6 +39,10 @@
 \file         wlan_hdd_tdls.h
 
 \brief       Linux HDD TDLS include file
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 ==========================================================================*/
 
 #define MAX_NUM_TDLS_PEER           3
@@ -112,6 +123,7 @@ typedef enum eTDLSLinkStatus {
     eTDLS_LINK_TEARING,
 } tTDLSLinkStatus;
 
+<<<<<<< HEAD
 
 typedef enum {
     eTDLS_LINK_SUCCESS,                              /* Success */
@@ -143,6 +155,8 @@ typedef int (*cfg80211_exttdls_callback)(tANI_U8* mac,
                                          tANI_S32 state,
                                          tANI_S32 reason,
                                          void *ctx);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct {
     tANI_U16    period;
     tANI_U16    bytes;
@@ -162,7 +176,10 @@ typedef struct {
 } tdls_rssi_config_t;
 
 struct _hddTdlsPeer_t;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct {
     struct list_head peer_list[256];
     hdd_adapter_t   *pAdapter;
@@ -178,6 +195,12 @@ typedef struct {
     struct _hddTdlsPeer_t  *curr_candidate;
     struct work_struct implicit_setup;
     v_U32_t            magic;
+<<<<<<< HEAD
+=======
+#ifdef FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP
+    v_BOOL_t        defer_link_lost_indication;
+#endif
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tdlsCtx_t;
 
 typedef struct _hddTdlsPeer_t {
@@ -195,6 +218,7 @@ typedef struct _hddTdlsPeer_t {
     tANI_U16    tx_pkt;
     tANI_U16    rx_pkt;
     tANI_U8     uapsdQueues;
+<<<<<<< HEAD
     tANI_U8     qos;
     tANI_U8     maxSp;
     tANI_U8     isBufSta;
@@ -209,6 +233,12 @@ typedef struct _hddTdlsPeer_t {
     /*EXT TDLS*/
     tTDLSLinkReason reason;
     cfg80211_exttdls_callback state_change_notification;
+=======
+    tANI_U8     maxSp;
+    tANI_U8     isBufSta;
+    vos_timer_t     peerIdleTimer;
+    vos_timer_t     initiatorWaitTimeoutTimer;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } hddTdlsPeer_t;
 
 typedef struct {
@@ -220,9 +250,13 @@ typedef struct {
     v_MACADDR_t peerMac;
 } tdlsConnInfo_t;
 
+<<<<<<< HEAD
 int wlan_hdd_sta_tdls_init(hdd_adapter_t *pAdapter);
 
 void wlan_hdd_tdls_init(hdd_context_t * pHddCtx);
+=======
+int wlan_hdd_tdls_init(hdd_adapter_t *pAdapter);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 void wlan_hdd_tdls_exit(hdd_adapter_t *pAdapter);
 
@@ -234,7 +268,11 @@ int wlan_hdd_tdls_increment_pkt_count(hdd_adapter_t *pAdapter, u8 *mac, u8 tx);
 
 int wlan_hdd_tdls_set_sta_id(hdd_adapter_t *pAdapter, u8 *mac, u8 staId);
 
+<<<<<<< HEAD
 hddTdlsPeer_t *wlan_hdd_tdls_find_peer(hdd_adapter_t *pAdapter, u8 *mac, tANI_BOOLEAN mutexLock);
+=======
+hddTdlsPeer_t *wlan_hdd_tdls_find_peer(hdd_adapter_t *pAdapter, u8 *mac);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 hddTdlsPeer_t *wlan_hdd_tdls_find_all_peer(hdd_context_t *pHddCtx, u8 *mac);
 
@@ -244,6 +282,7 @@ hddTdlsPeer_t *wlan_hdd_tdls_get_peer(hdd_adapter_t *pAdapter, u8 *mac);
 
 int wlan_hdd_tdls_set_cap(hdd_adapter_t *pAdapter, u8* mac, tTDLSCapType cap);
 
+<<<<<<< HEAD
 void wlan_hdd_tdls_set_peer_link_status(hddTdlsPeer_t *curr_peer,
                                         tTDLSLinkStatus status,
                                         tTDLSLinkReason reason);
@@ -251,14 +290,25 @@ void wlan_hdd_tdls_set_link_status(hdd_adapter_t *pAdapter,
                                    u8* mac,
                                    tTDLSLinkStatus linkStatus,
                                    tTDLSLinkReason reason);
+=======
+void wlan_hdd_tdls_set_peer_link_status(hddTdlsPeer_t *curr_peer, tTDLSLinkStatus status);
+
+void wlan_hdd_tdls_set_link_status(hdd_adapter_t *pAdapter, u8* mac, tTDLSLinkStatus status);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 int wlan_hdd_tdls_recv_discovery_resp(hdd_adapter_t *pAdapter, u8 *mac);
 
 int wlan_hdd_tdls_set_peer_caps(hdd_adapter_t *pAdapter,
                                 u8 *mac,
+<<<<<<< HEAD
                                 tCsrStaParams *StaParams,
                                 tANI_BOOLEAN isBufSta,
                                 tANI_BOOLEAN isOffChannelSupported);
+=======
+                                tANI_U8 uapsdQueues,
+                                tANI_U8 maxSp,
+                                tANI_BOOLEAN isBufSta);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 int wlan_hdd_tdls_set_rssi(hdd_adapter_t *pAdapter, u8 *mac, tANI_S8 rxRssi);
 
@@ -290,7 +340,11 @@ void wlan_hdd_tdls_check_bmps(hdd_adapter_t *pAdapter);
 
 u8 wlan_hdd_tdls_is_peer_progress(hdd_adapter_t *pAdapter, u8 *mac);
 
+<<<<<<< HEAD
 hddTdlsPeer_t *wlan_hdd_tdls_is_progress(hdd_context_t *pHddCtx, u8* mac, u8 skip_self);
+=======
+hddTdlsPeer_t *wlan_hdd_tdls_is_progress(hdd_context_t *pHddCtx, u8* mac, u8 skip_self, tANI_BOOLEAN mutexLock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 void wlan_hdd_tdls_set_mode(hdd_context_t *pHddCtx,
                             eTDLSSupportMode tdls_mode,
@@ -322,6 +376,7 @@ void wlan_hdd_tdls_timer_restart(hdd_adapter_t *pAdapter,
                                  vos_timer_t *timer,
                                  v_U32_t expirationTime);
 void wlan_hdd_tdls_indicate_teardown(hdd_adapter_t *pAdapter,
+<<<<<<< HEAD
                                      hddTdlsPeer_t *curr_peer,
                                      tANI_U16 reason);
 
@@ -344,4 +399,10 @@ int wlan_hdd_set_callback(hddTdlsPeer_t *curr_peer,
 
 // tdlsoffchan
 hddTdlsPeer_t *wlan_hdd_tdls_get_first_connected_peer(hdd_adapter_t *pAdapter);
+=======
+                                           hddTdlsPeer_t *curr_peer,
+                                           tANI_U16 reason);
+
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif // __HDD_TDSL_H

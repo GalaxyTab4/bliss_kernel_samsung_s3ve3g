@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,12 +23,15 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
+<<<<<<< HEAD
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
  */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /***********************************************************************
    sme_Trace.h
 
@@ -32,6 +39,15 @@
 
   \author Kiran Kumar Reddy CH L V
 
+<<<<<<< HEAD
+=======
+   Copyright (c) 2013 Qualcomm Atheros, Inc.
+
+   All Rights Reserved.
+
+   Qualcomm Atheros Confidential and Proprietary.
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   ========================================================================*/
 
 #ifndef __SME_TRACE_H__
@@ -125,6 +141,7 @@ enum {
     TRACE_CODE_SME_RX_HDD_UPDATE_FTENABLED,
     TRACE_CODE_SME_RX_HDD_UPDATE_WESMODE,
     TRACE_CODE_SME_RX_HDD_SET_SCANCTRL,
+<<<<<<< HEAD
     TRACE_CODE_SME_RX_HDD_EXTSCAN_GET_CAPABILITIES,
     TRACE_CODE_SME_RX_HDD_EXTSCAN_START,
     TRACE_CODE_SME_RX_HDD_EXTSCAN_STOP,
@@ -133,6 +150,8 @@ enum {
     TRACE_CODE_SME_RX_HDD_EXTSCAN_SET_SIGNF_CHANGE,
     TRACE_CODE_SME_RX_HDD_EXTSCAN_RESET_SIGNF_CHANGE,
     TRACE_CODE_SME_RX_HDD_EXTSCAN_GET_CACHED_RESULTS,
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 };
 
 void smeTraceInit(tpAniSirGlobal pMac);

@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**=========================================================================
@@ -49,10 +75,13 @@
 #include "wlan_qct_wdi_dp.h"
 #include "wlan_qct_wdi_sta.h"
 
+<<<<<<< HEAD
 #ifdef DEBUG_ROAM_DELAY
 #include "vos_utils.h"
 #endif
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 static WDTS_TransportDriverTrype gTransportDriver = {
   WLANDXE_Open, 
   WLANDXE_Start, 
@@ -76,9 +105,14 @@ typedef struct
    uint32 tputBpus;  //unit in Bytes per usec: round off to integral value
 }WDTS_RateInfo;
 
+<<<<<<< HEAD
 #define WDTS_MAX_RATE_NUM               137
 #define WDTS_MAX_11B_RATE_NUM           8
 #define MB_PER_SEC_TO_BYTES_PER_MSEC    13
+=======
+#define WDTS_MAX_RATE_NUM  137
+#define WDTS_MAX_11B_RATE_NUM  8
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 WDTS_RateInfo g11bRateInfo[WDTS_MAX_11B_RATE_NUM]  = {
     //11b rates
@@ -178,6 +212,7 @@ WDTS_RateInfo gRateInfo[WDTS_MAX_RATE_NUM]  = {
     { 1350, 1137,  14781, 15}, //index 63
 
     //11AC  
+<<<<<<< HEAD
     { 1350,  675,  8775,  9}, //reserved 64
     { 1350,  675,  8775,  9}, //reserved 65
     {   65,   45,   585,  1}, //index 66
@@ -251,6 +286,81 @@ WDTS_RateInfo gRateInfo[WDTS_MAX_RATE_NUM]  = {
     { 1350,  675,  8775,  9}, //index 134
     { 3900, 1950, 25350, 25}, //index 135
     { 4333, 2166, 28158, 28}  //index 136
+=======
+    { 1350, 1137, 14781, 15}, //reserved 64
+    { 1350, 1137, 14781, 15}, //reserved 65
+    { 65,     65,   845,  1}, //index 66
+    { 130,   130,  1690,  2}, //index 67
+    { 195,   195,  2535,  3}, //index 68
+    { 260,   260,  3380,  3}, //index 69
+    { 390,   390,  5070,  5}, //index 70
+    { 520,   520,  6760,  7}, //index 71
+    { 585,   585,  7605,  8}, //index 72
+    { 650,   650,  8450,  8}, //index 73
+    { 780,   780,  2340,  2}, //index 74
+    { 1350, 1137, 14781, 15}, //reserved 75
+    { 1350, 1137, 14781, 15}, //reserved 76
+    { 1350, 1137, 14781, 15}, //reserved 77
+    { 1350, 1137, 14781, 15}, //index 78
+    { 1350, 1137, 14781, 15}, //index 79
+    { 1350, 1137, 14781, 15}, //index 80
+    { 1350, 1137, 14781, 15}, //index 81
+    { 1350, 1137, 14781, 15}, //index 82
+    { 1350, 1137, 14781, 15}, //index 83
+    { 655,   655,  8515,  9}, //index 84
+    { 722,   722,  9386,  9}, //index 85
+    { 866,   866, 11258, 11}, //index 86
+    { 1350, 1137, 14781, 15}, //reserved 87
+    { 1350, 1137, 14781, 15}, //reserved 88
+    { 1350, 1137, 14781, 15}, //reserved 89
+    { 135,   135,  1755,  2}, //index 90
+    { 270,   270,  3510,  4}, //index 91
+    { 405,   405,  5265,  5}, //index 92
+    { 540,   540,  7020,  7}, //index 93
+    { 810,   810, 10530, 11}, //index 94
+    { 1080, 1080, 14040, 14}, //index 95
+    { 1215, 1215, 15795, 16}, //index 96
+    { 1350, 1350, 17550, 18}, //index 97
+    { 1350, 1137, 14781, 15}, //index 98
+    { 1620, 1620, 21060, 21}, //index 99
+    { 1800, 1800, 23400, 23}, //index 100
+    { 1350, 1137, 14781, 15}, //reserved 101
+    { 1350, 1137, 14781, 15}, //index 102
+    { 1350, 1137, 14781, 15}, //index 103
+    { 1350, 1137, 14781, 15}, //index 104
+    { 1350, 1137, 14781, 15}, //index 105
+    { 1350, 1137, 14781, 15}, //index 106
+    { 1200, 1200, 15600, 16}, //index 107
+    { 1350, 1350, 17550, 18}, //index 108
+    { 1500, 1500, 19500, 20}, //index 109
+    { 1350, 1137, 14781, 15}, //index 110
+    { 1800, 1800, 23400, 23}, //index 111
+    { 2000, 2000, 26000, 26}, //index 112
+    { 1350, 1137, 14781, 15}, //index 113
+    { 292,   292,  3796,  4}, //index 114
+    { 585,   585,  7605,  8}, //index 115
+    { 877,   877, 11401, 11}, //index 116
+    { 1170, 1170, 15210, 15}, //index 117
+    { 1755, 1755, 22815, 23}, //index 118
+    { 2340, 2340, 30420, 30}, //index 119
+    { 2632, 2632, 34216, 34}, //index 120
+    { 2925, 2925, 38025, 38}, //index 121
+    { 1350, 1137, 14781, 15}, //index 122
+    { 3510, 3510, 45630, 46}, //index 123
+    { 3900, 3900, 50700, 51}, //index 124
+    { 1350, 1137, 14781, 15}, //reserved 125
+    { 1350, 1137, 14781, 15}, //index 126
+    { 1350, 1137, 14781, 15}, //index 127
+    { 1350, 1137, 14781, 15}, //index 128
+    { 1350, 1137, 14781, 15}, //index 129
+    { 1350, 1137, 14781, 15}, //index 130
+    { 1350, 1137, 14781, 15}, //index 131
+    { 2925, 2925, 38025, 38}, //index 132
+    { 3250, 3250, 42250, 42}, //index 133
+    { 1350, 1137, 14781, 15}, //index 134
+    { 3900, 3900, 50700, 51}, //index 135
+    { 4333, 4333, 56329, 56}  //index 136
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  };
 
 /* TX stats */
@@ -282,6 +392,7 @@ static WDI_DTS_TrafficStatsType gDsTrafficStats;
 /* RX thread frame size threshold to delay frame drain */
 #define DTS_RX_DELAY_FRAMESIZE_THRESHOLD  500
 
+<<<<<<< HEAD
 /* API to fill Rate Info based on the mac efficiency passed to it
  * macEff si used to caclulate mac throughput based on each rate index/PHY rate.
  * This is eventually used by MAS to calculate RX stats periodically sent to FW
@@ -313,6 +424,8 @@ void WDTS_FillRateInfo(wpt_uint8 macEff, wpt_int16 startRateIndex, wpt_int16 end
     }
 }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* Tx/Rx stats function
  * This function should be invoked to fetch the current stats
   * Parameters:
@@ -609,10 +722,16 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
         ucMPDUHOffset = usMPDUDOffset;
       }
 
+<<<<<<< HEAD
       if(VPKT_SIZE_BUFFER_ALIGNED < (usMPDULen+ucMPDUHOffset)){
         WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_FATAL,
                    "Invalid Frame size, might memory corrupted(%d+%d/%d)",
                    usMPDULen, ucMPDUHOffset, VPKT_SIZE_BUFFER_ALIGNED);
+=======
+      if(VPKT_SIZE_BUFFER < (usMPDULen+ucMPDUHOffset)){
+        DTI_TRACE( DTI_TRACE_LEVEL_FATAL,
+                   "Invalid Frame size, might memory corrupted");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         /* Size of the packet tranferred by the DMA engine is
          * greater than the the memory allocated for the skb
@@ -663,9 +782,13 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       pRxMetadata->offloadScanLearn = WDI_RX_BD_GET_OFFLOADSCANLEARN(pBDHeader);
       pRxMetadata->roamCandidateInd = WDI_RX_BD_GET_ROAMCANDIDATEIND(pBDHeader);
 #endif
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_EXTSCAN
       pRxMetadata->extscanBuffer = WDI_RX_BD_GET_EXTSCANFULLSCANRESIND(pBDHeader);
 #endif
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       /* typeSubtype in BD doesn't look like correct. Fill from frame ctrl
          TL does it for Volans but TL does not know BD for Prima. WDI should do it */
       if ( 0 == WDI_RX_BD_GET_FT(pBDHeader) ) {
@@ -730,6 +853,7 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       WPAL_PACKET_SET_BD_POINTER(pFrame, pBDHeader);
       WPAL_PACKET_SET_BD_LENGTH(pFrame, sizeof(WDI_RxBdType));
 
+<<<<<<< HEAD
 #ifdef DEBUG_ROAM_DELAY
       //Hack we need to send the frame type, so we are using bufflen as frametype
       vos_record_roam_event(e_DXE_RX_PKT_TIME, (void *)pFrame, pRxMetadata->type);
@@ -740,6 +864,8 @@ wpt_status WDTS_RxPacket (void *pContext, wpt_packet *pFrame, WDTS_ChannelType c
       }
       */
 #endif
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       // Invoke Rx complete callback
       pClientData->receiveFrameCB(pClientData->pCallbackContext, pFrame);  
   }
@@ -933,6 +1059,7 @@ wpt_status WDTS_TxPacket(void *pContext, wpt_packet *pFrame)
 #endif
   // Send packet to  Transport Driver. 
   status =  gTransportDriver.xmit(pDTDriverContext, pFrame, channel);
+<<<<<<< HEAD
 #ifdef DEBUG_ROAM_DELAY
    //Hack we need to send the frame type, so we are using bufflen as frametype
    vos_record_roam_event(e_DXE_FIRST_XMIT_TIME, (void *)pFrame, pTxMetadata->frmType);
@@ -943,6 +1070,8 @@ wpt_status WDTS_TxPacket(void *pContext, wpt_packet *pFrame)
    }
    */
 #endif
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   return status;
 }
 
@@ -1025,9 +1154,15 @@ wpt_status WDTS_SetPowerState(void *pContext, WDTS_PowerStateType  powerState,
  * Return Value: NONE
  *
  */
+<<<<<<< HEAD
 void WDTS_ChannelDebug(wpt_boolean displaySnapshot, wpt_uint8 debugFlags)
 {
    gTransportDriver.channelDebug(displaySnapshot, debugFlags);
+=======
+void WDTS_ChannelDebug(wpt_boolean displaySnapshot, wpt_boolean toggleStallDetect)
+{
+   gTransportDriver.channelDebug(displaySnapshot, toggleStallDetect);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    return;
 }
 

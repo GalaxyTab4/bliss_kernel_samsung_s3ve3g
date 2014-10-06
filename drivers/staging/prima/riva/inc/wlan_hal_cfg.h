@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
@@ -25,6 +26,27 @@
  * to the Linux Foundation.
  */
 
+=======
+  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+  *
+  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+  *
+  *
+  * Permission to use, copy, modify, and/or distribute this software for
+  * any purpose with or without fee is hereby granted, provided that the
+  * above copyright notice and this permission notice appear in all
+  * copies.
+  *
+  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+  * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+  * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+  * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+  * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  * PERFORMANCE OF THIS SOFTWARE.
+*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*==========================================================================
  *
  *  @file:     wlan_hal_cfg.h
@@ -33,6 +55,11 @@
  *
  *  @author:   Kumar Anand
  *
+<<<<<<< HEAD
+=======
+ *             Copyright (C) 2010, Qualcomm Technologies, Inc. 
+ *             All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  *=========================================================================*/
 
@@ -225,6 +252,7 @@
 #define QWLAN_HAL_CFG_BTC_STATIC_OPP_WLAN_ACTIVE_BT_LEN          167
 #define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_WLAN_LEN    168
 #define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_BT_LEN      169
+<<<<<<< HEAD
 #define QWLAN_HAL_CFG_RMCAST_FIXED_RATE                 170
 #define QWLAN_HAL_CFG_ASD_PROBE_INTERVAL                171
 #define QWLAN_HAL_CFG_ASD_TRIGGER_THRESHOLD             172
@@ -273,6 +301,13 @@
 
 /* Total number of Integer CFGs. This is used while allocating the memory for TLV */
 #define QWLAN_HAL_CFG_INTEGER_PARAM                     211
+=======
+#define QWLAN_HAL_CFG_MAX_PARAMS                        170
+
+
+/* Total number of Integer CFGs. This is used while allocating the memory for TLV */
+#define QWLAN_HAL_CFG_INTEGER_PARAM                     170
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*-------------------------------------------------------------------------
   Configuration Parameter min, max, defaults
@@ -923,6 +958,7 @@
 
 #define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_WLAN_LEN_MIN 0
 #define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_WLAN_LEN_MAX 250000
+<<<<<<< HEAD
 #define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_WLAN_LEN_DEF 30000
 
 #define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_BT_LEN_MIN   0
@@ -932,6 +968,13 @@
 #define QWLAN_HAL_CFG_BTC_CTS2S_ON_STA_DURING_SCO_MIN     0
 #define QWLAN_HAL_CFG_BTC_CTS2S_ON_STA_DURING_SCO_MAX     1
 #define QWLAN_HAL_CFG_BTC_CTS2S_ON_STA_DURING_SCO_DEF     0
+=======
+#define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_WLAN_LEN_DEF 60000
+
+#define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_BT_LEN_MIN   0
+#define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_BT_LEN_MAX   250000
+#define QWLAN_HAL_CFG_BTC_SAP_STATIC_OPP_WLAN_ACTIVE_BT_LEN_DEF   90000
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /* QWLAN_HAL_CFG_ANTENNA_DIVERSITY */
 #define QWLAN_HAL_CFG_ANTENNA_DIVERSITY_DEF  0
@@ -969,6 +1012,7 @@
 #define QWLAN_HAL_CFG_SAR_POWER_BACKOFF_MIN  1
 #define QWLAN_HAL_CFG_SAR_POWER_BACKOFF_MAX  21
 
+<<<<<<< HEAD
 /*Once the period expires the RSSI will be compared with Threshold
  * and if needed trigger events will be raised
  */
@@ -1043,3 +1087,8 @@
 
 
 #endif //__WLAN_HAL_CFG_H__
+=======
+#endif //__WLAN_HAL_CFG_H__
+
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver

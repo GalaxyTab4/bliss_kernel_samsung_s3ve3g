@@ -1,5 +1,41 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+
+
+
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,15 +55,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifndef WLAN_QCT_WDA_H
 #define WLAN_QCT_WDA_H
 
@@ -132,9 +160,12 @@ typedef enum
   eWDA_AUTH_TYPE_UNKNOWN = eCSR_AUTH_TYPE_FAILED,
 }WDA_AuthType;
 
+<<<<<<< HEAD
 #define IS_FW_IN_TX_PATH_FEATURE_ENABLE ((WDI_getHostWlanFeatCaps(FW_IN_TX_PATH)) & (WDA_getFwWlanFeatCaps(FW_IN_TX_PATH)))
 #define IS_MUMIMO_BFORMEE_CAPABLE ((WDI_getHostWlanFeatCaps(MU_MIMO)) & (WDA_getFwWlanFeatCaps(MU_MIMO)))
 #define IS_FEATURE_BCN_FLT_DELTA_ENABLE ((WDI_getHostWlanFeatCaps(BCN_IE_FLT_DELTA)) & (WDA_getFwWlanFeatCaps(BCN_IE_FLT_DELTA)))
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*--------------------------------------------------------------------------
   Utilities
  --------------------------------------------------------------------------*/
@@ -160,6 +191,7 @@ typedef enum
 #define IS_ROAM_SCAN_OFFLOAD_FEATURE_ENABLE 0
 #endif
 
+<<<<<<< HEAD
 #define IS_DYNAMIC_WMM_PS_ENABLED ((WDI_getHostWlanFeatCaps(DYNAMIC_WMM_PS)) & (WDA_getFwWlanFeatCaps(DYNAMIC_WMM_PS)))
 
 /* Check if heartbeat offload is enabled */
@@ -233,6 +265,11 @@ typedef enum {
 
 #define WDA_IS_MCAST_FLT_ENABLE_IN_FW (WDA_getFwWlanFeatCaps(WLAN_MCADDR_FLT))
 
+=======
+/* Check if heartbeat offload is enabled */
+#define IS_IBSS_HEARTBEAT_OFFLOAD_FEATURE_ENABLE ((WDI_getHostWlanFeatCaps(IBSS_HEARTBEAT_OFFLOAD)) & (WDA_getFwWlanFeatCaps(IBSS_HEARTBEAT_OFFLOAD)))
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*--------------------------------------------------------------------------
   Definitions for Data path APIs
  --------------------------------------------------------------------------*/
@@ -388,7 +425,10 @@ typedef struct
     */
    tANI_U8    ucUseBaBitmap ;
    tANI_U8    bssIdx;
+<<<<<<< HEAD
    tANI_U32   currentOperChan;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    tANI_U32   framesTxed[STACFG_MAX_TC];
 }tWdaStaInfo, *tpWdaStaInfo ;
 
@@ -404,12 +444,16 @@ typedef struct
    /* Traffic Stats timer */
    TX_TIMER trafficStatsTimer ;
 }tWdaTimers ;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef WLAN_SOFTAP_VSTA_FEATURE
 #define WDA_MAX_STA    (41)
 #else
 #define WDA_MAX_STA    (16)
 #endif
+<<<<<<< HEAD
 typedef enum
 {
    WDA_ADDSTA_REQ_NO_MEM = 0,
@@ -429,6 +473,8 @@ typedef struct
    wpt_uint8            wdaAddSelfStaFailReason;
 } tWDA_AddSelfStaDebugParams;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct
 {
    v_PVOID_t            pVosContext;             /* global VOSS context*/
@@ -488,6 +534,7 @@ typedef struct
    tSirLinkState        linkState;
    /* set, when BT AMP session is going on */
    v_BOOL_t             wdaAmpSessionOn;
+<<<<<<< HEAD
    v_BOOL_t             needShutdown;
    v_BOOL_t             wdiFailed;
    v_BOOL_t             wdaTimersCreated;
@@ -498,6 +545,15 @@ typedef struct
 
    tWDA_AddSelfStaDebugParams wdaAddSelfStaParams;
 
+=======
+   v_U32_t              VosPacketToFree;
+   v_BOOL_t             needShutdown;
+   v_BOOL_t             wdiFailed;
+   v_BOOL_t             wdaTimersCreated;
+
+   /* Event to wait for WDA stop on FTM mode */
+   vos_event_t          ftmStopDoneEvent;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tWDA_CbContext ; 
 
 typedef struct
@@ -512,7 +568,11 @@ typedef struct
  * open WDA context
  */ 
 
+<<<<<<< HEAD
 VOS_STATUS WDA_open(v_PVOID_t pVosContext, v_PVOID_t devHandle,
+=======
+VOS_STATUS WDA_open(v_PVOID_t pVosContext, v_PVOID_t pOSContext, 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                               tMacOpenParameters *pMacParams ) ;
 
 /*
@@ -590,7 +650,11 @@ VOS_STATUS WDA_TxPacket(tWDA_CbContext *pWDA,
                                     pWDATxRxCompFunc pCompFunc,
                                     void *pData,
                                     pWDAAckFnTxComp pAckTxComp, 
+<<<<<<< HEAD
                                     tANI_U32 txFlag);
+=======
+                                    tANI_U8 txFlag);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*
  * FUNCTION: WDA_PostMsgApi
@@ -773,9 +837,12 @@ tBssSystemRole wdaGetGlobalSystemRole(tpAniSirGlobal pMac);
 /* WDA_GET_ROAMCANDIDATEIND **************************************************/
 #  define WDA_GET_ROAMCANDIDATEIND(pRxMeta) (((WDI_DS_RxMetaInfoType*)(pRxMeta))->roamCandidateInd)
 #endif
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_EXTSCAN
 #define WDA_GET_EXTSCANFULLSCANRESIND(pRxMeta) (((WDI_DS_RxMetaInfoType*)(pRxMeta))->extscanBuffer)
 #endif
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* WDA_GET_RX_RSSI_DB ********************************************************/
 // Volans RF
 #  define WDA_RSSI_OFFSET             100
@@ -1028,7 +1095,11 @@ tSirRetStatus uMacPostCtrlMsg(void* pSirGlobal, tSirMbMsg* pMb);
 #define WDA_EXCLUDE_UNENCRYPTED_IND    SIR_HAL_EXCLUDE_UNENCRYPTED_IND
 #endif
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WDA_TSM_STATS_REQ              SIR_HAL_TSM_STATS_REQ
 #define WDA_TSM_STATS_RSP              SIR_HAL_TSM_STATS_RSP
 #endif
@@ -1091,11 +1162,14 @@ tSirRetStatus uMacPostCtrlMsg(void* pSirGlobal, tSirMbMsg* pMb);
 #define WDA_SET_MAX_TX_POWER_REQ       SIR_HAL_SET_MAX_TX_POWER_REQ
 #define WDA_SET_MAX_TX_POWER_RSP       SIR_HAL_SET_MAX_TX_POWER_RSP
 
+<<<<<<< HEAD
 #define WDA_SET_MAX_TX_POWER_PER_BAND_REQ \
         SIR_HAL_SET_MAX_TX_POWER_PER_BAND_REQ
 #define WDA_SET_MAX_TX_POWER_PER_BAND_RSP \
         SIR_HAL_SET_MAX_TX_POWER_PER_BAND_RSP
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WDA_SEND_MSG_COMPLETE          SIR_HAL_SEND_MSG_COMPLETE 
 
 /// PE <-> HAL Host Offload message
@@ -1202,6 +1276,7 @@ tSirRetStatus uMacPostCtrlMsg(void* pSirGlobal, tSirMbMsg* pMb);
 #define WDA_STOP_BATCH_SCAN_IND           SIR_HAL_STOP_BATCH_SCAN_IND
 #define WDA_TRIGGER_BATCH_SCAN_RESULT_IND SIR_HAL_TRIGGER_BATCH_SCAN_RESULT_IND
 #endif
+<<<<<<< HEAD
 #define WDA_RATE_UPDATE_IND         SIR_HAL_RATE_UPDATE_IND
 
 
@@ -1255,6 +1330,12 @@ eHalStatus WDA_SetRegDomain(void * clientCtxt, v_REGDOMAIN_t regId,
 #endif /* WLAN_FEATURE_EXTSCAN */
 
 #define WDA_SPOOF_MAC_ADDR_REQ               SIR_HAL_SPOOF_MAC_ADDR_REQ
+=======
+
+tSirRetStatus wdaPostCtrlMsg(tpAniSirGlobal pMac, tSirMsgQ *pMsg);
+
+eHalStatus WDA_SetRegDomain(void * clientCtxt, v_REGDOMAIN_t regId);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define HAL_USE_BD_RATE2_FOR_MANAGEMENT_FRAME 0x40 // Bit 6 will be used to control BD rate for Management frames
 
@@ -1291,8 +1372,11 @@ eHalStatus WDA_SetRegDomain(void * clientCtxt, v_REGDOMAIN_t regId,
 v_BOOL_t WDA_IsHwFrameTxTranslationCapable(v_PVOID_t pVosGCtx, 
                                                       tANI_U8 staIdx);
 
+<<<<<<< HEAD
 v_BOOL_t WDA_IsSelfSTA(v_PVOID_t pVosGCtx,tANI_U8 staIdx);
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #  define WDA_EnableUapsdAcParams(vosGCtx, staId, uapsdInfo) \
          WDA_SetUapsdAcParamsReq(vosGCtx, staId, uapsdInfo)
 
@@ -1526,7 +1610,11 @@ WDA_DS_BuildTxPacketInfo
   v_U8_t          typeSubtype,
   v_PVOID_t       pAddr2,
   v_U8_t          uTid,
+<<<<<<< HEAD
   v_U32_t          txFlag,
+=======
+  v_U8_t          txFlag,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   v_U32_t         timeStamp,
   v_U8_t          ucIsEapol,
   v_U8_t          ucUP
@@ -2005,10 +2093,16 @@ tANI_U8 WDA_getFwWlanFeatCaps(tANI_U8 featEnumValue);
   PARAMETERS
     pMac : upper MAC context pointer
     displaySnapshot : Display DXE snapshot option
+<<<<<<< HEAD
     debugFlags      : Enable stall detect features
                       defined by WPAL_DeviceDebugFlags
                       These features may effect
                       data performance.
+=======
+    enableStallDetect : Enable stall detect feature
+                        This feature will take effect to data performance
+                        Not integrate till fully verification
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   RETURN VALUE
     NONE
@@ -2018,7 +2112,11 @@ void WDA_TransportChannelDebug
 (
   tpAniSirGlobal pMac,
   v_BOOL_t       displaySnapshot,
+<<<<<<< HEAD
   v_U8_t         debugFlags
+=======
+  v_BOOL_t       toggleStallDetect
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 );
 
 /*==========================================================================
@@ -2049,4 +2147,8 @@ void WDA_TrafficStatsTimerActivate(wpt_boolean activate);
 
 ===========================================================================*/
 void WDA_SetEnableSSR(v_BOOL_t enableSSR);
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif

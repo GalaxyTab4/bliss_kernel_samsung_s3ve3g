@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,18 +23,26 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
+<<<<<<< HEAD
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
  */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**========================================================================
 
   \file  wlan_hdd_tdls.c
 
   \brief WLAN Host Device Driver implementation for TDLS
 
+<<<<<<< HEAD
+=======
+  Copyright (c) 2013 Qualcomm Atheros, Inc. All Rights Reserved.
+  Qualcomm Atheros Confidential and Proprietary.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   ========================================================================*/
 
 #include <wlan_hdd_includes.h>
@@ -43,13 +55,22 @@
 #include <net/ieee80211_radiotap.h>
 #include "wlan_hdd_tdls.h"
 #include "wlan_hdd_cfg80211.h"
+<<<<<<< HEAD
 #include "vos_sched.h"
 
+=======
+
+
+static struct mutex tdls_lock;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 static tANI_S32 wlan_hdd_get_tdls_discovery_peer_cnt(tdlsCtx_t *pHddTdlsCtx);
 static tANI_S32 wlan_hdd_tdls_peer_reset_discovery_processed(tdlsCtx_t *pHddTdlsCtx);
 static void wlan_hdd_tdls_timers_destroy(tdlsCtx_t *pHddTdlsCtx);
 static void wlan_hdd_tdls_peer_timers_destroy(tdlsCtx_t *pHddTdlsCtx);
+<<<<<<< HEAD
 int wpa_tdls_is_allowed_force_peer(tdlsCtx_t *pHddTdlsCtx, u8 *mac);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef CONFIG_TDLS_IMPLICIT
 static void wlan_hdd_tdls_pre_setup(struct work_struct *work);
 #endif
@@ -90,6 +111,7 @@ static v_VOID_t wlan_hdd_tdls_start_peer_discover_timer(tdlsCtx_t *pHddTdlsCtx,
                                                         v_U32_t discoveryExpiry)
 {
     hdd_station_ctx_t *pHddStaCtx;
+<<<<<<< HEAD
     hdd_context_t *pHddCtx;
 
     if ((NULL == pHddTdlsCtx) || (NULL == pHddTdlsCtx->pAdapter) )
@@ -111,6 +133,30 @@ static v_VOID_t wlan_hdd_tdls_start_peer_discover_timer(tdlsCtx_t *pHddTdlsCtx,
     if ( mutexLock )
     {
        mutex_lock(&pHddCtx->tdls_lock);
+=======
+
+    if ( mutexLock )
+    {
+        if (mutex_lock_interruptible(&tdls_lock))
+        {
+           VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                     "%s: unable to lock list: %d", __func__, __LINE__);
+           return;
+        }
+    }
+    if (NULL == pHddTdlsCtx)
+    {
+        if ( mutexLock )
+            mutex_unlock(&tdls_lock);
+        return;
+    }
+
+    if (NULL == pHddTdlsCtx->pAdapter)
+    {
+        if ( mutexLock )
+            mutex_unlock(&tdls_lock);
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pHddTdlsCtx->pAdapter);
@@ -123,7 +169,11 @@ static v_VOID_t wlan_hdd_tdls_start_peer_discover_timer(tdlsCtx_t *pHddTdlsCtx,
                pHddTdlsCtx->ap_rssi);
 
     if ( mutexLock )
+<<<<<<< HEAD
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+        mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return;
 }
@@ -136,12 +186,16 @@ static v_VOID_t wlan_hdd_tdls_discover_peer_cb( v_PVOID_t userData )
     struct list_head *pos;
     hddTdlsPeer_t *curr_peer;
     hdd_station_ctx_t *pHddStaCtx;
+<<<<<<< HEAD
     hdd_context_t *pHddCtx;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tdlsCtx_t *pHddTdlsCtx = (tdlsCtx_t *)userData;
     int discover_req_sent = 0;
     v_U32_t discover_expiry = TDLS_SUB_DISCOVERY_PERIOD;
     tANI_BOOLEAN doMutexLock = eANI_BOOLEAN_TRUE;
 
+<<<<<<< HEAD
     if ((NULL == pHddTdlsCtx) || (NULL == pHddTdlsCtx->pAdapter) )
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -166,6 +220,27 @@ static v_VOID_t wlan_hdd_tdls_discover_peer_cb( v_PVOID_t userData )
 
     mutex_lock(&pHddCtx->tdls_lock);
 
+=======
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list : %d", __func__, __LINE__);
+       return;
+    }
+
+    if (NULL == pHddTdlsCtx)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+    }
+
+    if (NULL == pHddTdlsCtx->pAdapter)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+    }
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pHddTdlsCtx->pAdapter);
 
     VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO, "%s: ", __func__);
@@ -207,7 +282,11 @@ static v_VOID_t wlan_hdd_tdls_discover_peer_cb( v_PVOID_t userData )
                                                   pHddTdlsCtx->pAdapter->sessionId,
                                                   curr_peer->peerMac,
                                                   WLAN_TDLS_DISCOVERY_REQUEST,
+<<<<<<< HEAD
                                                   1, 0, 0, NULL, 0, 0);
+=======
+                                                  1, 0, NULL, 0, 0);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                             curr_peer->discovery_attempt++;
                         }
                         else
@@ -238,7 +317,11 @@ exit_loop:
 
     wlan_hdd_tdls_peer_reset_discovery_processed(pHddTdlsCtx);
 
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /* Commenting out the following function as it was introducing
      * a race condition when pHddTdlsCtx is deleted. Also , this
@@ -254,7 +337,11 @@ done:
     wlan_hdd_tdls_start_peer_discover_timer(pHddTdlsCtx, doMutexLock, discover_expiry);
 
     if ( !doMutexLock )
+<<<<<<< HEAD
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+        mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return;
 }
 #endif
@@ -265,6 +352,7 @@ static v_VOID_t wlan_hdd_tdls_update_peer_cb( v_PVOID_t userData )
     struct list_head *head;
     struct list_head *pos;
     hddTdlsPeer_t *curr_peer;
+<<<<<<< HEAD
     tdlsCtx_t *pHddTdlsCtx = (tdlsCtx_t *)userData;
     hdd_context_t *pHddCtx;
 
@@ -291,6 +379,29 @@ static v_VOID_t wlan_hdd_tdls_update_peer_cb( v_PVOID_t userData )
 
     mutex_lock(&pHddCtx->tdls_lock);
 
+=======
+    tdlsCtx_t *pHddTdlsCtx;
+
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return;
+    }
+    pHddTdlsCtx = (tdlsCtx_t *)userData;
+    if (NULL == pHddTdlsCtx)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+    }
+
+    if (NULL == pHddTdlsCtx->pAdapter)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+    }
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     for (i = 0; i < 256; i++) {
         head = &pHddTdlsCtx->peer_list[i];
 
@@ -315,12 +426,15 @@ static v_VOID_t wlan_hdd_tdls_update_peer_cb( v_PVOID_t userData )
 
                 if ((eTDLS_LINK_IDLE == curr_peer->link_status) ||
                     (eTDLS_LINK_DISCOVERING == curr_peer->link_status)){
+<<<<<<< HEAD
 
                     if (pHddCtx->cfg_ini->fTDLSExternalControl &&
                         (FALSE == curr_peer->isForcedPeer)) {
                         continue;
                     }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     if (curr_peer->tx_pkt >=
                             pHddTdlsCtx->threshold_config.tx_packet_n) {
 
@@ -357,6 +471,7 @@ static v_VOID_t wlan_hdd_tdls_update_peer_cb( v_PVOID_t userData )
                         goto next_peer;
                     }
 
+<<<<<<< HEAD
                     /* Only teardown based on non zero idle packet threshold, to address a use
                      * case where this threshold does not get consider for TEAR DOWN.
                      */
@@ -366,6 +481,12 @@ static v_VOID_t wlan_hdd_tdls_update_peer_cb( v_PVOID_t userData )
                             pHddTdlsCtx->threshold_config.idle_packet_n) &&
                         (curr_peer->rx_pkt <
                             pHddTdlsCtx->threshold_config.idle_packet_n))) {
+=======
+                    if ((curr_peer->tx_pkt <
+                            pHddTdlsCtx->threshold_config.idle_packet_n) &&
+                        (curr_peer->rx_pkt <
+                            pHddTdlsCtx->threshold_config.idle_packet_n)) {
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                         if (VOS_TIMER_STATE_RUNNING !=
                                 vos_timer_getCurrentState(&curr_peer->peerIdleTimer)) {
                             VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
@@ -398,20 +519,27 @@ static v_VOID_t wlan_hdd_tdls_update_peer_cb( v_PVOID_t userData )
 //                    }
                 }
             } else if (eTDLS_CAP_UNKNOWN == curr_peer->tdls_support) {
+<<<<<<< HEAD
 
                 if (pHddCtx->cfg_ini->fTDLSExternalControl &&
                     (FALSE == curr_peer->isForcedPeer)) {
                     continue;
                 }
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 if (!TDLS_IS_CONNECTED(curr_peer)) {
                     if (curr_peer->tx_pkt >=
                             pHddTdlsCtx->threshold_config.tx_packet_n) {
 
+<<<<<<< HEAD
                         /* Ignore discovery attempt if External Control is enabled, that
                          * is, peer is forced. In that case, continue discovery attempt
                          * regardless attempt count
                          */
                         if (curr_peer->isForcedPeer || curr_peer->discovery_attempt++ <
+=======
+                        if (curr_peer->discovery_attempt++ <
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                  pHddTdlsCtx->threshold_config.discovery_tries_n) {
                             VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "TDLS UNKNOWN discover ");
 #ifdef CONFIG_TDLS_IMPLICIT
@@ -421,11 +549,15 @@ static v_VOID_t wlan_hdd_tdls_update_peer_cb( v_PVOID_t userData )
                         else
                         {
                             curr_peer->tdls_support = eTDLS_CAP_NOT_SUPPORTED;
+<<<<<<< HEAD
                             wlan_hdd_tdls_set_peer_link_status(
                                                     curr_peer,
                                                     eTDLS_LINK_IDLE,
                                                     eTDLS_LINK_NOT_SUPPORTED);
 
+=======
+                            curr_peer->link_status  = eTDLS_LINK_IDLE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                         }
                     }
                 }
@@ -440,19 +572,27 @@ next_peer:
     wlan_hdd_tdls_timer_restart(pHddTdlsCtx->pAdapter,
                                 &pHddTdlsCtx->peerUpdateTimer,
                                 pHddTdlsCtx->threshold_config.tx_period_t);
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 static v_VOID_t wlan_hdd_tdls_idle_cb( v_PVOID_t userData )
 {
 #ifdef CONFIG_TDLS_IMPLICIT
     hddTdlsPeer_t *curr_peer = (hddTdlsPeer_t *)userData;
+<<<<<<< HEAD
     tdlsCtx_t *pHddTdlsCtx;
     hdd_context_t *pHddCtx;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (NULL == curr_peer)
     {
       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
               FL("Invalid tdls idle timer expired"));
       return;
     }
@@ -476,12 +616,29 @@ static v_VOID_t wlan_hdd_tdls_idle_cb( v_PVOID_t userData )
 
     VOS_TRACE(VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
               "%s: Tx/Rx Idle " MAC_ADDRESS_STR " tx_pkt: %d, rx_pkt: %d, idle_packet_n: %d",
+=======
+               "%s: Invalid tdls idle timer expired", __func__);
+      return;
+    }
+
+    VOS_TRACE(VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
+              "%s: Tx/Rx Idle " MAC_ADDRESS_STR " tx_pkt: %d, rx_pkt: %d, idle_packet_n: %d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               __func__, MAC_ADDR_ARRAY(curr_peer->peerMac),
               curr_peer->tx_pkt,
               curr_peer->rx_pkt,
               curr_peer->pHddTdlsCtx->threshold_config.idle_packet_n);
 
+<<<<<<< HEAD
     mutex_lock(&pHddCtx->tdls_lock);
+=======
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return;
+    }
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /* Check tx/rx statistics on this tdls link for recent activities and
      * then decide whether to tear down the link or keep it.
@@ -504,7 +661,11 @@ static v_VOID_t wlan_hdd_tdls_idle_cb( v_PVOID_t userData )
                                       curr_peer,
                                       eSIR_MAC_TDLS_TEARDOWN_UNSPEC_REASON);
     }
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 }
 
@@ -515,6 +676,7 @@ static v_VOID_t wlan_hdd_tdls_discovery_timeout_peer_cb(v_PVOID_t userData)
     hddTdlsPeer_t *tmp;
     struct list_head *pos, *q;
     tdlsCtx_t *pHddTdlsCtx;
+<<<<<<< HEAD
     hdd_context_t *pHddCtx;
 
     pHddTdlsCtx = (tdlsCtx_t *)userData;
@@ -543,6 +705,23 @@ static v_VOID_t wlan_hdd_tdls_discovery_timeout_peer_cb(v_PVOID_t userData)
 
     mutex_lock(&pHddCtx->tdls_lock);
 
+=======
+
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                  "%s: unable to lock list", __func__);
+        return ;
+    }
+    pHddTdlsCtx = (tdlsCtx_t *)userData;
+
+    if ( NULL == pHddTdlsCtx )
+    {
+        mutex_unlock(&tdls_lock);
+        return ;
+    }
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     for (i = 0; i < 256; i++) {
         head = &pHddTdlsCtx->peer_list[i];
         list_for_each_safe (pos, q, head) {
@@ -552,10 +731,14 @@ static v_VOID_t wlan_hdd_tdls_discovery_timeout_peer_cb(v_PVOID_t userData)
                 VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
                            "%s: " MAC_ADDRESS_STR " to idle state", __func__,
                            MAC_ADDR_ARRAY(tmp->peerMac));
+<<<<<<< HEAD
                            wlan_hdd_tdls_set_peer_link_status(
                                                   tmp,
                                                   eTDLS_LINK_IDLE,
                                                   eTDLS_LINK_NOT_SUPPORTED);
+=======
+                tmp->link_status = eTDLS_LINK_IDLE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             }
         }
     }
@@ -563,7 +746,11 @@ static v_VOID_t wlan_hdd_tdls_discovery_timeout_peer_cb(v_PVOID_t userData)
     pHddTdlsCtx->discovery_sent_cnt = 0;
     wlan_hdd_tdls_check_power_save_prohibited(pHddTdlsCtx->pAdapter);
 
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     wlan_hdd_tdls_check_bmps(pHddTdlsCtx->pAdapter);
 
@@ -576,20 +763,28 @@ static v_VOID_t wlan_hdd_tdls_initiator_wait_cb( v_PVOID_t userData )
     tdlsCtx_t   *pHddTdlsCtx;
 
     if ( NULL == curr_peer )
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("curr_peer is NULL"));
         return;
     }
+=======
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     pHddTdlsCtx = curr_peer->pHddTdlsCtx;
 
     if ( NULL == pHddTdlsCtx )
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddTdlsCtx is NULL"));
         return;
     }
+=======
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     WLANTL_ResumeDataTx( (WLAN_HDD_GET_CTX(pHddTdlsCtx->pAdapter))->pvosContext,
                            (v_U8_t *)&curr_peer->staId);
@@ -602,12 +797,17 @@ static void wlan_hdd_tdls_free_list(tdlsCtx_t *pHddTdlsCtx)
     hddTdlsPeer_t *tmp;
     struct list_head *pos, *q;
 
+<<<<<<< HEAD
     if (NULL == pHddTdlsCtx)
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddTdlsCtx is NULL"));
        return;
     }
+=======
+    if (NULL == pHddTdlsCtx) return;
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     for (i = 0; i < 256; i++) {
         head = &pHddTdlsCtx->peer_list[i];
@@ -615,7 +815,10 @@ static void wlan_hdd_tdls_free_list(tdlsCtx_t *pHddTdlsCtx)
             tmp = list_entry(pos, hddTdlsPeer_t, node);
             list_del(pos);
             vos_mem_free(tmp);
+<<<<<<< HEAD
             tmp = NULL;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
     }
 }
@@ -626,11 +829,15 @@ static void wlan_hdd_tdls_schedule_scan(struct work_struct *work)
           container_of(work, tdls_scan_context_t, tdls_scan_work.work);
 
     if (NULL == scan_ctx)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("scan_ctx is NULL"));
         return;
     }
+=======
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (unlikely(TDLS_CTX_MAGIC != scan_ctx->magic))
         return;
@@ -644,6 +851,7 @@ static void wlan_hdd_tdls_schedule_scan(struct work_struct *work)
                            scan_ctx->scan_request);
 }
 
+<<<<<<< HEAD
 /* initialize TDLS global context */
 void  wlan_hdd_tdls_init(hdd_context_t *pHddCtx )
 {
@@ -676,15 +884,25 @@ void  wlan_hdd_tdls_init(hdd_context_t *pHddCtx )
 }
 
 int wlan_hdd_sta_tdls_init(hdd_adapter_t *pAdapter)
+=======
+
+int wlan_hdd_tdls_init(hdd_adapter_t *pAdapter)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
     tdlsCtx_t *pHddTdlsCtx;
     int i;
+<<<<<<< HEAD
 
     if (NULL == pHddCtx)
         return -1;
 
     mutex_lock(&pHddCtx->tdls_lock);
+=======
+    v_U8_t staIdx;
+
+    mutex_init(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if ((FALSE == pHddCtx->cfg_ini->fEnableTDLSSupport) ||
         (FALSE == sme_IsFeatureSupportedByFW(TDLS)))
@@ -694,7 +912,10 @@ int wlan_hdd_sta_tdls_init(hdd_adapter_t *pAdapter)
         hddLog(VOS_TRACE_LEVEL_ERROR, "%s TDLS not enabled (%d) or FW doesn't support (%d)!",
         __func__, pHddCtx->cfg_ini->fEnableTDLSSupport,
         sme_IsFeatureSupportedByFW(TDLS));
+<<<<<<< HEAD
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return 0;
     }
     /* TDLS is supported only in STA / P2P Client modes,
@@ -709,7 +930,10 @@ int wlan_hdd_sta_tdls_init(hdd_adapter_t *pAdapter)
      */
     if (0 == WLAN_HDD_IS_TDLS_SUPPORTED_ADAPTER(pAdapter))
     {
+<<<<<<< HEAD
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return 0;
     }
     /* Check for the valid pHddTdlsCtx. If valid do not further
@@ -725,7 +949,10 @@ int wlan_hdd_sta_tdls_init(hdd_adapter_t *pAdapter)
         if (NULL == pHddTdlsCtx) {
             hddLog(VOS_TRACE_LEVEL_ERROR, "%s malloc failed!", __func__);
             pAdapter->sessionCtx.station.pHddTdlsCtx = NULL;
+<<<<<<< HEAD
             mutex_unlock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             return -1;
         }
         /* initialize TDLS pAdater context */
@@ -751,8 +978,28 @@ int wlan_hdd_sta_tdls_init(hdd_adapter_t *pAdapter)
 
     pHddTdlsCtx = pAdapter->sessionCtx.station.pHddTdlsCtx;
 
+<<<<<<< HEAD
     sme_SetTdlsPowerSaveProhibited(WLAN_HDD_GET_HAL_CTX(pAdapter), 0);
 
+=======
+    /* initialize TDLS global context */
+    pHddCtx->connected_peer_count = 0;
+    sme_SetTdlsPowerSaveProhibited(WLAN_HDD_GET_HAL_CTX(pAdapter), 0);
+
+    pHddCtx->tdls_scan_ctxt.magic = 0;
+    pHddCtx->tdls_scan_ctxt.attempt = 0;
+    pHddCtx->tdls_scan_ctxt.reject = 0;
+    pHddCtx->tdls_scan_ctxt.scan_request = NULL;
+
+    for (staIdx = 0; staIdx < HDD_MAX_NUM_TDLS_STA; staIdx++)
+    {
+         pHddCtx->tdlsConnInfo[staIdx].staId = 0;
+         pHddCtx->tdlsConnInfo[staIdx].sessionId = 255;
+         vos_mem_zero(&pHddCtx->tdlsConnInfo[staIdx].peerMac,
+                                            sizeof(v_MACADDR_t)) ;
+    }
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pHddTdlsCtx->pAdapter = pAdapter;
 
     for (i = 0; i < 256; i++)
@@ -774,9 +1021,23 @@ int wlan_hdd_sta_tdls_init(hdd_adapter_t *pAdapter)
     pHddTdlsCtx->threshold_config.rssi_trigger_threshold = pHddCtx->cfg_ini->fTDLSRSSITriggerThreshold;
     pHddTdlsCtx->threshold_config.rssi_teardown_threshold = pHddCtx->cfg_ini->fTDLSRSSITeardownThreshold;
 
+<<<<<<< HEAD
     INIT_WORK(&pHddTdlsCtx->implicit_setup, wlan_hdd_tdls_pre_setup);
     INIT_DELAYED_WORK(&pHddCtx->tdls_scan_ctxt.tdls_scan_work, wlan_hdd_tdls_schedule_scan);
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    if (FALSE == pHddCtx->cfg_ini->fEnableTDLSImplicitTrigger)
+    {
+        pHddCtx->tdls_mode = eTDLS_SUPPORT_EXPLICIT_TRIGGER_ONLY;
+        hddLog(VOS_TRACE_LEVEL_ERROR, "%s TDLS Implicit trigger not enabled!", __func__);
+    }
+    else
+    {
+        pHddCtx->tdls_mode = eTDLS_SUPPORT_ENABLED;
+    }
+    INIT_WORK(&pHddTdlsCtx->implicit_setup, wlan_hdd_tdls_pre_setup);
+    INIT_DELAYED_WORK(&pHddCtx->tdls_scan_ctxt.tdls_scan_work, wlan_hdd_tdls_schedule_scan);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return 0;
 }
@@ -786,6 +1047,7 @@ void wlan_hdd_tdls_exit(hdd_adapter_t *pAdapter)
     tdlsCtx_t *pHddTdlsCtx;
     hdd_context_t *pHddCtx;
 
+<<<<<<< HEAD
     /*
      * NOTE: The Callers of this function should ensure to acquire the
      * tdls_lock to avoid any concurrent access to the Adapter.
@@ -805,13 +1067,32 @@ void wlan_hdd_tdls_exit(hdd_adapter_t *pAdapter)
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                   "%s: LOGP in Progress. Ignore!!!", __func__);
         return ;
+=======
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return;
+    }
+
+    pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
+    if (NULL == pHddCtx)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
     if (NULL == pHddTdlsCtx)
     {
+<<<<<<< HEAD
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddTdlsCtx is NULL"));
+=======
+        mutex_unlock(&tdls_lock);
+        hddLog(VOS_TRACE_LEVEL_WARN, "%s TDLS not enabled, exiting!", __func__);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return;
     }
 #ifdef WLAN_OPEN_SOURCE
@@ -825,11 +1106,18 @@ void wlan_hdd_tdls_exit(hdd_adapter_t *pAdapter)
     wlan_hdd_tdls_free_list(pHddTdlsCtx);
 
     wlan_hdd_tdls_free_scan_request(&pHddCtx->tdls_scan_ctxt);
+<<<<<<< HEAD
     pHddTdlsCtx->magic = 0;
     pHddTdlsCtx->pAdapter = NULL;
     vos_mem_free(pHddTdlsCtx);
     pAdapter->sessionCtx.station.pHddTdlsCtx = NULL;
     pHddTdlsCtx = NULL;
+=======
+
+    vos_mem_free(pHddTdlsCtx);
+    pHddTdlsCtx = NULL;
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 /* stop all monitoring timers per Adapter */
@@ -926,6 +1214,7 @@ hddTdlsPeer_t *wlan_hdd_tdls_get_peer(hdd_adapter_t *pAdapter, u8 *mac)
     hddTdlsPeer_t *peer;
     u8 key;
     tdlsCtx_t *pHddTdlsCtx;
+<<<<<<< HEAD
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
@@ -937,6 +1226,11 @@ hddTdlsPeer_t *wlan_hdd_tdls_get_peer(hdd_adapter_t *pAdapter, u8 *mac)
 
     /* if already there, just update */
     peer = wlan_hdd_tdls_find_peer(pAdapter, mac, TRUE);
+=======
+
+    /* if already there, just update */
+    peer = wlan_hdd_tdls_find_peer(pAdapter, mac);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (peer != NULL)
     {
         return peer;
@@ -949,16 +1243,31 @@ hddTdlsPeer_t *wlan_hdd_tdls_get_peer(hdd_adapter_t *pAdapter, u8 *mac)
         return NULL;
     }
 
+<<<<<<< HEAD
     mutex_lock(&pHddCtx->tdls_lock);
 
+=======
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       vos_mem_free(peer);
+       return NULL;
+    }
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
 
     if (NULL == pHddTdlsCtx)
     {
+<<<<<<< HEAD
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                  FL("pHddTdlsCtx is NULL"));
         vos_mem_free(peer);
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+        vos_mem_free(peer);
+        mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return NULL;
     }
 
@@ -980,7 +1289,11 @@ hddTdlsPeer_t *wlan_hdd_tdls_get_peer(hdd_adapter_t *pAdapter, u8 *mac)
                     peer);
 
     list_add_tail(&peer->node, head);
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return peer;
 }
@@ -993,17 +1306,22 @@ int wlan_hdd_tdls_set_cap(hdd_adapter_t *pAdapter,
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: curr_peer is NULL", __func__);
         return -1;
     }
+=======
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     curr_peer->tdls_support = cap;
 
     return 0;
 }
 
+<<<<<<< HEAD
 void wlan_hdd_tdls_set_peer_link_status(hddTdlsPeer_t *curr_peer,
                                         tTDLSLinkStatus status,
                                         tTDLSLinkReason reason)
@@ -1018,12 +1336,19 @@ void wlan_hdd_tdls_set_peer_link_status(hddTdlsPeer_t *curr_peer,
                  "%s: curr_peer is NULL", __func__);
         return;
     }
+=======
+void wlan_hdd_tdls_set_peer_link_status(hddTdlsPeer_t *curr_peer, tTDLSLinkStatus status)
+{
+    if (curr_peer == NULL)
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     hddLog(VOS_TRACE_LEVEL_WARN, "tdls set peer " MAC_ADDRESS_STR " link status to %u",
             MAC_ADDR_ARRAY(curr_peer->peerMac), status);
 
     curr_peer->link_status = status;
 
+<<<<<<< HEAD
     /*EXT TDLS*/
     if (curr_peer->isForcedPeer && curr_peer->state_change_notification)
     {
@@ -1040,10 +1365,13 @@ void wlan_hdd_tdls_set_peer_link_status(hddTdlsPeer_t *curr_peer,
     }
     /*EXT TDLS*/
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 void wlan_hdd_tdls_set_link_status(hdd_adapter_t *pAdapter,
                                    u8* mac,
+<<<<<<< HEAD
                                    tTDLSLinkStatus linkStatus,
                                    tTDLSLinkReason reason)
 {
@@ -1079,6 +1407,18 @@ void wlan_hdd_tdls_set_link_status(hdd_adapter_t *pAdapter,
 
     }
     /*EXT TDLS*/
+=======
+                                   tTDLSLinkStatus linkStatus)
+{
+    hddTdlsPeer_t *curr_peer;
+
+    curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac);
+    if (curr_peer == NULL)
+        return;
+
+    curr_peer->link_status= linkStatus;
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return;
 }
 
@@ -1086,6 +1426,7 @@ int wlan_hdd_tdls_recv_discovery_resp(hdd_adapter_t *pAdapter, u8 *mac)
 {
     hddTdlsPeer_t *curr_peer;
     tdlsCtx_t *pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
+<<<<<<< HEAD
     hdd_context_t *pHddCtx;
 
     if ( NULL == pHddTdlsCtx )
@@ -1103,31 +1444,45 @@ int wlan_hdd_tdls_recv_discovery_resp(hdd_adapter_t *pAdapter, u8 *mac)
                  FL("pHddCtx is not valid"));
         return 0;
     }
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
 
     if (NULL == curr_peer)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("curr_peer is NULL"));
         return -1;
     }
+=======
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (pHddTdlsCtx->discovery_sent_cnt)
         pHddTdlsCtx->discovery_sent_cnt--;
 
+<<<<<<< HEAD
     mutex_lock(&pHddCtx->tdls_lock);
 
     wlan_hdd_tdls_check_power_save_prohibited(pAdapter);
 
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    wlan_hdd_tdls_check_power_save_prohibited(pAdapter);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (0 == pHddTdlsCtx->discovery_sent_cnt)
     {
         vos_timer_stop(&pHddTdlsCtx->peerDiscoveryTimeoutTimer);
     }
 
     VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
+<<<<<<< HEAD
                "Discovery(%u) Response from " MAC_ADDRESS_STR " link_status %d",
+=======
+               "Discovery(%lu) Response from " MAC_ADDRESS_STR " link_status %d",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pHddTdlsCtx->discovery_sent_cnt, MAC_ADDR_ARRAY(curr_peer->peerMac),
                curr_peer->link_status);
 
@@ -1137,9 +1492,13 @@ int wlan_hdd_tdls_recv_discovery_resp(hdd_adapter_t *pAdapter, u8 *mac)
            threshold is also met before setting up TDLS link*/
         if ((tANI_S32) curr_peer->rssi > (tANI_S32) pHddTdlsCtx->threshold_config.rssi_trigger_threshold)
         {
+<<<<<<< HEAD
             wlan_hdd_tdls_set_peer_link_status(curr_peer,
                                                eTDLS_LINK_DISCOVERED,
                                                eTDLS_LINK_SUCCESS);
+=======
+            curr_peer->link_status = eTDLS_LINK_DISCOVERED;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
             "Rssi Threshold met: "MAC_ADDRESS_STR" rssi = %d threshold= %d" ,
              MAC_ADDR_ARRAY(curr_peer->peerMac), curr_peer->rssi,
@@ -1148,6 +1507,7 @@ int wlan_hdd_tdls_recv_discovery_resp(hdd_adapter_t *pAdapter, u8 *mac)
         }
         else
         {
+<<<<<<< HEAD
             VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, 
             "Rssi Threshold not met: "MAC_ADDRESS_STR" rssi = %d threshold = %d ",
             MAC_ADDR_ARRAY(curr_peer->peerMac), curr_peer->rssi,
@@ -1162,6 +1522,13 @@ int wlan_hdd_tdls_recv_discovery_resp(hdd_adapter_t *pAdapter, u8 *mac)
             wlan_hdd_tdls_set_peer_link_status(curr_peer,
                                                eTDLS_LINK_IDLE,
                                                eTDLS_LINK_UNSPECIFIED);
+=======
+            VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
+            "Rssi Threshold not met: "MAC_ADDRESS_STR" rssi = %d threshold = %d ",
+            MAC_ADDR_ARRAY(curr_peer->peerMac), curr_peer->rssi,
+            pHddTdlsCtx->threshold_config.rssi_trigger_threshold);
+            curr_peer->link_status = eTDLS_LINK_IDLE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
     }
     else
@@ -1175,14 +1542,21 @@ int wlan_hdd_tdls_recv_discovery_resp(hdd_adapter_t *pAdapter, u8 *mac)
 
 int wlan_hdd_tdls_set_peer_caps(hdd_adapter_t *pAdapter,
                                 u8 *mac,
+<<<<<<< HEAD
                                 tCsrStaParams *StaParams,
                                 tANI_BOOLEAN isBufSta,
                                 tANI_BOOLEAN isOffChannelSupported)
+=======
+                                tANI_U8 uapsdQueues,
+                                tANI_U8 maxSp,
+                                tANI_BOOLEAN isBufSta)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     hddTdlsPeer_t *curr_peer;
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: curr_peer is NULL", __func__);
@@ -1208,6 +1582,13 @@ int wlan_hdd_tdls_set_peer_caps(hdd_adapter_t *pAdapter,
     curr_peer->supported_oper_classes_len =
                StaParams->supported_oper_classes_len;
     curr_peer->qos = StaParams->capability & CAPABILITIES_QOS_OFFSET;
+=======
+        return -1;
+
+    curr_peer->uapsdQueues = uapsdQueues;
+    curr_peer->maxSp = maxSp;
+    curr_peer->isBufSta = isBufSta;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return 0;
 }
 
@@ -1218,16 +1599,21 @@ int wlan_hdd_tdls_get_link_establish_params(hdd_adapter_t *pAdapter, u8 *mac,
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: curr_peer is NULL", __func__);
         return -1;
     }
+=======
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     tdlsLinkEstablishParams->isResponder = curr_peer->is_responder;
     tdlsLinkEstablishParams->uapsdQueues = curr_peer->uapsdQueues;
     tdlsLinkEstablishParams->maxSp = curr_peer->maxSp;
     tdlsLinkEstablishParams->isBufSta = curr_peer->isBufSta;
+<<<<<<< HEAD
     tdlsLinkEstablishParams->isOffChannelSupported =
                                  curr_peer->isOffChannelSupported;
 
@@ -1246,6 +1632,8 @@ int wlan_hdd_tdls_get_link_establish_params(hdd_adapter_t *pAdapter, u8 *mac,
                  curr_peer->supported_oper_classes_len;
     tdlsLinkEstablishParams->qos = curr_peer->qos;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return 0;
 }
 
@@ -1253,6 +1641,7 @@ int wlan_hdd_tdls_set_rssi(hdd_adapter_t *pAdapter, u8 *mac, tANI_S8 rxRssi)
 {
     hddTdlsPeer_t *curr_peer;
 
+<<<<<<< HEAD
     curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac, TRUE);
     if (curr_peer == NULL)
     {
@@ -1260,6 +1649,11 @@ int wlan_hdd_tdls_set_rssi(hdd_adapter_t *pAdapter, u8 *mac, tANI_S8 rxRssi)
                  "%s: curr_peer is NULL", __func__);
         return -1;
     }
+=======
+    curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac);
+    if (curr_peer == NULL)
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     curr_peer->rssi = rxRssi;
 
@@ -1272,11 +1666,15 @@ int wlan_hdd_tdls_set_responder(hdd_adapter_t *pAdapter, u8 *mac, tANI_U8 respon
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: curr_peer is NULL", __func__);
         return -1;
     }
+=======
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     curr_peer->is_responder = responder;
 
@@ -1287,6 +1685,7 @@ int wlan_hdd_tdls_get_responder(hdd_adapter_t *pAdapter, u8 *mac)
 {
     hddTdlsPeer_t *curr_peer;
 
+<<<<<<< HEAD
     curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac, TRUE);
     if (curr_peer == NULL)
     {
@@ -1294,6 +1693,11 @@ int wlan_hdd_tdls_get_responder(hdd_adapter_t *pAdapter, u8 *mac)
                  "%s: curr_peer is NULL", __func__);
         return -1;
     }
+=======
+    curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac);
+    if (curr_peer == NULL)
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return (curr_peer->is_responder);
 }
@@ -1304,11 +1708,15 @@ int wlan_hdd_tdls_set_signature(hdd_adapter_t *pAdapter, u8 *mac, tANI_U8 uSigna
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: curr_peer is NULL", __func__);
         return -1;
     }
+=======
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     curr_peer->signature = uSignature;
 
@@ -1336,11 +1744,15 @@ int wlan_hdd_tdls_increment_pkt_count(hdd_adapter_t *pAdapter, u8 *mac, u8 tx)
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                  FL("curr_peer is NULL"));
         return -1;
     }
+=======
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (tx)
         curr_peer->tx_pkt++;
@@ -1360,21 +1772,33 @@ static int wlan_hdd_tdls_check_config(tdls_config_params_t *config)
     if (config->tx_period_t < CFG_TDLS_TX_STATS_PERIOD_MIN ||
         config->tx_period_t > CFG_TDLS_TX_STATS_PERIOD_MAX)
     {
+<<<<<<< HEAD
         hddLog(VOS_TRACE_LEVEL_ERROR, "%s invalid 2nd argument %d. <%d...%ld>", __func__, config->tx_period_t,
+=======
+        hddLog(VOS_TRACE_LEVEL_ERROR, "%s invalid 2nd argument %d. <%d...%d>", __func__, config->tx_period_t,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             CFG_TDLS_TX_STATS_PERIOD_MIN, CFG_TDLS_TX_STATS_PERIOD_MAX);
         return -1;
     }
     if (config->tx_packet_n < CFG_TDLS_TX_PACKET_THRESHOLD_MIN ||
         config->tx_packet_n > CFG_TDLS_TX_PACKET_THRESHOLD_MAX)
     {
+<<<<<<< HEAD
         hddLog(VOS_TRACE_LEVEL_ERROR, "%s invalid 3rd argument %d. <%d...%ld>", __func__, config->tx_packet_n,
+=======
+        hddLog(VOS_TRACE_LEVEL_ERROR, "%s invalid 3rd argument %d. <%d...%d>", __func__, config->tx_packet_n,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             CFG_TDLS_TX_PACKET_THRESHOLD_MIN, CFG_TDLS_TX_PACKET_THRESHOLD_MAX);
         return -1;
     }
     if (config->discovery_period_t < CFG_TDLS_DISCOVERY_PERIOD_MIN ||
         config->discovery_period_t > CFG_TDLS_DISCOVERY_PERIOD_MAX)
     {
+<<<<<<< HEAD
         hddLog(VOS_TRACE_LEVEL_ERROR, "%s invalid 4th argument %d. <%d...%ld>", __func__, config->discovery_period_t,
+=======
+        hddLog(VOS_TRACE_LEVEL_ERROR, "%s invalid 4th argument %d. <%d...%d>", __func__, config->discovery_period_t,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             CFG_TDLS_DISCOVERY_PERIOD_MIN, CFG_TDLS_DISCOVERY_PERIOD_MAX);
         return -1;
     }
@@ -1432,7 +1856,11 @@ int wlan_hdd_tdls_set_params(struct net_device *dev, tdls_config_params_t *confi
 
     if (NULL == pHddTdlsCtx)
     {
+<<<<<<< HEAD
         hddLog(VOS_TRACE_LEVEL_ERROR, FL("TDLS not enabled!"));
+=======
+        hddLog(VOS_TRACE_LEVEL_ERROR, "%s TDLS not enabled!", __func__);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return -1;
     }
 
@@ -1479,17 +1907,22 @@ int wlan_hdd_tdls_set_sta_id(hdd_adapter_t *pAdapter, u8 *mac, u8 staId)
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: curr_peer is NULL", __func__);
         return -1;
     }
+=======
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     curr_peer->staId = staId;
 
     return 0;
 }
 
+<<<<<<< HEAD
 int wlan_hdd_tdls_set_force_peer(hdd_adapter_t *pAdapter, u8 *mac,
                                  tANI_BOOLEAN forcePeer)
 {
@@ -1517,12 +1950,19 @@ error:
 */
 hddTdlsPeer_t *wlan_hdd_tdls_find_peer(hdd_adapter_t *pAdapter, u8 *mac,
                                        tANI_BOOLEAN mutexLock)
+=======
+/* if peerMac is found, then it returns pointer to hddTdlsPeer_t
+   otherwise, it returns NULL
+*/
+hddTdlsPeer_t *wlan_hdd_tdls_find_peer(hdd_adapter_t *pAdapter, u8 *mac)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     u8 key;
     struct list_head *pos;
     struct list_head *head;
     hddTdlsPeer_t *curr_peer;
     tdlsCtx_t *pHddTdlsCtx;
+<<<<<<< HEAD
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
@@ -1535,12 +1975,25 @@ hddTdlsPeer_t *wlan_hdd_tdls_find_peer(hdd_adapter_t *pAdapter, u8 *mac,
     if ( mutexLock )
     {
        mutex_lock(&pHddCtx->tdls_lock);
+=======
+
+
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return NULL;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
     if (NULL == pHddTdlsCtx)
     {
+<<<<<<< HEAD
         if ( mutexLock )
             mutex_unlock(&pHddCtx->tdls_lock);
+=======
+        mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return NULL;
     }
 
@@ -1553,6 +2006,7 @@ hddTdlsPeer_t *wlan_hdd_tdls_find_peer(hdd_adapter_t *pAdapter, u8 *mac,
         if (!memcmp(mac, curr_peer->peerMac, 6)) {
             VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                      "findTdlsPeer: found staId %d", curr_peer->staId);
+<<<<<<< HEAD
             if ( mutexLock )
                 mutex_unlock(&pHddCtx->tdls_lock);
             return curr_peer;
@@ -1560,6 +2014,14 @@ hddTdlsPeer_t *wlan_hdd_tdls_find_peer(hdd_adapter_t *pAdapter, u8 *mac,
     }
     if ( mutexLock )
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+            mutex_unlock(&tdls_lock);
+            return curr_peer;
+        }
+    }
+
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return NULL;
 }
 
@@ -1571,7 +2033,10 @@ hddTdlsPeer_t *wlan_hdd_tdls_find_all_peer(hdd_context_t *pHddCtx, u8 *mac)
     hddTdlsPeer_t *curr_peer= NULL;
     VOS_STATUS status = 0;
 
+<<<<<<< HEAD
     mutex_lock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     status = hdd_get_front_adapter ( pHddCtx, &pAdapterNode );
     while ( NULL != pAdapterNode && VOS_STATUS_SUCCESS == status )
     {
@@ -1580,17 +2045,26 @@ hddTdlsPeer_t *wlan_hdd_tdls_find_all_peer(hdd_context_t *pHddCtx, u8 *mac)
         pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
         if (NULL != pHddTdlsCtx)
         {
+<<<<<<< HEAD
             curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac, FALSE);
             if (curr_peer)
             {
                 mutex_unlock(&pHddCtx->tdls_lock);
                 return curr_peer;
             }
+=======
+            curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac);
+            if (curr_peer)
+                return curr_peer;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
         status = hdd_get_next_adapter ( pHddCtx, pAdapterNode, &pNext );
         pAdapterNode = pNext;
     }
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return curr_peer;
 }
 
@@ -1604,6 +2078,7 @@ int wlan_hdd_tdls_reset_peer(hdd_adapter_t *pAdapter, u8 *mac)
 
     curr_peer = wlan_hdd_tdls_get_peer(pAdapter, mac);
     if (curr_peer == NULL)
+<<<<<<< HEAD
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  "%s: curr_peer is NULL", __func__);
@@ -1626,6 +2101,13 @@ int wlan_hdd_tdls_reset_peer(hdd_adapter_t *pAdapter, u8 *mac)
         pHddCtx->isTdlsScanCoexistence = FALSE;
     }
 
+=======
+        return -1;
+
+    curr_peer->link_status = eTDLS_LINK_IDLE;
+    curr_peer->staId = 0;
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if(eTDLS_SUPPORT_ENABLED == pHddCtx->tdls_mode) {
         vos_timer_stop( &curr_peer->peerIdleTimer );
     }
@@ -1702,16 +2184,22 @@ tANI_U16 wlan_hdd_tdlsConnectedPeers(hdd_adapter_t *pAdapter)
 {
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
+<<<<<<< HEAD
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddCtx is not valid"));
         return 0;
     }
+=======
+    if (NULL == pHddCtx)
+        return 0;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return pHddCtx->connected_peer_count;
 }
 
+<<<<<<< HEAD
 hddTdlsPeer_t *wlan_hdd_tdls_get_first_connected_peer(hdd_adapter_t *pAdapter)
 {
     int i;
@@ -1753,6 +2241,8 @@ hddTdlsPeer_t *wlan_hdd_tdls_get_first_connected_peer(hdd_adapter_t *pAdapter)
     return NULL;
 }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 int wlan_hdd_tdls_get_all_peers(hdd_adapter_t *pAdapter, char *buf, int buflen)
 {
     int i;
@@ -1761,6 +2251,7 @@ int wlan_hdd_tdls_get_all_peers(hdd_adapter_t *pAdapter, char *buf, int buflen)
     struct list_head *pos;
     hddTdlsPeer_t *curr_peer;
     tdlsCtx_t *pHddTdlsCtx;
+<<<<<<< HEAD
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
@@ -1769,6 +2260,9 @@ int wlan_hdd_tdls_get_all_peers(hdd_adapter_t *pAdapter, char *buf, int buflen)
                  FL("pHddCtx is not valid"));
         return 0;
     }
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     init_len = buflen;
     len = scnprintf(buf, buflen, "\n%-18s%-3s%-4s%-3s%-5s\n",
@@ -1780,10 +2274,22 @@ int wlan_hdd_tdls_get_all_peers(hdd_adapter_t *pAdapter, char *buf, int buflen)
     buf += len;
     buflen -= len;
 
+<<<<<<< HEAD
     mutex_lock(&pHddCtx->tdls_lock);
     pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
     if (NULL == pHddTdlsCtx) {
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return init_len-buflen;
+    }
+    pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
+    if (NULL == pHddTdlsCtx) {
+        mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         len = scnprintf(buf, buflen, "TDLS not enabled\n");
         return len;
     }
@@ -1806,12 +2312,17 @@ int wlan_hdd_tdls_get_all_peers(hdd_adapter_t *pAdapter, char *buf, int buflen)
             buflen -= len;
         }
     }
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return init_len-buflen;
 }
 
 void wlan_hdd_tdls_connection_callback(hdd_adapter_t *pAdapter)
 {
+<<<<<<< HEAD
     tdlsCtx_t *pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
@@ -1823,12 +2334,35 @@ void wlan_hdd_tdls_connection_callback(hdd_adapter_t *pAdapter)
     }
 
     mutex_lock(&pHddCtx->tdls_lock);
+=======
+    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
+    tdlsCtx_t *pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
+
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return;
+    }
+
+    if (NULL == pHddCtx || NULL == pHddTdlsCtx)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+    }
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
     "%s, update %d discover %d", __func__,
         pHddTdlsCtx->threshold_config.tx_period_t,
         pHddTdlsCtx->threshold_config.discovery_period_t);
 
+<<<<<<< HEAD
+=======
+#ifdef FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP
+    pHddTdlsCtx->defer_link_lost_indication = FALSE;
+#endif
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (eTDLS_SUPPORT_ENABLED == pHddCtx->tdls_mode)
     {
        wlan_hdd_tdls_peer_reset_discovery_processed(pHddTdlsCtx);
@@ -1844,13 +2378,18 @@ void wlan_hdd_tdls_connection_callback(hdd_adapter_t *pAdapter)
                                    &pHddTdlsCtx->peerUpdateTimer,
                                    pHddTdlsCtx->threshold_config.tx_period_t);
     }
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 }
 
 void wlan_hdd_tdls_disconnection_callback(hdd_adapter_t *pAdapter)
 {
     tdlsCtx_t *pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
+<<<<<<< HEAD
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
     if (NULL == pHddCtx)
@@ -1870,6 +2409,25 @@ void wlan_hdd_tdls_disconnection_callback(hdd_adapter_t *pAdapter)
         mutex_unlock(&pHddCtx->tdls_lock);
         return;
     }
+=======
+
+    VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,"%s", __func__);
+
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return;
+    }
+    if (NULL == pHddTdlsCtx)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+    }
+#ifdef FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP
+    pHddTdlsCtx->defer_link_lost_indication = FALSE;
+#endif
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pHddTdlsCtx->discovery_sent_cnt = 0;
     wlan_hdd_tdls_check_power_save_prohibited(pHddTdlsCtx->pAdapter);
 
@@ -1877,7 +2435,11 @@ void wlan_hdd_tdls_disconnection_callback(hdd_adapter_t *pAdapter)
     wlan_hdd_tdls_peer_timers_destroy(pHddTdlsCtx);
     wlan_hdd_tdls_free_list(pHddTdlsCtx);
 
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+    mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 void wlan_hdd_tdls_mgmt_completion_callback(hdd_adapter_t *pAdapter, tANI_U32 statusCode)
@@ -1892,6 +2454,7 @@ void wlan_hdd_tdls_increment_peer_count(hdd_adapter_t *pAdapter)
 {
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
+<<<<<<< HEAD
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -1900,20 +2463,27 @@ void wlan_hdd_tdls_increment_peer_count(hdd_adapter_t *pAdapter)
     }
 
     mutex_lock(&pHddCtx->tdls_lock);
+=======
+    if (NULL == pHddCtx) return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     pHddCtx->connected_peer_count++;
     wlan_hdd_tdls_check_power_save_prohibited(pAdapter);
 
     VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: %d",
                __func__, pHddCtx->connected_peer_count);
+<<<<<<< HEAD
 
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 void wlan_hdd_tdls_decrement_peer_count(hdd_adapter_t *pAdapter)
 {
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
+<<<<<<< HEAD
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -1922,6 +2492,9 @@ void wlan_hdd_tdls_decrement_peer_count(hdd_adapter_t *pAdapter)
     }
 
     mutex_lock(&pHddCtx->tdls_lock);
+=======
+    if (NULL == pHddCtx) return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (pHddCtx->connected_peer_count)
         pHddCtx->connected_peer_count--;
@@ -1930,8 +2503,11 @@ void wlan_hdd_tdls_decrement_peer_count(hdd_adapter_t *pAdapter)
     VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: %d",
                __func__, pHddCtx->connected_peer_count);
 
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 void wlan_hdd_tdls_check_bmps(hdd_adapter_t *pAdapter)
@@ -1940,6 +2516,7 @@ void wlan_hdd_tdls_check_bmps(hdd_adapter_t *pAdapter)
     tdlsCtx_t *pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
     hddTdlsPeer_t *curr_peer;
 
+<<<<<<< HEAD
     if ((NULL == pHddCtx) || (NULL == pHddTdlsCtx))
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
@@ -1948,6 +2525,11 @@ void wlan_hdd_tdls_check_bmps(hdd_adapter_t *pAdapter)
     }
 
     curr_peer = wlan_hdd_tdls_is_progress(pHddCtx, NULL, 0);
+=======
+    if ((NULL == pHddCtx) || (NULL == pHddTdlsCtx)) return;
+
+    curr_peer = wlan_hdd_tdls_is_progress(pHddCtx, NULL, 0, TRUE);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (NULL != curr_peer)
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
@@ -1984,6 +2566,7 @@ u8 wlan_hdd_tdls_is_peer_progress(hdd_adapter_t *pAdapter, u8 *mac)
 {
     hddTdlsPeer_t *curr_peer;
 
+<<<<<<< HEAD
     curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac, TRUE);
     if (curr_peer == NULL)
     {
@@ -1991,6 +2574,11 @@ u8 wlan_hdd_tdls_is_peer_progress(hdd_adapter_t *pAdapter, u8 *mac)
                  "%s: curr_peer is NULL", __func__);
         return 0;
     }
+=======
+    curr_peer = wlan_hdd_tdls_find_peer(pAdapter, mac);
+    if (curr_peer == NULL)
+        return 0;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return (eTDLS_LINK_CONNECTING == curr_peer->link_status);
 }
@@ -2000,18 +2588,41 @@ u8 wlan_hdd_tdls_is_peer_progress(hdd_adapter_t *pAdapter, u8 *mac)
  * skip_self - if TRUE, skip this mac. otherwise, check all the peer list. if
    mac is NULL, this argument is ignored, and check for all the peer list.
  */
+<<<<<<< HEAD
 static hddTdlsPeer_t *wlan_hdd_tdls_find_progress_peer(hdd_adapter_t *pAdapter, u8 *mac, u8 skip_self)
+=======
+static hddTdlsPeer_t *wlan_hdd_tdls_find_progress_peer(hdd_adapter_t *pAdapter, u8 *mac, u8 skip_self, tANI_BOOLEAN mutexLock)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     int i;
     struct list_head *head;
     hddTdlsPeer_t *curr_peer;
     struct list_head *pos;
+<<<<<<< HEAD
     tdlsCtx_t *pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);;
 
     if (NULL == pHddTdlsCtx)
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddTdlsCtx is NULL"));
+=======
+    tdlsCtx_t *pHddTdlsCtx;
+
+    if (mutexLock)
+    {
+        if (mutex_lock_interruptible(&tdls_lock))
+        {
+           VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+           return NULL;
+        }
+    }
+    pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
+    if (NULL == pHddTdlsCtx)
+    {
+        if (mutexLock)
+            mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return NULL;
     }
 
@@ -2029,15 +2640,30 @@ static hddTdlsPeer_t *wlan_hdd_tdls_find_progress_peer(hdd_adapter_t *pAdapter, 
                   VOS_TRACE(VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
                             "%s:" MAC_ADDRESS_STR " eTDLS_LINK_CONNECTING",
                             __func__, MAC_ADDR_ARRAY(curr_peer->peerMac));
+<<<<<<< HEAD
+=======
+                  if (mutexLock)
+                      mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   return curr_peer;
                 }
             }
         }
     }
+<<<<<<< HEAD
     return NULL;
 }
 
 hddTdlsPeer_t *wlan_hdd_tdls_is_progress(hdd_context_t *pHddCtx, u8 *mac, u8 skip_self)
+=======
+
+    if (mutexLock)
+        mutex_unlock(&tdls_lock);
+    return NULL;
+}
+
+hddTdlsPeer_t *wlan_hdd_tdls_is_progress(hdd_context_t *pHddCtx, u8 *mac, u8 skip_self, tANI_BOOLEAN mutexLock)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     hdd_adapter_list_node_t *pAdapterNode = NULL, *pNext = NULL;
     hdd_adapter_t *pAdapter = NULL;
@@ -2045,8 +2671,11 @@ hddTdlsPeer_t *wlan_hdd_tdls_is_progress(hdd_context_t *pHddCtx, u8 *mac, u8 ski
     hddTdlsPeer_t *curr_peer= NULL;
     VOS_STATUS status = 0;
 
+<<<<<<< HEAD
     mutex_lock(&pHddCtx->tdls_lock);
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     status = hdd_get_front_adapter ( pHddCtx, &pAdapterNode );
     while ( NULL != pAdapterNode && VOS_STATUS_SUCCESS == status )
     {
@@ -2055,17 +2684,26 @@ hddTdlsPeer_t *wlan_hdd_tdls_is_progress(hdd_context_t *pHddCtx, u8 *mac, u8 ski
         pHddTdlsCtx = WLAN_HDD_GET_TDLS_CTX_PTR(pAdapter);
         if (NULL != pHddTdlsCtx)
         {
+<<<<<<< HEAD
             curr_peer = wlan_hdd_tdls_find_progress_peer(pAdapter, mac, skip_self);
             if (curr_peer)
             {
                 mutex_unlock(&pHddCtx->tdls_lock);
                 return curr_peer;
             }
+=======
+            curr_peer = wlan_hdd_tdls_find_progress_peer(pAdapter, mac, skip_self, mutexLock);
+            if (curr_peer)
+                return curr_peer;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
         status = hdd_get_next_adapter ( pHddCtx, pAdapterNode, &pNext );
         pAdapterNode = pNext;
     }
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return NULL;
 }
 
@@ -2103,6 +2741,7 @@ void wlan_hdd_tdls_set_mode(hdd_context_t *pHddCtx,
 
     VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,"%s mode %d", __func__, (int)tdls_mode);
 
+<<<<<<< HEAD
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -2111,11 +2750,29 @@ void wlan_hdd_tdls_set_mode(hdd_context_t *pHddCtx,
     }
 
     mutex_lock(&pHddCtx->tdls_lock);
+=======
+    if (mutex_lock_interruptible(&tdls_lock))
+    {
+       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                 "%s: unable to lock list", __func__);
+       return;
+    }
+
+    if (NULL == pHddCtx)
+    {
+        mutex_unlock(&tdls_lock);
+        return;
+    }
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (pHddCtx->tdls_mode == tdls_mode)
     {
         hddLog(TDLS_LOG_LEVEL, "%s already in mode %d", __func__, (int)tdls_mode);
+<<<<<<< HEAD
         mutex_unlock(&pHddCtx->tdls_lock);
+=======
+        mutex_unlock(&tdls_lock);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return;
     }
 
@@ -2146,10 +2803,17 @@ void wlan_hdd_tdls_set_mode(hdd_context_t *pHddCtx,
     }
     pHddCtx->tdls_mode = tdls_mode;
 
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
 }
 
 static void __wlan_hdd_tdls_pre_setup(struct work_struct *work)
+=======
+    mutex_unlock(&tdls_lock);
+}
+
+static void wlan_hdd_tdls_pre_setup(struct work_struct *work)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     tdlsCtx_t *pHddTdlsCtx =
        container_of(work, tdlsCtx_t, implicit_setup);
@@ -2159,6 +2823,7 @@ static void __wlan_hdd_tdls_pre_setup(struct work_struct *work)
     int status;
 
     if (NULL == pHddTdlsCtx)
+<<<<<<< HEAD
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddTdlsCtx is NULL"));
@@ -2180,16 +2845,31 @@ static void __wlan_hdd_tdls_pre_setup(struct work_struct *work)
                  FL("pHddCtx is not valid"));
         return;
     }
+=======
+        return;
+
+    if (unlikely(TDLS_CTX_MAGIC != pHddTdlsCtx->magic))
+        return;
+
+    pHddCtx = WLAN_HDD_GET_CTX(pHddTdlsCtx->pAdapter);
+
+    if (NULL == pHddCtx)
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     curr_peer = pHddTdlsCtx->curr_candidate;
 
     if (NULL == curr_peer)
+<<<<<<< HEAD
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("curr_peer is NULL"));
 
         return;
     }
+=======
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (TRUE == sme_IsPmcBmps(WLAN_HDD_GET_HAL_CTX(pHddTdlsCtx->pAdapter)))
     {
@@ -2197,18 +2877,29 @@ static void __wlan_hdd_tdls_pre_setup(struct work_struct *work)
         hdd_disable_bmps_imps(pHddCtx, WLAN_HDD_INFRA_STATION);
     }
 
+<<<<<<< HEAD
     temp_peer = wlan_hdd_tdls_is_progress(pHddCtx, NULL, 0);
     if (NULL != temp_peer)
     {
         VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: " MAC_ADDRESS_STR " ongoing. pre_setup ignored",
+=======
+    temp_peer = wlan_hdd_tdls_is_progress(pHddCtx, NULL, 0, FALSE);
+    if (NULL != temp_peer)
+    {
+        VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: " MAC_ADDRESS_STR " ongoing. pre_setup ignored\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             __func__, MAC_ADDR_ARRAY(temp_peer->peerMac));
         goto done;
     }
 
     if (eTDLS_CAP_UNKNOWN != curr_peer->tdls_support)
+<<<<<<< HEAD
         wlan_hdd_tdls_set_peer_link_status(curr_peer,
                                            eTDLS_LINK_DISCOVERING,
                                            eTDLS_LINK_SUCCESS);
+=======
+        curr_peer->link_status = eTDLS_LINK_DISCOVERING;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     status = wlan_hdd_cfg80211_send_tdls_discover_req(pHddTdlsCtx->pAdapter->wdev.wiphy,
                                             pHddTdlsCtx->pAdapter->dev,
@@ -2216,36 +2907,54 @@ static void __wlan_hdd_tdls_pre_setup(struct work_struct *work)
 
     if (0 != status)
     {
+<<<<<<< HEAD
         VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: " MAC_ADDRESS_STR " discovery could not sent",
             __func__, MAC_ADDR_ARRAY(curr_peer->peerMac));
         if (eTDLS_CAP_UNKNOWN != curr_peer->tdls_support)
             wlan_hdd_tdls_set_peer_link_status(curr_peer,
                                                eTDLS_LINK_IDLE,
                                                eTDLS_LINK_UNSPECIFIED);
+=======
+        VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: " MAC_ADDRESS_STR " discovery could not sent\n",
+            __func__, MAC_ADDR_ARRAY(curr_peer->peerMac));
+        if (eTDLS_CAP_UNKNOWN != curr_peer->tdls_support)
+            curr_peer->link_status = eTDLS_LINK_IDLE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         goto done;
     }
 
     pHddTdlsCtx->discovery_sent_cnt++;
+<<<<<<< HEAD
 
     mutex_lock(&pHddCtx->tdls_lock);
 
     wlan_hdd_tdls_check_power_save_prohibited(pHddTdlsCtx->pAdapter);
+=======
+    wlan_hdd_tdls_check_power_save_prohibited(pHddTdlsCtx->pAdapter);
+    VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: discovery count %lu timeout %lu msec",
+               __func__, pHddTdlsCtx->discovery_sent_cnt,
+               pHddTdlsCtx->threshold_config.tx_period_t - TDLS_DISCOVERY_TIMEOUT_BEFORE_UPDATE);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     wlan_hdd_tdls_timer_restart(pHddTdlsCtx->pAdapter,
                                 &pHddTdlsCtx->peerDiscoveryTimeoutTimer,
                                 pHddTdlsCtx->threshold_config.tx_period_t - TDLS_DISCOVERY_TIMEOUT_BEFORE_UPDATE);
 
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->tdls_lock);
     VOS_TRACE( VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL, "%s: discovery count %u timeout %u msec",
                __func__, pHddTdlsCtx->discovery_sent_cnt,
                pHddTdlsCtx->threshold_config.tx_period_t - TDLS_DISCOVERY_TIMEOUT_BEFORE_UPDATE);
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 done:
     pHddTdlsCtx->curr_candidate = NULL;
     pHddTdlsCtx->magic = 0;
     return;
 }
 
+<<<<<<< HEAD
 
 static void wlan_hdd_tdls_pre_setup(struct work_struct *work)
 {
@@ -2256,6 +2965,8 @@ static void wlan_hdd_tdls_pre_setup(struct work_struct *work)
     return;
 }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 tANI_U32 wlan_hdd_tdls_discovery_sent_cnt(hdd_context_t *pHddCtx)
 {
     hdd_adapter_list_node_t *pAdapterNode = NULL, *pNext = NULL;
@@ -2286,11 +2997,15 @@ void wlan_hdd_tdls_check_power_save_prohibited(hdd_adapter_t *pAdapter)
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
     if ((NULL == pHddTdlsCtx) || (NULL == pHddCtx))
+<<<<<<< HEAD
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                FL(" pHddCtx or  pHddTdlsCtx points to NULL"));
         return;
     }
+=======
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if ((0 == pHddCtx->connected_peer_count) &&
         (0 == wlan_hdd_tdls_discovery_sent_cnt(pHddCtx)))
@@ -2305,11 +3020,15 @@ void wlan_hdd_tdls_check_power_save_prohibited(hdd_adapter_t *pAdapter)
 void wlan_hdd_tdls_free_scan_request (tdls_scan_context_t *tdls_scan_ctx)
 {
     if (NULL == tdls_scan_ctx)
+<<<<<<< HEAD
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("tdls_scan_ctx is NULL"));
         return;
     }
+=======
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     tdls_scan_ctx->attempt = 0;
     tdls_scan_ctx->reject = 0;
@@ -2327,12 +3046,17 @@ int wlan_hdd_tdls_copy_scan_context(hdd_context_t *pHddCtx,
 {
     tdls_scan_context_t *scan_ctx;
 
+<<<<<<< HEAD
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddCtx is not valid"));
         return 0;
     }
+=======
+    if (NULL == pHddCtx )
+        return -1;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     scan_ctx = &pHddCtx->tdls_scan_ctxt;
 
@@ -2379,6 +3103,7 @@ int wlan_hdd_tdls_scan_callback (hdd_adapter_t *pAdapter,
 {
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
     u16 connectedTdlsPeers;
+<<<<<<< HEAD
     hddTdlsPeer_t *curr_peer, *connected_peer;
     unsigned long delay;
     hdd_config_t  *cfg_param = pHddCtx->cfg_ini;
@@ -2389,11 +3114,23 @@ int wlan_hdd_tdls_scan_callback (hdd_adapter_t *pAdapter,
                  FL("pHddCtx is not valid"));
         return 0;
     }
+=======
+    hddTdlsPeer_t *curr_peer;
+    unsigned long delay;
+
+    if (NULL == pHddCtx)
+        return 0;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /* if tdls is not enabled, then continue scan */
     if (eTDLS_SUPPORT_NOT_ENABLED == pHddCtx->tdls_mode)
         return 1;
+<<<<<<< HEAD
     curr_peer = wlan_hdd_tdls_is_progress(pHddCtx, NULL, 0);
+=======
+
+    curr_peer = wlan_hdd_tdls_is_progress(pHddCtx, NULL, 0, TRUE);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (NULL != curr_peer)
     {
         if (pHddCtx->tdls_scan_ctxt.reject++ >= TDLS_MAX_SCAN_REJECT)
@@ -2403,9 +3140,13 @@ int wlan_hdd_tdls_scan_callback (hdd_adapter_t *pAdapter,
                     "%s: " MAC_ADDRESS_STR ". scan rejected %d. force it to idle",
                     __func__, MAC_ADDR_ARRAY (curr_peer->peerMac), pHddCtx->tdls_scan_ctxt.reject);
 
+<<<<<<< HEAD
             wlan_hdd_tdls_set_peer_link_status (curr_peer,
                                                 eTDLS_LINK_IDLE,
                                                 eTDLS_LINK_UNSPECIFIED);
+=======
+            wlan_hdd_tdls_set_peer_link_status (curr_peer, eTDLS_LINK_IDLE);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             return 1;
         }
         VOS_TRACE(VOS_MODULE_ID_HDD, TDLS_LOG_LEVEL,
@@ -2444,6 +3185,7 @@ int wlan_hdd_tdls_scan_callback (hdd_adapter_t *pAdapter,
     else if (eTDLS_SUPPORT_ENABLED == pHddCtx->tdls_mode ||
         eTDLS_SUPPORT_EXPLICIT_TRIGGER_ONLY == pHddCtx->tdls_mode)
     {
+<<<<<<< HEAD
         connectedTdlsPeers = wlan_hdd_tdlsConnectedPeers(pAdapter);
 
         /* check the TDLS link and Scan coexistance Capability */
@@ -2507,6 +3249,12 @@ int wlan_hdd_tdls_scan_callback (hdd_adapter_t *pAdapter,
          * so that the peer shall not go to the TDLS power save
          */
 
+=======
+        /* disable implicit trigger logic & tdls operatoin */
+        wlan_hdd_tdls_set_mode(pHddCtx, eTDLS_SUPPORT_DISABLED, FALSE);
+        /* indicate the teardown all connected to peer */
+        connectedTdlsPeers = wlan_hdd_tdlsConnectedPeers(pAdapter);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         if (connectedTdlsPeers)
         {
             tANI_U8 staIdx;
@@ -2555,6 +3303,7 @@ void wlan_hdd_tdls_scan_done_callback(hdd_adapter_t *pAdapter)
 {
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
 
+<<<<<<< HEAD
     if(0 != (wlan_hdd_validate_context(pHddCtx)))
     {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
@@ -2562,6 +3311,10 @@ void wlan_hdd_tdls_scan_done_callback(hdd_adapter_t *pAdapter)
         return;
     }
 
+=======
+    if (NULL == pHddCtx)
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /* free allocated memory at scan time */
     wlan_hdd_tdls_free_scan_request (&pHddCtx->tdls_scan_ctxt);
@@ -2585,11 +3338,15 @@ void wlan_hdd_tdls_timer_restart(hdd_adapter_t *pAdapter,
     hdd_station_ctx_t *pHddStaCtx = WLAN_HDD_GET_STATION_CTX_PTR(pAdapter);
 
     if (NULL == pHddStaCtx)
+<<<<<<< HEAD
     {
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                  FL("pHddStaCtx is NULL"));
         return;
     }
+=======
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /* Check whether driver load unload is in progress */
     if(vos_is_load_unload_in_progress( VOS_MODULE_ID_VOSS, NULL))
@@ -2609,6 +3366,7 @@ void wlan_hdd_tdls_indicate_teardown(hdd_adapter_t *pAdapter,
                                            hddTdlsPeer_t *curr_peer,
                                            tANI_U16 reason)
 {
+<<<<<<< HEAD
     hdd_context_t *pHddCtx;
 
     if (NULL == pAdapter || NULL == curr_peer)
@@ -2619,10 +3377,15 @@ void wlan_hdd_tdls_indicate_teardown(hdd_adapter_t *pAdapter,
     }
 
     pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+=======
+    if (NULL == pAdapter || NULL == curr_peer)
+        return;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (eTDLS_LINK_CONNECTED != curr_peer->link_status)
         return;
 
+<<<<<<< HEAD
     /* Throughput Monitor shall disable the split scan when
      * TDLS scan coexistance is disabled.At this point of time
      * since TDLS scan coexistance is not meeting the criteria
@@ -2637,12 +3400,16 @@ void wlan_hdd_tdls_indicate_teardown(hdd_adapter_t *pAdapter,
     wlan_hdd_tdls_set_peer_link_status(curr_peer,
                                        eTDLS_LINK_TEARING,
                                        eTDLS_LINK_UNSPECIFIED);
+=======
+    wlan_hdd_tdls_set_peer_link_status(curr_peer, eTDLS_LINK_TEARING);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     cfg80211_tdls_oper_request(pAdapter->dev,
                                curr_peer->peerMac,
                                NL80211_TDLS_TEARDOWN,
                                reason,
                                GFP_KERNEL);
 }
+<<<<<<< HEAD
 
 
 /*EXT TDLS*/
@@ -2732,3 +3499,5 @@ int wlan_hdd_tdls_get_status(hdd_adapter_t *pAdapter,
 
 /*EXT TDLS*/
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver

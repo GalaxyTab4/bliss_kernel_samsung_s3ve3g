@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /** ------------------------------------------------------------------------- * 
@@ -30,6 +56,11 @@
     \file csrSupport.h
 
     Exports and types for the Common Scan and Roaming supporting interfaces.
+<<<<<<< HEAD
+=======
+  
+   Copyright (C) 2006 Airgo Networks, Incorporated
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    ========================================================================== */
 #ifndef CSR_SUPPORT_H__
@@ -40,7 +71,10 @@
 #include "vos_nvitem.h"
 
 #ifdef FEATURE_WLAN_WAPI
+<<<<<<< HEAD
 #define CSR_WAPI_OUI_ROW_SIZE          ( 3 )
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define CSR_WAPI_OUI_SIZE              ( 4 )
 #define CSR_WAPI_VERSION_SUPPORTED     ( 1 )
 #define CSR_WAPI_MAX_AUTH_SUITES       ( 2 )
@@ -764,12 +798,16 @@ tANI_BOOLEAN csrRatesIsDot11Rate11bSupportedRate( tANI_U8 dot11Rate );
 tANI_BOOLEAN csrRatesIsDot11Rate11aSupportedRate( tANI_U8 dot11Rate );
 tAniEdType csrTranslateEncryptTypeToEdType( eCsrEncryptionType EncryptType ); 
 //pIes shall contain IEs from pSirBssDesc. It shall be returned from function csrGetParsedBssDescriptionIEs 
+<<<<<<< HEAD
 tANI_BOOLEAN csrIsSecurityMatch( tHalHandle hHal, tCsrAuthList *authType,
                                  tCsrEncryptionList *pUCEncryptionType,
                                  tCsrEncryptionList *pMCEncryptionType,
                                  tANI_BOOLEAN *pMFPEnabled,
                                  tANI_U8 *pMFPRequired,
                                  tANI_U8 *pMFPCapable,
+=======
+tANI_BOOLEAN csrIsSecurityMatch( tHalHandle hHal, tCsrAuthList *authType, tCsrEncryptionList *pUCEncryptionType, tCsrEncryptionList *pMCEncryptionType,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                  tSirBssDescription *pSirBssDesc, tDot11fBeaconIEs *pIes, 
                                  eCsrAuthType *negotiatedAuthtype, eCsrEncryptionType *negotiatedUCCipher, eCsrEncryptionType *negotiatedMCCipher );
 tANI_BOOLEAN csrIsBSSTypeMatch(eCsrRoamBssType bssType1, eCsrRoamBssType bssType2);
@@ -826,9 +864,15 @@ tANI_BOOLEAN csrIsProfile11r( tCsrRoamProfile *pProfile );
 tANI_BOOLEAN csrIsAuthType11r( eCsrAuthType AuthType, tANI_U8 mdiePresent);
 #endif
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
 tANI_BOOLEAN csrIsAuthTypeESE( eCsrAuthType AuthType );
 tANI_BOOLEAN csrIsProfileESE( tCsrRoamProfile *pProfile );
+=======
+#ifdef FEATURE_WLAN_CCX
+tANI_BOOLEAN csrIsAuthTypeCCX( eCsrAuthType AuthType );
+tANI_BOOLEAN csrIsProfileCCX( tCsrRoamProfile *pProfile );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 #endif

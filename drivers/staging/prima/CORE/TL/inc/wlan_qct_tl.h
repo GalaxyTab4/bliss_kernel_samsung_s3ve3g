@@ -1,5 +1,41 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+
+
+
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,15 +55,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifndef WLAN_QCT_WLANTL_H
 #define WLAN_QCT_WLANTL_H
 
@@ -40,6 +68,20 @@
 DESCRIPTION
   This file contains the external API exposed by the wlan transport layer
   module.
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:CORE/TL/inc/wlan_qct_tl.h
+  
+      
+  Copyright (c) 2008 QUALCOMM Incorporated. All Rights Reserved.
+  Qualcomm Confidential and Proprietary
+=======
+
+
+  Copyright (c) 2008 Qualcomm Technologies, Inc. All Rights Reserved.
+  Qualcomm Technologies Confidential and Proprietary
+>>>>>>> 326d6cf... wlan: remove obsolete ANI_CHIPSET_VOLANS featurization:prima/CORE/TL/inc/wlan_qct_tl.h
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 ===========================================================================*/
 
 
@@ -137,6 +179,7 @@ when        who    what, where, why
 // Choose the largest possible value that can be accomodates in 8 bit signed
 // variable.
 #define SNR_HACK_BMPS                         (127)
+<<<<<<< HEAD
 #define IS_BROADCAST_ADD(_a)              \
     ((_a)[0] == 0xff &&                         \
      (_a)[1] == 0xff &&                         \
@@ -147,6 +190,8 @@ when        who    what, where, why
 
 #define IS_MULTICAST_ADD(_a)  (*(_a) & 0x01)
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*--------------------------------------------------------------------------
   Access category enum used by TL
   - order must be kept as these values are used to setup the AC mask
@@ -281,9 +326,15 @@ typedef struct
  /*Flag to indicate if STA is a WAPI STA*/
   v_U8_t         ucIsWapiSta;
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
  /*Flag to indicate if STA is a ESE STA*/
   v_U8_t         ucIsEseSta;
+=======
+#ifdef FEATURE_WLAN_CCX
+ /*Flag to indicate if STA is a CCX STA*/
+  v_U8_t         ucIsCcxSta;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
   /*DPU Signature used for broadcast data - used for data caching*/
@@ -310,9 +361,12 @@ typedef struct
 
   /* Min Threshold for Processing Frames in TL */
   v_U8_t   uMinFramesProcThres;
+<<<<<<< HEAD
 
   /* Re-order Aging Time */
   v_U16_t  ucReorderAgingTime[WLANTL_MAX_AC];
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }WLANTL_ConfigInfoType;
 
 /*---------------------------------------------------------------------------
@@ -418,8 +472,11 @@ typedef struct
 
   /* STA has more packets to send */
   v_BOOL_t  bMorePackets;
+<<<<<<< HEAD
   /* notifying TL if this is an ARP frame or not */
   v_U8_t    ucIsArp;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }WLANTL_MetaInfoType;
 
 /*---------------------------------------------------------------------------
@@ -439,6 +496,7 @@ typedef struct
  #endif
 }WLANTL_RxMetaInfoType;
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_LINK_LAYER_STATS
 /* per interface per access category statistics */
 typedef PACKED_PRE struct PACKED_POST
@@ -524,6 +582,8 @@ typedef PACKED_PRE struct PACKED_POST
 
 
 #endif
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*---------------------------------------------------------------------------
   Handoff support and statistics defines and enum types
@@ -585,6 +645,7 @@ typedef tSap_SoftapStats WLANTL_TRANSFER_STA_TYPE;
 #define WLANTL_HS_NUM_CLIENT         2
 #define WLANTL_SINGLE_CLNT_THRESHOLD 4
 
+<<<<<<< HEAD
 typedef enum
 {
   WLANTL_DEBUG_TX_SNAPSHOT = 1<<0,
@@ -592,6 +653,8 @@ typedef enum
   WLANTL_DEBUG_FW_CLEANUP = 1<<1,
 }WLANTL_DebugFlags;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*----------------------------------------------------------------------------
  *   TL callback types
  *--------------------------------------------------------------------------*/
@@ -1016,6 +1079,7 @@ WLANTL_Close
   v_PVOID_t  pvosGCtx 
 );
 
+<<<<<<< HEAD
 /*===========================================================================
 
   FUNCTION    WLANTL_StartForwarding
@@ -1063,6 +1127,8 @@ WLANTL_StartForwarding
   v_U8_t ucUcastSig,
   v_U8_t ucBcastSig
 );
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*----------------------------------------------------------------------------
     INTERACTION WITH HDD
@@ -1151,6 +1217,7 @@ WLANTL_RegisterSTAClient
 
 /*===========================================================================
 
+<<<<<<< HEAD
   FUNCTION    WLANTL_UpdateTdlsSTAClient
 
   DESCRIPTION
@@ -1193,6 +1260,8 @@ WLANTL_UpdateTdlsSTAClient
 
 /*===========================================================================
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   FUNCTION    WLANTL_ClearSTAClient
 
   DESCRIPTION 
@@ -1230,6 +1299,7 @@ WLANTL_ClearSTAClient
   v_U8_t           ucSTAId 
 );
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_LINK_LAYER_STATS
 /*==========================================================================
 
@@ -1301,6 +1371,8 @@ WLANTL_ClearInterfaceStats
 );
 #endif
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*===========================================================================
 
   FUNCTION    WLANTL_ChangeSTAState
@@ -1946,7 +2018,11 @@ WLANTL_TxMgmtFrm
   v_U8_t               tid,
   WLANTL_TxCompCBType  pfnCompTxFunc,
   v_PVOID_t            voosBDHeader,
+<<<<<<< HEAD
   v_U32_t              ucAckResponse
+=======
+  v_U8_t               ucAckResponse
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 );
 
 
@@ -2202,6 +2278,7 @@ WLANTL_McProcessMsg
 );
 
 /*==========================================================================
+<<<<<<< HEAD
   FUNCTION    WLANTL_RxProcessMsg
 
   DESCRIPTION
@@ -2240,6 +2317,8 @@ WLANTL_RxProcessMsg
 );
 
 /*==========================================================================
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   FUNCTION    WLANTL_McFreeMsg
 
   DESCRIPTION 
@@ -2762,6 +2841,7 @@ VOS_STATUS WLANTL_GetSoftAPStatistics(v_PVOID_t pAdapter, WLANTL_TRANSFER_STA_TY
  }
 #endif 
 
+<<<<<<< HEAD
 /*===========================================================================
 
   FUNCTION    WLANTL_EnableCaching
@@ -2787,6 +2867,8 @@ VOS_STATUS WLANTL_GetSoftAPStatistics(v_PVOID_t pAdapter, WLANTL_TRANSFER_STA_TY
 
 ============================================================================*/
 void WLANTL_EnableCaching(v_U8_t staId);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
  /*===========================================================================
 
@@ -3163,6 +3245,7 @@ WLANTL_TxThreadDebugHandler
 v_VOID_t
 WLANTL_TLDebugMessage
 (
+<<<<<<< HEAD
   v_U32_t debugFlags
 );
 
@@ -3189,6 +3272,9 @@ v_VOID_t
 WLANTL_FatalError
 (
  v_VOID_t
+=======
+  v_BOOL_t displaySnapshot
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 );
 
 #endif /* #ifndef WLAN_QCT_WLANTL_H */

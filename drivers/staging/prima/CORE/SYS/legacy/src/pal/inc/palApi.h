@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -17,6 +21,7 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
+<<<<<<< HEAD
  */
 
 /*
@@ -24,6 +29,9 @@
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
  */
+=======
+*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /** ------------------------------------------------------------------------- *
     ------------------------------------------------------------------------- *
@@ -34,6 +42,11 @@
     \brief Exports and types for the Platform Abstraction Layer interfaces.
 
     $Id$
+<<<<<<< HEAD
+=======
+
+    Copyright (C) 2006 Airgo Networks, Incorporated
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     This file contains all the interfaces for thge Platform Abstration Layer
     functions.  It is intended to be included in all modules that are using
     the PAL interfaces.

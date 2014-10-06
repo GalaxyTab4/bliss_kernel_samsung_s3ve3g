@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( __WLAN_QCT_PAL_API_H )
@@ -49,6 +75,7 @@
 #include "vos_memory.h"
 #endif /* MEMORY_DEBUG */
 
+<<<<<<< HEAD
 typedef struct sPalStruct
 {
    /*?must check the data type*/
@@ -57,6 +84,8 @@ typedef struct sPalStruct
 
 extern tPalContext gContext;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*********************************MACRO**********************/
 
 // macro to get maximum of two values.
@@ -113,11 +142,20 @@ extern tPalContext gContext;
        ppPalContext – pointer to a caller allocated pointer. It is opaque to caller.
                       Caller save the returned pointer for future use when calling
                       PAL APIs. If this is NULL, it means that PAL doesn't need it.
+<<<<<<< HEAD
        devHandle - pointer to the OS specific device handle
     Return:
        eWLAN_PAL_STATUS_SUCCESS - success. Otherwise fail.
 ---------------------------------------------------------------------------*/
 wpt_status wpalOpen(void **ppPalContext, void *devHandle);
+=======
+       pOSContext - Pointer to a context that is OS specific. This is NULL is a 
+                     particular PAL doesn't use it for that OS.
+    Return:
+       eWLAN_PAL_STATUS_SUCCESS - success. Otherwise fail.
+---------------------------------------------------------------------------*/
+wpt_status wpalOpen(void **ppPalContext, void *pOSContext);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*---------------------------------------------------------------------------
     wpalClose - Release PAL
@@ -354,6 +392,7 @@ void wpalFwDumpReq(wpt_uint32 cmd, wpt_uint32 arg1, wpt_uint32 arg2,
        NONE
 ---------------------------------------------------------------------------*/
 void wpalDevicePanic(void);
+<<<<<<< HEAD
 
 /*---------------------------------------------------------------------------
     wpalIslogPInProgress -  calls vos API vos_is_logp_in_progress()
@@ -374,4 +413,6 @@ int  wpalIslogPInProgress(void);
        STATUS
 --------------------------------------------------------------------------*/
 int  wpalIsSsrPanicOnFailure(void);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif // __WLAN_QCT_PAL_API_H

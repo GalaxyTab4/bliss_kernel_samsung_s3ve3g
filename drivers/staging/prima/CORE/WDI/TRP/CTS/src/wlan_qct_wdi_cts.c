@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*===========================================================================
@@ -85,11 +111,15 @@
 #include "wlan_qct_wdi.h"
 #include "wlan_qct_wdi_i.h"
 #ifdef CONFIG_ANDROID
+<<<<<<< HEAD
 #ifdef EXISTS_MSM_SMD
 #include <mach/msm_smd.h>
 #else
 #include <soc/qcom/smd.h>
 #endif
+=======
+#include <mach/msm_smd.h>
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #include <linux/delay.h>
 #else
 #include "msm_smd.h"
@@ -310,7 +340,10 @@ WCTS_PALReadCallback
                            pWCTSCb->wctsRxMsgCBData);
 
       /* Free the allocated buffer*/
+<<<<<<< HEAD
       wpalMemoryZero(buffer, bytes_read);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       wpalMemoryFree(buffer);
    }
 
@@ -395,7 +428,10 @@ WCTS_PALWriteCallback
       }
 
       /* whether we had success or failure, reclaim all memory */
+<<<<<<< HEAD
       wpalMemoryZero(pBuffer, len);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       wpalMemoryFree(pBuffer);
       wpalMemoryFree(pBufferQueue);
 
@@ -651,7 +687,11 @@ WCTS_OpenTransport
     * the SMD port was never closed during SSR*/
    if (gwctsHandle) {
        WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
                "WCTS_OpenTransport port is already open");
+=======
+               "WCTS_OpenTransport port is already open\n");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
        pWCTSCb = gwctsHandle;
        if (WCTS_CB_MAGIC != pWCTSCb->wctsMagic) {
@@ -960,10 +1000,17 @@ WCTS_SendMessage
       WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "WCTS_SendMessage: Failed to send message over the bus.");
       wpalMemoryFree(pMsg);
+<<<<<<< HEAD
       return eWLAN_PAL_STATUS_E_FAILURE;
    } else if (written == len) {
       /* Message sent! No deferred state, free the buffer*/
       wpalMemoryZero(pMsg, len);
+=======
+      WPAL_ASSERT(0);
+      return eWLAN_PAL_STATUS_E_FAILURE;
+   } else if (written == len) {
+      /* Message sent! No deferred state, free the buffer*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       wpalMemoryFree(pMsg);
    } else {
       /* This much data cannot be written at this time,
@@ -979,6 +1026,7 @@ WCTS_SendMessage
 
       pBufferQueue->bufferSize = len;
       pBufferQueue->pBuffer = pMsg;
+<<<<<<< HEAD
 
       if (eWLAN_PAL_STATUS_E_FAILURE ==
              wpal_list_insert_back(&pWCTSCb->wctsPendingQueue,
@@ -991,6 +1039,9 @@ WCTS_SendMessage
          WPAL_ASSERT(0);
          return eWLAN_PAL_STATUS_E_NOMEM;
       }
+=======
+      wpal_list_insert_back(&pWCTSCb->wctsPendingQueue, &pBufferQueue->node);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
       /* if we are not already in the deferred state, then transition
          to that state.  when we do so, we enable the remote read

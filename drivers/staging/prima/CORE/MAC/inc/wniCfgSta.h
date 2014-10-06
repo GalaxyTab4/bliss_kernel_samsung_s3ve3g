@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2011-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -18,11 +22,33 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
+<<<<<<< HEAD
 
 /*
  * This file was originally distributed by Qualcomm Atheros, Inc.
  * under proprietary terms before Copyright ownership was assigned
  * to the Linux Foundation.
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
@@ -266,7 +292,11 @@
 #define WNI_CFG_MAX_BA_SESSIONS    225
 #define WNI_CFG_BA_AUTO_SETUP    226
 #define WNI_CFG_ADDBA_REQ_DECLINE    227
+<<<<<<< HEAD
 #define WNI_CFG_DEL_ALL_RX_TX_BA_SESSIONS_2_4_G_BTC    228
+=======
+#define WNI_CFG_DEL_ALL_RX_BA_SESSIONS_2_4_G_BTC    228
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WNI_CFG_BG_SCAN_CHANNEL_LIST    229
 #define WNI_CFG_MAX_MEDIUM_TIME    230
 #define WNI_CFG_MAX_MPDUS_IN_AMPDU    231
@@ -341,14 +371,21 @@
 #define WNI_CFG_TDLS_PUAPSD_INACT_TIME    300
 #define WNI_CFG_TDLS_RX_FRAME_THRESHOLD    301
 #define WNI_CFG_ENABLE_ADAPT_RX_DRAIN    302
+<<<<<<< HEAD
 #define WNI_CFG_FLEX_CONNECT_POWER_FACTOR    303
 #define WNI_CFG_ANTENNA_DIVESITY    304
 #define WNI_CFG_GO_LINK_MONITOR_TIMEOUT    305
+=======
+#define WNI_CFG_OXYGEN_NETWORK_DATA    303
+#define WNI_CFG_FLEX_CONNECT_POWER_FACTOR    304
+#define WNI_CFG_ANTENNA_DIVESITY    305
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WNI_CFG_ATH_DISABLE    306
 #define WNI_CFG_BTC_ACTIVE_WLAN_LEN    307
 #define WNI_CFG_BTC_ACTIVE_BT_LEN    308
 #define WNI_CFG_BTC_SAP_ACTIVE_WLAN_LEN    309
 #define WNI_CFG_BTC_SAP_ACTIVE_BT_LEN    310
+<<<<<<< HEAD
 #define WNI_CFG_RMC_ACTION_PERIOD_FREQUENCY    311
 #define WNI_CFG_ASD_PROBE_INTERVAL    312
 #define WNI_CFG_ASD_TRIGGER_THRESHOLD    313
@@ -383,6 +420,8 @@
 #define WNI_CFG_ENABLE_DYNAMIC_WMMPS    342
 #define WNI_CFG_BURST_MODE_BE_TXOP_VALUE    343
 #define WNI_CFG_ENABLE_DYNAMIC_RA_START_RATE    344
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*
  * String parameter lengths 
@@ -1191,7 +1230,11 @@
 #define WNI_CFG_VHT_SU_BEAMFORMEE_CAP_STADEF    0
 
 #define WNI_CFG_VHT_CSN_BEAMFORMEE_ANT_SUPPORTED_STAMIN    0
+<<<<<<< HEAD
 #define WNI_CFG_VHT_CSN_BEAMFORMEE_ANT_SUPPORTED_STAMAX    4
+=======
+#define WNI_CFG_VHT_CSN_BEAMFORMEE_ANT_SUPPORTED_STAMAX    3
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WNI_CFG_VHT_CSN_BEAMFORMEE_ANT_SUPPORTED_STADEF    0
 
 #define WNI_CFG_VHT_NUM_SOUNDING_DIMENSIONS_STAMIN    0
@@ -1410,9 +1453,15 @@
 #define WNI_CFG_ADDBA_REQ_DECLINE_STAMAX    255
 #define WNI_CFG_ADDBA_REQ_DECLINE_STADEF    0
 
+<<<<<<< HEAD
 #define WNI_CFG_DEL_ALL_RX_TX_BA_SESSIONS_2_4_G_BTC_STAMIN    0
 #define WNI_CFG_DEL_ALL_RX_TX_BA_SESSIONS_2_4_G_BTC_STAMAX    1
 #define WNI_CFG_DEL_ALL_RX_TX_BA_SESSIONS_2_4_G_BTC_STADEF    0
+=======
+#define WNI_CFG_DEL_ALL_RX_BA_SESSIONS_2_4_G_BTC_STAMIN    0
+#define WNI_CFG_DEL_ALL_RX_BA_SESSIONS_2_4_G_BTC_STAMAX    1
+#define WNI_CFG_DEL_ALL_RX_BA_SESSIONS_2_4_G_BTC_STADEF    0
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define WNI_CFG_MAX_MEDIUM_TIME_STAMIN    0
 #define WNI_CFG_MAX_MEDIUM_TIME_STAMAX    65535
@@ -1610,7 +1659,11 @@
 #define WNI_CFG_SAP_CHANNEL_SELECT_END_CHANNEL_STADEF    11
 
 #define WNI_CFG_SAP_CHANNEL_SELECT_OPERATING_BAND_STAMIN    0
+<<<<<<< HEAD
 #define WNI_CFG_SAP_CHANNEL_SELECT_OPERATING_BAND_STAMAX    5
+=======
+#define WNI_CFG_SAP_CHANNEL_SELECT_OPERATING_BAND_STAMAX    4
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WNI_CFG_SAP_CHANNEL_SELECT_OPERATING_BAND_STADEF    0
 
 #define WNI_CFG_AP_DATA_AVAIL_POLL_PERIOD_STAMIN    0
@@ -1677,6 +1730,13 @@
 #define WNI_CFG_ENABLE_ADAPT_RX_DRAIN_STAMAX    1
 #define WNI_CFG_ENABLE_ADAPT_RX_DRAIN_STADEF    1
 
+<<<<<<< HEAD
+=======
+#define WNI_CFG_OXYGEN_NETWORK_DATA_STAMIN    0
+#define WNI_CFG_OXYGEN_NETWORK_DATA_STAMAX    8192
+#define WNI_CFG_OXYGEN_NETWORK_DATA_STADEF    8192
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WNI_CFG_FLEX_CONNECT_POWER_FACTOR_STAMIN    0
 #define WNI_CFG_FLEX_CONNECT_POWER_FACTOR_STAMAX    9
 #define WNI_CFG_FLEX_CONNECT_POWER_FACTOR_STADEF    0
@@ -1685,10 +1745,13 @@
 #define WNI_CFG_ANTENNA_DIVESITY_STAMAX    3
 #define WNI_CFG_ANTENNA_DIVESITY_STADEF    0
 
+<<<<<<< HEAD
 #define WNI_CFG_GO_LINK_MONITOR_TIMEOUT_STAMIN    3
 #define WNI_CFG_GO_LINK_MONITOR_TIMEOUT_STAMAX    50
 #define WNI_CFG_GO_LINK_MONITOR_TIMEOUT_STADEF    10
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WNI_CFG_ATH_DISABLE_STAMIN    0
 #define WNI_CFG_ATH_DISABLE_STAMAX    1
 #define WNI_CFG_ATH_DISABLE_STADEF    0
@@ -1703,6 +1766,7 @@
 
 #define WNI_CFG_BTC_SAP_ACTIVE_WLAN_LEN_STAMIN    0
 #define WNI_CFG_BTC_SAP_ACTIVE_WLAN_LEN_STAMAX    250000
+<<<<<<< HEAD
 #define WNI_CFG_BTC_SAP_ACTIVE_WLAN_LEN_STADEF    30000
 
 #define WNI_CFG_BTC_SAP_ACTIVE_BT_LEN_STAMIN    0
@@ -1849,6 +1913,17 @@
 #define CFG_PARAM_MAX_NUM        345
 #define CFG_STA_IBUF_MAX_SIZE    279
 #define CFG_STA_SBUF_MAX_SIZE    3389
+=======
+#define WNI_CFG_BTC_SAP_ACTIVE_WLAN_LEN_STADEF    60000
+
+#define WNI_CFG_BTC_SAP_ACTIVE_BT_LEN_STAMIN    0
+#define WNI_CFG_BTC_SAP_ACTIVE_BT_LEN_STAMAX    250000
+#define WNI_CFG_BTC_SAP_ACTIVE_BT_LEN_STADEF    90000
+
+#define CFG_PARAM_MAX_NUM        311
+#define CFG_STA_IBUF_MAX_SIZE    245
+#define CFG_STA_SBUF_MAX_SIZE    3388
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define CFG_SEM_MAX_NUM          19
 
 #define CFG_STA_MAGIC_DWORD    0xbeefbeef

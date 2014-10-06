@@ -1,5 +1,41 @@
 /*
+<<<<<<< HEAD
  * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+ *
+ * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
+ *
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted, provided that the
+ * above copyright notice and this permission notice appear in all
+ * copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+<<<<<<< HEAD
+
+/*
+ * This file was originally distributed by Qualcomm Atheros, Inc.
+ * under proprietary terms before Copyright ownership was assigned
+ * to the Linux Foundation.
+ */
+
+
+
+
+=======
+/*
+ * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -19,15 +55,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*===========================================================================
 
                        W L A N _ Q C T _ W D I. C
@@ -157,6 +185,7 @@ static placeHolderInCapBitmap supportEnabledFeatures[] =
     ,IBSS_HEARTBEAT_OFFLOAD         //26
     ,FEATURE_NOT_SUPPORTED          //27
     ,WLAN_PERIODIC_TX_PTRN          //28
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_TDLS
     ,ADVANCE_TDLS                   //29
 #else
@@ -196,6 +225,9 @@ static placeHolderInCapBitmap supportEnabledFeatures[] =
    ,WPS_PRBRSP_TMPL                //48
    ,BCN_IE_FLT_DELTA               //49
 };
+=======
+   };
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*-------------------------------------------------------------------------- 
    WLAN DAL  State Machine
@@ -374,7 +406,11 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
   WDI_ProcessShutdownReq,               /* WDI_SHUTDOWN_REQ  */
 
   WDI_ProcessSetPowerParamsReq,         /*WDI_SET_POWER_PARAMS_REQ*/
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   WDI_ProcessTSMStatsReq,          /* WDI_TSM_STATS_REQ */
 #else
   NULL,
@@ -395,7 +431,11 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
 #else
   NULL,
 #endif
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   WDI_ProcessGetRoamRssiReq,            /* WDI_GET_ROAM_RSSI_REQ  */
 #else
   NULL,
@@ -423,6 +463,7 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
   NULL,
 #endif /* FEATURE_WLAN_BATCH_SCAN */
 
+<<<<<<< HEAD
   WDI_ProcessSetMaxTxPowerPerBandReq,   /* WDI_SET_MAX_TX_POWER_PER_BAND_REQ*/
 
   WDI_ProcessUpdateChannelParamsReq,    /* WDI_UPDATE_CHAN_REQ */
@@ -460,6 +501,8 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
   WDI_ProcessSpoofMacAddrReq,       /* WDI_SPOOF_MAC_ADDR_REQ */
   WDI_ProcessEncryptMsgReq,         /* WDI_ENCRYPT_MSG_REQ*/
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*-------------------------------------------------------------------------
     Indications
   -------------------------------------------------------------------------*/
@@ -481,6 +524,7 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
   NULL,
   NULL,
 #endif /* FEATURE_WLAN_BATCH_SCAN */
+<<<<<<< HEAD
   WDI_ProcessRateUpdateInd,              /* WDI_RATE_UPDATE_IND */
 
   WDI_ProcessHT40OBSSScanInd,        /*WDI_START_HT40_OBSS_SCAN_IND */
@@ -493,6 +537,8 @@ WDI_ReqProcFuncType  pfnReqProcTbl[WDI_MAX_UMAC_IND] =
   NULL,
 #endif
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 };
 
 
@@ -635,7 +681,11 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
   WDI_ProcessShutdownRsp,         /* WDI_SHUTDOWN_RESP */
   
   WDI_ProcessSetPowerParamsRsp,         /*WDI_SET_POWER_PARAMS_RESP*/
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   WDI_ProcessTsmStatsRsp,          /* WDI_TSM_STATS_RESP  */
 #else
   NULL,
@@ -655,7 +705,11 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
 #else
    NULL,
 #endif
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   WDI_ProcessGetRoamRssiRsp,            /* WDI_GET_ROAM_RSSI_RESP  */
 #else
   NULL,
@@ -682,6 +736,7 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
 #else
     NULL,
 #endif /*FEATURE_WLAN_BATCH_SCAN*/
+<<<<<<< HEAD
   WDI_ProcessSetMaxTxPowerPerBandRsp,  /* WDI_SET_MAX_TX_POWER_PER_BAND_RSP */
 
   WDI_ProcessUpdateChanRsp,         /* WDI_UPDATE_CHAN_RESP */
@@ -721,6 +776,8 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
 #endif /* WLAN_FEATURE_EXTSCAN */
     WDI_ProcessSpoofMacAddrRsp,                /* WDI_SPOOF_MAC_ADDR_RSP */
     WDI_ProcessEncryptMsgRsp,                  /* WDI_ENCRYPT_MSG_RSP*/
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*---------------------------------------------------------------------
     Indications
@@ -760,7 +817,11 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
 #endif
 
 #ifdef FEATURE_WLAN_LPHB
+<<<<<<< HEAD
   WDI_ProcessLphbInd,                   /* WDI_HAL_LPHB_IND */
+=======
+  WDI_ProcessLphbWaitTimeoutInd,    /* WDI_HAL_LPHB_WAIT_TIMEOUT_IND */
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #else
   NULL,
 #endif /* FEATURE_WLAN_LPHB */
@@ -775,6 +836,7 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
   NULL,
 #endif
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_CH_AVOID
     WDI_ProcessChAvoidInd,               /* WDI_LBP_UPDATE_IND_TO_HOST */
 #else
@@ -806,6 +868,8 @@ WDI_RspProcFuncType  pfnRspProcTbl[WDI_MAX_RESP] =
   NULL,
 #endif
   WDI_delBaInd,                             /* WDI_HAL_DEL_BA_IND*/
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 };
 
 
@@ -1012,6 +1076,12 @@ WDI_SetPowerStateCb
    void      *pContext
 );
 
+<<<<<<< HEAD
+=======
+#define CASE_RETURN_STRING( str )           \
+    case ( ( str ) ): return( #str ); break \
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief WDI_getReqMsgString prints the WDI request message in string.
 
@@ -1046,7 +1116,10 @@ static char *WDI_getReqMsgString(wpt_uint16 wdiReqMsgId)
     CASE_RETURN_STRING( WDI_ADD_BA_SESSION_REQ );
     CASE_RETURN_STRING( WDI_DEL_BA_REQ );
     CASE_RETURN_STRING( WDI_CH_SWITCH_REQ );
+<<<<<<< HEAD
     CASE_RETURN_STRING( WDI_CH_SWITCH_REQ_V1);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     CASE_RETURN_STRING( WDI_CONFIG_STA_REQ );
     CASE_RETURN_STRING( WDI_SET_LINK_ST_REQ );
     CASE_RETURN_STRING( WDI_GET_STATS_REQ );
@@ -1059,11 +1132,17 @@ static char *WDI_getReqMsgString(wpt_uint16 wdiReqMsgId)
     CASE_RETURN_STRING( WDI_SET_STA_BCAST_KEY_REQ );
     CASE_RETURN_STRING( WDI_RMV_STA_BCAST_KEY_REQ );
     CASE_RETURN_STRING( WDI_SET_MAX_TX_POWER_REQ );
+<<<<<<< HEAD
     CASE_RETURN_STRING( WDI_SET_MAX_TX_POWER_PER_BAND_REQ );
     CASE_RETURN_STRING( WDI_P2P_GO_NOTICE_OF_ABSENCE_REQ );
 #ifdef FEATURE_WLAN_TDLS
     CASE_RETURN_STRING( WDI_TDLS_LINK_ESTABLISH_REQ );
     CASE_RETURN_STRING( WDI_TDLS_CHAN_SWITCH_REQ );
+=======
+    CASE_RETURN_STRING( WDI_P2P_GO_NOTICE_OF_ABSENCE_REQ );
+#ifdef FEATURE_WLAN_TDLS
+    CASE_RETURN_STRING( WDI_TDLS_LINK_ESTABLISH_REQ );
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
     CASE_RETURN_STRING( WDI_ENTER_IMPS_REQ );
     CASE_RETURN_STRING( WDI_EXIT_IMPS_REQ );
@@ -1110,7 +1189,10 @@ static char *WDI_getReqMsgString(wpt_uint16 wdiReqMsgId)
     CASE_RETURN_STRING( WDI_HAL_DUMP_CMD_REQ );
     CASE_RETURN_STRING( WDI_SHUTDOWN_REQ );
     CASE_RETURN_STRING( WDI_SET_POWER_PARAMS_REQ );
+<<<<<<< HEAD
     CASE_RETURN_STRING( WDI_GET_BCN_MISS_RATE_REQ );
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     CASE_RETURN_STRING( WDI_TRAFFIC_STATS_IND );
     CASE_RETURN_STRING( WDI_GET_ROAM_RSSI_REQ );
 #ifdef WLAN_FEATURE_11W
@@ -1121,6 +1203,7 @@ static char *WDI_getReqMsgString(wpt_uint16 wdiReqMsgId)
     CASE_RETURN_STRING( WDI_STOP_BATCH_SCAN_IND );
     CASE_RETURN_STRING( WDI_TRIGGER_BATCH_SCAN_RESULT_IND);
 #endif
+<<<<<<< HEAD
     CASE_RETURN_STRING(WDI_START_HT40_OBSS_SCAN_IND);
     CASE_RETURN_STRING(WDI_STOP_HT40_OBSS_SCAN_IND);
     CASE_RETURN_STRING(WDI_UPDATE_CHAN_REQ);
@@ -1141,6 +1224,8 @@ static char *WDI_getReqMsgString(wpt_uint16 wdiReqMsgId)
 #endif /* WLAN_FEATURE_EXTSCAN */
     CASE_RETURN_STRING( WDI_SPOOF_MAC_ADDR_REQ);
     CASE_RETURN_STRING( WDI_ENCRYPT_MSG_REQ);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     default:
         return "Unknown WDI MessageId";
   }
@@ -1197,7 +1282,10 @@ static char *WDI_getRespMsgString(wpt_uint16 wdiRespMsgId)
     CASE_RETURN_STRING( WDI_P2P_GO_NOTICE_OF_ABSENCE_RESP );
 #ifdef FEATURE_WLAN_TDLS
     CASE_RETURN_STRING( WDI_TDLS_LINK_ESTABLISH_REQ_RESP );
+<<<<<<< HEAD
     CASE_RETURN_STRING( WDI_TDLS_CHAN_SWITCH_REQ_RESP);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     CASE_RETURN_STRING( WDI_HAL_TDLS_IND );
 #endif
     CASE_RETURN_STRING( WDI_ENTER_IMPS_RESP );
@@ -1248,6 +1336,7 @@ static char *WDI_getRespMsgString(wpt_uint16 wdiRespMsgId)
 #ifdef FEATURE_WLAN_BATCH_SCAN
     CASE_RETURN_STRING( WDI_SET_BATCH_SCAN_RESP);
 #endif
+<<<<<<< HEAD
     CASE_RETURN_STRING( WDI_UPDATE_CHAN_RESP);
     CASE_RETURN_STRING( WDI_CH_SWITCH_RESP_V1 );
     CASE_RETURN_STRING( WDI_GET_BCN_MISS_RATE_RSP );
@@ -1273,6 +1362,8 @@ static char *WDI_getRespMsgString(wpt_uint16 wdiRespMsgId)
 
 #endif /* WLAN_FEATURE_EXTSCAN */
     CASE_RETURN_STRING( WDI_ENCRYPT_MSG_RSP);
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     default:
         return "Unknown WDI MessageId";
   }
@@ -1281,13 +1372,18 @@ static char *WDI_getRespMsgString(wpt_uint16 wdiRespMsgId)
 /**
   @brief WDI_TraceHostFWCapabilities - Parses both host and Firmware
                                          Capability bitmap array.
+<<<<<<< HEAD
   @param capabilityBitmap - Base address of a 4 element Bitmap array
                                                of type tANI_U32.
+=======
+  @param capabilityBitmap - Base address of Bitmap array
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   @see
   @returns  None
   */
 void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
 {
+<<<<<<< HEAD
      int i,j;
      char capStr[512];
      char *pCapStr = capStr;
@@ -1295,6 +1391,14 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
          for (i = 0; i < 32; i++) {
              if ((*(capabilityBitmap + j) & (1 << i))) {
                  switch(i + (j * 32)) {
+=======
+     int i;
+     char capStr[512];
+     char *pCapStr = capStr;
+     for (i = 0; i < 32; i++) {
+          if ((*(capabilityBitmap + 0) & (1 << i))) {
+               switch(i) {
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      case MCC: snprintf(pCapStr, sizeof("MCC"), "%s", "MCC");
                           pCapStr += strlen("MCC");
                           break;
@@ -1364,6 +1468,7 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
                      case WLAN_ROAM_SCAN_OFFLOAD: snprintf(pCapStr, sizeof("WLAN_ROAM_SCAN_OFFLOAD"), "%s", "WLAN_ROAM_SCAN_OFFLOAD");
                           pCapStr += strlen("WLAN_ROAM_SCAN_OFFLOAD");
                           break;
+<<<<<<< HEAD
                      case FW_IN_TX_PATH: snprintf(pCapStr, sizeof("FW_IN_TX_PATH"), "%s", "FW_IN_TX_PATH");
                           pCapStr += strlen("FW_IN_TX_PATH");
                           break;
@@ -1424,6 +1529,11 @@ void WDI_TraceHostFWCapabilities(tANI_U32 *capabilityBitmap)
                  *pCapStr++ = ',';
                  *pCapStr++ = ' ';
              }
+=======
+              }
+              *pCapStr++ = ',';
+              *pCapStr++ = ' ';
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          }
      }
      pCapStr -= 2;
@@ -1495,7 +1605,12 @@ static char *WDI_getHALStatusMsgString(wpt_uint16 halStatusId)
  open both the data and the control transport which in their turn will open
  DXE/SMD or any other drivers that they need.
 
+<<<<<<< HEAD
  @param devHandle: pointer to the OS specific device handle
+=======
+ @param pOSContext: pointer to the OS context provided by the UMAC
+                    will be passed on to PAL on Open
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         ppWDIGlobalCtx: output pointer of Global Context
         pWdiDevCapability: output pointer of device capability
 
@@ -1504,7 +1619,11 @@ static char *WDI_getHALStatusMsgString(wpt_uint16 halStatusId)
 WDI_Status
 WDI_Init
 (
+<<<<<<< HEAD
   void*                      devHandle,
+=======
+  void*                      pOSContext,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   void**                     ppWDIGlobalCtx,
   WDI_DeviceCapabilityType*  pWdiDevCapability,
   unsigned int               driverType
@@ -1546,7 +1665,11 @@ WDI_Init
 
   /*Setup the control block */
   WDI_CleanCB(&gWDICb);
+<<<<<<< HEAD
   gWDICb.pOSContext = devHandle ;
+=======
+  gWDICb.pOSContext = pOSContext;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*Setup the STA Table*/
   wdiStatus = WDI_STATableInit(&gWDICb);
@@ -1561,7 +1684,11 @@ WDI_Init
   /*------------------------------------------------------------------------
     Open the PAL
    ------------------------------------------------------------------------*/
+<<<<<<< HEAD
   wptStatus =  wpalOpen(&gWDICb.pPALContext, devHandle);
+=======
+  wptStatus =  wpalOpen(&gWDICb.pPALContext, pOSContext);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   if ( eWLAN_PAL_STATUS_SUCCESS != wptStatus )
   {
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
@@ -3177,6 +3304,7 @@ WDI_SetMaxTxPowerReq
 }
 
 /**
+<<<<<<< HEAD
  @brief WDI_SetMaxTxPowerPerBandReq will be called when the upper
         MAC wants to set Max Tx Power to HW for specific band.
 
@@ -3226,6 +3354,8 @@ WDI_SetMaxTxPowerPerBandReq
 }
 
 /**
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  @brief WDI_SetTxPowerReq will be called when the upper
         MAC wants to set Tx Power to HW.
         In state BUSY this request will be queued. Request won't
@@ -3276,7 +3406,11 @@ WDI_SetTxPowerReq
   return WDI_PostMainEvent(&gWDICb, WDI_REQUEST_EVENT, &wdiEventData);
 }
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 WDI_Status
 WDI_TSMStatsReq
 (
@@ -3713,7 +3847,10 @@ WDI_SetPwrSaveCfgReq
 WDI_Status
 WDI_EnterImpsReq
 (
+<<<<<<< HEAD
    WDI_EnterImpsReqParamsType *pwdiEnterImpsReqParams,
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    WDI_EnterImpsRspCb  wdiEnterImpsRspCb,
    void*                   pUserData
 )
@@ -3736,8 +3873,13 @@ WDI_EnterImpsReq
     Fill in Event data and post to the Main FSM
   ------------------------------------------------------------------------*/
   wdiEventData.wdiRequest      = WDI_ENTER_IMPS_REQ;
+<<<<<<< HEAD
   wdiEventData.pEventData      = pwdiEnterImpsReqParams;
   wdiEventData.uEventDataSize  = sizeof(*pwdiEnterImpsReqParams);
+=======
+  wdiEventData.pEventData      = NULL;
+  wdiEventData.uEventDataSize  = 0;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   wdiEventData.pCBfnc          = wdiEnterImpsRspCb;
   wdiEventData.pUserData       = pUserData;
 
@@ -3769,7 +3911,10 @@ WDI_EnterImpsReq
 WDI_Status
 WDI_ExitImpsReq
 (
+<<<<<<< HEAD
    WDI_ExitImpsReqParamsType *pwdiExitImpsReqParams,
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    WDI_ExitImpsRspCb  wdiExitImpsRspCb,
    void*                   pUserData
 )
@@ -3792,8 +3937,13 @@ WDI_ExitImpsReq
     Fill in Event data and post to the Main FSM
   ------------------------------------------------------------------------*/
   wdiEventData.wdiRequest      = WDI_EXIT_IMPS_REQ;
+<<<<<<< HEAD
   wdiEventData.pEventData      = pwdiExitImpsReqParams;
   wdiEventData.uEventDataSize  = sizeof(*pwdiExitImpsReqParams);
+=======
+  wdiEventData.pEventData      = NULL;
+  wdiEventData.uEventDataSize  = 0;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   wdiEventData.pCBfnc          = wdiExitImpsRspCb;
   wdiEventData.pUserData       = pUserData;
 
@@ -5056,6 +5206,7 @@ WDI_SwitchChReq
 
 }/*WDI_SwitchChReq*/
 
+<<<<<<< HEAD
 /**
  @brief WDI_SwitchChReq_V1 will be called when the upper MAC wants
         the WLAN HW to change the current channel of operation.
@@ -5118,6 +5269,8 @@ WDI_SwitchChReq_V1
 
 }/*WDI_SwitchChReq_V1*/
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**
  @brief WDI_ConfigSTAReq will be called when the upper MAC
@@ -5179,6 +5332,7 @@ WDI_ConfigSTAReq
 
 }/*WDI_ConfigSTAReq*/
 
+<<<<<<< HEAD
  /**
  @brief WDI_UpdateChannelReq will be called when the upper MAC
         wants to update the channel list on change in country code.
@@ -5235,6 +5389,8 @@ WDI_UpdateChannelReq
 
 }/*WDI_UpdateChannelReq*/
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief WDI_SetLinkStateReq will be called when the upper MAC
         wants to change the state of an ongoing link. Upon the
@@ -5355,7 +5511,11 @@ WDI_GetStatsReq
 
 }/*WDI_GetStatsReq*/
 
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief WDI_GetRoamRssiReq will be called when the upper MAC wants
         to get roam rssi from the device. Upon
@@ -5947,6 +6107,7 @@ WDI_SetTDLSLinkEstablishReq
   return WDI_PostMainEvent(&gWDICb, WDI_REQUEST_EVENT, &wdiEventData);
 
 }/*WDI_SetTDLSLinkEstablishReq*/
+<<<<<<< HEAD
 
 //tdlsoffchan
 /**
@@ -6009,6 +6170,9 @@ WDI_SetTDLSChanSwitchReq
 }/*WDI_SetTDLSChanSwitchReq*/
 
 #endif
+=======
+#endif
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**
  @brief WDI_AddSTASelfReq will be called when the
@@ -6668,6 +6832,10 @@ WDI_PostMainEvent
   WDI_ControlBlockType*  pWDICtx,
   WDI_MainEventType      wdiEV,
   WDI_EventInfoType*     pEventData
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 )
 {
   WDI_Status         wdiStatus;
@@ -6790,7 +6958,11 @@ WDI_MainStart
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Start Started %p %p",
+=======
+               "Invalid parameters on Main Start %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -6869,7 +7041,11 @@ WDI_MainClose
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Close %p %p",
+=======
+               "Invalid parameters on Main Close %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -6907,7 +7083,11 @@ WDI_MainStartStarted
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Start %p %p",
+=======
+               "Invalid parameters on Main Start %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -6963,7 +7143,11 @@ WDI_MainStopStarted
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                "Invalid parameters on Main Stop Started %p %p",
+=======
+               "Invalid parameters on Main Start %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7002,7 +7186,11 @@ WDI_MainReqStarted
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Req Started %p %p",
+=======
+               "Invalid parameters on Main Req Started %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7041,7 +7229,11 @@ WDI_MainRsp
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Response %p %p",
+=======
+               "Invalid parameters on Main Response %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7120,7 +7312,11 @@ WDI_MainStopStopped
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                "Invalid parameters on Main Stop Stopped %p %p",
+=======
+               "Invalid parameters on Main Stop Stopped %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7164,7 +7360,11 @@ WDI_MainStartBusy
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Start in BUSY %p %p",
+=======
+               "Invalid parameters on Main Start in BUSY %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7205,7 +7405,11 @@ WDI_MainStopBusy
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Stop in BUSY %p %p",
+=======
+               "Invalid parameters on Main Stop in BUSY %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7244,7 +7448,11 @@ WDI_MainReqBusy
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Request in BUSY %p %p",
+=======
+               "Invalid parameters on Main Request in BUSY %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7283,7 +7491,11 @@ WDI_MainCloseBusy
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Invalid parameters on Main Close in BUSY %p %p",
+=======
+               "Invalid parameters on Main Close in BUSY %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7322,7 +7534,11 @@ WDI_MainShutdown
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                "Invalid parameters on Main Start %p %p",
+=======
+               "Invalid parameters on Main Start %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7361,7 +7577,11 @@ WDI_MainShutdownBusy
   if (( NULL ==  pWDICtx ) || ( NULL == pEventData ))
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                "Invalid parameters on Main Start %p %p",
+=======
+               "Invalid parameters on Main Start %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pWDICtx, pEventData);
      return WDI_STATUS_E_FAILURE;
   }
@@ -7440,7 +7660,11 @@ WDI_ProcessStartReq
       ( usSendSize < (usDataOffset + usLen )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
               "Unable to get send buffer in start req %p %p %p",
+=======
+              "Unable to get send buffer in start req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiStartParams, wdiStartRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -7529,7 +7753,11 @@ WDI_ProcessStopReq
       ( usSendSize < (usDataOffset + sizeof(halStopReq.stopReqParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in stop req %p %p %p",
+=======
+              "Unable to get send buffer in stop req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiStopParams, wdiStopRspCb);
      WDI_ASSERT(0);
      goto failRequest;
@@ -7570,7 +7798,11 @@ WDI_ProcessStopReq
      if( eWLAN_PAL_STATUS_SUCCESS != status ) 
      {
         WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Power Down state", status);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Power Down state\n", status);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         WDI_ASSERT(0);
         goto fail;
      }
@@ -7749,7 +7981,11 @@ WDI_ProcessInitScanReq
         ( usSendSize < (usDataOffset + sizeof(halInitScanConReqMsg.initScanParams) )))
     {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
           "Unable to get send buffer in init scan req %p %p %p",
+=======
+          "Unable to get send buffer in init scan req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           pEventData, pwdiInitScanParams, wdiInitScanRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -7802,7 +8038,11 @@ WDI_ProcessInitScanReq
         ( usSendSize < (usDataOffset + sizeof(halInitScanReqMsg.initScanParams) )))
     {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
           "Unable to get send buffer in init scan req %p %p %p",
+=======
+          "Unable to get send buffer in init scan req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           pEventData, pwdiInitScanParams, wdiInitScanRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -7925,7 +8165,11 @@ WDI_ProcessStartScanReq
       ( usSendSize < (usDataOffset + sizeof(halStartScanReqMsg.startScanParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in start scan req %p %p %p",
+=======
+              "Unable to get send buffer in start scan req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiStartScanParams, wdiStartScanRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -8022,7 +8266,11 @@ WDI_ProcessEndScanReq
       ( usSendSize < (usDataOffset + sizeof(halEndScanReqMsg.endScanParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in start scan req %p %p %p",
+=======
+              "Unable to get send buffer in start scan req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiEndScanParams, wdiEndScanRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -8123,7 +8371,11 @@ WDI_ProcessFinishScanReq
      if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) 
      {
         WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering BMPS", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering BMPS\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         WDI_ASSERT(0);
      }
   }
@@ -8137,7 +8389,11 @@ WDI_ProcessFinishScanReq
       ( usSendSize < (usDataOffset + sizeof(halFinishScanReqMsg.finishScanParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in start scan req %p %p %p",
+=======
+              "Unable to get send buffer in start scan req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiFinishScanParams, wdiFinishScanRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -8279,7 +8535,11 @@ WDI_ProcessBSSSessionJoinReq
       ( usSendSize < (usDataOffset + sizeof(halJoinReqMsg.joinReqParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in join req %p %p %p",
+=======
+              "Unable to get send buffer in join req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pUserData, pwdiJoinParams, wdiJoinRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -8433,7 +8693,10 @@ WDI_ProcessConfigBSSReq
      return WDI_STATUS_E_FAILURE;
   }
 
+<<<<<<< HEAD
   wpalMemoryZero(&halConfigBssReqMsg, sizeof(tConfigBssReqMsg));
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   pwdiConfigBSSParams = (WDI_ConfigBSSReqParamsType*)pEventData->pEventData;
   wdiConfigBSSRspCb   = (WDI_ConfigBSSRspCb)pEventData->pCBfnc;
   /*-------------------------------------------------------------------------
@@ -8560,7 +8823,11 @@ WDI_ProcessConfigBSSReq
       ( usSendSize < (usDataOffset + uMsgSize )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in config bss req %p %p %p",
+=======
+              "Unable to get send buffer in config bss req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiConfigBSSParams, wdiConfigBSSRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -8605,7 +8872,11 @@ WDI_ProcessConfigBSSReq
 
   pWDICtx->wdiReqStatusCB     = pwdiConfigBSSParams->wdiReqStatusCB;
   pWDICtx->pReqStatusUserData = pwdiConfigBSSParams->pUserData;
+<<<<<<< HEAD
   wpalMemoryZero(&halConfigBssReqMsg, sizeof(halConfigBssReqMsg));
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*-------------------------------------------------------------------------
     Send Config BSS Request to HAL
   -------------------------------------------------------------------------*/
@@ -8727,7 +8998,11 @@ WDI_ProcessDelBSSReq
       ( usSendSize < (usDataOffset + sizeof(halBssReqMsg.deleteBssParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in start req %p %p %p",
+=======
+              "Unable to get send buffer in start req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiDelBSSParams, wdiDelBSSRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -8879,7 +9154,11 @@ WDI_ProcessPostAssocReq
       ( usSendSize < (usDataOffset + uMsgSize )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in start req %p %p %p",
+=======
+              "Unable to get send buffer in start req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiPostAssocParams, wdiPostAssocRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -8896,9 +9175,13 @@ WDI_ProcessPostAssocReq
                                    (wpt_uint8*)&halPostAssocReqMsg.postAssocReqParams.configStaParams.staIdx ))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 MAC_ADDRESS_STR
                 ": This station does not exist in the WDI Station Table",
                 MAC_ADDR_ARRAY(pwdiPostAssocParams->wdiSTAParams.macSTA));
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     wpalMemoryFree(pSendBuffer);
     return WDI_STATUS_E_FAILURE;
@@ -8919,9 +9202,13 @@ WDI_ProcessPostAssocReq
                                    (wpt_uint8*)&halPostAssocReqMsg.postAssocReqParams.configBssParams.staContext.staIdx))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 MAC_ADDRESS_STR
                 ": This station does not exist in the WDI Station Table",
                 MAC_ADDR_ARRAY(pwdiPostAssocParams->wdiBSSParams.wdiSTAContext.macSTA));
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     wpalMemoryFree(pSendBuffer);
     return WDI_STATUS_E_FAILURE;
@@ -8951,7 +9238,10 @@ WDI_ProcessPostAssocReq
                   pwdiPostAssocParams,
                   sizeof(pWDICtx->wdiCachedPostAssocReq));
 
+<<<<<<< HEAD
   wpalMemoryZero(&halPostAssocReqMsg, sizeof(halPostAssocReqMsg));
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*-------------------------------------------------------------------------
     Send Post Assoc Request to HAL
   -------------------------------------------------------------------------*/
@@ -9019,8 +9309,12 @@ WDI_ProcessDelSTAReq
                                                          &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiDelSTAParams->ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -9061,7 +9355,11 @@ WDI_ProcessDelSTAReq
       ( usSendSize < (usDataOffset + sizeof(halDelStaReqMsg.delStaParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in start req %p %p %p",
+=======
+              "Unable to get send buffer in start req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiDelSTAParams, wdiDelSTARspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -9114,7 +9412,10 @@ WDI_ProcessSetBssKeyReq
   WDI_Status                   wdiStatus           = WDI_STATUS_SUCCESS;
   tSetBssKeyReqMsg             halSetBssKeyReqMsg  = {{0}};
   wpt_uint8                    keyIndex            = 0;
+<<<<<<< HEAD
   wpt_uint8                    i;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -9181,7 +9482,11 @@ WDI_ProcessSetBssKeyReq
       ( usSendSize < (usDataOffset + sizeof(halSetBssKeyReqMsg.setBssKeyParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSetBSSKeyParams, wdiSetBSSKeyRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -9208,6 +9513,7 @@ WDI_ProcessSetBssKeyReq
                      pwdiSetBSSKeyParams->wdiBSSKeyInfo.aKeys[keyIndex].unicast;
     halSetBssKeyReqMsg.setBssKeyParams.key[keyIndex].keyDirection =
                 pwdiSetBSSKeyParams->wdiBSSKeyInfo.aKeys[keyIndex].keyDirection;
+<<<<<<< HEAD
 
     if(WDI_getHostWlanFeatCaps(DISA) && WDI_getFwWlanFeatCaps(DISA))
     {
@@ -9237,11 +9543,23 @@ WDI_ProcessSetBssKeyReq
                      pwdiSetBSSKeyParams->wdiBSSKeyInfo.aKeys[keyIndex].key,
                      WDI_MAX_KEY_LENGTH);
     }
+=======
+    wpalMemoryCopy(halSetBssKeyReqMsg.setBssKeyParams.key[keyIndex].keyRsc,
+                     pwdiSetBSSKeyParams->wdiBSSKeyInfo.aKeys[keyIndex].keyRsc,
+                     WDI_MAX_KEY_RSC_LEN);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     halSetBssKeyReqMsg.setBssKeyParams.key[keyIndex].paeRole =
                      pwdiSetBSSKeyParams->wdiBSSKeyInfo.aKeys[keyIndex].paeRole;
     halSetBssKeyReqMsg.setBssKeyParams.key[keyIndex].keyLength =
                    pwdiSetBSSKeyParams->wdiBSSKeyInfo.aKeys[keyIndex].keyLength;
+<<<<<<< HEAD
   }
+=======
+    wpalMemoryCopy(halSetBssKeyReqMsg.setBssKeyParams.key[keyIndex].key,
+                         pwdiSetBSSKeyParams->wdiBSSKeyInfo.aKeys[keyIndex].key,
+                        WDI_MAX_KEY_LENGTH);
+   }
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   wpalMemoryCopy( pSendBuffer+usDataOffset,
                     &halSetBssKeyReqMsg.setBssKeyParams,
@@ -9351,7 +9669,11 @@ WDI_ProcessRemoveBssKeyReq
       ( usSendSize < (usDataOffset + sizeof(halRemoveBssKeyReqMsg.removeBssKeyParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiRemoveBSSKeyParams, wdiRemoveBSSKeyRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -9412,7 +9734,10 @@ WDI_ProcessSetStaKeyReq
   wpt_uint8                    ucCurrentBSSSesIdx;
   tSetStaKeyReqMsg             halSetStaKeyReqMsg  = {{0}};
   wpt_uint8                    keyIndex            = 0;
+<<<<<<< HEAD
   wpt_uint8                    i;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -9444,8 +9769,12 @@ WDI_ProcessSetStaKeyReq
                                   &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiSetSTAKeyParams->wdiKeyInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -9487,7 +9816,11 @@ WDI_ProcessSetStaKeyReq
       ( usSendSize < (usDataOffset + sizeof(halSetStaKeyReqMsg.setStaKeyParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSetSTAKeyParams, wdiSetSTAKeyRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -9516,6 +9849,7 @@ WDI_ProcessSetStaKeyReq
                      pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].unicast;
     halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].keyDirection =
                 pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].keyDirection;
+<<<<<<< HEAD
 
     if(WDI_getHostWlanFeatCaps(DISA) && WDI_getFwWlanFeatCaps(DISA))
     {
@@ -9545,11 +9879,23 @@ WDI_ProcessSetStaKeyReq
                      pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].key,
                      WDI_MAX_KEY_LENGTH);
     }
+=======
+    wpalMemoryCopy(halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].keyRsc,
+                     pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].keyRsc,
+                     WDI_MAX_KEY_RSC_LEN);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].paeRole =
                      pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].paeRole;
     halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].keyLength =
                    pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].keyLength;
+<<<<<<< HEAD
   }
+=======
+    wpalMemoryCopy(halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].key,
+                         pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].key,
+                        WDI_MAX_KEY_LENGTH);
+   }
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   wpalMemoryCopy( pSendBuffer+usDataOffset,
                     &halSetStaKeyReqMsg.setStaKeyParams,
@@ -9557,7 +9903,11 @@ WDI_ProcessSetStaKeyReq
 
   pWDICtx->wdiReqStatusCB     = pwdiSetSTAKeyParams->wdiReqStatusCB;
   pWDICtx->pReqStatusUserData = pwdiSetSTAKeyParams->pUserData;
+<<<<<<< HEAD
   wpalMemoryZero(&halSetStaKeyReqMsg, sizeof(halSetStaKeyReqMsg));
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*-------------------------------------------------------------------------
     Send Set STA Key Request to HAL
   -------------------------------------------------------------------------*/
@@ -9624,8 +9974,12 @@ WDI_ProcessRemoveStaKeyReq
                              &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiRemoveSTAKeyParams->wdiKeyInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -9668,7 +10022,11 @@ WDI_ProcessRemoveStaKeyReq
       ( usSendSize < (usDataOffset + sizeof(halRemoveStaKeyReqMsg.removeStaKeyParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiRemoveSTAKeyParams, wdiRemoveSTAKeyRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -9734,7 +10092,10 @@ WDI_ProcessSetStaBcastKeyReq
   wpt_uint8                    ucCurrentBSSSesIdx;
   tSetStaKeyReqMsg             halSetStaKeyReqMsg  = {{0}};
   wpt_uint8                    keyIndex            = 0;
+<<<<<<< HEAD
   wpt_uint8                    i;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -9766,8 +10127,12 @@ WDI_ProcessSetStaBcastKeyReq
                                   &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiSetSTAKeyParams->wdiKeyInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -9776,7 +10141,11 @@ WDI_ProcessSetStaBcastKeyReq
   if ( NULL == pBSSSes )
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
               "%s: Association sequence for this BSS does not yet exist. macBSSID " MAC_ADDRESS_STR,
+=======
+              "Association sequence for this BSS does not yet exist. macBSSID " MAC_ADDRESS_STR,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               __func__, MAC_ADDR_ARRAY(macBSSID));
 
     wpalMutexRelease(&pWDICtx->wptMutex);
@@ -9809,7 +10178,11 @@ WDI_ProcessSetStaBcastKeyReq
       ( usSendSize < (usDataOffset + sizeof(halSetStaKeyReqMsg.setStaKeyParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSetSTAKeyParams, wdiSetSTAKeyRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -9838,6 +10211,7 @@ WDI_ProcessSetStaBcastKeyReq
                      pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].unicast;
     halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].keyDirection =
                 pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].keyDirection;
+<<<<<<< HEAD
 
     if(WDI_getHostWlanFeatCaps(DISA) && WDI_getFwWlanFeatCaps(DISA))
     {
@@ -9867,11 +10241,24 @@ WDI_ProcessSetStaBcastKeyReq
                      pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].key,
                      WDI_MAX_KEY_LENGTH);
     }
+=======
+    wpalMemoryCopy(halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].keyRsc,
+                     pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].keyRsc,
+                     WDI_MAX_KEY_RSC_LEN);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].paeRole =
                      pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].paeRole;
     halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].keyLength =
                    pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].keyLength;
+<<<<<<< HEAD
   }
+=======
+    wpalMemoryCopy(halSetStaKeyReqMsg.setStaKeyParams.key[keyIndex].key,
+                         pwdiSetSTAKeyParams->wdiKeyInfo.wdiKey[keyIndex].key,
+                        WDI_MAX_KEY_LENGTH);
+   }
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   wpalMemoryCopy( pSendBuffer+usDataOffset,
                     &halSetStaKeyReqMsg.setStaKeyParams,
                     sizeof(halSetStaKeyReqMsg.setStaKeyParams));
@@ -9945,8 +10332,12 @@ WDI_ProcessRemoveStaBcastKeyReq
                              &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiRemoveSTABcastKeyParams->wdiKeyInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -9989,7 +10380,11 @@ WDI_ProcessRemoveStaBcastKeyReq
       ( usSendSize < (usDataOffset + sizeof(halRemoveStaBcastKeyReqMsg.removeStaKeyParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiRemoveSTABcastKeyParams, wdiRemoveSTAKeyRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -10088,8 +10483,12 @@ WDI_ProcessAddTSpecReq
                                         &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiAddTSParams->wdiTsInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -10132,7 +10531,11 @@ WDI_ProcessAddTSpecReq
       ( usSendSize < (usDataOffset + sizeof(halAddTsParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiAddTSParams, wdiAddTSRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -10305,7 +10708,11 @@ WDI_ProcessDelTSpecReq
       ( usSendSize < (usDataOffset + sizeof(pwdiDelTSParams->wdiDelTSInfo) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiDelTSParams, wdiDelTSRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -10416,7 +10823,11 @@ WDI_ProcessUpdateEDCAParamsReq
       ( usSendSize < (usDataOffset + sizeof(pwdiUpdateEDCAParams->wdiEDCAInfo) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiUpdateEDCAParams, wdiUpdateEDCARspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -10497,8 +10908,12 @@ WDI_ProcessAddBASessionReq
                    &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiAddBASessionParams->wdiBASessionInfoType.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -10544,7 +10959,11 @@ WDI_ProcessAddBASessionReq
             (usDataOffset + sizeof(halAddBASessionReq.addBASessionParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in Add BA session req %p %p %p",
+=======
+              "Unable to get send buffer in Add BA session req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiAddBASessionParams, wdiAddBASessionRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -10640,8 +11059,12 @@ WDI_ProcessDelBAReq
                                      &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiDelBAParams->wdiBAInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -10680,7 +11103,11 @@ WDI_ProcessDelBAReq
       ( usSendSize < (usDataOffset + sizeof(halDelBAparam) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer for DEL BA req %p %p %p",
+=======
+              "Unable to get send buffer for DEL BA req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiDelBAParams, wdiDelBARspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -10704,7 +11131,11 @@ WDI_ProcessDelBAReq
                        wdiDelBARspCb, pEventData->pUserData, WDI_DEL_BA_RESP);
 }/*WDI_ProcessDelBAReq*/
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 WDI_Status
 WDI_ProcessTSMStatsReq
@@ -10763,7 +11194,11 @@ WDI_ProcessTSMStatsReq
   if ( eWLAN_PAL_TRUE == pBSSSes->bAssocReqQueued )
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "%s: Association sequence for this BSS exists but currently queued. macBSSID " MAC_ADDRESS_STR,
+=======
+              "s: Association sequence for this BSS exists but currently queued. macBSSID " MAC_ADDRESS_STR, 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               __func__, MAC_ADDR_ARRAY(pwdiTSMParams->wdiTsmStatsParamsInfo.bssid));
 
     wdiStatus = WDI_QueueAssocRequest( pWDICtx, pBSSSes, pEventData); 
@@ -10782,7 +11217,11 @@ WDI_ProcessTSMStatsReq
       ( usSendSize < (usDataOffset + sizeof(halTsmStatsReqParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiTSMParams, wdiTSMRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE; 
@@ -10858,7 +11297,11 @@ WDI_ProcessFlushAcReq
        ( usSendSize < (usDataOffset + sizeof(pwdiFlushAcParams->wdiFlushAcInfo) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in set bss key req %p %p %p",
+=======
+               "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiFlushAcParams, wdiFlushAcRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -10928,7 +11371,11 @@ WDI_ProcessBtAmpEventReq
        ( usSendSize < (usDataOffset + sizeof(haltBtAmpEventMsg.btAmpEventParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in BT AMP event req %p %p %p",
+=======
+               "Unable to get send buffer in BT AMP event req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiBtAmpEventParams, wdiBtAmpEventRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -11002,7 +11449,11 @@ WDI_ProcessAddSTASelfReq
       ( usSendSize < (usDataOffset + sizeof(tAddStaSelfParams_V1) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in ADD STA SELF REQ %p %p %p",
+=======
+              "Unable to get send buffer in ADD STA SELF REQ %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      pEventData, pwdiAddSTASelfReqParams, wdiAddSTASelfReqRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -11094,7 +11545,11 @@ WDI_ProcessDelSTASelfReq
          (usDataOffset + sizeof(pwdiDelStaSelfReqParams->wdiDelStaSelfInfo) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Del Sta Self req %p %p %p",
+=======
+               "Unable to get send buffer in Del Sta Self req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiDelStaSelfReqParams, wdiDelStaSelfRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -11171,7 +11626,11 @@ WDI_ProcessStartOemDataReq
         (usSendSize < (usDataOffset + reqLen)))
   {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Start Oem Data req %p %p %p",
+=======
+               "Unable to get send buffer in Start Oem Data req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiOemDataReqParams, wdiOemDataRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -11245,7 +11704,11 @@ WDI_ProcessHostResumeReq
         (usSendSize < (usDataOffset + sizeof(halResumeReqParams))))
   {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Start Oem Data req %p %p %p",
+=======
+               "Unable to get send buffer in Start Oem Data req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiHostResumeParams, wdiHostResumeRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -11319,7 +11782,11 @@ WDI_ProcessSetTxPerTrackingReq
        ( usSendSize < (usDataOffset + sizeof(halTxPerTrackingReqParam) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in set tx per tracking req %p %p %p",
+=======
+                  "Unable to get send buffer in set tx per tracking req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiSetTxPerTrackingReqParams, pwdiSetTxPerTrackingRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -11801,7 +12268,11 @@ WDI_ProcessChannelSwitchReq
       ( usSendSize < (usDataOffset + sizeof(halSwitchChannelReq.switchChannelParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in channel switch req %p %p %p",
+=======
+              "Unable to get send buffer in channel switch req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSwitchChParams, wdiSwitchChRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -11841,6 +12312,7 @@ WDI_ProcessChannelSwitchReq
 }/*WDI_ProcessChannelSwitchReq*/
 
 /**
+<<<<<<< HEAD
  @brief Process Channel Switch Request function (called when
         Main FSM allows it)
 
@@ -11934,6 +12406,8 @@ WDI_Status WDI_ProcessChannelSwitchReq_V1
 }/*WDI_ProcessChannelSwitchReq_V1*/
 
 /**
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  @brief Process Config STA Request function (called when Main FSM
         allows it)
 
@@ -11975,7 +12449,10 @@ WDI_ProcessConfigStaReq
      return WDI_STATUS_E_FAILURE;
   }
 
+<<<<<<< HEAD
   wpalMemoryZero(&halConfigStaReqMsg, sizeof(tConfigStaReqMsg));
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   pwdiConfigSTAParams = (WDI_ConfigSTAReqParamsType*)pEventData->pEventData;
   wdiConfigSTARspCb   = (WDI_ConfigSTARspCb)pEventData->pCBfnc;
   /*-------------------------------------------------------------------------
@@ -12035,7 +12512,11 @@ WDI_ProcessConfigStaReq
       ( usSendSize < (usDataOffset + uMsgSize )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in config sta req %p %p %p",
+=======
+              "Unable to get send buffer in config sta req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiConfigSTAParams, wdiConfigSTARspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12054,9 +12535,13 @@ WDI_ProcessConfigStaReq
                                      (wpt_uint8*)&halConfigStaReqMsg.uStaParams.configStaParams.staIdx ))
     {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   MAC_ADDRESS_STR
                   ": This station does not exist in the WDI Station Table",
                 MAC_ADDR_ARRAY(pwdiConfigSTAParams->wdiReqInfo.macSTA));
+=======
+               "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       wpalMutexRelease(&pWDICtx->wptMutex);
       wpalMemoryFree(pSendBuffer);
       return WDI_STATUS_E_FAILURE;
@@ -12187,7 +12672,11 @@ WDI_ProcessSetLinkStateReq
       ( usSendSize < (usDataOffset + sizeof(halLinkStateReqMsg) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSetLinkParams, wdiSetLinkRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12275,8 +12764,12 @@ WDI_ProcessGetStatsReq
                         &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiGetStatsParams->wdiGetStatsParamsInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -12319,7 +12812,11 @@ WDI_ProcessGetStatsReq
       ( usSendSize < (usDataOffset + sizeof(halStatsReqMsg.statsReqParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiGetStatsParams, wdiGetStatsRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12343,7 +12840,11 @@ WDI_ProcessGetStatsReq
                        wdiGetStatsRspCb, pEventData->pUserData, WDI_GET_STATS_RESP);
 }/*WDI_ProcessGetStatsReq*/
 
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief Process Get Roam Rssi Request function (called when Main FSM
         allows it)
@@ -12401,8 +12902,12 @@ WDI_ProcessGetRoamRssiReq
                         &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiGetRoamRssiParams->wdiGetRoamRssiParamsInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -12444,7 +12949,11 @@ WDI_ProcessGetRoamRssiReq
       ( usSendSize < (usDataOffset + sizeof(halRssiRoamReqMsg.roamRssiReqParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiGetRoamRssiParams, wdiGetStatsRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12518,7 +13027,11 @@ WDI_ProcessUpdateCfgReq
       ( usSendSize < (usDataOffset +  pwdiUpdateCfgParams->uConfigBufferLen)))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiUpdateCfgParams, wdiUpdateCfgRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12604,8 +13117,12 @@ WDI_ProcessAddBAReq
                                   &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiAddBAParams->wdiBAInfoType.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -12648,7 +13165,11 @@ WDI_ProcessAddBAReq
             (usDataOffset + sizeof(halAddBAReq.addBAParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in Add BA req %p %p %p",
+=======
+              "Unable to get send buffer in Add BA req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiAddBAParams, wdiAddBARspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12741,8 +13262,12 @@ WDI_ProcessTriggerBAReq
                                   &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiTriggerBAParams->wdiTriggerBAInfoType.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -12790,7 +13315,11 @@ WDI_ProcessTriggerBAReq
                pwdiTriggerBAParams->wdiTriggerBAInfoType.usBACandidateCnt) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in Trigger BA req %p %p %p",
+=======
+              "Unable to get send buffer in Trigger BA req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiTriggerBAParams, wdiTriggerBARspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12881,7 +13410,11 @@ WDI_ProcessUpdateBeaconParamsReq
       ( usSendSize < (usDataOffset + sizeof(halUpdateBeaconParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiUpdateBeaconParams, wdiUpdateBeaconParamsRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -12983,7 +13516,11 @@ WDI_ProcessSendBeaconParamsReq
       ( usSendSize < (usDataOffset + sizeof(halSendBeaconReq.sendBeaconParam) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in send beacon req %p %p %p",
+=======
+              "Unable to get send buffer in send beacon req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSendBeaconParams, wdiSendBeaconParamsRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -13079,7 +13616,11 @@ WDI_ProcessUpdateProbeRspTemplateReq
       ( usSendSize < (usDataOffset + sizeof(halUpdateProbeRspTmplParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      pEventData, pwdiUpdateProbeRespTmplParams, wdiUpdateProbeRespTmplRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -13222,7 +13763,11 @@ if (( WDI_STATUS_SUCCESS != WDI_GetMessageBuffer( pWDICtx, WDI_SET_MAX_TX_POWER_
 )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
               "Unable to get Set Max Tx Power req %p %p %p",
+=======
+              "Unable to get Set Max Tx Power req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSetMaxTxPowerParams, wdiSetMaxTxPowerRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -13254,6 +13799,7 @@ if (( WDI_STATUS_SUCCESS != WDI_GetMessageBuffer( pWDICtx, WDI_SET_MAX_TX_POWER_
 
 }
 
+<<<<<<< HEAD
 /*
  @brief Process Set Max Tx Power Per Band Request function (called when Main
         FSM allows it)
@@ -13336,6 +13882,8 @@ WDI_Status WDI_ProcessSetMaxTxPowerPerBandReq
                       WDI_SET_MAX_TX_POWER_PER_BAND_RSP);
 }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief Process Set Tx Power Request function (called when Main
         FSM allows it)
@@ -13388,7 +13936,11 @@ WDI_Status WDI_ProcessSetTxPowerReq
   )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                  "Unable to get Set Max Tx Power req %p %p %p",
+=======
+                 "Unable to get Set Max Tx Power req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiSetTxPowerParams, wdiSetTxPowerRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -13461,7 +14013,11 @@ WDI_ProcessP2PGONOAReq
       ( usSendSize < (usDataOffset + sizeof(halSetP2PGONOAParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set P2P GO NOA REQ %p %p %p",
+=======
+              "Unable to get send buffer in set P2P GO NOA REQ %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      pEventData, pwdiP2PGONOAReqParams, wdiP2PGONOAReqRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -13552,7 +14108,11 @@ WDI_ProcessTdlsLinkEstablishReq
       ( usSendSize < (usDataOffset + sizeof(halSetTDLSLinkEstablishParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set P2P GO NOA REQ %p %p %p",
+=======
+              "Unable to get send buffer in set P2P GO NOA REQ %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      pEventData, pwdiTDLSLinkEstablishReqParams, wdiTDLSLinkEstablishReqRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -13574,6 +14134,7 @@ WDI_ProcessTdlsLinkEstablishReq
   halSetTDLSLinkEstablishParams.maxServicePeriodLength = (pwdiTDLSLinkEstablishReqParams->wdiTDLSLinkEstablishInfo.uMaxSp & 0x03);
   halSetTDLSLinkEstablishParams.moreDataAck = 0;
   halSetTDLSLinkEstablishParams.TPUBufferStaSupport =  pwdiTDLSLinkEstablishReqParams->wdiTDLSLinkEstablishInfo.uIsBufSta;
+<<<<<<< HEAD
   halSetTDLSLinkEstablishParams.tdlsOffChannelSupport =
                              pwdiTDLSLinkEstablishReqParams->wdiTDLSLinkEstablishInfo.uIsOffChannelSupported;
 
@@ -13588,6 +14149,8 @@ WDI_ProcessTdlsLinkEstablishReq
                   pwdiTDLSLinkEstablishReqParams->wdiTDLSLinkEstablishInfo.validOperClassesLen);
   halSetTDLSLinkEstablishParams.validOperClassesLen =
                              pwdiTDLSLinkEstablishReqParams->wdiTDLSLinkEstablishInfo.validOperClassesLen;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   wpalMemoryCopy( pSendBuffer+usDataOffset,
                   &halSetTDLSLinkEstablishParams,
@@ -13606,6 +14169,7 @@ WDI_ProcessTdlsLinkEstablishReq
 }/*WDI_ProcessTdlsLinkEstablishReq*/
 
 
+<<<<<<< HEAD
 /**
  @brief sends the channel switch command to f/w (called when Main FSM
         allows it)
@@ -13704,11 +14268,38 @@ WDI_SetPowerStateCb
    wpt_status status,
    unsigned int dxePhyAddr,
    void      *pContext
+=======
+#endif
+
+
+
+/**
+ @brief    Function to handle the ack from DXE once the power
+           state is set.
+ @param    None
+
+ @see
+ @return void
+*/
+void
+WDI_SetPowerStateCb
+(
+   wpt_status status,
+   unsigned int dxePhyAddr,
+   void      *pContext
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 )
 {
    wpt_status              wptStatus;
    WDI_ControlBlockType *pCB = NULL;
    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+<<<<<<< HEAD
+=======
+   if(eWLAN_PAL_STATUS_E_FAILURE == status )
+   {
+      //it shouldn't happen, put an error msg
+   }
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*
     * Trigger the event to bring the Enter BMPS req function to come
     * out of wait
@@ -13722,6 +14313,7 @@ WDI_SetPowerStateCb
       //put an error msg
       pCB = &gWDICb;
    }
+<<<<<<< HEAD
 
    if(eWLAN_PAL_STATUS_SUCCESS == status )
    {
@@ -13731,6 +14323,8 @@ WDI_SetPowerStateCb
    {
       pCB->dxeRingsEmpty = eWLAN_PAL_FALSE;
    }
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    pCB->dxePhyAddr = dxePhyAddr;
    wptStatus  = wpalEventSet(&pCB->setPowerStateEvent);
    if ( eWLAN_PAL_STATUS_SUCCESS !=  wptStatus )
@@ -13766,16 +14360,24 @@ WDI_ProcessEnterImpsReq
    wpt_uint8*               pSendBuffer         = NULL;
    wpt_uint16               usDataOffset        = 0;
    wpt_uint16               usSendSize          = 0;
+<<<<<<< HEAD
    WDI_EnterImpsReqParamsType*  pwdiEnterImpsReqParams = NULL;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
    /*-------------------------------------------------------------------------
      Sanity check
    -------------------------------------------------------------------------*/
+<<<<<<< HEAD
    if ((NULL == pEventData ) ||
        (NULL == (wdiEnterImpsRspCb = (WDI_EnterImpsRspCb)pEventData->pCBfnc)) ||
        (NULL == (pwdiEnterImpsReqParams =
                   (WDI_EnterImpsReqParamsType*)pEventData->pEventData)))
+=======
+   if (( NULL == pEventData ) ||
+       ( NULL == (wdiEnterImpsRspCb   = (WDI_EnterImpsRspCb)pEventData->pCBfnc)))
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
                   "%s: Invalid parameters", __func__);
@@ -13793,7 +14395,11 @@ WDI_ProcessEnterImpsReq
        ( usSendSize < (usDataOffset )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Enter IMPS req %p %p",
+=======
+               "Unable to get send buffer in Enter IMPS req %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, wdiEnterImpsRspCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -13814,7 +14420,11 @@ WDI_ProcessEnterImpsReq
    wptStatus = WDTS_SetPowerState(pWDICtx, WDTS_POWER_STATE_IMPS, WDI_SetPowerStateCb);
    if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) {
         WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering IMPS", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering IMPS\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         WDI_ASSERT(0);
         goto fail;
     }
@@ -13833,6 +14443,7 @@ WDI_ProcessEnterImpsReq
       goto fail;
    }
 
+<<<<<<< HEAD
    if (pWDICtx->dxeRingsEmpty == eWLAN_PAL_FALSE)
    {
       WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
@@ -13843,6 +14454,8 @@ WDI_ProcessEnterImpsReq
 
    pWDICtx->wdiReqStatusCB     = pwdiEnterImpsReqParams->wdiReqStatusCB;
    pWDICtx->pReqStatusUserData = pwdiEnterImpsReqParams->pUserData;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*-------------------------------------------------------------------------
      Send Get STA Request to HAL
    -------------------------------------------------------------------------*/
@@ -13879,16 +14492,23 @@ WDI_ProcessExitImpsReq
    wpt_uint8*               pSendBuffer         = NULL;
    wpt_uint16               usDataOffset        = 0;
    wpt_uint16               usSendSize          = 0;
+<<<<<<< HEAD
    WDI_ExitImpsReqParamsType *pwdiExitImpsReqParams = NULL;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
    /*-------------------------------------------------------------------------
      Sanity check
    -------------------------------------------------------------------------*/
    if (( NULL == pEventData ) ||
+<<<<<<< HEAD
        ( NULL == (wdiExitImpsRspCb   = (WDI_ExitImpsRspCb)pEventData->pCBfnc)) ||
         (NULL == (pwdiExitImpsReqParams =
                  (WDI_ExitImpsReqParamsType*)pEventData->pEventData)))
+=======
+       ( NULL == (wdiExitImpsRspCb   = (WDI_ExitImpsRspCb)pEventData->pCBfnc)))
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
                   "%s: Invalid parameters", __func__);
@@ -13906,13 +14526,21 @@ WDI_ProcessExitImpsReq
        ( usSendSize < (usDataOffset )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Exit IMPS req %p %p",
+=======
+               "Unable to get send buffer in Exit IMPS req %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, wdiExitImpsRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
    }
+<<<<<<< HEAD
    pWDICtx->wdiReqStatusCB = pwdiExitImpsReqParams->wdiReqStatusCB;
    pWDICtx->pReqStatusUserData = pwdiExitImpsReqParams->pUserData;
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*-------------------------------------------------------------------------
      Send Get STA Request to HAL
    -------------------------------------------------------------------------*/
@@ -13970,7 +14598,11 @@ WDI_ProcessEnterBmpsReq
        ( usSendSize < (usDataOffset + sizeof(enterBmpsReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Enter BMPS req %p %p %p",
+=======
+               "Unable to get send buffer in Enter BMPS req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiEnterBmpsReqParams, wdiEnterBmpsRspCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -13992,7 +14624,11 @@ WDI_ProcessEnterBmpsReq
    if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) 
    {
         WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that we are entering BMPS", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that we are entering BMPS\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         WDI_ASSERT(0);
         goto fail;
     }
@@ -14018,7 +14654,11 @@ WDI_ProcessEnterBmpsReq
    enterBmpsReq.dtimCount = pwdiEnterBmpsReqParams->wdiEnterBmpsInfo.ucDtimCount;
    enterBmpsReq.dtimPeriod = pwdiEnterBmpsReqParams->wdiEnterBmpsInfo.ucDtimPeriod;
 
+<<<<<<< HEAD
    // For ESE and 11R Roaming
+=======
+   // For CCX and 11R Roaming
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    enterBmpsReq.rssiFilterPeriod = pwdiEnterBmpsReqParams->wdiEnterBmpsInfo.rssiFilterPeriod;
    enterBmpsReq.numBeaconPerRssiAverage = pwdiEnterBmpsReqParams->wdiEnterBmpsInfo.numBeaconPerRssiAverage;
    enterBmpsReq.bRssiFilterEnable = pwdiEnterBmpsReqParams->wdiEnterBmpsInfo.bRssiFilterEnable;
@@ -14093,7 +14733,11 @@ WDI_ProcessExitBmpsReq
        ( usSendSize < (usDataOffset + sizeof(exitBmpsReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Exit BMPS req %p %p %p",
+=======
+               "Unable to get send buffer in Exit BMPS req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiExitBmpsReqParams, wdiExitBmpsRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -14164,7 +14808,11 @@ WDI_ProcessEnterUapsdReq
        ( usSendSize < (usDataOffset + sizeof(enterUapsdReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Enter UAPSD req %p %p %p",
+=======
+               "Unable to get send buffer in Enter UAPSD req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiEnterUapsdReqParams, wdiEnterUapsdRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -14243,7 +14891,11 @@ WDI_ProcessExitUapsdReq
        ( usSendSize < (usDataOffset + sizeof(wpt_uint8))))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Exit UAPSD req %p %p",
+=======
+               "Unable to get send buffer in Exit UAPSD req %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, wdiExitUapsdRspCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -14313,7 +14965,11 @@ WDI_ProcessSetUapsdAcParamsReq
       ( usSendSize < (usDataOffset + sizeof(uapsdAcParamsReq) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in Set UAPSD params req %p %p %p",
+=======
+              "Unable to get send buffer in Set UAPSD params req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiSetUapsdAcParams, wdiSetUapsdAcParamsCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -14387,7 +15043,11 @@ WDI_ProcessUpdateUapsdParamsReq
        ( usSendSize < (usDataOffset + sizeof(pwdiUpdateUapsdReqParams->wdiUpdateUapsdInfo) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Update UAPSD params req %p %p %p",
+=======
+               "Unable to get send buffer in Update UAPSD params req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiUpdateUapsdReqParams, wdiUpdateUapsdParamsCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -14455,7 +15115,11 @@ WDI_ProcessConfigureRxpFilterReq
       ( usSendSize < (usDataOffset + sizeof(halRxpFilterParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in Set UAPSD params req %p %p %p",
+=======
+              "Unable to get send buffer in Set UAPSD params req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiRxpFilterParams, wdiConfigureRxpFilterCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -14527,7 +15191,11 @@ WDI_ProcessSetBeaconFilterReq
        ( usSendSize < (usDataOffset + sizeof(pwdiBeaconFilterParams->wdiBeaconFilterInfo) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Set beacon filter req %p %p %p",
+=======
+               "Unable to get send buffer in Set beacon filter req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiBeaconFilterParams, wdiBeaconFilterCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -14597,7 +15265,11 @@ WDI_ProcessRemBeaconFilterReq
        ( usSendSize < (usDataOffset + sizeof(pwdiBeaconFilterParams->wdiBeaconFilterInfo) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in remove beacon filter req %p %p %p",
+=======
+                  "Unable to get send buffer in remove beacon filter req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiBeaconFilterParams, wdiBeaconFilterCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -14666,7 +15338,11 @@ WDI_ProcessSetRSSIThresholdsReq
        ( usSendSize < (usDataOffset + sizeof(rssiThresholdsReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in remove beacon filter req %p %p %p",
+=======
+                  "Unable to get send buffer in remove beacon filter req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiRSSIThresholdsParams, wdiRSSIThresholdsCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -14770,7 +15446,11 @@ WDI_ProcessHostOffloadReq
        ( usSendSize < (usDataOffset + sizeof(hostOffloadParams) + sizeof(nsOffloadParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in host offload req %p %p %p",
+=======
+                  "Unable to get send buffer in host offload req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiHostOffloadParams, wdiHostOffloadCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -14781,7 +15461,11 @@ WDI_ProcessHostOffloadReq
                             &pBSSSes);
    if ( NULL == pBSSSes )
    {
+<<<<<<< HEAD
        WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+=======
+       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  " %s : Association for this BSSID does not exist " MAC_ADDRESS_STR,
                  __func__, MAC_ADDR_ARRAY(pwdiHostOffloadParams->wdiHostOffloadInfo.bssId));
        goto fail;
@@ -14932,7 +15616,11 @@ WDI_ProcessKeepAliveReq
        ( usSendSize < (usDataOffset + sizeof(keepAliveReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                   "Unable to get send buffer in keep alive req %p %p %p",
+=======
+                  "Unable to get send buffer in keep alive req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiKeepAliveParams, wdiKeepAliveCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -14971,11 +15659,18 @@ WDI_ProcessKeepAliveReq
                    sizeof(keepAliveReq));
 
    WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
                "Process keep alive req %zu", sizeof(keepAliveReq));
 
    WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO,
                "Process keep alive req time period %d",
                keepAliveReq.timePeriod);
+=======
+               "Process keep alive req %d",sizeof(keepAliveReq));
+
+   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO,
+               "Process keep alive req time period %d",keepAliveReq.timePeriod);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    pWDICtx->wdiReqStatusCB     = pwdiKeepAliveParams->wdiReqStatusCB;
    pWDICtx->pReqStatusUserData = pwdiKeepAliveParams->pUserData;
@@ -15050,7 +15745,11 @@ WDI_ProcessWowlAddBcPtrnReq
        ( usSendSize < (usDataOffset + sizeof(wowlAddBcPtrnReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Wowl add bc ptrn req %p %p %p",
+=======
+                  "Unable to get send buffer in Wowl add bc ptrn req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiWowlAddBcPtrnParams, wdiWowlAddBcPtrnCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -15174,7 +15873,11 @@ WDI_ProcessWowlDelBcPtrnReq
        ( usSendSize < (usDataOffset + sizeof(wowlDelBcPtrnReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Wowl del bc ptrn req %p %p %p",
+=======
+                  "Unable to get send buffer in Wowl del bc ptrn req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiWowlDelBcPtrnParams, wdiWowlDelBcPtrnCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -15265,7 +15968,11 @@ WDI_ProcessWowlEnterReq
        ( usSendSize < (usDataOffset + sizeof(wowlEnterReq) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Wowl enter req %p %p %p",
+=======
+                  "Unable to get send buffer in Wowl enter req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiWowlEnterParams, wdiWowlEnterCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -15375,7 +16082,11 @@ WDI_ProcessWowlExitReq
        ( usSendSize < (usDataOffset + sizeof(wowlExitparams))))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Wowl Exit req %p %p",
+=======
+               "Unable to get send buffer in Wowl Exit req %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, wdiWowlExitCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -15440,7 +16151,11 @@ WDI_ProcessConfigureAppsCpuWakeupStateReq
        ( usSendSize < (usDataOffset + sizeof(pwdiAppsCpuWakeupStateParams->bIsAppsAwake) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                "Unable to get send buffer in Apps CPU Wakeup State req %p %p %p",
+=======
+               "Unable to get send buffer in Apps CPU Wakeup State req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pEventData, pwdiAppsCpuWakeupStateParams, wdiConfigureAppsCpuWakeupStateCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -15523,8 +16238,12 @@ WDI_ProcessAggrAddTSpecReq
                                         &macBSSID))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                 "This station does not exist in the WDI Station Table %d",
                 pwdiAggrAddTSParams->wdiAggrTsInfo.ucSTAIdx);
+=======
+             "This station does not exist in the WDI Station Table %d");
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
   }
@@ -15566,7 +16285,11 @@ WDI_ProcessAggrAddTSpecReq
       ( usSendSize < (usDataOffset + sizeof(tAggrAddTsParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in set bss key req %p %p %p",
+=======
+              "Unable to get send buffer in set bss key req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiAggrAddTSParams, wdiAggrAddTSRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -15792,7 +16515,11 @@ WDI_ProcessStartRsp
   {
      // not enough data was received
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                  "Invalid response length in Start Resp Expect %zx Rcvd %x",
+=======
+                 "Invalid response length in Start Resp Expect %x Rcvd %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  sizeof(tHalMacStartRspParams), pEventData->uEventDataSize);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -15857,7 +16584,10 @@ WDI_ProcessStartRsp
     wdiStartRspCb( &wdiRspParams, pWDICtx->pRspCBUserData);
 
     WDI_DetectedDeviceError(pWDICtx, wdiRspParams.wdiStatus);
+<<<<<<< HEAD
     wpalWlanReload();
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /*Although the response is an error - it was processed by our function
     so as far as the caller is concerned this is a succesful reponse processing*/
@@ -15963,7 +16693,11 @@ WDI_ProcessStopRsp
   if ( sizeof(halMacStopRspMsg) < pEventData->uEventDataSize )
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Invalid response length in Stop Resp %u",
+=======
+              "Invalid response length in Stop Resp %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData->uEventDataSize);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -15992,7 +16726,10 @@ WDI_ProcessStopRsp
                halMacStopRspMsg.stopRspParams.status);
 
     WDI_DetectedDeviceError( pWDICtx, WDI_ERR_BASIC_OP_FAILURE);
+<<<<<<< HEAD
     wpalWlanReload();
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     wpalMutexRelease(&pWDICtx->wptMutex);
     return WDI_STATUS_E_FAILURE;
@@ -16102,7 +16839,11 @@ WDI_ProcessInitScanRsp
      wptStatus = WDTS_SetPowerState(pWDICtx, WDTS_POWER_STATE_FULL, NULL);
      if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) {
         WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         WDI_ASSERT(0);
     }
   }
@@ -16728,8 +17469,12 @@ WDI_ProcessDelBSSRsp
 
 
   /* Delete the BCAST STA entry from the STA table if SAP/GO session is deleted */
+<<<<<<< HEAD
   if(WDI_INFRA_AP_MODE == pBSSSes->wdiBssType ||
      pBSSSes->wdiBssType == WDI_IBSS_MODE)
+=======
+  if(WDI_INFRA_AP_MODE == pBSSSes->wdiBssType)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   {
     (void)WDI_STATableDelSta( pWDICtx, pBSSSes->bcastStaIdx );
   }
@@ -17409,6 +18154,7 @@ WDI_ProcessAddTSpecRsp
 }/*WDI_ProcessAddTSpecRsp*/
 
 
+<<<<<<< HEAD
 
 #ifdef WLAN_FEATURE_LINK_LAYER_STATS
 
@@ -17503,6 +18249,8 @@ WDI_ProcessLLStatsClearRsp
 }
 #endif /* WLAN_FEATURE_LINK_LAYER_STATS */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief Process Del TSpec Rsp function (called when a response
         is being received over the bus from HAL)
@@ -17719,7 +18467,11 @@ WDI_ProcessDelBARsp
   return WDI_STATUS_SUCCESS;
 }/*WDI_ProcessDelBARsp*/
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief Process TSM Stats Rsp function (called when a response
         is being received over the bus from HAL)
@@ -18074,6 +18826,10 @@ WDI_ProcessDelSTASelfRsp
  @see
  @return Result of the function call
 */
+<<<<<<< HEAD
+=======
+#define OFFSET_OF(structType,fldName)   (&((structType*)0)->fldName)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 WDI_Status
 WDI_ProcessStartOemDataRsp
@@ -18115,7 +18871,11 @@ WDI_ProcessStartOemDataRsp
   if(NULL == wdiOemDataRspParams)
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
             "Failed to allocate memory in OEM DATA Response %p %p %p ",
+=======
+            "Failed to allocate memory in OEM DATA Response %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pWDICtx, pEventData, pEventData->pEventData);
     WDI_ASSERT(0);
     return WDI_STATUS_E_FAILURE;
@@ -18195,6 +18955,7 @@ WDI_ProcessChannelSwitchRsp
   return WDI_STATUS_SUCCESS;
 }/*WDI_ProcessChannelSwitchRsp*/
 
+<<<<<<< HEAD
 /**
  @brief Process Channel Switch Rsp function (called when a response
         is being received over the bus from HAL against
@@ -18261,6 +19022,8 @@ WDI_ProcessChannelSwitchRsp_V1
 
   return WDI_STATUS_SUCCESS;
 }/*WDI_ProcessChannelSwitchRsp_V1*/
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**
  @brief Process Config STA Rsp function (called when a response
@@ -18576,7 +19339,11 @@ WDI_ProcessGetStatsRsp
   if(NULL == wdiGetStatsRsp)
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                 "Failed to allocate memory in Get Stats Response %p %p %p ",
+=======
+                "Failed to allocate memory in Get Stats Response %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  pWDICtx, pEventData, pEventData->pEventData);
     WDI_ASSERT(0);
     return WDI_STATUS_E_FAILURE;
@@ -18604,7 +19371,11 @@ WDI_ProcessGetStatsRsp
   return WDI_STATUS_SUCCESS;
 }/*WDI_ProcessGetStatsRsp*/
 
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief Process Get Roam Rssi Rsp function (called when a response is
         being received over the bus from HAL)
@@ -18833,7 +19604,11 @@ WDI_ProcessTriggerBARsp
     if(NULL == wdiTriggerBARsp)
     {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Failed to allocate memory in Trigger BA Response %p %p %p ",
+=======
+                  "Failed to allocate memory in Trigger BA Response %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pWDICtx, pEventData, pEventData->pEventData);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -18870,7 +19645,11 @@ WDI_ProcessTriggerBARsp
     if(NULL == wdiTriggerBARsp)
     {
        WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Failed to allocate memory in Trigger BA Response %p %p %p ",
+=======
+                  "Failed to allocate memory in Trigger BA Response %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pWDICtx, pEventData, pEventData->pEventData);
        WDI_ASSERT(0);
        return WDI_STATUS_E_FAILURE;
@@ -19162,6 +19941,7 @@ WDI_ProcessSetTxPowerRsp
 
   return WDI_STATUS_SUCCESS;
 }
+<<<<<<< HEAD
 
 /**
  @brief Process Set Max Tx Power Per Band Rsp function (called when a response
@@ -19224,6 +20004,8 @@ WDI_ProcessSetMaxTxPowerPerBandRsp
    return WDI_STATUS_SUCCESS;
 }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_TDLS
 /**
  @brief Process TDLS Link Establish Rsp function (called
@@ -19285,11 +20067,18 @@ WDI_ProcessLinkEstablishReqRsp
 
   return WDI_STATUS_SUCCESS;
 }/*WDI_ProcessLinkEstablishReqRsp*/
+<<<<<<< HEAD
 
 
 
 /**
  @brief Process TDLS Chan switch Rsp function (called
+=======
+#endif
+
+/**
+ @brief Process P2P Group Owner Notice Of Absense Rsp function (called
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         when a response is being received over the bus from HAL)
 
  @param  pWDICtx:         pointer to the WLAN DAL context
@@ -19299,17 +20088,27 @@ WDI_ProcessLinkEstablishReqRsp
  @return Result of the function call
 */
 WDI_Status
+<<<<<<< HEAD
 WDI_ProcessChanSwitchReqRsp
+=======
+WDI_ProcessP2PGONOARsp
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 (
   WDI_ControlBlockType*  pWDICtx,
   WDI_EventInfoType*     pEventData
 )
 {
+<<<<<<< HEAD
   eHalStatus       halStatus;
   WDI_SetTDLSChanSwitchReqParamsRspCb   wdiTDLSChanSwitchReqParamsRspCb;
   tTDLSChanSwitchRespMsg                halTdlsChanSwitchRespMsg;
   WDI_SetTdlsChanSwitchReqResp          wdiSetTdlsChanSwitchReqResp;
 
+=======
+  WDI_Status       wdiStatus;
+  eHalStatus       halStatus;
+  WDI_SetP2PGONOAReqParamsRspCb   wdiP2PGONOAReqParamsRspCb;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
   /*-------------------------------------------------------------------------
@@ -19324,6 +20123,7 @@ WDI_ProcessChanSwitchReqRsp
      return WDI_STATUS_E_FAILURE;
   }
 
+<<<<<<< HEAD
   /*-------------------------------------------------------------------------
   Extract indication and send it to UMAC
  -------------------------------------------------------------------------*/
@@ -19332,6 +20132,9 @@ WDI_ProcessChanSwitchReqRsp
                   sizeof(halTdlsChanSwitchRespMsg.tdlsChanSwitchRespParams) );
 
   wdiTDLSChanSwitchReqParamsRspCb = (WDI_SetTDLSChanSwitchReqParamsRspCb)pWDICtx->pfncRspCB;
+=======
+  wdiP2PGONOAReqParamsRspCb = (WDI_SetP2PGONOAReqParamsRspCb)pWDICtx->pfncRspCB;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*-------------------------------------------------------------------------
     Extract response and send it to UMAC
@@ -19340,6 +20143,7 @@ WDI_ProcessChanSwitchReqRsp
                   pEventData->pEventData,
                   sizeof(halStatus));
 
+<<<<<<< HEAD
   wdiSetTdlsChanSwitchReqResp.wdiStatus   =   WDI_HAL_2_WDI_STATUS(halStatus);
   wdiSetTdlsChanSwitchReqResp.uStaIdx   =  halTdlsChanSwitchRespMsg.tdlsChanSwitchRespParams.staIdx;
 
@@ -19356,6 +20160,18 @@ WDI_ProcessChanSwitchReqRsp
 /**
  @brief Process P2P Group Owner Notice Of Absense Rsp function (called
         when a response is being received over the bus from HAL)
+=======
+  wdiStatus   =   WDI_HAL_2_WDI_STATUS(halStatus);
+
+  /*Notify UMAC*/
+  wdiP2PGONOAReqParamsRspCb( wdiStatus, pWDICtx->pRspCBUserData);
+
+  return WDI_STATUS_SUCCESS;
+}/*WDI_ProcessP2PGONOARsp*/
+/**
+ @brief Process Enter IMPS Rsp function (called when a response
+        is being received over the bus from HAL)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
  @param  pWDICtx:         pointer to the WLAN DAL context
          pEventData:      pointer to the event information structure
@@ -19364,6 +20180,7 @@ WDI_ProcessChanSwitchReqRsp
  @return Result of the function call
 */
 WDI_Status
+<<<<<<< HEAD
 WDI_ProcessP2PGONOARsp
 (
   WDI_ControlBlockType*  pWDICtx,
@@ -19415,6 +20232,9 @@ WDI_ProcessP2PGONOARsp
 */
 WDI_Status
 WDI_ProcessEnterImpsRsp
+=======
+WDI_ProcessEnterImpsRsp
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 (
   WDI_ControlBlockType*  pWDICtx,
   WDI_EventInfoType*     pEventData
@@ -19462,7 +20282,11 @@ WDI_ProcessEnterImpsRsp
      
      if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) {
           WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           WDI_ASSERT(0);
      }
   }
@@ -19524,7 +20348,11 @@ WDI_ProcessExitImpsRsp
   if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) 
   {
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     WDI_ASSERT(0);
   }
   /*Notify UMAC*/
@@ -19607,7 +20435,11 @@ WDI_ProcessEnterBmpsRsp
        if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) 
        {
            WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            WDI_ASSERT(0);
        }
        pWDICtx->bInBmps = eWLAN_PAL_FALSE;
@@ -19681,7 +20513,11 @@ WDI_ProcessExitBmpsRsp
   if( eWLAN_PAL_STATUS_SUCCESS != wptStatus ) 
   {
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state", wptStatus);
+=======
+                "WDTS_SetPowerState returned with status %d when trying to notify DTS that host is entering Full Power state\n", wptStatus);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     WDI_ASSERT(0);
   }
   pWDICtx->bInBmps = eWLAN_PAL_FALSE;
@@ -21296,8 +22132,11 @@ WDI_ProcessTdlsInd
   wdiInd.wdiIndicationData.wdiTdlsIndInfo.reasonCode
                           = halTdlsIndMsg.tdlsIndParams.reasonCode;
 
+<<<<<<< HEAD
   wdiInd.wdiIndicationData.wdiTdlsIndInfo.assocId
                           = halTdlsIndMsg.tdlsIndParams.assocId;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*Notify UMAC*/
   pWDICtx->wdiLowLevelIndCB( &wdiInd, pWDICtx->pIndUserData );
 
@@ -21688,7 +22527,11 @@ WDI_ProcessHALDumpCmdReq
             (usDataOffset + sizeof(halDumpCmdReqMsg.dumpCmdReqParams) )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
               "Unable to get send buffer in HAL Dump Command req %p %p %p",
+=======
+              "Unable to get send buffer in HAL Dump Command req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, pwdiHALDumpCmdParams, wdiHALDumpCmdRspCb);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE;
@@ -21917,8 +22760,11 @@ WDI_RXMsgCTSCB
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
               "Invalid packet received from HAL - catastrophic failure");
     WDI_DetectedDeviceError( pWDICtx, WDI_ERR_INVALID_RSP_FMT);
+<<<<<<< HEAD
     wpalWlanReload();
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return;
   }
 
@@ -22029,7 +22875,11 @@ WDI_ProcessRequest
       ( NULL != pfnReqProcTbl[pEventData->wdiRequest] ))
   {
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
               "Calling request processing function for req %s (%d) %p",
+=======
+              "Calling request processing function for req %s (%d) %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               WDI_getReqMsgString(pEventData->wdiRequest),
               pEventData->wdiRequest, pfnReqProcTbl[pEventData->wdiRequest]);
     return pfnReqProcTbl[pEventData->wdiRequest](pWDICtx, pEventData);
@@ -22164,6 +23014,7 @@ WDI_SendMsg
        (eWLAN_PAL_STATUS_E_RESOURCES != ret))
    {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
                 "Failed to send message with expected response %s (%d)"
                 " over the bus - catastrophic failure",
                 WDI_getRespMsgString(pWDICtx->wdiExpectedResponse),
@@ -22171,6 +23022,11 @@ WDI_SendMsg
 
      wdiStatus = (ret == eWLAN_PAL_STATUS_E_FAILURE) ?
                   WDI_STATUS_DEV_INTERNAL_FAILURE : WDI_STATUS_E_FAILURE;
+=======
+                "Failed to send message over the bus - catastrophic failure");
+
+     wdiStatus = WDI_STATUS_E_FAILURE;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
    else
    {
@@ -22203,10 +23059,15 @@ WDI_SendMsg
      (wdiStatus) to WDI_STATUS_PENDING. This makes sure that WDA doesnt
      end up repeating the functonality in the req callback  for the
      WDI_STATUS_E_FAILURE case*/
+<<<<<<< HEAD
      if (wdiStatus != WDI_STATUS_SUCCESS)
      {
        wdiStatus = WDI_STATUS_PENDING;
      }
+=======
+     if (wdiStatus == WDI_STATUS_E_FAILURE)
+       wdiStatus = WDI_STATUS_PENDING;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
   if ( wdiStatus == WDI_STATUS_SUCCESS )
@@ -22216,7 +23077,10 @@ WDI_SendMsg
 
    /*cache current timestamp for debugging */
    pWDICtx->uTimeStampRspTmrStart = wpalGetSystemTime();
+<<<<<<< HEAD
    pWDICtx->uArchTimeStampRspTmrStart = wpalGetArchCounterTime();
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   }
   else
   {
@@ -22315,8 +23179,11 @@ WDI_DetectedDeviceError
             "Device Error detected code: %d - transitioning to stopped state",
             usErrorCode);
 
+<<<<<<< HEAD
   pWDICtx->DeviceErrorReason = VOS_RETURN_ADDRESS;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   wpalMutexAcquire(&pWDICtx->wptMutex);
 
   WDI_STATableStop(pWDICtx);
@@ -22379,7 +23246,10 @@ WDI_ResponseTimerCB
 
   /*cache current timestamp for debugging */
   pWDICtx->uTimeStampRspTmrExp = wpalGetSystemTime();
+<<<<<<< HEAD
   pWDICtx->uArchTimeStampRspTmrExp = wpalGetArchCounterTime();
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /* If response timer is running at this time that means this timer
    * event is not for the last request but rather last-to-last request and
@@ -22390,6 +23260,7 @@ WDI_ResponseTimerCB
   {
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
                "WDI_ResponseTimerCB: timer in running state on timer event, "
+<<<<<<< HEAD
                "ignore tmr event, timeStampTmrStart: %u, timeStampTmrExp: %u",
                pWDICtx->uTimeStampRspTmrStart, pWDICtx->uTimeStampRspTmrExp);
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
@@ -22398,6 +23269,10 @@ WDI_ResponseTimerCB
                pWDICtx->uArchTimeStampRspTmrStart,
                pWDICtx->uArchTimeStampRspTmrExp);
 
+=======
+               "ignore tmr event, timeStampTmrStart: %ld, timeStampTmrExp: %ld",
+               pWDICtx->uTimeStampRspTmrStart, pWDICtx->uTimeStampRspTmrExp);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return;
   }
 
@@ -22406,6 +23281,7 @@ WDI_ResponseTimerCB
 
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_FATAL,
             "Timeout occurred while waiting for %s (%d) message from device "
+<<<<<<< HEAD
             " - catastrophic failure, timeStampTmrStart: %u, timeStampTmrExp: %u",
             WDI_getRespMsgString(pWDICtx->wdiExpectedResponse),
             pWDICtx->wdiExpectedResponse, pWDICtx->uTimeStampRspTmrStart,
@@ -22415,6 +23291,12 @@ WDI_ResponseTimerCB
                 "uArchTimeStampTmrExp: %llu seconds",
                 pWDICtx->uArchTimeStampRspTmrStart,
                 pWDICtx->uArchTimeStampRspTmrExp);
+=======
+            " - catastrophic failure, timeStampTmrStart: %ld, timeStampTmrExp: %ld",
+            WDI_getRespMsgString(pWDICtx->wdiExpectedResponse),
+            pWDICtx->wdiExpectedResponse, pWDICtx->uTimeStampRspTmrStart,
+            pWDICtx->uTimeStampRspTmrExp);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /* WDI timeout means Riva is not responding or SMD communication to Riva
      * is not happening. The only possible way to recover from this error
@@ -22431,6 +23313,7 @@ WDI_ResponseTimerCB
     }
 #ifndef WDI_RE_ENABLE_WIFI_ON_WDI_TIMEOUT
     wpalWcnssResetIntr();
+<<<<<<< HEAD
     if(wpalIslogPInProgress())
     {
       if(wpalIsSsrPanicOnFailure())
@@ -22439,6 +23322,10 @@ WDI_ResponseTimerCB
        /* if this timer fires, it means Riva did not receive the FIQ */
        wpalTimerStart(&pWDICtx->ssrTimer, WDI_SSR_TIMEOUT);
     }
+=======
+    /* if this timer fires, it means Riva did not receive the FIQ */
+    wpalTimerStart(&pWDICtx->ssrTimer, WDI_SSR_TIMEOUT);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #else
     WDI_DetectedDeviceError(pWDICtx, WDI_ERR_BASIC_OP_FAILURE);
     wpalWlanReload();
@@ -22448,6 +23335,7 @@ WDI_ResponseTimerCB
   {
      WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "Timeout occurred but not waiting for any response %d "
+<<<<<<< HEAD
                  "timeStampTmrStart: %u, timeStampTmrExp: %u",
                  pWDICtx->wdiExpectedResponse, pWDICtx->uTimeStampRspTmrStart,
                  pWDICtx->uTimeStampRspTmrExp);
@@ -22457,6 +23345,11 @@ WDI_ResponseTimerCB
                 pWDICtx->uArchTimeStampRspTmrStart,
                 pWDICtx->uArchTimeStampRspTmrExp);
 
+=======
+                 "timeStampTmrStart: %ld, timeStampTmrExp: %ld",
+                 pWDICtx->wdiExpectedResponse, pWDICtx->uTimeStampRspTmrStart,
+                 pWDICtx->uTimeStampRspTmrExp);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   }
 
   return; 
@@ -22490,7 +23383,11 @@ WDI_ProcessResponse
       ( NULL != pfnRspProcTbl[pEventData->wdiResponse] ))
   {
     WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
               "Calling response processing function for resp %s (%d) %p",
+=======
+              "Calling response processing function for resp %s (%d) %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               WDI_getRespMsgString(pEventData->wdiResponse),
               pEventData->wdiResponse, pfnRspProcTbl[pEventData->wdiResponse]);
     return pfnRspProcTbl[pEventData->wdiResponse](pWDICtx, pEventData);
@@ -22568,6 +23465,7 @@ WDI_QueuePendingReq
   /*Send wpt a pointer to the node (this is the 1st element in the event data)*/
   pNode = (wpt_list_node*)pEventDataQueue;
 
+<<<<<<< HEAD
   if (eWLAN_PAL_STATUS_E_FAILURE ==
             wpal_list_insert_back(&(pWDICtx->wptPendingQueue), pNode))
   {
@@ -22578,6 +23476,9 @@ WDI_QueuePendingReq
       wpalMemoryFree(pEventInfo);
       return WDI_STATUS_MEM_FAILURE;
   }
+=======
+  wpal_list_insert_back(&(pWDICtx->wptPendingQueue), pNode);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   return WDI_STATUS_SUCCESS;
 }/*WDI_QueuePendingReq*/
@@ -22850,6 +23751,7 @@ WDI_QueueNewAssocRequest
   /*This association is currently being queued*/
   pSession->bAssocReqQueued = eWLAN_PAL_TRUE;
 
+<<<<<<< HEAD
   if (eWLAN_PAL_STATUS_E_FAILURE ==
             wpal_list_insert_back(&(pSession->wptPendingQueue), pNode))
   {
@@ -22861,6 +23763,9 @@ WDI_QueueNewAssocRequest
     wpalMemoryFree(pEventInfo);
     return WDI_STATUS_MEM_FAILURE;
   }
+=======
+  wpal_list_insert_back(&(pSession->wptPendingQueue), pNode);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*We need to maintain a separate list that keeps track of the order in which
   the new assoc requests are being queued such that we can start processing
@@ -22870,6 +23775,7 @@ WDI_QueueNewAssocRequest
 
   WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
        "Queueing up new assoc session : %d ", pSessionIdElement->ucIndex);
+<<<<<<< HEAD
   if (eWLAN_PAL_STATUS_E_FAILURE ==
          wpal_list_insert_back(&pWDICtx->wptPendingAssocSessionIdQueue, pNode))
   {
@@ -22881,6 +23787,9 @@ WDI_QueueNewAssocRequest
     wpalMemoryFree(pEventInfo);
     return WDI_STATUS_MEM_FAILURE;
   }
+=======
+  wpal_list_insert_back(&pWDICtx->wptPendingAssocSessionIdQueue, pNode);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*Return pending as this is what the status of the request is since it has
     been queued*/
@@ -22963,6 +23872,7 @@ WDI_QueueAssocRequest
   /*This association is currently being queued*/
   pSession->bAssocReqQueued = eWLAN_PAL_TRUE;
 
+<<<<<<< HEAD
   if (eWLAN_PAL_STATUS_E_FAILURE ==
           wpal_list_insert_back(&(pSession->wptPendingQueue), pNode))
   {
@@ -22974,6 +23884,9 @@ WDI_QueueAssocRequest
     wpalMemoryFree(pEventInfo);
     return WDI_STATUS_MEM_FAILURE;
   }
+=======
+  wpal_list_insert_back(&(pSession->wptPendingQueue), pNode);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*The result of this operation is pending because the request has been
     queued and it will be processed at a later moment in time */
@@ -23562,7 +24475,11 @@ WDI_Status WDI_SendNvBlobReq
            (usDataOffset + sizeof(halNvImgDownloadParam.nvImageReqParams) + usCurrentFragmentSize )))
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
          "Unable to get send buffer in NV Download req %p %p ",
+=======
+         "Unable to get send buffer in NV Download req %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          pEventData, pwdiNvDownloadReqParams);
     WDI_ASSERT(0);
     return WDI_STATUS_E_FAILURE;
@@ -23742,7 +24659,11 @@ WDI_2_HAL_REQ_TYPE
     return WLAN_HAL_ADD_BA_REQ;
   case WDI_DEL_BA_REQ:
     return WLAN_HAL_DEL_BA_REQ; 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WDI_TSM_STATS_REQ:
     return WLAN_HAL_TSM_STATS_REQ; 
 #endif
@@ -23768,8 +24689,11 @@ WDI_2_HAL_REQ_TYPE
     return WLAN_HAL_UPDATE_PROBE_RSP_TEMPLATE_REQ;
    case WDI_SET_MAX_TX_POWER_REQ:
     return WLAN_HAL_SET_MAX_TX_POWER_REQ;
+<<<<<<< HEAD
   case WDI_SET_MAX_TX_POWER_PER_BAND_REQ:
     return WLAN_HAL_SET_MAX_TX_POWER_PER_BAND_REQ;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    case WDI_SET_TX_POWER_REQ:
     return WLAN_HAL_SET_TX_POWER_REQ;
   case WDI_P2P_GO_NOTICE_OF_ABSENCE_REQ:
@@ -23777,8 +24701,11 @@ WDI_2_HAL_REQ_TYPE
 #ifdef FEATURE_WLAN_TDLS
   case WDI_TDLS_LINK_ESTABLISH_REQ:
     return WLAN_HAL_TDLS_LINK_ESTABLISHED_REQ;
+<<<<<<< HEAD
   case WDI_TDLS_CHAN_SWITCH_REQ:
     return WLAN_HAL_TDLS_CHAN_SWITCH_REQ;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
   case WDI_ENTER_IMPS_REQ:
     return WLAN_HAL_ENTER_IMPS_REQ;
@@ -23916,6 +24843,7 @@ WDI_2_HAL_REQ_TYPE
   case WDI_TRIGGER_BATCH_SCAN_RESULT_IND:
        return WLAN_HAL_BATCHSCAN_TRIGGER_RESULT_IND;
 #endif
+<<<<<<< HEAD
   case WDI_RATE_UPDATE_IND:
     return WLAN_HAL_RATE_UPDATE_IND;
   case WDI_START_HT40_OBSS_SCAN_IND:
@@ -23959,6 +24887,9 @@ WDI_2_HAL_REQ_TYPE
        return WLAN_HAL_MAC_SPOOFED_SCAN_REQ;
   case WDI_ENCRYPT_MSG_REQ:
        return WLAN_HAL_ENCRYPT_DATA_REQ;
+=======
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   default:
     return WLAN_HAL_MSG_MAX;
   }
@@ -24022,7 +24953,11 @@ HAL_2_WDI_RSP_TYPE
     return WDI_ADD_BA_RESP;
   case WLAN_HAL_DEL_BA_RSP:
     return WDI_DEL_BA_RESP;
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WLAN_HAL_TSM_STATS_RSP:
     return WDI_TSM_STATS_RESP;
 #endif
@@ -24065,14 +25000,20 @@ HAL_2_WDI_RSP_TYPE
     return WDI_HAL_P2P_NOA_ATTR_IND;
   case WLAN_HAL_P2P_NOA_START_IND:
     return WDI_HAL_P2P_NOA_START_IND;
+<<<<<<< HEAD
   case WLAN_HAL_DEL_BA_IND:
     return WDI_HAL_DEL_BA_IND;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WLAN_HAL_TX_PER_HIT_IND:
     return WDI_HAL_TX_PER_HIT_IND;
   case WLAN_HAL_SET_MAX_TX_POWER_RSP:
     return WDI_SET_MAX_TX_POWER_RESP;
+<<<<<<< HEAD
   case WLAN_HAL_SET_MAX_TX_POWER_PER_BAND_RSP:
     return WDI_SET_MAX_TX_POWER_PER_BAND_RSP;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WLAN_HAL_SET_TX_POWER_RSP:
     return WDI_SET_TX_POWER_RESP;
   case WLAN_HAL_SET_P2P_GONOA_RSP:
@@ -24080,8 +25021,11 @@ HAL_2_WDI_RSP_TYPE
 #ifdef FEATURE_WLAN_TDLS
   case WLAN_HAL_TDLS_LINK_ESTABLISHED_RSP:
     return WDI_TDLS_LINK_ESTABLISH_REQ_RESP;
+<<<<<<< HEAD
   case WLAN_HAL_TDLS_CHAN_SWITCH_RSP:
     return WDI_TDLS_CHAN_SWITCH_REQ_RESP;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WLAN_HAL_TDLS_IND:
     return WDI_HAL_TDLS_IND;
 #endif
@@ -24196,14 +25140,22 @@ case WLAN_HAL_DEL_STA_SELF_RSP:
   case WLAN_HAL_UPDATE_VHT_OP_MODE_RSP:
       return WDI_UPDATE_VHT_OP_MODE_RESP;
 #endif
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WLAN_HAL_GET_ROAM_RSSI_RSP:
     return WDI_GET_ROAM_RSSI_RESP;
 #endif
 
 #ifdef FEATURE_WLAN_LPHB
   case WLAN_HAL_LPHB_IND:
+<<<<<<< HEAD
     return WDI_HAL_LPHB_IND;
+=======
+    return WDI_HAL_LPHB_WAIT_TIMEOUT_IND;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WLAN_HAL_LPHB_CFG_RSP:
     return WDI_LPHB_CFG_RESP;
 #endif /* FEATURE_WLAN_LPHB */
@@ -24220,6 +25172,7 @@ case WLAN_HAL_DEL_STA_SELF_RSP:
     return WDI_BATCHSCAN_RESULT_IND;
 #endif // FEATURE_WLAN_BATCH_SCAN
 
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_CH_AVOID
   case WLAN_HAL_AVOID_FREQ_RANGE_IND:
     return WDI_HAL_CH_AVOID_IND;
@@ -24275,6 +25228,8 @@ case WLAN_HAL_DEL_STA_SELF_RSP:
   case WLAN_HAL_ENCRYPT_DATA_RSP:
        return WDI_ENCRYPT_MSG_RSP;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   default:
     return eDRIVER_TYPE_MAX;
   }
@@ -24761,7 +25716,10 @@ WDI_CopyWDIStaCtxToHALStaCtx
      phalConfigSta_V1->vhtCapable = pwdiConfigSta->ucVhtCapableSta;
      phalConfigSta_V1->vhtTxChannelWidthSet = pwdiConfigSta->ucVhtTxChannelWidthSet;
      phalConfigSta_V1->vhtTxBFEnabled = pwdiConfigSta->ucVhtTxBFEnabled;
+<<<<<<< HEAD
      phalConfigSta_V1->vhtTxMUBformeeCapable = pwdiConfigSta->vhtTxMUBformeeCapable;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      phalConfigSta_V1->htLdpcEnabled = pwdiConfigSta->ucHtLdpcEnabled;
      phalConfigSta_V1->vhtLdpcEnabled = pwdiConfigSta->ucVhtLdpcEnabled;
 
@@ -25107,7 +26065,11 @@ WDI_ExtractRequestCBFromEvent
     *ppfnReqCB   =  ((WDI_DelBAReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_DelBAReqParamsType*)pEvent->pEventData)->pUserData;
     break;
+<<<<<<< HEAD
 #ifdef FEATURE_WLAN_ESE
+=======
+#ifdef FEATURE_WLAN_CCX
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    case WDI_TSM_STATS_REQ:
     *ppfnReqCB   =  ((WDI_TSMStatsReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_TSMStatsReqParamsType*)pEvent->pEventData)->pUserData;
@@ -25117,10 +26079,13 @@ WDI_ExtractRequestCBFromEvent
     *ppfnReqCB   =  ((WDI_SwitchChReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_SwitchChReqParamsType*)pEvent->pEventData)->pUserData;
     break;
+<<<<<<< HEAD
   case WDI_CH_SWITCH_REQ_V1:
     *ppfnReqCB   =  ((WDI_SwitchChReqParamsType_V1*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_SwitchChReqParamsType_V1*)pEvent->pEventData)->pUserData;
     break;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WDI_CONFIG_STA_REQ:
     *ppfnReqCB   =  ((WDI_ConfigSTAReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_ConfigSTAReqParamsType*)pEvent->pEventData)->pUserData;
@@ -25133,7 +26098,11 @@ WDI_ExtractRequestCBFromEvent
     *ppfnReqCB   =  ((WDI_GetStatsReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_GetStatsReqParamsType*)pEvent->pEventData)->pUserData;
     break;
+<<<<<<< HEAD
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
+=======
+#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case WDI_GET_ROAM_RSSI_REQ:
     *ppfnReqCB   =  ((WDI_GetRoamRssiReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_GetRoamRssiReqParamsType*)pEvent->pEventData)->pUserData;
@@ -25167,10 +26136,13 @@ WDI_ExtractRequestCBFromEvent
     *ppfnReqCB   =  ((WDI_ExitBmpsReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_ExitBmpsReqParamsType*)pEvent->pEventData)->pUserData;
      break;
+<<<<<<< HEAD
   case  WDI_ENTER_IMPS_REQ:
     *ppfnReqCB   =  ((WDI_EnterImpsReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_EnterImpsReqParamsType*)pEvent->pEventData)->pUserData;
      break;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   case  WDI_ENTER_UAPSD_REQ:
     *ppfnReqCB   =  ((WDI_EnterUapsdReqParamsType*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_EnterUapsdReqParamsType*)pEvent->pEventData)->pUserData;
@@ -25290,10 +26262,13 @@ WDI_ExtractRequestCBFromEvent
     break;
 #endif
 
+<<<<<<< HEAD
   case WDI_SPOOF_MAC_ADDR_REQ:
     *ppfnReqCB   =  ((WDI_GtkOffloadGetInfoReqMsg*)pEvent->pEventData)->wdiReqStatusCB;
     *ppUserData  =  ((WDI_GtkOffloadGetInfoReqMsg*)pEvent->pEventData)->pUserData;
     break;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   default:
     *ppfnReqCB   =  NULL;
     *ppUserData  =  NULL;
@@ -25345,6 +26320,7 @@ WDI_IsHwFrameTxTranslationCapable
   return gWDICb.bFrameTransEnabled;
 }/*WDI_IsHwFrameTxTranslationCapable*/
 
+<<<<<<< HEAD
 
 /**
  @brief WDI_IsSelfSTA - check if staid is self sta index
@@ -25371,6 +26347,8 @@ wpt_boolean WDI_IsSelfSTA(  void*  pWDICtx, wpt_uint8 ucSTAIdx )
 
 
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_SCAN_PNO
 /**
  @brief WDI_SetPreferredNetworkList
@@ -25556,7 +26534,11 @@ WDI_PackPreferredNetworkList
        ( usSendSize < (usDataOffset + sizeof(tPrefNetwListParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Set PNO req %p",
+=======
+                  "Unable to get send buffer in Set PNO req %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pwdiPNOScanReqParams);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -25709,7 +26691,11 @@ WDI_PackPreferredNetworkListNew
        ( usSendSize < (usDataOffset + sizeof(tPrefNetwListParamsNew) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Set PNO req %p",
+=======
+                  "Unable to get send buffer in Set PNO req %x  ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pwdiPNOScanReqParams);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -25861,6 +26847,7 @@ WDI_ProcessSetPreferredNetworkReq
       return WDI_STATUS_E_FAILURE;
    }
 
+<<<<<<< HEAD
    /*----------------------------------------------------------------------
      Avoid Enable PNO during any active session or an ongoing session
    ----------------------------------------------------------------------*/
@@ -25873,6 +26860,8 @@ WDI_ProcessSetPreferredNetworkReq
      return WDI_STATUS_E_FAILURE;
    }
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /*-------------------------------------------------------------------------
      Pack the PNO request structure based on version
    -------------------------------------------------------------------------*/
@@ -25959,7 +26948,11 @@ WDI_ProcessSetRssiFilterReq
        ( usSendSize < (usDataOffset + sizeof(ucRssiThreshold) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Set PNO req %p %p %p",
+=======
+                  "Unable to get send buffer in Set PNO req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiRssiFilterReqParams, wdiRssiFilterCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -26102,7 +27095,11 @@ WDI_PackRoamScanOffloadParams
        ( usSendSize < (usDataOffset + sizeof(tRoamCandidateListParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Start Roam Candidate Lookup Req %p",
+=======
+                  "Unable to get send buffer in Start Roam Candidate Lookup Req %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pwdiRoamScanOffloadReqParams);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -26130,7 +27127,10 @@ WDI_PackRoamScanOffloadParams
    pRoamCandidateListParams->ConnectedNetwork.ChannelCount = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.ConnectedNetwork.ChannelCount;
    pRoamCandidateListParams->ChannelCacheType = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.ChannelCacheType ;
    pRoamCandidateListParams->LookupThreshold = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.LookupThreshold;
+<<<<<<< HEAD
    pRoamCandidateListParams->RxSensitivityThreshold = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.RxSensitivityThreshold;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    pRoamCandidateListParams->RoamRssiDiff = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.RoamRssiDiff ;
    pRoamCandidateListParams->MAWCEnabled = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.MAWCEnabled ;
    pRoamCandidateListParams->Command = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.Command ;
@@ -26140,7 +27140,11 @@ WDI_PackRoamScanOffloadParams
    pRoamCandidateListParams->NeighborScanChannelMinTime = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.NeighborScanChannelMinTime ;
    pRoamCandidateListParams->NeighborScanChannelMaxTime = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.NeighborScanChannelMaxTime ;
    pRoamCandidateListParams->EmptyRefreshScanPeriod = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.EmptyRefreshScanPeriod ;
+<<<<<<< HEAD
    pRoamCandidateListParams->IsESEEnabled = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.IsESEEnabled ;
+=======
+   pRoamCandidateListParams->IsCCXEnabled = pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.IsCCXEnabled ;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    wpalMemoryCopy(pRoamCandidateListParams->ValidChannelList,
                   pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.ValidChannelList,
                   pwdiRoamScanOffloadReqParams->wdiRoamOffloadScanInfo.ValidChannelCount);
@@ -26152,7 +27156,11 @@ WDI_PackRoamScanOffloadParams
               "NeighborRoamScanRefreshPeriod=%d,NeighborScanChannelMinTime=%d,"
               "NeighborScanChannelMaxTime = %d,EmptyRefreshScanPeriod=%d,"
               "mdiePresent=%d,MDID=%d, auth=%d, uce=%d, mce=%d, nProbes=%d,"
+<<<<<<< HEAD
               "HomeAwayTime=%d",
+=======
+              "HomeAwayTime=%d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               pRoamCandidateListParams->ConnectedNetwork.ssId.ssId,
               pRoamCandidateListParams->RoamScanOffloadEnabled,
               pRoamCandidateListParams->Command,
@@ -26350,7 +27358,11 @@ WDI_PackUpdateScanParamsReq
        ( usSendSize < (usDataOffset + sizeof(updateScanParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Update Scan Params req %p",
+=======
+                  "Unable to get send buffer in Update Scan Params req %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pwdiUpdateScanParams);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -26430,7 +27442,11 @@ WDI_PackUpdateScanParamsReqEx
        ( usSendSize < (usDataOffset + sizeof(updateScanParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Update Scan Params Ex req %p",
+=======
+                  "Unable to get send buffer in Update Scan Params Ex req %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pwdiUpdateScanParams);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -26541,6 +27557,7 @@ WDI_ProcessUpdateScanParamsReq
 }
 
 /**
+<<<<<<< HEAD
  @brief Process Update Channel Params function
 
  @param  pWDICtx:         pointer to the WLAN DAL context
@@ -26613,6 +27630,8 @@ WDI_ProcessUpdateChannelParamsReq
 }
 
 /**
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  @brief Process Preferred Network Found Indication function
 
  @param  pWDICtx:         pointer to the WLAN DAL context
@@ -26679,7 +27698,11 @@ WDI_ProcessPrefNetworkFoundInd
 
   // DEBUG
   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
               "[PNO WDI] PREF_NETWORK_FOUND_IND Type (%d) data (SSID=%.*s, LENGTH=%u,  RSSI=%u)",
+=======
+              "[PNO WDI] PREF_NETWORK_FOUND_IND Type (%x) data (SSID=%.*s, LENGTH=%u,  RSSI=%u)",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               wdiInd.wdiIndicationType,
               wdiInd.wdiIndicationData.wdiPrefNetworkFoundInd.ssId.ucLength,
               wdiInd.wdiIndicationData.wdiPrefNetworkFoundInd.ssId.sSSID,
@@ -26828,8 +27851,12 @@ WDI_ProcessUpdateScanParamsRsp
    }
 
    WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
               "%s: Process UPD scan params ptr : %p",
               __func__, pEventData->pEventData);
+=======
+                  "Process UPD scan params ptr : %x", __func__);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   wdiUpdateScanParamsCb = (WDI_UpdateScanParamsCb)pWDICtx->pfncRspCB;
 
@@ -27090,7 +28117,11 @@ WDI_Process8023MulticastListReq
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
                   "Unable to get send buffer in "
+<<<<<<< HEAD
                   "WDI_Process8023MulticastListReq() %p %p %p",
+=======
+                  "WDI_Process8023MulticastListReq() %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiFltPktSetMcListReqParamsType,
                   wdi8023MulticastListCb);
       wpalMemoryFree(pRcvFltMcAddrListType);
@@ -27196,7 +28227,11 @@ WDI_ProcessReceiveFilterSetFilterReq
        {
          WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
                  "%s: Failed to allocate memory for "
+<<<<<<< HEAD
                  "tHalRcvPktFilterCfgType: %p %p %p ",
+=======
+                 "tHalRcvPktFilterCfgType: %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  __func__, pWDICtx, pEventData, pEventData->pEventData);
          WDI_ASSERT(0);
          return WDI_STATUS_E_FAILURE;
@@ -27215,7 +28250,11 @@ WDI_ProcessReceiveFilterSetFilterReq
         {
            WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
                        "Unable to get send buffer in "
+<<<<<<< HEAD
                        "WDI_ProcessReceiveFilterSetFilterReq() %p %p %p",
+=======
+                       "WDI_ProcessReceiveFilterSetFilterReq() %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                        pEventData, pwdiSetRcvPktFilterReqInfo,
                        wdiReceiveFilterSetFilterCb);
            WDI_ASSERT(0);
@@ -27224,7 +28263,11 @@ WDI_ProcessReceiveFilterSetFilterReq
         }
 
         WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                    "UsData Off %d UsSend %d cfg %p",usDataOffset,
+=======
+                   "UsData Off %d UsSend %d cfg %d",usDataOffset,
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    usSendSize,pSessRcvPktFilterCfg);
        
         pSessRcvPktFilterCfg->filterId = pwdiSetRcvPktFilterReqInfo->wdiPktFilterCfg.filterId;
@@ -27260,17 +28303,29 @@ WDI_ProcessReceiveFilterSetFilterReq
                          8);
        
            WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                 "Out:Proto %d Comp Flag %d",
+=======
+                "Out:Proto %d Comp Flag %d \n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pSessRcvPktFilterCfg->paramsData[i].protocolLayer,
                 pSessRcvPktFilterCfg->paramsData[i].cmpFlag);
 
            WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                 "Data Offset %d Data Len %d",
+=======
+                "Data Offset %d Data Len %d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pSessRcvPktFilterCfg->paramsData[i].dataOffset,
                 pSessRcvPktFilterCfg->paramsData[i].dataLength);
        
            WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                 "CData: %d:%d:%d:%d:%d:%d",
+=======
+                "CData: %d:%d:%d:%d:%d:%d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pSessRcvPktFilterCfg->paramsData[i].compareData[0],
                 pSessRcvPktFilterCfg->paramsData[i].compareData[1],
                 pSessRcvPktFilterCfg->paramsData[i].compareData[2],
@@ -27279,7 +28334,11 @@ WDI_ProcessReceiveFilterSetFilterReq
                 pSessRcvPktFilterCfg->paramsData[i].compareData[5]);
        
            WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                 "MData: %d:%d:%d:%d:%d:%d",
+=======
+                "MData: %d:%d:%d:%d:%d:%d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pSessRcvPktFilterCfg->paramsData[i].dataMask[0],
                 pSessRcvPktFilterCfg->paramsData[i].dataMask[1],
                 pSessRcvPktFilterCfg->paramsData[i].dataMask[2],
@@ -27313,7 +28372,11 @@ WDI_ProcessReceiveFilterSetFilterReq
       {
             WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
                 "%s: Failed to allocate memory for "
+<<<<<<< HEAD
                 "tHalRcvPktFilterCfgType: %p %p %p ",
+=======
+                "tHalRcvPktFilterCfgType: %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, pWDICtx, pEventData, pEventData->pEventData);
             WDI_ASSERT(0);
             return WDI_STATUS_E_FAILURE;
@@ -27331,7 +28394,11 @@ WDI_ProcessReceiveFilterSetFilterReq
         {
               WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
                   "Unable to get send buffer in "
+<<<<<<< HEAD
                   "WDI_ProcessReceiveFilterSetFilterReq() %p %p %p",
+=======
+                  "WDI_ProcessReceiveFilterSetFilterReq() %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiSetRcvPktFilterReqInfo,
                   wdiReceiveFilterSetFilterCb);
               WDI_ASSERT(0);
@@ -27374,17 +28441,29 @@ WDI_ProcessReceiveFilterSetFilterReq
                     8);
 
           WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
            "Out:Proto %d Comp Flag %d",
+=======
+           "Out:Proto %d Comp Flag %d \n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            pRcvPktFilterCfg->paramsData[i].protocolLayer,
            pRcvPktFilterCfg->paramsData[i].cmpFlag);
 
           WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
                "Data Offset %d Data Len %d",
+=======
+               "Data Offset %d Data Len %d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pRcvPktFilterCfg->paramsData[i].dataOffset,
                pRcvPktFilterCfg->paramsData[i].dataLength);
 
           WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
                "CData: %d:%d:%d:%d:%d:%d",
+=======
+               "CData: %d:%d:%d:%d:%d:%d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pRcvPktFilterCfg->paramsData[i].compareData[0],
                pRcvPktFilterCfg->paramsData[i].compareData[1],
                pRcvPktFilterCfg->paramsData[i].compareData[2],
@@ -27393,7 +28472,11 @@ WDI_ProcessReceiveFilterSetFilterReq
                pRcvPktFilterCfg->paramsData[i].compareData[5]);
 
           WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                "MData: %d:%d:%d:%d:%d:%d",
+=======
+               "MData: %d:%d:%d:%d:%d:%d\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pRcvPktFilterCfg->paramsData[i].dataMask[0],
                pRcvPktFilterCfg->paramsData[i].dataMask[1],
                pRcvPktFilterCfg->paramsData[i].dataMask[2],
@@ -27488,7 +28571,11 @@ WDI_ProcessFilterMatchCountReq
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
                   "Unable to get send buffer in "
+<<<<<<< HEAD
                   "WDI_ProcessFilterMatchCountReq() %p %p %p",
+=======
+                  "WDI_ProcessFilterMatchCountReq() %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiRcvFltPktMatchCntReqParamsType,
                   wdiFilterMatchCountCb);
       WDI_ASSERT(0);
@@ -27580,7 +28667,11 @@ WDI_ProcessReceiveFilterClearFilterReq
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
                   "Unable to get send buffer in "
+<<<<<<< HEAD
                   "WDI_ProcessReceiveFilterClearFilterReq() %p %p %p",
+=======
+                  "WDI_ProcessReceiveFilterClearFilterReq() %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiRcvFltPktClearReqParamsType,
                   wdiRcvFltPktClearFilterCb);
       WDI_ASSERT(0);
@@ -27988,7 +29079,11 @@ WDI_ProcessSetPowerParamsReq
        ( usSendSize < (usDataOffset + sizeof(powerParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Set PNO req %p %p %p",
+=======
+                  "Unable to get send buffer in Set PNO req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiPowerParamsReqParams, wdiPowerParamsCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE;
@@ -28114,7 +29209,11 @@ WDI_dhcpStartInd
 
    wdiEventData.wdiRequest      = WDI_DHCP_START_IND;
    wdiEventData.pEventData      = wdiDHCPInd;
+<<<<<<< HEAD
    wdiEventData.uEventDataSize  = sizeof(WDI_DHCPInd);
+=======
+   wdiEventData.uEventDataSize  = sizeof(wdiDHCPInd);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    wdiEventData.pCBfnc          = NULL;
    wdiEventData.pUserData       = NULL;
 
@@ -28152,7 +29251,11 @@ WDI_dhcpStopInd
 
    wdiEventData.wdiRequest      = WDI_DHCP_STOP_IND;
    wdiEventData.pEventData      = wdiDHCPInd;
+<<<<<<< HEAD
    wdiEventData.uEventDataSize  = sizeof(WDI_DHCPInd);
+=======
+   wdiEventData.uEventDataSize  = sizeof(wdiDHCPInd);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    wdiEventData.pCBfnc          = NULL;
    wdiEventData.pUserData       = NULL;
 
@@ -28182,8 +29285,11 @@ WDI_ProcessDHCPStartInd
   wpt_uint16              usLen              = 0;
   WDI_DHCPInd*            pwdiDHCPInd        = NULL;
   tDHCPInfo*              pDHCPInfo;
+<<<<<<< HEAD
   WDI_Status              wdiStatus;
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -28218,7 +29324,11 @@ WDI_ProcessDHCPStartInd
      return WDI_STATUS_E_FAILURE;
   }
 
+<<<<<<< HEAD
   pDHCPInfo = (tDHCPInfo*)(pSendBuffer+usDataOffset);
+=======
+  pDHCPInfo = (tDHCPInfo*)pSendBuffer+usDataOffset;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   pDHCPInfo->device_mode = pwdiDHCPInd->device_mode;
   wpalMemoryCopy(pDHCPInfo->macAddr, pwdiDHCPInd->macAddr,
                                         WDI_MAC_ADDR_LEN);
@@ -28229,8 +29339,13 @@ WDI_ProcessDHCPStartInd
  /*-------------------------------------------------------------------------
     Send DHCP Start Indication to HAL
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
   wdiStatus = WDI_SendIndication( pWDICtx, pSendBuffer, usSendSize);
   return (wdiStatus != WDI_STATUS_SUCCESS) ? wdiStatus:WDI_STATUS_SUCCESS_SYNC;
+=======
+  return  WDI_SendIndication( pWDICtx, pSendBuffer, usSendSize);
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }/*WDI_ProcessDHCPStartInd*/
 
 /**
@@ -28255,7 +29370,10 @@ WDI_ProcessDHCPStopInd
   wpt_uint16              usLen              = 0;
   WDI_DHCPInd*            pwdiDHCPInd        = NULL;
   tDHCPInfo*              pDHCPInfo;
+<<<<<<< HEAD
   WDI_Status              wdiStatus;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -28291,7 +29409,11 @@ WDI_ProcessDHCPStopInd
      return WDI_STATUS_E_FAILURE;
   }
 
+<<<<<<< HEAD
   pDHCPInfo = (tDHCPInfo*)(pSendBuffer+usDataOffset);
+=======
+  pDHCPInfo = (tDHCPInfo*)pSendBuffer+usDataOffset;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   pDHCPInfo->device_mode = pwdiDHCPInd->device_mode;
   wpalMemoryCopy(pDHCPInfo->macAddr, pwdiDHCPInd->macAddr,
                                         WDI_MAC_ADDR_LEN);
@@ -28301,8 +29423,12 @@ WDI_ProcessDHCPStopInd
  /*-------------------------------------------------------------------------
     Send DHCP Stop indication to HAL
   -------------------------------------------------------------------------*/
+<<<<<<< HEAD
   wdiStatus = WDI_SendIndication( pWDICtx, pSendBuffer, usSendSize);
   return (wdiStatus != WDI_STATUS_SUCCESS) ? wdiStatus:WDI_STATUS_SUCCESS_SYNC;
+=======
+  return  WDI_SendIndication( pWDICtx, pSendBuffer, usSendSize);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 }/*WDI_ProcessDHCPStopInd*/
 
@@ -28477,7 +29603,11 @@ WDI_ProcessGTKOffloadReq
        ( usSendSize < (usDataOffset + sizeof(gtkOffloadReqParams) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in GTK offload req %p %p %p",
+=======
+                  "Unable to get send buffer in GTK offload req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiGtkOffloadReqMsg, wdiGtkOffloadCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -28576,7 +29706,11 @@ WDI_ProcessGTKOffloadGetInfoReq
        ( usSendSize < ( usDataOffset + sizeof(halGtkOffloadGetInfoReqParams))))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in WDI_ProcessGTKOffloadGetInfoReq() %p %p %p",
+=======
+                  "Unable to get send buffer in WDI_ProcessGTKOffloadGetInfoReq() %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiGtkOffloadGetInfoReqMsg, wdiGtkOffloadGetInfoCb);
       WDI_ASSERT(0);
       goto failRequest;
@@ -28806,7 +29940,11 @@ WDI_ProcessWakeReasonInd
   if(NULL == pWdiInd)
   {
     WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
             "%s: Failed to allocate memory for WDI_WakeReasonIndType: %p %p %p ",
+=======
+            "%s: Failed to allocate memory for WDI_WakeReasonIndType: %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, pWDICtx, pEventData, pEventData->pEventData);
     WDI_ASSERT(0);
     return WDI_STATUS_E_FAILURE; 
@@ -28946,7 +30084,11 @@ WDI_ProcessSetTmLevelReq
        ( usSendSize < (usDataOffset + sizeof(halTmMsg) )))
    {
       WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
                   "Unable to get send buffer in Set PNO req %p %p %p",
+=======
+                  "Unable to get send buffer in Set PNO req %x %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   pEventData, pwdiSetTmLevelReq, wdiSetTmLevelCb);
       WDI_ASSERT(0);
       return WDI_STATUS_E_FAILURE; 
@@ -29026,7 +30168,11 @@ WDI_featureCapsExchangeReq
    if ( NULL ==  gpHostWlanFeatCaps )
    {
       WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                "Cannot allocate memory for host capability info");
+=======
+               "Cannot allocate memory for host capability info\n"); 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       WDI_ASSERT(0);
       return WDI_STATUS_MEM_FAILURE;
    }
@@ -29039,7 +30185,11 @@ WDI_featureCapsExchangeReq
    FillAllFeatureCaps(gpHostWlanFeatCaps, supportEnabledFeatures,
       (sizeof(supportEnabledFeatures)/sizeof(supportEnabledFeatures[0])));
    WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
       "Host caps %x %x %x %x",
+=======
+      "Host caps %x %x %x %x\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       gpHostWlanFeatCaps->featCaps[0],
       gpHostWlanFeatCaps->featCaps[1],
       gpHostWlanFeatCaps->featCaps[2],
@@ -29121,14 +30271,22 @@ WDI_ProcessFeatureCapsExchangeReq
       ( usSendSize < (usDataOffset + usLen )))
   {
      WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_FATAL,
+<<<<<<< HEAD
               "Unable to get send buffer in feat caps exchange req %p %p",
+=======
+              "Unable to get send buffer in feat caps exchange req %x %x",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 pEventData, (tWlanFeatCaps *)pEventData->pEventData);
      WDI_ASSERT(0);
      return WDI_STATUS_E_FAILURE; 
   }
 
   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_INFO,
+<<<<<<< HEAD
        "Host Caps - %x %x %x %x",
+=======
+       "Host Caps - %x %x %x %x\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       ((tWlanFeatCaps *)pEventData->pEventData)->featCaps[0],
       ((tWlanFeatCaps *)pEventData->pEventData)->featCaps[1],
       ((tWlanFeatCaps *)pEventData->pEventData)->featCaps[2],
@@ -29191,7 +30349,11 @@ WDI_ProcessFeatureCapsExchangeRsp
    if ( NULL ==  gpFwWlanFeatCaps )
    {
       WPAL_TRACE(eWLAN_MODULE_DAL_CTRL, eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
                "Cannot allocate memory for host capability info");
+=======
+               "Cannot allocate memory for host capability info\n"); 
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       WDI_ASSERT(0);
       return WDI_STATUS_MEM_FAILURE;
    }
@@ -29207,7 +30369,11 @@ WDI_ProcessFeatureCapsExchangeRsp
    wpalMemoryCopy(gpFwWlanFeatCaps,(tWlanFeatCaps *) pEventData -> pEventData,
                     fCapsStructSize);
    WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_ERROR,
+<<<<<<< HEAD
       "FW caps %x %x %x %x",
+=======
+      "FW caps %x %x %x %x\n",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       gpFwWlanFeatCaps->featCaps[0],
       gpFwWlanFeatCaps->featCaps[1],
       gpFwWlanFeatCaps->featCaps[2],
@@ -29375,7 +30541,11 @@ WDI_ProcessUpdateVHTOpModeReq
   }
 
   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
             "pwdiVHTOpModeParams->opMode=%d, pwdiVHTOpModeParams->staId=%d", pwdiVHTOpModeParams->opMode, pwdiVHTOpModeParams->staId);
+=======
+            "pwdiVHTOpModeParams->opMode=%d, pwdiVHTOpModeParams->staId=%d\n", pwdiVHTOpModeParams->opMode, pwdiVHTOpModeParams->staId);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   wpalMemoryCopy( pSendBuffer+usDataOffset, pwdiVHTOpModeParams,
                   sizeof(WDI_UpdateVHTOpMode));
@@ -29420,7 +30590,11 @@ WDI_UpdateVHTOpModeReq
   wdiEventData.pUserData       = pUserData;
   
   WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
             "pData->opMode=%d, pData->staId=%d", pData->opMode, pData->staId);
+=======
+            "pData->opMode=%d, pData->staId=%d\n", pData->opMode, pData->staId);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   return WDI_PostMainEvent(&gWDICb, WDI_REQUEST_EVENT, &wdiEventData);
 
@@ -29434,20 +30608,33 @@ WDI_UpdateVHTOpModeReq
     Or if host driver detects any abnormal stcuk may display
         
  @param  displaySnapshot : Display DXE snapshot option
+<<<<<<< HEAD
  @param  debugFlags      : Enable stall detect features
                            defined by WPAL_DeviceDebugFlags
                            These features may effect
                            data performance.
+=======
+ @param  enableStallDetect : Enable stall detect feature
+                        This feature will take effect to data performance
+                        Not integrate till fully verification
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  @see
  @return none
 */
 void WDI_TransportChannelDebug
 (
    wpt_boolean  displaySnapshot,
+<<<<<<< HEAD
    wpt_uint8    debugFlags
 )
 {
    WDTS_ChannelDebug(displaySnapshot, debugFlags);
+=======
+   wpt_boolean  toggleStallDetect
+)
+{
+   WDTS_ChannelDebug(displaySnapshot, toggleStallDetect);
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    return;
 }
 /**
@@ -29499,7 +30686,11 @@ void WDI_SetEnableSSR(wpt_boolean  enableSSR)
 
 #ifdef FEATURE_WLAN_LPHB
 /**
+<<<<<<< HEAD
  @brief WDI_ProcessLphbInd -
+=======
+ @brief WDI_ProcessLphbWaitTimeoutInd -
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     This function will be invoked when FW detects low power
     heart beat failure
 
@@ -29509,14 +30700,22 @@ void WDI_SetEnableSSR(wpt_boolean  enableSSR)
  @return Result of the function call
 */
 WDI_Status
+<<<<<<< HEAD
 WDI_ProcessLphbInd
+=======
+WDI_ProcessLphbWaitTimeoutInd
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 (
   WDI_ControlBlockType*  pWDICtx,
   WDI_EventInfoType*     pEventData
 )
 {
   WDI_LowLevelIndType  wdiInd;
+<<<<<<< HEAD
   tHalLowPowerHeartBeatIndParam lphbIndicationParam;
+=======
+  tHalLowPowerHeartBeatIndMsg *lphbIndicationParam;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
   /*-------------------------------------------------------------------------
@@ -29534,6 +30733,7 @@ WDI_ProcessLphbInd
   /*-------------------------------------------------------------------------
   Extract indication and send it to UMAC
  -------------------------------------------------------------------------*/
+<<<<<<< HEAD
    wpalMemoryCopy(&lphbIndicationParam,
                   pEventData->pEventData,
                   sizeof(tHalLowPowerHeartBeatIndParam));
@@ -29547,6 +30747,19 @@ WDI_ProcessLphbInd
                lphbIndicationParam.protocolType;
   wdiInd.wdiIndicationData.wdiLPHBTimeoutInd.eventReason =
                lphbIndicationParam.eventReason;
+=======
+  lphbIndicationParam = (tHalLowPowerHeartBeatIndMsg *)pEventData->pEventData;
+
+  wdiInd.wdiIndicationType = WDI_LPHB_WAIT_TIMEOUT_IND;
+  wdiInd.wdiIndicationData.wdiLPHBTimeoutInd.bssIdx =
+               lphbIndicationParam->lowPowerHeartBeatIndParams.bssIdx;
+  wdiInd.wdiIndicationData.wdiLPHBTimeoutInd.sessionIdx =
+               lphbIndicationParam->lowPowerHeartBeatIndParams.sessionIdx;
+  wdiInd.wdiIndicationData.wdiLPHBTimeoutInd.protocolType =
+               lphbIndicationParam->lowPowerHeartBeatIndParams.protocolType;
+  wdiInd.wdiIndicationData.wdiLPHBTimeoutInd.eventReason =
+               lphbIndicationParam->lowPowerHeartBeatIndParams.eventReason;
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   /*Notify UMAC*/
   if (pWDICtx->wdiLowLevelIndCB)
   {
@@ -29696,10 +30909,13 @@ WDI_Status WDI_ProcessLPHBConfReq
                                 pLphbReqParams->params.lphbTcpParamReq.src_port;
       halLphbReqRarams->options.tcpParams.destPort =
                                 pLphbReqParams->params.lphbTcpParamReq.dst_port;
+<<<<<<< HEAD
       halLphbReqRarams->options.tcpParams.timePeriodSec =
                                 pLphbReqParams->params.lphbTcpParamReq.timePeriodSec;
       halLphbReqRarams->options.tcpParams.tcpSn =
                                 pLphbReqParams->params.lphbTcpParamReq.tcpSn;
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       break;
 
     case WDI_LPHB_SET_TCP_PKT_FILTER_INDID:
@@ -29872,6 +31088,7 @@ WDI_ProcessIbssPeerInactivityInd
 
 } /*WDI_ProcessIbssPeerInactivityInd*/
 
+<<<<<<< HEAD
 /**
 *@brief WDI_RateUpdateInd will be called when the upper MAC
         requests the device to set rates.
@@ -30013,6 +31230,10 @@ WDI_ProcessRateUpdateInd
 } /* WDI_ProcessRateUpdateInd */
 
 #ifdef FEATURE_WLAN_BATCH_SCAN
+=======
+#ifdef FEATURE_WLAN_BATCH_SCAN
+
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief Process stop batch indication from WDA
 
@@ -30200,24 +31421,40 @@ WDI_ProcessSetBatchScanRsp
     if (NULL == pSetBatchScanRsp)
     {
         WPAL_TRACE( eWLAN_MODULE_DAL_CTRL,  eWLAN_PAL_TRACE_LEVEL_WARN,
+<<<<<<< HEAD
             "Failed to allocate memory in set batch scan response %p %p %p ",
+=======
+            "Failed to allocate memory in set batch scan response %x %x %x ",
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             pWDICtx, pEventData, pEventData->pEventData);
         WDI_ASSERT(0);
         return WDI_STATUS_E_FAILURE;
     }
 
+<<<<<<< HEAD
     /* extract response and send it to UMAC */
+=======
+    /*extract response and send it to UMAC*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pHalSetBatchScanRsp = (tHalBatchScanSetRspParam *)pEventData->pEventData;
 
     pSetBatchScanRsp->nScansToBatch = pHalSetBatchScanRsp->supportedMscan;
 
+<<<<<<< HEAD
     /* Notify UMAC */
+=======
+    /*Notify UMAC*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wdiSetBatchScanCb(pSetBatchScanRsp, pWDICtx->pRspCBUserData);
 
     wpalMemoryFree(pSetBatchScanRsp);
 
     return WDI_STATUS_SUCCESS;
+<<<<<<< HEAD
 }/* WDI_ProcessSetBatchScanRsp */
+=======
+}/*WDI_ProcessSetBatchScanRsp*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**
  @brief Process batch scan result indication from FW
@@ -30239,7 +31476,11 @@ WDI_ProcessBatchScanResultInd
     WDI_LowLevelIndType wdiInd;
     /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+<<<<<<< HEAD
     /* sanity check */
+=======
+    /*sanity check*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (( NULL == pWDICtx ) || ( NULL == pEventData ) ||
       ( NULL == pEventData->pEventData))
     {
@@ -30249,15 +31490,26 @@ WDI_ProcessBatchScanResultInd
         return WDI_STATUS_E_FAILURE;
     }
 
+<<<<<<< HEAD
     /* extract response and send it to UMAC */
     pBatchScanResultInd = (void *)pEventData->pEventData;
 
     /* Fill in the indication parameters */
+=======
+    /*extract response and send it to UMAC*/
+    pBatchScanResultInd = (void *)pEventData->pEventData;
+
+    /*Fill in the indication parameters*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wdiInd.wdiIndicationType = WDI_BATCH_SCAN_RESULT_IND;
 
     wdiInd.wdiIndicationData.pBatchScanResult = pBatchScanResultInd;
 
+<<<<<<< HEAD
     /* Notify UMAC */
+=======
+    /*Notify UMAC*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (pWDICtx->wdiLowLevelIndCB)
     {
         pWDICtx->wdiLowLevelIndCB( &wdiInd, pWDICtx->pIndUserData );
@@ -30273,6 +31525,7 @@ WDI_ProcessBatchScanResultInd
     return WDI_STATUS_SUCCESS;
 } /*End of WDI_ProcessBatchScanResultInd*/
 
+<<<<<<< HEAD
 #ifdef WLAN_FEATURE_LINK_LAYER_STATS
 /**
  @brief Process Link Layer Statistics Result indication from FW
@@ -30357,6 +31610,8 @@ WDI_ProcessLinkLayerStatsResultsInd
 } /* End of WDI_ProcessLinkLayerStatsResultsInd */
 #endif /* WLAN_FEATURE_LINK_LAYER_STATS */
 
+=======
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  @brief WDI_ProcessSetBatchScanReq -
     Set batch scan request to FW
@@ -30538,6 +31793,7 @@ WDI_Status WDI_TriggerBatchScanResultInd
 
     return WDI_PostMainEvent(&gWDICb, WDI_REQUEST_EVENT, &wdiEventData);
 }
+<<<<<<< HEAD
 #endif /*FEATURE_WLAN_BATCH_SCAN*/
 
 /**
@@ -33736,3 +34992,7 @@ WDI_ProcessEncryptMsgRsp
           pWDICtx->pRspCBUserData);
   return WDI_STATUS_SUCCESS;
 }
+=======
+
+#endif /*FEATURE_WLAN_BATCH_SCAN*/
+>>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
