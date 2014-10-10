@@ -188,6 +188,8 @@ static DEFINE_SPINLOCK(reg_spinlock);
 #define	WCNSS_VBATT_LEVEL_IND         (WCNSS_CTRL_MSG_START + 8)
 #define	WCNSS_BUILD_VER_REQ           (WCNSS_CTRL_MSG_START + 9)
 #define	WCNSS_BUILD_VER_RSP           (WCNSS_CTRL_MSG_START + 10)
+#define	WCNSS_PM_CONFIG_REQ           (WCNSS_CTRL_MSG_START + 11)
+#define WCNSS_CBC_COMPLETE_IND		(WCNSS_CTRL_MSG_START + 12)
 
 
 #define VALID_VERSION(version) \
@@ -366,6 +368,7 @@ static struct {
 	void __iomem *wlan_brdg_err_source;
 	void __iomem *fiq_reg;
 	int	nv_downloaded;
+	int	is_cbc_done;
 	unsigned char *fw_cal_data;
 	unsigned char *user_cal_data;
 	int	fw_cal_rcvd;
@@ -876,6 +879,7 @@ static void wcnss_smd_notify_event(void *data, unsigned int event)
 		pr_debug("wcnss: closing WCNSS SMD channel :%s",
 				WCNSS_CTRL_CHANNEL);
 		penv->nv_downloaded = 0;
+		penv->is_cbc_done = 0;
 		break;
 
 	default:
@@ -1075,6 +1079,22 @@ int wcnss_device_ready(void)
 }
 EXPORT_SYMBOL(wcnss_device_ready);
 
+int wcnss_cbc_complete(void)
+{
+	if (penv && penv->pdev && penv->is_cbc_done &&
+		!wcnss_device_is_shutdown())
+		return 1;
+	return 0;
+}
+EXPORT_SYMBOL(wcnss_cbc_complete);
+
+int wcnss_device_is_shutdown(void)
+{
+	if (penv && penv->is_shutdown)
+		return 1;
+	return 0;
+}
+EXPORT_SYMBOL(wcnss_device_is_shutdown);
 
 struct resource *wcnss_wlan_get_memory_map(struct device *dev)
 {
@@ -1668,6 +1688,10 @@ static void wcnssctrl_rx_handler(struct work_struct *worker)
 		fw_status = wcnss_fw_status();
 		pr_debug("wcnss: received WCNSS_CALDATA_DNLD_RSP from ccpu %u\n",
 			fw_status);
+		break;
+	case WCNSS_CBC_COMPLETE_IND:
+		penv->is_cbc_done = 1;
+		pr_info("wcnss: received WCNSS_CBC_COMPLETE_IND from FW\n");
 		break;
 
 	case WCNSS_CALDATA_UPLD_REQ:
