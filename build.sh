@@ -2,13 +2,13 @@
 
 KERNEL_DEFCONFIG=msm8226-sec_defconfig
 #DEBUG_DEFCONFIG=msm8974_sec_eng_defconfig
-SELINUX_DEFCONFIG=selinux_defconfig
+export SELINUX_DEFCONFIG=selinux_defconfig
 #SELINUX_LOG_DEFCONFIG=selinux_log_defconfig
-VARIANT_DEFCONFIG=msm8226-sec_matissewifi_defconfig
+export VARIANT_DEFCONFIG=msm8226-sec_matissewifi_defconfig
 
 kernel="sub77"
 variant="matissewifi"
-toolchain=/kernel/arm-eabi-4.8/bin/
+toolchain=/kernel/arm-eabi-4.9-sm/bin/
 toolchain2="arm-eabi-"
 #config="Phoenix_falcon_defconfig"
 kerneltype="zImage-dtb"
@@ -19,7 +19,7 @@ jobcount="-j$(grep -c ^processor /proc/cpuinfo)"
 
 if [ "$1" = "local" ]; then
 	build=/kernel/bliss_kernel_samsung_s3ve3g
-	toolchain=/kernel/arm-eabi-4.8/bin/
+	toolchain=/kernel/arm-eabi-4.9-sm/bin/
 fi
 
 	read -p "Previous build found, clean working directory..(y/n)? : " cchoice
@@ -36,7 +36,7 @@ echo "now building the kernel"
 
 START=$(date +%s)
 
-	make  $(KERNEL_DEFCONFIG) VARIANT_DEFCONFIG=$(VARIANT_DEFCONFIG) SELINUX_DEFCONFIG=$(SELINUX_DEFCONFIG)
+	make  ARCH=arm "$KERNEL_DEFCONFIG" VARIANT_DEFCONFIG="$VARIANT_DEFCONFIG" SELINUX_DEFCONFIG="$SELINUX_DEFCONFIG"
 #	make "$config"
 	make "$jobcount"
 
