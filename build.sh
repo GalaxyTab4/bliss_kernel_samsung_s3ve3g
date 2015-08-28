@@ -1,10 +1,16 @@
 #!/bin/bash
 
-kernel="Phoenix"
-variant="falcon"
-toolchain=/home/chijure/arm-eabi-4.7/bin/
+KERNEL_DEFCONFIG=msm8226-sec_defconfig
+#DEBUG_DEFCONFIG=msm8974_sec_eng_defconfig
+SELINUX_DEFCONFIG=selinux_defconfig
+#SELINUX_LOG_DEFCONFIG=selinux_log_defconfig
+VARIANT_DEFCONFIG=msm8226-sec_matissewifi_defconfig
+
+kernel="sub77"
+variant="matissewifi"
+toolchain=/kernel/arm-eabi-4.8/bin/
 toolchain2="arm-eabi-"
-config="Phoenix_falcon_defconfig"
+#config="Phoenix_falcon_defconfig"
 kerneltype="zImage-dtb"
 jobcount="-j$(grep -c ^processor /proc/cpuinfo)"
 
@@ -12,8 +18,8 @@ jobcount="-j$(grep -c ^processor /proc/cpuinfo)"
 	export CROSS_COMPILE=$toolchain/"$toolchain2"
 
 if [ "$1" = "local" ]; then
-	build=/home/chijure/android_kernel_motorola_msm8226
-	toolchain=/home/chijure/arm-eabi-4.7/bin/
+	build=/kernel/bliss_kernel_samsung_s3ve3g
+	toolchain=/kernel/arm-eabi-4.8/bin/
 fi
 
 	read -p "Previous build found, clean working directory..(y/n)? : " cchoice
@@ -30,7 +36,8 @@ echo "now building the kernel"
 
 START=$(date +%s)
 
-	make "$config"
+	make  $(KERNEL_DEFCONFIG) VARIANT_DEFCONFIG=$(VARIANT_DEFCONFIG) SELINUX_DEFCONFIG=$(SELINUX_DEFCONFIG)
+#	make "$config"
 	make "$jobcount"
 
 # the zip creation
