@@ -64,7 +64,6 @@
 #define ADRENO_DEFAULT_PWRSCALE_POLICY  NULL
 #endif
 
-void adreno_debugfs_init(struct kgsl_device *device);
 
 #define ADRENO_ISTORE_START 0x5000 /* Istore offset */
 
@@ -882,6 +881,12 @@ static inline int adreno_bootstrap_ucode(struct adreno_device *adreno_dev)
 	else
 		return 0;
 }
+
+#ifdef CONFIG_DEBUG_FS
+void adreno_debugfs_init(struct kgsl_device *device);
+#else
+static inline void adreno_debugfs_init(struct kgsl_device *device) { }
+#endif
 
 /**
  * adreno_get_rptr() - Get the current ringbuffer read pointer
