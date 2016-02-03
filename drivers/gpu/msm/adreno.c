@@ -1150,14 +1150,16 @@ static int adreno_iommu_setstate(struct kgsl_device *device,
 	}
 	num_iommu_units = kgsl_mmu_get_num_iommu_units(&device->mmu);
 
-	context = kgsl_context_get(device, context_id);
-	if (context)
-		adreno_ctx = ADRENO_CONTEXT(context);
+			context = kgsl_context_get_owner(dev_priv,
+							constraint.context_id);
 
-	result = kgsl_mmu_enable_clk(&device->mmu, KGSL_IOMMU_CONTEXT_USER);
+			if (context == NULL)
+				break;
 
-	if (result)
-		goto done;
+			status = adreno_set_constraint(device, context,
+								&constraint);
+
+			kgsl_context_put(context);
 	}
 
 	cmds = link;

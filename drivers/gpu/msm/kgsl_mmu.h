@@ -490,15 +490,6 @@ static inline int kgsl_mmu_set_pagefault_policy(struct kgsl_mmu *mmu,
 		return 0;
 }
 
-static inline int kgsl_mmu_set_pagefault_policy(struct kgsl_mmu *mmu,
-						unsigned int pf_policy)
-{
-	if (mmu->mmu_ops && mmu->mmu_ops->mmu_set_pf_policy)
-		return mmu->mmu_ops->mmu_set_pf_policy(mmu, pf_policy);
-	else
-		return 0;
-}
-
 static inline void kgsl_mmu_set_pagefault(struct kgsl_mmu *mmu)
 {
 	if (mmu->mmu_ops && mmu->mmu_ops->mmu_set_pagefault)
