@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**=========================================================================
@@ -58,8 +46,6 @@
   \brief virtual Operating System Servies (vOS)
 
    Definitions for vOSS Timer services
-<<<<<<< HEAD
-=======
 <<<<<<< HEAD:CORE/VOSS/src/vos_timer.c
   
    Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
@@ -73,7 +59,6 @@
    Qualcomm Technologies Confidential and Proprietary.
 
 >>>>>>> f7413b6... wlan: voss: remove obsolete "INTEGRATED_SOC" featurization:prima/CORE/VOSS/src/vos_timer.c
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   ========================================================================*/
 
 /* $Header$ */
@@ -131,29 +116,6 @@ static void tryAllowingSleep( VOS_TIMER_TYPE type )
 
 
 /*----------------------------------------------------------------------------
-<<<<<<< HEAD
-
-  \brief  vos_linux_timer_callback() - internal vos entry point which is
-          called when the timer interval expires
-
-  This function in turn calls the vOS client callback and changes the
-  state of the timer from running (ACTIVE) to expired (INIT).
-
-
-  \param data - pointer to the timer control block which describes the
-                timer that expired
-
-  \return  nothing
-
-  Note: function signature is defined by the Linux kernel.  The fact
-  that the argument is "unsigned long" instead of "void *" is
-  unfortunately imposed upon us.  But we can safely pass a pointer via
-  this parameter for LP32 and LP64 architectures.
-
-  --------------------------------------------------------------------------*/
-
-static void vos_linux_timer_callback (unsigned long data)
-=======
   
   \brief  vos_linux_timer_callback() - internal vos entry point which is 
           called when the timer interval expires 
@@ -178,7 +140,6 @@ static void vos_linux_timer_callback (unsigned long data)
   --------------------------------------------------------------------------*/
 
 static void vos_linux_timer_callback ( v_U32_t data ) 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
    vos_timer_t *timer = ( vos_timer_t *)data; 
    vos_msg_t msg;
@@ -246,18 +207,7 @@ static void vos_linux_timer_callback ( v_U32_t data )
 
    tryAllowingSleep( type );
 
-<<<<<<< HEAD
-   if (callback == NULL)
-   {
-       VOS_ASSERT(0);
-       VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-                 "%s: No TIMER callback, Could not enqueue timer to any queue",
-                 __func__);
-       return;
-   }
-=======
    VOS_ASSERT( callback ); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    // If timer has expired then call vos_client specific callback 
    if ( vos_sched_is_tx_thread( threadId ) )
@@ -267,14 +217,8 @@ static void vos_linux_timer_callback ( v_U32_t data )
          
       //Serialize to the Tx thread
       sysBuildMessageHeader( SYS_MSG_ID_TX_TIMER, &msg );
-<<<<<<< HEAD
-      msg.callback = callback;
-      msg.bodyptr  = userData;
-      msg.bodyval  = 0;
-=======
       msg.bodyptr  = callback;
       msg.bodyval  = (v_U32_t)userData; 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        
       if(vos_tx_mq_serialize( VOS_MQ_ID_SYS, &msg ) == VOS_STATUS_SUCCESS)
          return;
@@ -286,14 +230,8 @@ static void vos_linux_timer_callback ( v_U32_t data )
          
       //Serialize to the Rx thread
       sysBuildMessageHeader( SYS_MSG_ID_RX_TIMER, &msg );
-<<<<<<< HEAD
-      msg.callback = callback;
-      msg.bodyptr  = userData;
-      msg.bodyval  = 0;
-=======
       msg.bodyptr  = callback;
       msg.bodyval  = (v_U32_t)userData; 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        
       if(vos_rx_mq_serialize( VOS_MQ_ID_SYS, &msg ) == VOS_STATUS_SUCCESS)
          return;
@@ -305,14 +243,8 @@ static void vos_linux_timer_callback ( v_U32_t data )
                     
       // Serialize to the MC thread
       sysBuildMessageHeader( SYS_MSG_ID_MC_TIMER, &msg );
-<<<<<<< HEAD
-      msg.callback = callback;
-      msg.bodyptr  = userData;
-      msg.bodyval  = 0;
-=======
       msg.bodyptr  = callback;
       msg.bodyval  = (v_U32_t)userData; 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        
       if(vos_mq_post_message( VOS_MQ_ID_SYS, &msg ) == VOS_STATUS_SUCCESS)
         return;
@@ -525,11 +457,7 @@ VOS_STATUS vos_timer_init_debug( vos_timer_t *timer, VOS_TIMER_TYPE timerType,
     if(VOS_STATUS_SUCCESS != vosStatus)
     {
          VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-             "%s: Unable to insert node into List vosStatus %d", __func__, vosStatus);
-=======
              "%s: Unable to insert node into List vosStatus %d\n", __func__, vosStatus);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
    
    // set the various members of the timer structure 

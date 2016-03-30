@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,16 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/*
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -54,7 +40,6 @@
  */
 /*
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file parserApi.cc contains the code for parsing
  * 802.11 messages.
  * Author:        Pierre Vandwalle
@@ -772,38 +757,10 @@ void limLogOperatingMode( tpAniSirGlobal pMac,
 #endif /* DUMP_MGMT_CNTNTS */
 }
 
-<<<<<<< HEAD
-void limLogQosMapSet(tpAniSirGlobal pMac, tSirQosMapSet *pQosMapSet)
-{
-    tANI_U8 i;
-    limLog(pMac, LOG1, FL("num of dscp exceptions : %d"),
-                                   pQosMapSet->num_dscp_exceptions);
-    for (i=0; i < pQosMapSet->num_dscp_exceptions; i++)
-    {
-        limLog(pMac, LOG1, FL("dscp value: %d"),
-                                 pQosMapSet->dscp_exceptions[i][0]);
-        limLog(pMac, LOG1, FL("User priority value: %d"),
-                                 pQosMapSet->dscp_exceptions[i][1]);
-    }
-    for (i=0;i<8;i++)
-    {
-        limLog(pMac, LOG1, FL("dscp low for up %d: %d"),i,
-                                      pQosMapSet->dscp_range[i][0]);
-        limLog(pMac, LOG1, FL("dscp high for up %d: %d"),i,
-                                      pQosMapSet->dscp_range[i][1]);
-    }
-}
-
-tSirRetStatus
-PopulateDot11fVHTCaps(tpAniSirGlobal           pMac,
-                      tDot11fIEVHTCaps *pDot11f,
-                      tAniBool isProbeRspAssocRspBeacon)
-=======
 
 tSirRetStatus
 PopulateDot11fVHTCaps(tpAniSirGlobal           pMac,
                            tDot11fIEVHTCaps *pDot11f)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     tSirRetStatus        nStatus;
     tANI_U32             nCfgValue=0;
@@ -857,27 +814,6 @@ PopulateDot11fVHTCaps(tpAniSirGlobal           pMac,
                                                                nCfgValue );
     pDot11f->numSoundingDim = (nCfgValue & 0x0007);
 
-<<<<<<< HEAD
-    /* muBeamformerCap should be 0 for non AP and
-     * muBeamformeeCap should be 0 for AP
-     */
-    if(eSIR_TRUE == isProbeRspAssocRspBeacon)
-    {
-       nCfgValue = 0;
-       CFG_GET_INT( nStatus, pMac, WNI_CFG_VHT_MU_BEAMFORMER_CAP, nCfgValue );
-       pDot11f->muBeamformerCap = (nCfgValue & 0x0001);
-       pDot11f->muBeamformeeCap = 0;
-    }
-    else
-    {
-       pDot11f->muBeamformerCap = 0;
-       nCfgValue = 0;
-       CFG_GET_INT( nStatus, pMac, WNI_CFG_VHT_MU_BEAMFORMEE_CAP, nCfgValue );
-       /* Enable only if FW and host both support the MU_MIMO feature
-        */
-       pDot11f->muBeamformeeCap = IS_MUMIMO_BFORMEE_CAPABLE ? (nCfgValue & 0x0001): 0;
-    }
-=======
     nCfgValue = 0;
     CFG_GET_INT( nStatus, pMac, WNI_CFG_VHT_MU_BEAMFORMER_CAP, nCfgValue );
     pDot11f->muBeamformerCap = (nCfgValue & 0x0001);
@@ -885,7 +821,6 @@ PopulateDot11fVHTCaps(tpAniSirGlobal           pMac,
     nCfgValue = 0;
     CFG_GET_INT( nStatus, pMac, WNI_CFG_VHT_MU_BEAMFORMEE_CAP, nCfgValue );
     pDot11f->muBeamformeeCap = (nCfgValue & 0x0001);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     nCfgValue = 0;
     CFG_GET_INT( nStatus, pMac, WNI_CFG_VHT_TXOP_PS, nCfgValue );
@@ -1009,40 +944,11 @@ PopulateDot11fVHTExtBssLoad(tpAniSirGlobal      pMac,
 
 tSirRetStatus
 PopulateDot11fExtCap(tpAniSirGlobal      pMac,
-<<<<<<< HEAD
-                           tDot11fIEExtCap  *pDot11f,
-                           tpPESession   psessionEntry)
-{
-    tANI_U32            val;
-
-#ifdef WLAN_FEATURE_11AC
-    if (psessionEntry->vhtCapability)
-    {
-        pDot11f->operModeNotification = 1;
-        pDot11f->present = 1;
-    }
-#endif
-       /* while operating in 2.4GHz only then STA need to advertize
-               the bss co-ex capability*/
-    if (psessionEntry->currentOperChannel <= RF_CHAN_14)
-    {
-       if (wlan_cfgGetInt(pMac, WNI_CFG_CHANNEL_BONDING_24G, &val) !=
-                         eSIR_SUCCESS)
-            PELOGE(limLog(pMac, LOGE, FL("could not retrieve "
-                                         "24G Chan bond Length \n"));)
-       if (TRUE == val)
-       {
-           pDot11f->bssCoexistMgmtSupport = 1;
-           pDot11f->present = 1;
-       }
-    }
-=======
                            tDot11fIEExtCap  *pDot11f)
 {
     pDot11f->present = 1;
     pDot11f->operModeNotification = 1;
     
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return eSIR_SUCCESS;
 }
 
@@ -1638,31 +1544,18 @@ void PopulateDot11fWMMCaps(tDot11fIEWMMCaps *pCaps)
     pCaps->present       = 1;
 } // End PopulateDot11fWmmCaps.
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-=======
 #ifdef FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 void PopulateDot11fReAssocTspec(tpAniSirGlobal pMac, tDot11fReAssocRequest *pReassoc, tpPESession psessionEntry)
 {
     tANI_U8 numTspecs = 0, idx;
     tTspecInfo *pTspec = NULL;
 
-<<<<<<< HEAD
-    numTspecs = psessionEntry->pLimReAssocReq->eseTspecInfo.numTspecs;
-    pTspec = &psessionEntry->pLimReAssocReq->eseTspecInfo.tspec[0];
-=======
     numTspecs = psessionEntry->pLimReAssocReq->ccxTspecInfo.numTspecs;
     pTspec = &psessionEntry->pLimReAssocReq->ccxTspecInfo.tspec[0];
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pReassoc->num_WMMTSPEC = numTspecs;
     if (numTspecs) {
         for (idx=0; idx<numTspecs; idx++) {
             PopulateDot11fWMMTSPEC(&pTspec->tspec, &pReassoc->WMMTSPEC[idx]);
-<<<<<<< HEAD
-            pTspec->tspec.mediumTime = 0;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             pTspec++;
         }
     }
@@ -1926,11 +1819,7 @@ sirConvertProbeReqFrame2Struct(tpAniSirGlobal  pMac,
     if ( pr.WscProbeReq.present )
     {
         pProbeReq->wscIePresent = 1;
-<<<<<<< HEAD
-        vos_mem_copy(&pProbeReq->probeReqWscIeInfo, &pr.WscProbeReq, sizeof(tDot11fIEWscProbeReq));
-=======
         memcpy(&pProbeReq->probeReqWscIeInfo, &pr.WscProbeReq, sizeof(tDot11fIEWscProbeReq));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 #ifdef WLAN_FEATURE_11AC
     if ( pr.VHTCaps.present )
@@ -1949,65 +1838,6 @@ sirConvertProbeReqFrame2Struct(tpAniSirGlobal  pMac,
 
 } // End sirConvertProbeReqFrame2Struct.
 
-<<<<<<< HEAD
-/* function ValidateAndRectifyIEs checks for the malformed frame.
- * The frame would contain fixed IEs of 12 bytes follwed by Variable IEs
- * (Tagged elements).
- * Every Tagged IE has tag number, tag length and data. Tag length indicates
- * the size of data in bytes.
- * This function checks for size of Frame recived with the sum of all IEs.
- * And also rectifies missing optional fields in IE.
- *
- * NOTE : Presently this function rectifies RSN capability in RSN IE, can
- * extended to rectify other optional fields in other IEs.
- *
- */
-tSirRetStatus ValidateAndRectifyIEs(tpAniSirGlobal pMac,
-                                    tANI_U8 *pMgmtFrame,
-                                    tANI_U32 nFrameBytes,
-                                    tANI_U32 *nMissingRsnBytes)
-{
-    tANI_U32 length = SIZE_OF_FIXED_PARAM;
-    tANI_U8 *refFrame;
-
-    // Frame contains atleast one IE
-    if (nFrameBytes > (SIZE_OF_FIXED_PARAM + 2))
-    {
-        while (length < nFrameBytes)
-        {
-            /*refFrame points to next IE */
-            refFrame = pMgmtFrame + length;
-            length += (tANI_U32)(SIZE_OF_TAG_PARAM_NUM + SIZE_OF_TAG_PARAM_LEN
-                                 + (*(refFrame + SIZE_OF_TAG_PARAM_NUM)));
-        }
-        if (length != nFrameBytes)
-        {
-            /* Workaround : Some APs may not include RSN Capability but
-             * the length of which is included in RSN IE length.
-             * this may cause in updating RSN Capability with junk value.
-             * To avoid this, add RSN Capability value with default value.
-             * Going further we can have such workaround for other IEs
-             */
-            if ((*refFrame == RSNIEID) &&
-                (length == (nFrameBytes + RSNIE_CAPABILITY_LEN)))
-            {
-                //Assume RSN Capability as 00
-                vos_mem_set( ( tANI_U8* ) (pMgmtFrame + (nFrameBytes)),
-                             RSNIE_CAPABILITY_LEN, DEFAULT_RSNIE_CAP_VAL );
-                *nMissingRsnBytes = RSNIE_CAPABILITY_LEN;
-                limLog(pMac, LOG1,
-                       FL("Added RSN Capability to the RSNIE as 0x00 0x00\n"));
-
-                return eHAL_STATUS_SUCCESS;
-            }
-            return eSIR_FAILURE;
-        }
-    }
-    return eHAL_STATUS_SUCCESS;
-}
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 tSirRetStatus sirConvertProbeFrame2Struct(tpAniSirGlobal       pMac,
                                           tANI_U8             *pFrame,
                                           tANI_U32             nFrame,
@@ -2227,11 +2057,7 @@ tSirRetStatus sirConvertProbeFrame2Struct(tpAniSirGlobal       pMac,
     }
 #endif
 
-<<<<<<< HEAD
-#if defined FEATURE_WLAN_ESE
-=======
 #if defined FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (pr->QBSSLoad.present)
     {
         vos_mem_copy(&pProbeResp->QBSSLoad, &pr->QBSSLoad, sizeof(tDot11fIEQBSSLoad));
@@ -2527,18 +2353,8 @@ sirConvertAssocRespFrame2Struct(tpAniSirGlobal pMac,
         pAssocRsp->edcaPresent = 1;
         ConvertEDCAParam( pMac, &pAssocRsp->edca, &ar.EDCAParamSet );
     }
-<<<<<<< HEAD
-    if (ar.ExtCap.present)
-    {
-        vos_mem_copy(&pAssocRsp->ExtCap, &ar.ExtCap, sizeof(tDot11fIEExtCap));
-        limLog(pMac, LOG1,
-               FL("ExtCap is present, TDLSChanSwitProhibited: %d"),
-               ar.ExtCap.TDLSChanSwitProhibited);
-    }
-=======
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if ( ar.WMMParams.present )
     {
         pAssocRsp->wmeEdcaPresent = 1;
@@ -2596,11 +2412,7 @@ sirConvertAssocRespFrame2Struct(tpAniSirGlobal pMac,
     }
 #endif    
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-=======
 #ifdef FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (ar.num_WMMTSPEC) {
         pAssocRsp->num_tspecs = ar.num_WMMTSPEC;
         for (cnt=0; cnt < ar.num_WMMTSPEC; cnt++) {
@@ -2610,19 +2422,11 @@ sirConvertAssocRespFrame2Struct(tpAniSirGlobal pMac,
         pAssocRsp->tspecPresent = TRUE;
     }
    
-<<<<<<< HEAD
-    if(ar.ESETrafStrmMet.present)
-    {
-        pAssocRsp->tsmPresent = 1;
-        vos_mem_copy(&pAssocRsp->tsmIE.tsid,
-                &ar.ESETrafStrmMet.tsid,sizeof(tSirMacESETSMIE));
-=======
     if(ar.CCXTrafStrmMet.present)
     {
         pAssocRsp->tsmPresent = 1;
         vos_mem_copy(&pAssocRsp->tsmIE.tsid,
                 &ar.CCXTrafStrmMet.tsid,sizeof(tSirMacCCXTSMIE));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }    
 #endif
 
@@ -2640,25 +2444,9 @@ sirConvertAssocRespFrame2Struct(tpAniSirGlobal pMac,
         limLogVHTOperation(pMac, &pAssocRsp->VHTOperation);
     }
 #endif
-<<<<<<< HEAD
-    if(ar.OBSSScanParameters.present)
-    {
-       vos_mem_copy( &pAssocRsp->OBSSScanParameters, &ar.OBSSScanParameters,
-                      sizeof( tDot11fIEOBSSScanParameters));
-    }
-    if ( ar.QosMapSet.present )
-    {
-        pAssocRsp->QosMapSet.present = 1;
-        ConvertQosMapsetFrame( pMac, &pAssocRsp->QosMapSet, &ar.QosMapSet);
-        limLog( pMac, LOG1, FL("Received Assoc Response with Qos Map Set"));
-        limLogQosMapSet(pMac, &pAssocRsp->QosMapSet);
-    }
-    return eSIR_SUCCESS;
-=======
 
     return eSIR_SUCCESS;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } // End sirConvertAssocRespFrame2Struct.
 
 tSirRetStatus
@@ -2840,455 +2628,6 @@ sirConvertReassocReqFrame2Struct(tpAniSirGlobal pMac,
 
 } // End sirConvertReassocReqFrame2Struct.
 
-
-<<<<<<< HEAD
-#if defined(FEATURE_WLAN_ESE_UPLOAD)
-tSirRetStatus
-sirFillBeaconMandatoryIEforEseBcnReport(tpAniSirGlobal   pMac,
-=======
-#if defined(FEATURE_WLAN_CCX_UPLOAD)
-tSirRetStatus
-sirFillBeaconMandatoryIEforCcxBcnReport(tpAniSirGlobal   pMac,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                                        tANI_U8         *pPayload,
-                                        const tANI_U32   nPayload,
-                                        tANI_U8        **outIeBuf,
-                                        tANI_U32        *pOutIeLen)
-{
-    tDot11fBeaconIEs            *pBies = NULL;
-    tANI_U32                    status = eHAL_STATUS_SUCCESS;
-    tSirRetStatus               retStatus = eSIR_SUCCESS;
-<<<<<<< HEAD
-    tSirEseBcnReportMandatoryIe eseBcnReportMandatoryIe;
-=======
-    tSirCcxBcnReportMandatoryIe ccxBcnReportMandatoryIe;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-
-    /* To store how many bytes are required to be allocated
-           for Bcn report mandatory Ies */
-    tANI_U16 numBytes = 0, freeBytes = 0;
-    tANI_U8  *pos = NULL;
-
-    // Zero-init our [out] parameter,
-<<<<<<< HEAD
-    vos_mem_set( (tANI_U8*)&eseBcnReportMandatoryIe, sizeof(eseBcnReportMandatoryIe), 0 );
-=======
-    vos_mem_set( (tANI_U8*)&ccxBcnReportMandatoryIe, sizeof(ccxBcnReportMandatoryIe), 0 );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    pBies = vos_mem_malloc(sizeof(tDot11fBeaconIEs));
-    if ( NULL == pBies )
-        status = eHAL_STATUS_FAILURE;
-    else
-        status = eHAL_STATUS_SUCCESS;
-    if (!HAL_STATUS_SUCCESS(status))
-    {
-        limLog(pMac, LOGE, FL("Failed to allocate memory\n") );
-        return eSIR_FAILURE;
-    }
-    // delegate to the framesc-generated code,
-    status = dot11fUnpackBeaconIEs( pMac, pPayload, nPayload, pBies );
-
-    if ( DOT11F_FAILED( status ) )
-    {
-        limLog(pMac, LOGE, FL("Failed to parse Beacon IEs (0x%08x, %d bytes):\n"),
-                  status, nPayload);
-        vos_mem_free(pBies);
-        return eSIR_FAILURE;
-    }
-    else if ( DOT11F_WARNED( status ) )
-    {
-      limLog( pMac, LOGW, FL("There were warnings while unpacking Beacon IEs (0x%08x, %d bytes):\n"),
-                 status, nPayload );
-        PELOG2(sirDumpBuf(pMac, SIR_DBG_MODULE_ID, LOG2, pPayload, nPayload);)
-    }
-
-<<<<<<< HEAD
-    // & "transliterate" from a 'tDot11fBeaconIEs' to a 'eseBcnReportMandatoryIe'...
-=======
-    // & "transliterate" from a 'tDot11fBeaconIEs' to a 'ccxBcnReportMandatoryIe'...
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    if ( !pBies->SSID.present )
-    {
-        PELOGW(limLog(pMac, LOGW, FL("Mandatory IE SSID not present!\n"));)
-    }
-    else
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.ssidPresent = 1;
-        ConvertSSID( pMac, &eseBcnReportMandatoryIe.ssId, &pBies->SSID );
-        /* 1 for EID, 1 for length and length bytes */
-        numBytes += 1 + 1 + eseBcnReportMandatoryIe.ssId.length;
-=======
-        ccxBcnReportMandatoryIe.ssidPresent = 1;
-        ConvertSSID( pMac, &ccxBcnReportMandatoryIe.ssId, &pBies->SSID );
-        /* 1 for EID, 1 for length and length bytes */
-        numBytes += 1 + 1 + ccxBcnReportMandatoryIe.ssId.length;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    }
-
-    if ( !pBies->SuppRates.present )
-    {
-        PELOGW(limLog(pMac, LOGW, FL("Mandatory IE Supported Rates not present!\n"));)
-    }
-    else
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.suppRatesPresent = 1;
-        ConvertSuppRates( pMac, &eseBcnReportMandatoryIe.supportedRates, &pBies->SuppRates );
-        numBytes += 1 + 1 + eseBcnReportMandatoryIe.supportedRates.numRates;
-=======
-        ccxBcnReportMandatoryIe.suppRatesPresent = 1;
-        ConvertSuppRates( pMac, &ccxBcnReportMandatoryIe.supportedRates, &pBies->SuppRates );
-        numBytes += 1 + 1 + ccxBcnReportMandatoryIe.supportedRates.numRates;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    }
-
-    if ( pBies->FHParamSet.present)
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.fhParamPresent = 1;
-        ConvertFHParams( pMac, &eseBcnReportMandatoryIe.fhParamSet, &pBies->FHParamSet );
-=======
-        ccxBcnReportMandatoryIe.fhParamPresent = 1;
-        ConvertFHParams( pMac, &ccxBcnReportMandatoryIe.fhParamSet, &pBies->FHParamSet );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        numBytes += 1 + 1 + SIR_MAC_FH_PARAM_SET_EID_MAX;
-    }
-
-    if ( pBies->DSParams.present )
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.dsParamsPresent = 1;
-        eseBcnReportMandatoryIe.dsParamSet.channelNumber = pBies->DSParams.curr_channel;
-=======
-        ccxBcnReportMandatoryIe.dsParamsPresent = 1;
-        ccxBcnReportMandatoryIe.dsParamSet.channelNumber = pBies->DSParams.curr_channel;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        numBytes += 1 + 1 + SIR_MAC_DS_PARAM_SET_EID_MAX;
-    }
-
-    if ( pBies->CFParams.present )
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.cfPresent = 1;
-        ConvertCFParams( pMac, &eseBcnReportMandatoryIe.cfParamSet, &pBies->CFParams );
-=======
-        ccxBcnReportMandatoryIe.cfPresent = 1;
-        ConvertCFParams( pMac, &ccxBcnReportMandatoryIe.cfParamSet, &pBies->CFParams );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        numBytes += 1 + 1 + SIR_MAC_CF_PARAM_SET_EID_MAX;
-    }
-
-    if ( pBies->IBSSParams.present )
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.ibssParamPresent = 1;
-        eseBcnReportMandatoryIe.ibssParamSet.atim = pBies->IBSSParams.atim;
-=======
-        ccxBcnReportMandatoryIe.ibssParamPresent = 1;
-        ccxBcnReportMandatoryIe.ibssParamSet.atim = pBies->IBSSParams.atim;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        numBytes += 1 + 1 + SIR_MAC_IBSS_PARAM_SET_EID_MAX;
-    }
-
-    if ( pBies->TIM.present )
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.timPresent = 1;
-        eseBcnReportMandatoryIe.tim.dtimCount     = pBies->TIM.dtim_count;
-        eseBcnReportMandatoryIe.tim.dtimPeriod    = pBies->TIM.dtim_period;
-        eseBcnReportMandatoryIe.tim.bitmapControl = pBies->TIM.bmpctl;
-        /* As per the ESE spec, May truncate and report first 4 octets only */
-=======
-        ccxBcnReportMandatoryIe.timPresent = 1;
-        ccxBcnReportMandatoryIe.tim.dtimCount     = pBies->TIM.dtim_count;
-        ccxBcnReportMandatoryIe.tim.dtimPeriod    = pBies->TIM.dtim_period;
-        ccxBcnReportMandatoryIe.tim.bitmapControl = pBies->TIM.bmpctl;
-        /* As per the CCX spec, May truncate and report first 4 octets only */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        numBytes += 1 + 1 + SIR_MAC_TIM_EID_MIN;
-    }
-
-    if ( pBies->RRMEnabledCap.present )
-    {
-<<<<<<< HEAD
-        eseBcnReportMandatoryIe.rrmPresent = 1;
-        vos_mem_copy( &eseBcnReportMandatoryIe.rmEnabledCapabilities, &pBies->RRMEnabledCap, sizeof( tDot11fIERRMEnabledCap ) );
-=======
-        ccxBcnReportMandatoryIe.rrmPresent = 1;
-        vos_mem_copy( &ccxBcnReportMandatoryIe.rmEnabledCapabilities, &pBies->RRMEnabledCap, sizeof( tDot11fIERRMEnabledCap ) );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        numBytes += 1 + 1 + SIR_MAC_RM_ENABLED_CAPABILITY_EID_MAX;
-    }
-
-    *outIeBuf = vos_mem_malloc(numBytes);
-    if (NULL == *outIeBuf)
-    {
-        limLog(pMac, LOGP, FL("Memory Allocation failure"));
-        vos_mem_free(pBies);
-        return eSIR_FAILURE;
-    }
-    pos = *outIeBuf;
-    *pOutIeLen = numBytes;
-    freeBytes = numBytes;
-
-    /* Start filling the output Ie with Mandatory IE information */
-    /* Fill SSID IE */
-<<<<<<< HEAD
-    if (eseBcnReportMandatoryIe.ssidPresent)
-    {
-       if (freeBytes < (1 + 1 + eseBcnReportMandatoryIe.ssId.length))
-=======
-    if (ccxBcnReportMandatoryIe.ssidPresent)
-    {
-       if (freeBytes < (1 + 1 + ccxBcnReportMandatoryIe.ssId.length))
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy SSID"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_SSID_EID;
-       pos++;
-<<<<<<< HEAD
-       *pos = eseBcnReportMandatoryIe.ssId.length;
-       pos++;
-       vos_mem_copy(pos, (tANI_U8*)eseBcnReportMandatoryIe.ssId.ssId,
-                    eseBcnReportMandatoryIe.ssId.length);
-       pos += eseBcnReportMandatoryIe.ssId.length;
-       freeBytes -= (1 + 1 + eseBcnReportMandatoryIe.ssId.length);
-    }
-
-    /* Fill Supported Rates IE */
-    if (eseBcnReportMandatoryIe.suppRatesPresent)
-    {
-       if (freeBytes < (1 + 1 + eseBcnReportMandatoryIe.supportedRates.numRates))
-=======
-       *pos = ccxBcnReportMandatoryIe.ssId.length;
-       pos++;
-       vos_mem_copy(pos, (tANI_U8*)ccxBcnReportMandatoryIe.ssId.ssId,
-                    ccxBcnReportMandatoryIe.ssId.length);
-       pos += ccxBcnReportMandatoryIe.ssId.length;
-       freeBytes -= (1 + 1 + ccxBcnReportMandatoryIe.ssId.length);
-    }
-
-    /* Fill Supported Rates IE */
-    if (ccxBcnReportMandatoryIe.suppRatesPresent)
-    {
-       if (freeBytes < (1 + 1 + ccxBcnReportMandatoryIe.supportedRates.numRates))
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy Rates IE"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_RATESET_EID;
-       pos++;
-<<<<<<< HEAD
-       *pos = eseBcnReportMandatoryIe.supportedRates.numRates;
-       pos++;
-       vos_mem_copy(pos, (tANI_U8*)eseBcnReportMandatoryIe.supportedRates.rate,
-                    eseBcnReportMandatoryIe.supportedRates.numRates);
-       pos += eseBcnReportMandatoryIe.supportedRates.numRates;
-       freeBytes -= (1 + 1 + eseBcnReportMandatoryIe.supportedRates.numRates);
-    }
-
-    /* Fill FH Parameter set IE */
-    if (eseBcnReportMandatoryIe.fhParamPresent)
-=======
-       *pos = ccxBcnReportMandatoryIe.supportedRates.numRates;
-       pos++;
-       vos_mem_copy(pos, (tANI_U8*)ccxBcnReportMandatoryIe.supportedRates.rate,
-                    ccxBcnReportMandatoryIe.supportedRates.numRates);
-       pos += ccxBcnReportMandatoryIe.supportedRates.numRates;
-       freeBytes -= (1 + 1 + ccxBcnReportMandatoryIe.supportedRates.numRates);
-    }
-
-    /* Fill FH Parameter set IE */
-    if (ccxBcnReportMandatoryIe.fhParamPresent)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    {
-       if (freeBytes < (1 + 1 + SIR_MAC_FH_PARAM_SET_EID_MAX))
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy FHIE"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_FH_PARAM_SET_EID;
-       pos++;
-       *pos = SIR_MAC_FH_PARAM_SET_EID_MAX;
-       pos++;
-<<<<<<< HEAD
-       vos_mem_copy(pos, (tANI_U8*)&eseBcnReportMandatoryIe.fhParamSet,
-=======
-       vos_mem_copy(pos, (tANI_U8*)&ccxBcnReportMandatoryIe.fhParamSet,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                    SIR_MAC_FH_PARAM_SET_EID_MAX);
-       pos += SIR_MAC_FH_PARAM_SET_EID_MAX;
-       freeBytes -= (1 + 1 + SIR_MAC_FH_PARAM_SET_EID_MAX);
-    }
-
-    /* Fill DS Parameter set IE */
-<<<<<<< HEAD
-    if (eseBcnReportMandatoryIe.dsParamsPresent)
-=======
-    if (ccxBcnReportMandatoryIe.dsParamsPresent)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    {
-       if (freeBytes < (1 + 1 + SIR_MAC_DS_PARAM_SET_EID_MAX))
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy DS IE"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_DS_PARAM_SET_EID;
-       pos++;
-       *pos = SIR_MAC_DS_PARAM_SET_EID_MAX;
-       pos++;
-<<<<<<< HEAD
-       *pos = eseBcnReportMandatoryIe.dsParamSet.channelNumber;
-=======
-       *pos = ccxBcnReportMandatoryIe.dsParamSet.channelNumber;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-       pos += SIR_MAC_DS_PARAM_SET_EID_MAX;
-       freeBytes -= (1 + 1 + SIR_MAC_DS_PARAM_SET_EID_MAX);
-    }
-
-    /* Fill CF Parameter set */
-<<<<<<< HEAD
-    if (eseBcnReportMandatoryIe.cfPresent)
-=======
-    if (ccxBcnReportMandatoryIe.cfPresent)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    {
-       if (freeBytes < (1 + 1 + SIR_MAC_CF_PARAM_SET_EID_MAX))
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy CF IE"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_CF_PARAM_SET_EID;
-       pos++;
-       *pos = SIR_MAC_CF_PARAM_SET_EID_MAX;
-       pos++;
-<<<<<<< HEAD
-       vos_mem_copy(pos, (tANI_U8*)&eseBcnReportMandatoryIe.cfParamSet,
-=======
-       vos_mem_copy(pos, (tANI_U8*)&ccxBcnReportMandatoryIe.cfParamSet,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                    SIR_MAC_CF_PARAM_SET_EID_MAX);
-       pos += SIR_MAC_CF_PARAM_SET_EID_MAX;
-       freeBytes -= (1 + 1 + SIR_MAC_CF_PARAM_SET_EID_MAX);
-    }
-
-    /* Fill IBSS Parameter set IE */
-<<<<<<< HEAD
-    if (eseBcnReportMandatoryIe.ibssParamPresent)
-=======
-    if (ccxBcnReportMandatoryIe.ibssParamPresent)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    {
-       if (freeBytes < (1 + 1 + SIR_MAC_IBSS_PARAM_SET_EID_MAX))
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy IBSS IE"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_IBSS_PARAM_SET_EID;
-       pos++;
-       *pos = SIR_MAC_IBSS_PARAM_SET_EID_MAX;
-       pos++;
-<<<<<<< HEAD
-       vos_mem_copy(pos, (tANI_U8*)&eseBcnReportMandatoryIe.ibssParamSet.atim,
-=======
-       vos_mem_copy(pos, (tANI_U8*)&ccxBcnReportMandatoryIe.ibssParamSet.atim,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                    SIR_MAC_IBSS_PARAM_SET_EID_MAX);
-       pos += SIR_MAC_IBSS_PARAM_SET_EID_MAX;
-       freeBytes -= (1 + 1 + SIR_MAC_IBSS_PARAM_SET_EID_MAX);
-    }
-
-    /* Fill TIM IE */
-<<<<<<< HEAD
-    if (eseBcnReportMandatoryIe.timPresent)
-=======
-    if (ccxBcnReportMandatoryIe.timPresent)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    {
-       if (freeBytes < (1 + 1 + SIR_MAC_TIM_EID_MIN))
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy TIM IE"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_TIM_EID;
-       pos++;
-       *pos = SIR_MAC_TIM_EID_MIN;
-       pos++;
-<<<<<<< HEAD
-       vos_mem_copy(pos, (tANI_U8*)&eseBcnReportMandatoryIe.tim,
-=======
-       vos_mem_copy(pos, (tANI_U8*)&ccxBcnReportMandatoryIe.tim,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                    SIR_MAC_TIM_EID_MIN);
-       pos += SIR_MAC_TIM_EID_MIN;
-       freeBytes -= (1 + 1 + SIR_MAC_TIM_EID_MIN);
-    }
-
-    /* Fill RM Capability IE */
-<<<<<<< HEAD
-    if (eseBcnReportMandatoryIe.rrmPresent)
-=======
-    if (ccxBcnReportMandatoryIe.rrmPresent)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    {
-       if (freeBytes < (1 + 1 + SIR_MAC_RM_ENABLED_CAPABILITY_EID_MAX))
-       {
-           limLog(pMac, LOGP, FL("Insufficient memory to copy RRM IE"));
-           retStatus = eSIR_FAILURE;
-           goto err_bcnrep;
-       }
-       *pos = SIR_MAC_RM_ENABLED_CAPABILITY_EID;
-       pos++;
-       *pos = SIR_MAC_RM_ENABLED_CAPABILITY_EID_MAX;
-       pos++;
-<<<<<<< HEAD
-       vos_mem_copy(pos, (tANI_U8*)&eseBcnReportMandatoryIe.rmEnabledCapabilities,
-=======
-       vos_mem_copy(pos, (tANI_U8*)&ccxBcnReportMandatoryIe.rmEnabledCapabilities,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                    SIR_MAC_RM_ENABLED_CAPABILITY_EID_MAX);
-       freeBytes -= (1 + 1 + SIR_MAC_RM_ENABLED_CAPABILITY_EID_MAX);
-    }
-
-    if (freeBytes != 0)
-    {
-       limLog(pMac, LOGP, FL("Mismatch in allocation and copying of IE in Bcn Rep"));
-       retStatus = eSIR_FAILURE;
-    }
-
-err_bcnrep:
-    /* The message counter would not be incremented in case of
-     * returning failure and hence next time, this function gets
-     * called, it would be using the same msg ctr for a different
-     * BSS.So, it is good to clear the memory allocated for a BSS
-     * that is returning failure.On success, the caller would take
-     * care of freeing up the memory*/
-    if (retStatus == eSIR_FAILURE)
-    {
-       vos_mem_free(*outIeBuf);
-       *outIeBuf = NULL;
-    }
-    vos_mem_free(pBies);
-    return retStatus;
-}
-
-<<<<<<< HEAD
-#endif /* FEATURE_WLAN_ESE_UPLOAD */
-=======
-#endif /* FEATURE_WLAN_CCX_UPLOAD */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-
 tSirRetStatus
 sirParseBeaconIE(tpAniSirGlobal        pMac,
                  tpSirProbeRespBeacon  pBeaconStruct,
@@ -3390,19 +2729,11 @@ sirParseBeaconIE(tpAniSirGlobal        pMac,
                       &pBies->PowerConstraints,
                       sizeof(tDot11fIEPowerConstraints));
     }
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-    if(pBies->ESETxmitPower.present)
-    {
-        pBeaconStruct->eseTxPwr.present = 1;
-        pBeaconStruct->eseTxPwr.power_limit = pBies->ESETxmitPower.power_limit;
-=======
 #ifdef FEATURE_WLAN_CCX
     if(pBies->CCXTxmitPower.present)
     {
         pBeaconStruct->ccxTxPwr.present = 1;
         pBeaconStruct->ccxTxPwr.power_limit = pBies->CCXTxmitPower.power_limit;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     if (pBies->QBSSLoad.present)
     {
@@ -3793,16 +3124,6 @@ sirConvertBeaconFrame2Struct(tpAniSirGlobal       pMac,
     }
 #endif
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-    if (pBeacon->ESETxmitPower.present)
-    {
-        //ESE Tx Power
-        pBeaconStruct->eseTxPwr.present = 1;
-        vos_mem_copy(&pBeaconStruct->eseTxPwr,
-                                   &pBeacon->ESETxmitPower,
-                                   sizeof(tDot11fIEESETxmitPower));
-=======
 #ifdef FEATURE_WLAN_CCX
     if (pBeacon->CCXTxmitPower.present)
     {
@@ -3811,7 +3132,6 @@ sirConvertBeaconFrame2Struct(tpAniSirGlobal       pMac,
         palCopyMemory( pMac->hHdd, &pBeaconStruct->ccxTxPwr,
                                    &pBeacon->CCXTxmitPower,
                                    sizeof(tDot11fIECCXTxmitPower));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 #endif
 
@@ -3842,16 +3162,7 @@ sirConvertBeaconFrame2Struct(tpAniSirGlobal       pMac,
                       sizeof( tDot11fIEWiderBWChanSwitchAnn));
     }      
 #endif
-<<<<<<< HEAD
-    if(pBeacon->OBSSScanParameters.present)
-    {
-       vos_mem_copy( &pBeaconStruct->OBSSScanParameters,
-                     &pBeacon->OBSSScanParameters,
-                     sizeof( tDot11fIEOBSSScanParameters));
-    }
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     vos_mem_free(pBeacon);
     return eSIR_SUCCESS;
 
@@ -4157,21 +3468,12 @@ sirConvertAddtsRsp2Struct(tpAniSirGlobal    pMac,
             pAddTs->tclasProcPresent = 1;
             pAddTs->tclasProc = addts.TCLASSPROC.processing;
         }
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-        if(addts.ESETrafStrmMet.present)
-        {
-            pAddTs->tsmPresent = 1;
-            vos_mem_copy(&pAddTs->tsmIE.tsid,
-                      &addts.ESETrafStrmMet.tsid,sizeof(tSirMacESETSMIE));
-=======
 #ifdef FEATURE_WLAN_CCX
         if(addts.CCXTrafStrmMet.present)
         {
             pAddTs->tsmPresent = 1;
             vos_mem_copy(&pAddTs->tsmIE.tsid,
                       &addts.CCXTrafStrmMet.tsid,sizeof(tSirMacCCXTSMIE));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
 #endif
         if ( addts.Schedule.present )
@@ -4236,21 +3538,12 @@ sirConvertAddtsRsp2Struct(tpAniSirGlobal    pMac,
             return eSIR_FAILURE;
         }
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-        if(wmmaddts.ESETrafStrmMet.present)
-        {
-            pAddTs->tsmPresent = 1;
-            vos_mem_copy(&pAddTs->tsmIE.tsid,
-                         &wmmaddts.ESETrafStrmMet.tsid,sizeof(tSirMacESETSMIE));
-=======
 #ifdef FEATURE_WLAN_CCX
         if(wmmaddts.CCXTrafStrmMet.present)
         {
             pAddTs->tsmPresent = 1;
             vos_mem_copy(&pAddTs->tsmIE.tsid,
                          &wmmaddts.CCXTrafStrmMet.tsid,sizeof(tSirMacCCXTSMIE));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
 #endif
 
@@ -4349,36 +3642,6 @@ sirConvertDeltsReq2Struct(tpAniSirGlobal    pMac,
 
 } // End sirConvertDeltsReq2Struct.
 
-<<<<<<< HEAD
-tSirRetStatus
-sirConvertQosMapConfigureFrame2Struct(tpAniSirGlobal    pMac,
-                          tANI_U8               *pFrame,
-                          tANI_U32               nFrame,
-                          tSirQosMapSet      *pQosMapSet)
-{
-    tDot11fQosMapConfigure mapConfigure;
-    tANI_U32 status;
-    status = dot11fUnpackQosMapConfigure(pMac, pFrame, nFrame, &mapConfigure);
-    if ( DOT11F_FAILED( status ) )
-    {
-        dot11fLog(pMac, LOGE, FL("Failed to parse Qos Map Configure frame (0x%08x, %d bytes):\n"),
-                  status, nFrame);
-        PELOG2(sirDumpBuf(pMac, SIR_DBG_MODULE_ID, LOG2, pFrame, nFrame);)
-        return eSIR_FAILURE;
-    }
-    else if ( DOT11F_WARNED( status ) )
-    {
-      dot11fLog( pMac, LOGW, FL("There were warnings while unpacking Qos Map Configure frame (0x%08x, %d bytes):\n"),
-                 status, nFrame );
-        PELOG2(sirDumpBuf(pMac, SIR_DBG_MODULE_ID, LOG2, pFrame, nFrame);)
-    }
-    pQosMapSet->present = mapConfigure.QosMapSet.present;
-    ConvertQosMapsetFrame(pMac->hHdd, pQosMapSet, &mapConfigure.QosMapSet);
-    limLogQosMapSet(pMac, pQosMapSet);
-    return eSIR_SUCCESS;
-}
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #ifdef ANI_SUPPORT_11H
 tSirRetStatus
@@ -4571,93 +3834,10 @@ PopulateDot11fWMMTSPEC(tSirMacTspecIE     *pOld,
 
 } // End PopulateDot11fWMMTSPEC.
 
-<<<<<<< HEAD
-#if defined(FEATURE_WLAN_ESE)
-
-// Fill the ESE version currently supported
-void PopulateDot11fESEVersion(tDot11fIEESEVersion *pESEVersion)
-{
-    pESEVersion->present = 1;
-    pESEVersion->version = ESE_VERSION_SUPPORTED;
-}
-
-// Fill the ESE ie for the station.
-// The State is Normal (1)
-// The MBSSID for station is set to 0.
-void PopulateDot11fESERadMgmtCap(tDot11fIEESERadMgmtCap *pESERadMgmtCap)
-{
-    pESERadMgmtCap->present = 1;
-    pESERadMgmtCap->mgmt_state = RM_STATE_NORMAL;
-    pESERadMgmtCap->mbssid_mask = 0;
-    pESERadMgmtCap->reserved = 0;
-}
-
-tSirRetStatus PopulateDot11fESECckmOpaque( tpAniSirGlobal pMac,
-                                           tpSirCCKMie    pCCKMie,
-                                           tDot11fIEESECckmOpaque *pDot11f )
-=======
-#if defined(FEATURE_WLAN_CCX)
-
-// Fill the CCX version currently supported
-void PopulateDot11fCCXVersion(tDot11fIECCXVersion *pCCXVersion)
-{
-    pCCXVersion->present = 1;
-    pCCXVersion->version = CCX_VERSION_SUPPORTED;
-}
-
-// Fill the CCX ie for the station.
-// The State is Normal (1)
-// The MBSSID for station is set to 0.
-void PopulateDot11fCCXRadMgmtCap(tDot11fIECCXRadMgmtCap *pCCXRadMgmtCap)
-{
-    pCCXRadMgmtCap->present = 1;
-    pCCXRadMgmtCap->mgmt_state = RM_STATE_NORMAL;
-    pCCXRadMgmtCap->mbssid_mask = 0;
-    pCCXRadMgmtCap->reserved = 0;
-}
-
-tSirRetStatus PopulateDot11fCCXCckmOpaque( tpAniSirGlobal pMac,
-                                           tpSirCCKMie    pCCKMie,
-                                           tDot11fIECCXCckmOpaque *pDot11f )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-{
-    int idx;
-
-    if ( pCCKMie->length )
-    {
-<<<<<<< HEAD
-        if( 0 <= ( idx = FindIELocation( pMac, (tpSirRSNie)pCCKMie, DOT11F_EID_ESECCKMOPAQUE ) ) )
-        {
-            pDot11f->present  = 1;
-            pDot11f->num_data = pCCKMie->cckmIEdata[ idx + 1 ] - 4; // Dont include OUI
-            vos_mem_copy(pDot11f->data,
-=======
-        if( 0 <= ( idx = FindIELocation( pMac, (tpSirRSNie)pCCKMie, DOT11F_EID_CCXCCKMOPAQUE ) ) )
-        {
-            pDot11f->present  = 1;
-            pDot11f->num_data = pCCKMie->cckmIEdata[ idx + 1 ] - 4; // Dont include OUI
-            palCopyMemory( pMac->hHdd, pDot11f->data,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                           pCCKMie->cckmIEdata + idx + 2 + 4,    // EID, len, OUI
-                           pCCKMie->cckmIEdata[ idx + 1 ] - 4 ); // Skip OUI
-        }
-    }
-
-    return eSIR_SUCCESS;
-
-<<<<<<< HEAD
-} // End PopulateDot11fESECckmOpaque.
-
-void PopulateDot11TSRSIE(tpAniSirGlobal  pMac,
-                               tSirMacESETSRSIE     *pOld,
-                               tDot11fIEESETrafStrmRateSet  *pDot11f,
-=======
-} // End PopulateDot11fCCXCckmOpaque.
-
+#ifdef FEATURE_WLAN_CCX
 void PopulateDot11TSRSIE(tpAniSirGlobal  pMac,
                                tSirMacCCXTSRSIE     *pOld,
                                tDot11fIECCXTrafStrmRateSet  *pDot11f,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                tANI_U8 rate_length)
 {
     pDot11f->tsid = pOld->tsid;
@@ -4690,21 +3870,12 @@ PopulateDot11fTCLAS(tpAniSirGlobal  pMac,
         pDot11f->info.IpParams.version = pOld->version;
         if ( SIR_MAC_TCLAS_IPV4 == pDot11f->info.IpParams.version )
         {
-<<<<<<< HEAD
-            vos_mem_copy( pDot11f->info.IpParams.params.
-                          IpV4Params.source,
-                          pOld->tclasParams.ipv4.srcIpAddr, 4 );
-            vos_mem_copy( pDot11f->info.IpParams.params.
-                          IpV4Params.dest,
-                          pOld->tclasParams.ipv4.dstIpAddr, 4 );
-=======
             vos_mem_copy( ( tANI_U8* )&pDot11f->info.IpParams.params.
                           IpV4Params.source,
                           ( tANI_U8* )pOld->tclasParams.ipv4.srcIpAddr, 4 );
             vos_mem_copy( ( tANI_U8* )&pDot11f->info.IpParams.params.
                           IpV4Params.dest,
                           ( tANI_U8* )pOld->tclasParams.ipv4.dstIpAddr, 4 );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             pDot11f->info.IpParams.params.IpV4Params.src_port  =
               pOld->tclasParams.ipv4.srcPort;
             pDot11f->info.IpParams.params.IpV4Params.dest_port =
@@ -5571,18 +4742,5 @@ void PopulateDot11fAssocRspRates ( tpAniSirGlobal pMac, tDot11fIESuppRates *pSup
      pExt->num_rates = num_ext;
      pExt->present = 1;
   }
-<<<<<<< HEAD
-}
-
-void PopulateDot11fTimeoutInterval( tpAniSirGlobal pMac,
-                                    tDot11fIETimeoutInterval *pDot11f,
-                                    tANI_U8 type, tANI_U32 value )
-{
-   pDot11f->present = 1;
-   pDot11f->timeoutType = type;
-   pDot11f->timeoutValue = value;
-}
-=======
 } 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 // parserApi.c ends here.

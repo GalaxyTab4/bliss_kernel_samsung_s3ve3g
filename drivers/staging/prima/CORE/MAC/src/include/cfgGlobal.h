@@ -1,10 +1,6 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2011-2014 The Linux Foundation. All rights reserved.
-=======
  *
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -23,13 +19,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -49,15 +38,11 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
-<<<<<<< HEAD
-=======
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * Author:      Sandesh Goel
  * Date:        02/09/03
  * History:-
@@ -72,16 +57,9 @@
 #include "sirCommon.h"
 #include "sirTypes.h"
 #include "wniCfgSta.h"
-<<<<<<< HEAD
-#include "wniCfgAp.h"
-#define CFG_MAX_NUM_STA      SIR_MAX_NUM_STA_IN_IBSS
-
-#define CFG_MAX_STATIC_STRING   70
-=======
 
 #define CFG_MAX_NUM_STA      SIR_MAX_NUM_STA_IN_IBSS
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define CFG_MAX_STR_LEN       256    // as the number of channels grows, 128 is not big enough
 
 /*--------------------------------------------------------------------*/
@@ -92,26 +70,6 @@ typedef struct
     tANI_U32   control;
 } tCfgCtl;
 
-<<<<<<< HEAD
-typedef struct sAniSirCfgStaticString
-{
-    tANI_U16 cfgId;
-    tANI_U8  maxLen;
-    tANI_U8  length;
-    tANI_U8  data[255];
-}tAniSirCfgStaticString;
-
-typedef struct sAniSirCfgStatic
-{
-    tANI_U16 cfgId;
-    tANI_U32 control;
-    tANI_U32 cfgIMin;
-    tANI_U32 cfgIMax;
-    tANI_U32 cfgIVal;
-    void     *pStrData;
-}tAniSirCgStatic;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 typedef struct sAniSirCfg
 {

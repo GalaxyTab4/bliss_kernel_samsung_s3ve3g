@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #ifdef FEATURE_OEM_DATA_SUPPORT
@@ -78,11 +66,7 @@
 
   This function also reports the results to the user space
 
-<<<<<<< HEAD
-  \return - eHalStatus enumeration
-=======
   \return - 0 for success, non zero for failure
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 -----------------------------------------------------------------------------------------------*/
 static eHalStatus hdd_OemDataReqCallback(tHalHandle hHal, 
@@ -104,20 +88,12 @@ static eHalStatus hdd_OemDataReqCallback(tHalHandle hHal,
     if(oemDataReqStatus == eOEM_DATA_REQ_FAILURE)
     {
         snprintf(buffer, IW_CUSTOM_MAX, "QCOM: OEM-DATA-REQ-FAILED");
-<<<<<<< HEAD
-        hddLog(LOGW, "%s: oem data req %d failed", __func__, oemDataReqID);
-=======
         hddLog(LOGW, "%s: oem data req %d failed\n", __func__, oemDataReqID);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     else if(oemDataReqStatus == eOEM_DATA_REQ_INVALID_MODE)
     {
         snprintf(buffer, IW_CUSTOM_MAX, "QCOM: OEM-DATA-REQ-INVALID-MODE");
-<<<<<<< HEAD
-        hddLog(LOGW, "%s: oem data req %d failed because the driver is in invalid mode (IBSS|BTAMP|AP)", __func__, oemDataReqID);
-=======
         hddLog(LOGW, "%s: oem data req %d failed because the driver is in invalid mode (IBSS|BTAMP|AP)\n", __func__, oemDataReqID);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     else
     {
@@ -155,12 +131,7 @@ int iw_get_oem_data_rsp(
         union iwreq_data *wrqu,
         char *extra)
 {
-<<<<<<< HEAD
-    int                                   rc = 0;
-    eHalStatus                            status;
-=======
     eHalStatus                            status = eHAL_STATUS_SUCCESS;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     struct iw_oem_data_rsp*               pHddOemDataRsp;
     tOemDataRsp*                          pSmeOemDataRsp;
 
@@ -177,48 +148,28 @@ int iw_get_oem_data_rsp(
     {
         //get the oem data response from sme
         status = sme_getOemDataRsp(WLAN_HDD_GET_HAL_CTX(pAdapter), &pSmeOemDataRsp);
-<<<<<<< HEAD
-        if (status != eHAL_STATUS_SUCCESS)
-        {
-            hddLog(LOGE, "%s: failed in sme_getOemDataRsp", __func__);
-            rc = -EIO;
-=======
         if(status != eHAL_STATUS_SUCCESS)
         {
             hddLog(LOGE, "%s: failed in sme_getOemDataRsp\n", __func__);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
         }
         else
         {
-<<<<<<< HEAD
-            if (pSmeOemDataRsp != NULL)
-=======
             if(pSmeOemDataRsp != NULL)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             {
                 pHddOemDataRsp = (struct iw_oem_data_rsp*)(extra);
                 vos_mem_copy(pHddOemDataRsp->oemDataRsp, pSmeOemDataRsp->oemDataRsp, OEM_DATA_RSP_SIZE); 
             }
             else
             {
-<<<<<<< HEAD
-                hddLog(LOGE, "%s: pSmeOemDataRsp = NULL", __func__);
-                rc = -EIO;
-=======
                 hddLog(LOGE, "%s: pSmeOemDataRsp = NULL\n", __func__);
                 status = eHAL_STATUS_FAILURE;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 break;
             }
         }
     } while(0);
 
-<<<<<<< HEAD
-    return rc;
-=======
     return eHAL_STATUS_SUCCESS;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 /**--------------------------------------------------------------------------------------------
@@ -243,10 +194,6 @@ int iw_set_oem_data_req(
         union iwreq_data *wrqu,
         char *extra)
 {
-<<<<<<< HEAD
-    int rc = 0;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     eHalStatus status = eHAL_STATUS_SUCCESS;
     struct iw_oem_data_req *pOemDataReq = NULL;
     tOemDataReqConfig oemDataReqConfig;
@@ -265,73 +212,35 @@ int iw_set_oem_data_req(
 
     do
     {
-<<<<<<< HEAD
-        if (NULL != wrqu->data.pointer)
-=======
         if(NULL != wrqu->data.pointer)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         {
             pOemDataReq = (struct iw_oem_data_req *)wrqu->data.pointer;
         }
 
-<<<<<<< HEAD
-        if (pOemDataReq == NULL)
-        {
-            hddLog(LOGE, "in %s oemDataReq == NULL", __func__);
-            rc = -EIO;
-=======
         if(pOemDataReq == NULL)
         {
             hddLog(LOGE, "in %s oemDataReq == NULL\n", __func__);
             status = eHAL_STATUS_FAILURE;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
         }
 
         vos_mem_zero(&oemDataReqConfig, sizeof(tOemDataReqConfig));
 
-<<<<<<< HEAD
-        if (copy_from_user((&oemDataReqConfig)->oemDataReq,
-                           pOemDataReq->oemDataReq, OEM_DATA_REQ_SIZE))
-        {
-            VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
-                      "%s: copy_from_user() failed!", __func__);
-            rc = -EFAULT;
-            break;
-        }
-
-=======
         vos_mem_copy((&oemDataReqConfig)->oemDataReq, pOemDataReq->oemDataReq, OEM_DATA_REQ_SIZE);
     
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         status = sme_OemDataReq(WLAN_HDD_GET_HAL_CTX(pAdapter), 
                                                 pAdapter->sessionId,
                                                 &oemDataReqConfig, 
                                                 &oemDataReqID, 
                                                 &hdd_OemDataReqCallback, 
                                                 dev);
-<<<<<<< HEAD
-        if (status != eHAL_STATUS_SUCCESS)
-        {
-            VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                      "%s: sme_OemDataReq status %d", __func__, status);
-            rc = -EFAULT;
-            break;
-        }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     
         pwextBuf->oemDataReqID = oemDataReqID;
         pwextBuf->oemDataReqInProgress = TRUE;
 
     } while(0);
-<<<<<<< HEAD
-
-    return rc;
-=======
     
     return status;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 

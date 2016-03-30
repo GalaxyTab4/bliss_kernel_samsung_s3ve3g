@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*===========================================================================
@@ -663,38 +651,6 @@ WDI_STATableGetStaAddr
 }/*WDI_STATableGetStaAddr*/
 
 /**
-<<<<<<< HEAD
- @brief WDI_STATableGetStaMacAddr - get station MAC address
-
- @param  pWDICtx:  WDI Context pointer
-         ucSTAIdx:  station index
-         pStaAddr: output station MAC address
-
- @see
- @return Result of the function call
-*/
-WDI_Status
-WDI_STATableGetStaMacAddr
-(
-    WDI_ControlBlockType*  pWDICtx,
-    wpt_uint8              ucSTAIdx,
-    wpt_macAddr*           staMacAddr
-)
-{
-    WDI_StaStruct* pSTATable = (WDI_StaStruct*) pWDICtx->staTable;
-    if ((ucSTAIdx < pWDICtx->ucMaxStations) && (pSTATable[ucSTAIdx].valid))
-    {
-        wpalMemoryCopy(staMacAddr, pSTATable[ucSTAIdx].staAddr,
-                WDI_MAC_ADDR_LEN);
-        return WDI_STATUS_SUCCESS;
-    }
-    else
-        return WDI_STATUS_E_FAILURE;
-}/*WDI_STATableGetStaMacAddr*/
-
-/**
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  @brief WDI_STATableSetStaAddr - set station address
  
  @param  pWDICtx:  WDI Context pointer

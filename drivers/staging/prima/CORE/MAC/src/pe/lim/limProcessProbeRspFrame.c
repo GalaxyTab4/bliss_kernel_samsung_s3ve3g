@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,15 +37,11 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
-<<<<<<< HEAD
-=======
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limProcessProbeRspFrame.cc contains the code
  * for processing Probe Response Frame.
  * Author:        Chandra Modumudi
@@ -83,33 +68,6 @@
 #include "parserApi.h"
 
 tSirRetStatus
-<<<<<<< HEAD
-limValidateIEInformationInProbeRspFrame (tpAniSirGlobal pMac,
-                                         tANI_U8 *pRxPacketInfo)
-{
-   tSirRetStatus       status = eSIR_SUCCESS;
-   tANI_U8             *pFrame;
-   tANI_U32            nFrame;
-   tANI_U32            nMissingRsnBytes;
-
-   /* Validate a Probe response frame for malformed frame.
-    * If the frame is malformed then do not consider as it
-    * may cause problem fetching wrong IE values
-    */
-   if (WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo) < (SIR_MAC_B_PR_SSID_OFFSET + SIR_MAC_MIN_IE_LEN))
-   {
-      return eSIR_FAILURE;
-   }
-
-   pFrame = WDA_GET_RX_MPDU_DATA(pRxPacketInfo);
-   nFrame = WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo);
-   nMissingRsnBytes = 0;
-
-   status = ValidateAndRectifyIEs(pMac, pFrame, nFrame, &nMissingRsnBytes);
-   if ( status == eSIR_SUCCESS )
-   {
-       WDA_GET_RX_MPDU_LEN(pRxPacketInfo) += nMissingRsnBytes;
-=======
 limValidateIEInformationInProbeRspFrame (tANI_U8 *pRxPacketInfo)
 {
    tSirRetStatus       status = eSIR_SUCCESS;
@@ -117,7 +75,6 @@ limValidateIEInformationInProbeRspFrame (tANI_U8 *pRxPacketInfo)
    if (WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo) < (SIR_MAC_B_PR_SSID_OFFSET + SIR_MAC_MIN_IE_LEN))
    {
       status = eSIR_FAILURE;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    return status;
@@ -158,18 +115,6 @@ limProcessProbeRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession 
     tANI_U8 qosEnabled =    false;
     tANI_U8 wmeEnabled =    false;
 
-<<<<<<< HEAD
-    if (!psessionEntry)
-    {
-        limLog(pMac, LOGE, FL("psessionEntry is NULL") );
-        return;
-    }
-    limLog(pMac,LOG1,"SessionId:%d ProbeRsp Frame is received",
-                psessionEntry->peSessionId);
-
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pProbeRsp = vos_mem_malloc(sizeof(tSirProbeRespBeacon));
     if ( NULL == pProbeRsp )
     {
@@ -200,12 +145,7 @@ limProcessProbeRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession 
    }
 
    // Validate IE information before processing Probe Response Frame
-<<<<<<< HEAD
-   if (limValidateIEInformationInProbeRspFrame(pMac, pRxPacketInfo)
-       != eSIR_SUCCESS)
-=======
    if (limValidateIEInformationInProbeRspFrame(pRxPacketInfo) != eSIR_SUCCESS)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    {
        PELOG1(limLog(pMac, LOG1,
                  FL("Parse error ProbeResponse, length=%d"), frameLen);)
@@ -229,11 +169,7 @@ limProcessProbeRspFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo,tpPESession 
      *
      * Ignore Probe Response frame in all other states
      */
-<<<<<<< HEAD
-
-=======
         /*  */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    // TO SUPPORT BT-AMP
     if (((pMac->lim.gLimMlmState == eLIM_MLM_WT_PROBE_RESP_STATE) ||   //mlm state check should be global - 18th oct
         (pMac->lim.gLimMlmState == eLIM_MLM_PASSIVE_SCAN_STATE) ||     //mlm state check should be global - 18th oct
@@ -459,12 +395,7 @@ limProcessProbeRspFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
     }
 #endif
      // Validate IE information before processing Probe Response Frame
-<<<<<<< HEAD
-    if (limValidateIEInformationInProbeRspFrame(pMac, pRxPacketInfo)
-        != eSIR_SUCCESS)
-=======
     if (limValidateIEInformationInProbeRspFrame(pRxPacketInfo) != eSIR_SUCCESS)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     {
        PELOG1(limLog(pMac, LOG1,FL("Parse error ProbeResponse, length=%d"),
               frameLen);)

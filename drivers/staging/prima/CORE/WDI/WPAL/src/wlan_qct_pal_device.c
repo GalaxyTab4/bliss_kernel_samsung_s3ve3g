@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**=========================================================================
@@ -89,37 +77,22 @@
 #include <linux/irqreturn.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
-<<<<<<< HEAD
-#ifdef EXISTS_MSM_SMSM
 #include <mach/msm_smsm.h>
-#else
-#include <soc/qcom/smsm.h>
-#endif
-=======
-#include <mach/msm_smsm.h>
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #include "wlan_qct_pal_api.h"
 #include "wlan_qct_pal_device.h"
 #include "wlan_hdd_main.h"
 #include "linux/wcnss_wlan.h"
-<<<<<<< HEAD
-#include <linux/ratelimit.h>
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*----------------------------------------------------------------------------
  * Preprocessor Definitions and Constants
  * -------------------------------------------------------------------------*/
 
-<<<<<<< HEAD
-=======
 // address in the Host physical memory map
 #ifdef WCN_PRONTO
 #define WCNSS_BASE_ADDRESS 0xFB000000
 #else
 #define WCNSS_BASE_ADDRESS 0x03000000
 #endif
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*----------------------------------------------------------------------------
  * Type Declarations
  * -------------------------------------------------------------------------*/
@@ -143,28 +116,11 @@ typedef struct {
    void            *rx_context;
    int              rx_registered;
    int              tx_registered;
-<<<<<<< HEAD
-   u8               rx_isr_enabled;
-   u64              *rx_disable_return;
-   u64              *rx_enable_return;
-   u8               rx_isr_enable_failure;
-   u8               rx_isr_enable_partial_failure;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } wcnss_env;
 
 static wcnss_env  gEnv;
 static wcnss_env *gpEnv = NULL;
 
-<<<<<<< HEAD
-#define WPAL_READ_REGISTER_RATELIMIT_INTERVAL 20*HZ
-#define WPAL_READ_REGISTER_RATELIMIT_BURST    1
-
-static DEFINE_RATELIMIT_STATE(wpalReadRegister_rs, \
-        WPAL_READ_REGISTER_RATELIMIT_INTERVAL,     \
-        WPAL_READ_REGISTER_RATELIMIT_BURST);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*----------------------------------------------------------------------------
  * Static Function Declarations and Definitions
  * -------------------------------------------------------------------------*/
@@ -387,10 +343,6 @@ wpt_status wpalEnableInterrupt
    switch (intType) 
    {
    case DXE_INTERRUPT_RX_READY:
-<<<<<<< HEAD
-      gpEnv->rx_enable_return = VOS_RETURN_ADDRESS;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       if (!gpEnv->rx_registered) 
       {
          gpEnv->rx_registered = 1;
@@ -400,10 +352,6 @@ wpt_status wpalEnableInterrupt
             WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                        "%s: RX IRQ request failure",
                        __func__);
-<<<<<<< HEAD
-           gpEnv->rx_isr_enable_failure = 1;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            break;
          }
       
@@ -413,23 +361,12 @@ wpt_status wpalEnableInterrupt
             WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                        "%s: enable_irq_wake failed for RX IRQ",
                        __func__);
-<<<<<<< HEAD
-           gpEnv->rx_isr_enable_partial_failure = 1;
             /* not fatal -- keep on going */
          }
-         gpEnv->rx_isr_enabled = 1;
-=======
-            /* not fatal -- keep on going */
-         }
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
       else
       {
          enable_irq(gpEnv->rx_irq);
-<<<<<<< HEAD
-         gpEnv->rx_isr_enabled = 1;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
       break;
    case DXE_INTERRUPT_TX_COMPLE:
@@ -493,13 +430,7 @@ wpt_status wpalDisableInterrupt
    switch (intType) 
    {
    case DXE_INTERRUPT_RX_READY:
-<<<<<<< HEAD
-      gpEnv->rx_disable_return = VOS_RETURN_ADDRESS;
       disable_irq_nosync(gpEnv->rx_irq);
-      gpEnv->rx_isr_enabled = 0;
-=======
-      disable_irq_nosync(gpEnv->rx_irq);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       break;
    case DXE_INTERRUPT_TX_COMPLE:
       disable_irq_nosync(gpEnv->tx_irq);
@@ -531,37 +462,19 @@ wpt_status wpalWriteRegister
    wpt_uint32   data
 )
 {
-   /* if SSR is in progress, and WCNSS is not out of reset (re-init
-    * not invoked), then do not access WCNSS registers */
-<<<<<<< HEAD
-   if (NULL == gpEnv || wcnss_device_is_shutdown() ||
-=======
-   if (NULL == gpEnv ||
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        (vos_is_logp_in_progress(VOS_MODULE_ID_WDI, NULL) &&
-            !vos_is_reinit_in_progress(VOS_MODULE_ID_WDI, NULL))) {
+   if (NULL == gpEnv) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: invoked before subsystem initialized",
                  __func__);
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
-<<<<<<< HEAD
-   address = (address | gpEnv->wcnss_memory->start);
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if ((address < gpEnv->wcnss_memory->start) ||
        (address > gpEnv->wcnss_memory->end)) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: Register address 0x%0x out of range 0x%0x - 0x%0x",
                  __func__, address,
-<<<<<<< HEAD
-                 (u32) gpEnv->wcnss_memory->start,
-                 (u32) gpEnv->wcnss_memory->end);
-=======
                  gpEnv->wcnss_memory->start, gpEnv->wcnss_memory->end);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
@@ -573,11 +486,7 @@ wpt_status wpalWriteRegister
    }
 
    wmb();
-<<<<<<< HEAD
-   writel_relaxed(data, gpEnv->mmio + (address - gpEnv->wcnss_memory->start));
-=======
    writel_relaxed(data, gpEnv->mmio + (address - WCNSS_BASE_ADDRESS));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    return eWLAN_PAL_STATUS_SUCCESS;
 }
@@ -597,49 +506,19 @@ wpt_status wpalReadRegister
    wpt_uint32  *data
 )
 {
-   /* if SSR is in progress, and WCNSS is not out of reset (re-init
-    * not invoked), then do not access WCNSS registers */
-<<<<<<< HEAD
-   if (NULL == gpEnv || wcnss_device_is_shutdown() ||
-        (vos_is_logp_in_progress(VOS_MODULE_ID_WDI, NULL) &&
-            !vos_is_reinit_in_progress(VOS_MODULE_ID_WDI, NULL))) {
-       /* Ratelimit wpalReadRegister failure messages which
-        * can flood serial console during improper system
-        * initialization or wcnss_device in shutdown state.
-        * wpalRegisterInterrupt() call to wpalReadRegister is
-        * likely to cause flooding. */
-       if (__ratelimit(&wpalReadRegister_rs)) {
-           WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
-                   "%s: invoked before subsystem initialized",
-                   __func__);
-       }
-       return eWLAN_PAL_STATUS_E_INVAL;
-   }
-
-   address = (address | gpEnv->wcnss_memory->start);
-
-=======
-   if (NULL == gpEnv ||
-        (vos_is_logp_in_progress(VOS_MODULE_ID_WDI, NULL) &&
-            !vos_is_reinit_in_progress(VOS_MODULE_ID_WDI, NULL))) {
+   if (NULL == gpEnv) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: invoked before subsystem initialized",
                  __func__);
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if ((address < gpEnv->wcnss_memory->start) ||
        (address > gpEnv->wcnss_memory->end)) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: Register address 0x%0x out of range 0x%0x - 0x%0x",
                  __func__, address,
-<<<<<<< HEAD
-                 (u32) gpEnv->wcnss_memory->start,
-                 (u32) gpEnv->wcnss_memory->end);
-=======
                  gpEnv->wcnss_memory->start, gpEnv->wcnss_memory->end);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
@@ -650,11 +529,7 @@ wpt_status wpalReadRegister
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
-<<<<<<< HEAD
-   *data = readl_relaxed(gpEnv->mmio + (address - gpEnv->wcnss_memory->start));
-=======
    *data = readl_relaxed(gpEnv->mmio + (address - WCNSS_BASE_ADDRESS));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    rmb();
 
    return eWLAN_PAL_STATUS_SUCCESS;
@@ -678,46 +553,23 @@ wpt_status wpalWriteDeviceMemory
   wpt_uint32 len
 )
 {
-   /* if SSR is in progress, and WCNSS is not out of reset (re-init
-    * not invoked), then do not access WCNSS registers */
-<<<<<<< HEAD
-   if (NULL == gpEnv || wcnss_device_is_shutdown() ||
-=======
-   if (NULL == gpEnv ||
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        (vos_is_logp_in_progress(VOS_MODULE_ID_WDI, NULL) &&
-            !vos_is_reinit_in_progress(VOS_MODULE_ID_WDI, NULL))) {
+   if (NULL == gpEnv) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: invoked before subsystem initialized",
                  __func__);
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
-<<<<<<< HEAD
-   address = (address | gpEnv->wcnss_memory->start);
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if ((address < gpEnv->wcnss_memory->start) ||
        ((address + len) > gpEnv->wcnss_memory->end)) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: Memory address 0x%0x len %d out of range 0x%0x - 0x%0x",
                  __func__, address, len,
-<<<<<<< HEAD
-                 (u32) gpEnv->wcnss_memory->start,
-                 (u32) gpEnv->wcnss_memory->end);
-      return eWLAN_PAL_STATUS_E_INVAL;
-   }
-
-   vos_mem_copy(gpEnv->mmio + (address - gpEnv->wcnss_memory->start),
-                                                            s_buffer, len);
-=======
                  gpEnv->wcnss_memory->start, gpEnv->wcnss_memory->end);
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
    memcpy(gpEnv->mmio + (address - WCNSS_BASE_ADDRESS), s_buffer, len);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    wmb();
 
    return eWLAN_PAL_STATUS_SUCCESS;
@@ -741,46 +593,23 @@ wpt_status wpalReadDeviceMemory
   wpt_uint32 len
 )
 {
-   /* if SSR is in progress, and WCNSS is not out of reset (re-init
-    * not invoked), then do not access WCNSS registers */
-<<<<<<< HEAD
-   if (NULL == gpEnv || wcnss_device_is_shutdown() ||
-=======
-   if (NULL == gpEnv ||
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-        (vos_is_logp_in_progress(VOS_MODULE_ID_WDI, NULL) &&
-            !vos_is_reinit_in_progress(VOS_MODULE_ID_WDI, NULL))) {
+   if (NULL == gpEnv) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: invoked before subsystem initialized",
                  __func__);
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
-<<<<<<< HEAD
-   address = (address | gpEnv->wcnss_memory->start);
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if ((address < gpEnv->wcnss_memory->start) ||
        ((address + len) > gpEnv->wcnss_memory->end)) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: Memory address 0x%0x len %d out of range 0x%0x - 0x%0x",
                  __func__, address, len,
-<<<<<<< HEAD
-                 (u32) gpEnv->wcnss_memory->start,
-                 (u32) gpEnv->wcnss_memory->end);
-      return eWLAN_PAL_STATUS_E_INVAL;
-   }
-
-   vos_mem_copy(d_buffer,
-                   gpEnv->mmio + (address - gpEnv->wcnss_memory->start), len);
-=======
                  gpEnv->wcnss_memory->start, gpEnv->wcnss_memory->end);
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
    memcpy(d_buffer, gpEnv->mmio + (address - WCNSS_BASE_ADDRESS), len);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    rmb();
 
    return eWLAN_PAL_STATUS_SUCCESS;
@@ -798,18 +627,11 @@ wpt_status wpalReadDeviceMemory
 */
 wpt_status wpalDeviceInit
 (
-<<<<<<< HEAD
-   void * devHandle
-)
-{
-   struct device *wcnss_device = (struct device *)devHandle;
-=======
    void * deviceCB
 )
 {
    hdd_context_t *pHddCtx = (hdd_context_t *)deviceCB;
    struct device *wcnss_device = pHddCtx->parent_dev;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    struct resource *wcnss_memory;
    int tx_irq;
    int rx_irq;
@@ -872,10 +694,6 @@ wpt_status wpalDeviceInit
       exclusive access to that memory */
 
    gpEnv->mmio = ioremap(wcnss_memory->start, resource_size(wcnss_memory));
-<<<<<<< HEAD
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if (NULL == gpEnv->mmio) {
       WPAL_TRACE(eWLAN_MODULE_DAL_DATA, eWLAN_PAL_TRACE_LEVEL_ERROR,
                  "%s: memory remap failure",

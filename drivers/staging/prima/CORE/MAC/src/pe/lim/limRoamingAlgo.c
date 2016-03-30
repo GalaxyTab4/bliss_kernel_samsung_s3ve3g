@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2011-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,15 +37,11 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
-<<<<<<< HEAD
-=======
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limRoamingAlgo.cc contains the code for LIM
  * algorithms.
  * Author:        Chandra Modumudi
@@ -294,13 +279,7 @@ void limTriggerBackgroundScan(tpAniSirGlobal pMac)
     smeScanReq.uIEFieldOffset = sizeof(tSirSmeScanReq);
     
     backgroundScan = limSelectsBackgroundScanMode(pMac);
-<<<<<<< HEAD
-    PELOG1(limLog(pMac, LOG1, FL("Performing (mode %s (%d)) Background Scan"),
-           lim_BackgroundScanModetoString(backgroundScan),
-           backgroundScan);)
-=======
     PELOG1(limLog(pMac, LOG1, FL("Performing (mode %d) Background Scan "), backgroundScan);)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     smeScanReq.backgroundScanMode = backgroundScan;
     
     //determine whether to send the results or not, If so, notify the BG scan results to SME

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( __VOS_SCHED_H )
@@ -97,19 +85,11 @@
   Include Files
   ------------------------------------------------------------------------*/
 #include <vos_event.h>
-<<<<<<< HEAD
-#include <vos_nvitem.h>
-#include <vos_mq.h>
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #include "i_vos_types.h"
 #include "i_vos_packet.h"
 #include <linux/wait.h>
 #include <linux/wakelock.h>
-<<<<<<< HEAD
-=======
 #include <vos_power.h>
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define TX_POST_EVENT_MASK               0x001
 #define TX_SUSPEND_EVENT_MASK            0x002
@@ -194,12 +174,6 @@ typedef struct _VosSchedContext
    /* TL Message queue on the Tx thread */
    VosMqType           tlTxMq;
 
-<<<<<<< HEAD
-   /* TL Message queue on the Rx thread */
-   VosMqType           tlRxMq;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /* SYS Message queue on the Tx thread */
    VosMqType           sysTxMq;
 
@@ -295,11 +269,7 @@ typedef struct _VosWatchdogContext
 
    v_BOOL_t resetInProgress;
 
-<<<<<<< HEAD
-   v_BOOL_t isFatalError;
-=======
    vos_chip_reset_reason_type reason;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    /* Lock for preventing multiple reset being triggered simultaneously */
    spinlock_t wdLock;
@@ -371,15 +341,6 @@ typedef struct _VosContextType
 
    volatile v_U8_t    isLoadUnloadInProgress;
 
-   /* SSR re-init in progress */
-   volatile v_U8_t     isReInitInProgress;
-
-<<<<<<< HEAD
-   /* NV BIN Version */
-   eNvVersionType     nvVersion;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } VosContextType, *pVosContextType;
 
 
@@ -537,20 +498,11 @@ void vos_sched_deinit_mqs (pVosSchedContext pSchedContext);
 void vos_sched_flush_mc_mqs  (pVosSchedContext pSchedContext);
 void vos_sched_flush_tx_mqs  (pVosSchedContext pSchedContext);
 void vos_sched_flush_rx_mqs  (pVosSchedContext pSchedContext);
-<<<<<<< HEAD
-=======
 VOS_STATUS vos_watchdog_chip_reset ( vos_chip_reset_reason_type reason );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 void clearWlanResetReason(void);
 
 void vos_timer_module_init( void );
 VOS_STATUS vos_watchdog_wlan_shutdown(void);
 VOS_STATUS vos_watchdog_wlan_re_init(void);
-<<<<<<< HEAD
-v_BOOL_t isSsrPanicOnFailure(void);
-void vos_ssr_protect(const char *caller_func);
-void vos_ssr_unprotect(const char *caller_func);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #endif // #if !defined __VOSS_SCHED_H

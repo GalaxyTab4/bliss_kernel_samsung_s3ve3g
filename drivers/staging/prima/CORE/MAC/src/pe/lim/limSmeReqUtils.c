@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2011-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,15 +37,11 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
-<<<<<<< HEAD
-=======
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limSmeReqUtils.cc contains the utility functions
  * for processing SME request messages.
  * Author:        Chandra Modumudi
@@ -531,13 +516,7 @@ limIsSmeStartBssReqValid(tpAniSirGlobal pMac,
     tANI_U8 valid = true;
 
     PELOG1(limLog(pMac, LOG1,
-<<<<<<< HEAD
-           FL("Parsed START_BSS_REQ fields are bssType=%s (%d), channelId=%d,"
-              " SSID len=%d, rsnIE len=%d, nwType=%d, rateset len=%d"),
-           lim_BssTypetoString(pStartBssReq->bssType),
-=======
            FL("Parsed START_BSS_REQ fields are bssType=%d, channelId=%d, SSID len=%d, rsnIE len=%d, nwType=%d, rateset len=%d"),
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            pStartBssReq->bssType,
            pStartBssReq->channelId,
            pStartBssReq->ssId.length,
@@ -893,36 +872,10 @@ limIsSmeScanReqValid(tpAniSirGlobal pMac, tpSirSmeScanReq pScanReq)
     {
         if (pScanReq->ssId[i].length > SIR_MAC_MAX_SSID_LENGTH)
         {
-<<<<<<< HEAD
-            limLog(pMac, LOGE,
-                   FL("Requested SSID length > SIR_MAC_MAX_SSID_LENGTH"));
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             valid = false;
             goto end;    
         }
     }
-<<<<<<< HEAD
-    if (pScanReq->bssType > eSIR_AUTO_MODE)
-    {
-        limLog(pMac, LOGE, FL("Invalid BSS Type"));
-        valid = false;
-    }
-    if (limIsGroupAddr(pScanReq->bssId) && !limIsAddrBC(pScanReq->bssId))
-    {
-        valid = false;
-        limLog(pMac, LOGE, FL("BSSID is group addr and is not Broadcast Addr"));
-    }
-    if (!(pScanReq->scanType == eSIR_PASSIVE_SCAN || pScanReq->scanType == eSIR_ACTIVE_SCAN))
-    {
-        valid = false;
-        limLog(pMac, LOGE, FL("Invalid Scan Type"));
-    }
-    if (pScanReq->channelList.numChannels > SIR_MAX_NUM_CHANNELS)
-    {
-        valid = false;
-        limLog(pMac, LOGE, FL("Number of Channels > SIR_MAX_NUM_CHANNELS"));
-=======
     if ((pScanReq->bssType > eSIR_AUTO_MODE) ||
         (limIsGroupAddr(pScanReq->bssId) && !limIsAddrBC(pScanReq->bssId)) ||
         (!(pScanReq->scanType == eSIR_PASSIVE_SCAN || pScanReq->scanType == eSIR_ACTIVE_SCAN)) || 
@@ -930,30 +883,18 @@ limIsSmeScanReqValid(tpAniSirGlobal pMac, tpSirSmeScanReq pScanReq)
     {
         valid = false;
         goto end;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     /*
     ** check min/max channelTime range
     **/
 
-<<<<<<< HEAD
-    if (valid)
-    {
-        if ((pScanReq->scanType == eSIR_ACTIVE_SCAN) &&
-            (pScanReq->maxChannelTime < pScanReq->minChannelTime))
-        {
-            limLog(pMac, LOGE, FL("Max Channel Time < Min Channel Time"));
-            valid = false;
-        }
-=======
     if ((pScanReq->scanType == eSIR_ACTIVE_SCAN) && 
         (pScanReq->maxChannelTime < pScanReq->minChannelTime))
     {
         PELOGW(limLog(pMac, LOGW, FL("Max Channel Time < Min Channel Time"));)
         valid = false;
         goto end;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
 end:

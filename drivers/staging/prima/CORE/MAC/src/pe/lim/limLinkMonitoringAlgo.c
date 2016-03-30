@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -54,7 +41,6 @@
 
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*
  * This file limLinkMonitoringAlgo.cc contains the code for
  * Link monitoring algorithm on AP and heart beat failure
@@ -147,14 +133,7 @@ limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg)
         case HAL_DEL_STA_REASON_CODE_TIM_BASED:
              PELOGE(limLog(pMac, LOGE, FL(" Deleting station: staId = %d, reasonCode = %d"), pMsg->staId, pMsg->reasonCode);)
              if (eLIM_STA_IN_IBSS_ROLE == psessionEntry->limSystemRole)
-<<<<<<< HEAD
-             {
-                 vos_mem_free(pMsg);
                  return;
-             }
-=======
-                 return;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
              pStaDs = dphLookupAssocId(pMac, pMsg->staId, &pMsg->assocId, &psessionEntry->dph.dphHashTable);
 
@@ -180,31 +159,7 @@ limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg)
              {
                  PELOG1(limLog(pMac, LOG1, FL("SAP:lim Delete Station Context (staId: %d, assocId: %d) "),
                              pMsg->staId, pMsg->assocId);)
-<<<<<<< HEAD
-                 /*
-                  * Check if Deauth/Disassoc is triggered from Host.
-                  * If mlmState is in some transient state then
-                  * don't trigger STA deletion to avoid the race
-                  * condition.
-                  */
-                  if ((pStaDs &&
-                      ((pStaDs->mlmStaContext.mlmState !=
-                        eLIM_MLM_LINK_ESTABLISHED_STATE) &&
-                       (pStaDs->mlmStaContext.mlmState !=
-                        eLIM_MLM_WT_ASSOC_CNF_STATE) &&
-                       (pStaDs->mlmStaContext.mlmState !=
-                        eLIM_MLM_ASSOCIATED_STATE))))
-                 {
-                     PELOGE(limLog(pMac, LOGE, FL("SAP:received Del STA context in some transit state(staId: %d, assocId: %d)"),
-                            pMsg->staId, pMsg->assocId);)
-                     vos_mem_free(pMsg);
-                     return;
-                 }
-                 else
-                     limTriggerSTAdeletion(pMac, pStaDs, psessionEntry);
-=======
                  limTriggerSTAdeletion(pMac, pStaDs, psessionEntry);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
              }
              else
              {
@@ -225,60 +180,10 @@ limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg)
                     tLimMlmDeauthInd  mlmDeauthInd;
                     PELOGW(limLog(pMac, LOGW, FL("lim Delete Station Context (staId: %d, assocId: %d) "),
                                 pMsg->staId, pMsg->assocId);)
-<<<<<<< HEAD
-                    if ((pStaDs &&
-                            ((pStaDs->mlmStaContext.mlmState !=
-                             eLIM_MLM_LINK_ESTABLISHED_STATE) &&
-                             (pStaDs->mlmStaContext.mlmState !=
-                             eLIM_MLM_WT_ASSOC_CNF_STATE) &&
-                             (pStaDs->mlmStaContext.mlmState !=
-                             eLIM_MLM_ASSOCIATED_STATE))))
-                    {
-                        /**
-                         * Received WDA_DELETE_STA_CONTEXT_IND for STA that does not
-                         * have context or in some transit state.
-                         * Log error
-                         */
-                         PELOGE(limLog(pMac, LOGE,
-                                FL("received WDA_DELETE_STA_CONTEXT_IND for STA that either has no context or in some transit state, Addr= "
-                                    MAC_ADDRESS_STR), MAC_ADDR_ARRAY(pMsg->bssId));)
-                         vos_mem_free(pMsg);
-                         return;
-                    }
-
-                    if( pMac->roam.configParam.sendDeauthBeforeCon )
-                    {
-                       tANI_U8 apCount = pMac->lim.gLimHeartBeatApMacIndex;
-
-                       if(pMac->lim.gLimHeartBeatApMacIndex)
-                          pMac->lim.gLimHeartBeatApMacIndex = 0;
-                       else
-                          pMac->lim.gLimHeartBeatApMacIndex = 1;
-
-                       limLog(pMac, LOG1, FL("lim Delete Station Context for MAC "
-                                          MAC_ADDRESS_STR" Store it on Index %d"),
-                                          MAC_ADDR_ARRAY(pStaDs->staAddr),apCount);
-
-                       sirCopyMacAddr(pMac->lim.gLimHeartBeatApMac[apCount],pStaDs->staAddr);
-                    }
-                    pStaDs->mlmStaContext.disassocReason = eSIR_MAC_UNSPEC_FAILURE_REASON;
-                    pStaDs->mlmStaContext.cleanupTrigger = eLIM_LINK_MONITORING_DEAUTH;
-
-                   /** Set state to mlm State to eLIM_MLM_WT_DEL_STA_RSP_STATE
-                    * This is to address the issue of race condition between
-                    * disconnect request from the HDD and deauth from
-                    * Tx inactivity timer by FWR. This will make sure that we will not
-                    * process disassoc if deauth is in progress for the station
-                    * and thus mlmStaContext.cleanupTrigger will not be overwritten.
-                    */
-                    pStaDs->mlmStaContext.mlmState   = eLIM_MLM_WT_DEL_STA_RSP_STATE;
-
-=======
 
                     pStaDs->mlmStaContext.disassocReason = eSIR_MAC_UNSPEC_FAILURE_REASON;
                     pStaDs->mlmStaContext.cleanupTrigger = eLIM_LINK_MONITORING_DEAUTH;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     // Issue Deauth Indication to SME.
                     vos_mem_copy((tANI_U8 *) &mlmDeauthInd.peerMacAddr,
                                   pStaDs->staAddr, sizeof(tSirMacAddr));
@@ -286,8 +191,6 @@ limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg)
                     mlmDeauthInd.deauthTrigger =  pStaDs->mlmStaContext.cleanupTrigger;
 
 #ifdef FEATURE_WLAN_TDLS
-<<<<<<< HEAD
-=======
 #ifdef FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP
                     if ((TRUE == pMac->lim.gLimTDLSOxygenSupport) &&
                         (limGetTDLSPeerCount(pMac, psessionEntry) != 0)) {
@@ -296,7 +199,6 @@ limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg)
                             return ;
                     }
 #endif
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     /* Delete all TDLS peers connected before leaving BSS*/
                     limDeleteTDLSPeers(pMac, psessionEntry);
 #endif
@@ -478,8 +380,6 @@ limTearDownLinkWithAp(tpAniSirGlobal pMac, tANI_U8 sessionId, tSirMacReasonCodes
         tLimMlmDeauthInd  mlmDeauthInd;
 
 #ifdef FEATURE_WLAN_TDLS
-<<<<<<< HEAD
-=======
 #ifdef FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP
         if ((TRUE == pMac->lim.gLimTDLSOxygenSupport) &&
             (limGetTDLSPeerCount(pMac, psessionEntry) != 0)) {
@@ -487,7 +387,6 @@ limTearDownLinkWithAp(tpAniSirGlobal pMac, tANI_U8 sessionId, tSirMacReasonCodes
                 return;
         }
 #endif
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         /* Delete all TDLS peers connected before leaving BSS*/
         limDeleteTDLSPeers(pMac, psessionEntry);
 #endif
@@ -499,30 +398,6 @@ limTearDownLinkWithAp(tpAniSirGlobal pMac, tANI_U8 sessionId, tSirMacReasonCodes
         vos_mem_copy((tANI_U8 *) &mlmDeauthInd.peerMacAddr,
                       pStaDs->staAddr,
                       sizeof(tSirMacAddr));
-<<<<<<< HEAD
-        /* if sendDeauthBeforeCon is enabled and reasoncode is Beacon Missed
-         * Store the MAC of AP in the flip flop buffer. This MAC will be
-         * used to send Deauth before connection, if we connect to same AP
-         * after HB failure.
-         */
-        if(pMac->roam.configParam.sendDeauthBeforeCon &&
-            eSIR_BEACON_MISSED == reasonCode)
-        {
-           int apCount = pMac->lim.gLimHeartBeatApMacIndex;
-
-           if(pMac->lim.gLimHeartBeatApMacIndex)
-              pMac->lim.gLimHeartBeatApMacIndex = 0;
-           else
-              pMac->lim.gLimHeartBeatApMacIndex = 1;
-
-           limLog(pMac, LOGE, FL("HB Failure on MAC "
-                 MAC_ADDRESS_STR" Store it on Index %d"),
-                   MAC_ADDR_ARRAY(pStaDs->staAddr),apCount);
-
-           sirCopyMacAddr(pMac->lim.gLimHeartBeatApMac[apCount],pStaDs->staAddr);
-        }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         mlmDeauthInd.reasonCode    = (tANI_U8) pStaDs->mlmStaContext.disassocReason;
         mlmDeauthInd.deauthTrigger =  pStaDs->mlmStaContext.cleanupTrigger;
 
@@ -577,14 +452,6 @@ void limHandleHeartBeatFailure(tpAniSirGlobal pMac,tpPESession psessionEntry)
 
     /* Ensure HB Status for the session has been reseted */
     psessionEntry->LimHBFailureStatus = eANI_BOOLEAN_FALSE;
-<<<<<<< HEAD
-
-    if (((psessionEntry->limSystemRole == eLIM_STA_ROLE)||
-         (psessionEntry->limSystemRole == eLIM_BT_AMP_STA_ROLE))&&
-         (psessionEntry->limMlmState == eLIM_MLM_LINK_ESTABLISHED_STATE)&&
-         (psessionEntry->limSmeState != eLIM_SME_WT_DISASSOC_STATE) &&
-         (psessionEntry->limSmeState != eLIM_SME_WT_DEAUTH_STATE))
-=======
     /** Re Activate Timer if the system is Waiting for ReAssoc Response*/
     if(((psessionEntry->limSystemRole == eLIM_STA_IN_IBSS_ROLE) || 
         (psessionEntry->limSystemRole == eLIM_STA_ROLE) ||
@@ -612,7 +479,6 @@ void limHandleHeartBeatFailure(tpAniSirGlobal pMac,tpPESession psessionEntry)
     }
     if (((psessionEntry->limSystemRole == eLIM_STA_ROLE)||(psessionEntry->limSystemRole == eLIM_BT_AMP_STA_ROLE))&&
          (psessionEntry->limMlmState == eLIM_MLM_LINK_ESTABLISHED_STATE))
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     {
         if (!pMac->sys.gSysEnableLinkMonitorMode)
             return;
@@ -631,11 +497,6 @@ void limHandleHeartBeatFailure(tpAniSirGlobal pMac,tpPESession psessionEntry)
         {
             /*** Detected continuous Beacon Misses ***/
              psessionEntry->LimHBFailureStatus= eANI_BOOLEAN_TRUE;
-<<<<<<< HEAD
-             /*Reset the HB packet count before sending probe*/
-             limResetHBPktCount(psessionEntry);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             /**
              * Send Probe Request frame to AP to see if
              * it is still around. Wait until certain
@@ -657,11 +518,7 @@ void limHandleHeartBeatFailure(tpAniSirGlobal pMac,tpPESession psessionEntry)
             }
             /* Connected on DFS channel so should not send the probe request
             * tear down the link directly */
-<<<<<<< HEAD
-            limTearDownLinkWithAp(pMac, psessionEntry->peSessionId, eSIR_BEACON_MISSED);
-=======
             limTearDownLinkWithAp(pMac, psessionEntry->peSessionId, eSIR_MAC_UNSPEC_FAILURE_REASON);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
     }
     else
@@ -672,11 +529,7 @@ void limHandleHeartBeatFailure(tpAniSirGlobal pMac,tpPESession psessionEntry)
             * or in states other than link-established state.
             * Log error.
             */
-<<<<<<< HEAD
-        PELOG1(limLog(pMac, LOG1, FL("received heartbeat timeout in state %d"),
-=======
         PELOG1(limLog(pMac, LOG1, FL("received heartbeat timeout in state %X"),
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                psessionEntry->limMlmState);)
         limPrintMlmState(pMac, LOG1, psessionEntry->limMlmState);
         pMac->lim.gLimHBfailureCntInOtherStates++;

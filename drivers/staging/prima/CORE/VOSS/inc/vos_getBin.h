@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( __VOS_GETBIN_H )
@@ -163,11 +151,6 @@ VOS_STATUS vos_get_binary_blob( VOS_BINARY_ID binaryId,
 -----------------------------------------------------------------------------*/
 tVOS_CON_MODE vos_get_conparam( void );
 tVOS_CONCURRENCY_MODE vos_get_concurrency_mode( void );
-<<<<<<< HEAD
-v_BOOL_t vos_concurrent_open_sessions_running(void);
-v_BOOL_t vos_max_concurrent_connections_reached(void);
-=======
 v_BOOL_t vos_concurrent_sessions_running(void);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #endif // !defined __VOS_GETBIN_H

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -60,7 +47,6 @@
    All Rights Reserved.
    Qualcomm Atheros Confidential and Proprietary.
   ==============================================================================*/
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* $HEADER$ */
 /**-----------------------------------------------------------------------------
   Include files
@@ -138,11 +124,7 @@ VOS_STATUS vos_get_binary_blob( VOS_BINARY_ID binaryId,
        if ( !VOS_IS_STATUS_SUCCESS( VosSts ))
        {
           VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                                    "%s : vos_open failed",__func__);
-=======
                                     "%s : vos_open failed\n",__func__);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
           return VOS_STATUS_E_FAILURE;
        }
@@ -176,11 +158,7 @@ tVOS_CONCURRENCY_MODE vos_get_concurrency_mode( void )
     return con_mode;
 }
 
-<<<<<<< HEAD
-v_BOOL_t vos_concurrent_open_sessions_running(void)
-=======
 v_BOOL_t vos_concurrent_sessions_running(void)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     v_U8_t i=0;
     v_U8_t j=0;
@@ -194,11 +172,7 @@ v_BOOL_t vos_concurrent_sessions_running(void)
        {
           for (i=0; i < VOS_MAX_NO_OF_MODE; i++)
           {
-<<<<<<< HEAD
-              j += pHddCtx->no_of_open_sessions[i];
-=======
              j += pHddCtx->no_of_sessions[i];
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           }
        }
     }
@@ -206,43 +180,3 @@ v_BOOL_t vos_concurrent_sessions_running(void)
     return (j>1);
 }
 
-<<<<<<< HEAD
-/**---------------------------------------------------------------------------
- *
- *   \brief vos_max_concurrent_connections_reached()
- *
- *   This function checks for presence of concurrency where more than
- *   one connection exists and it returns TRUE if the max concurrency is
- *   reached.
- *
- *   Example:
- *   STA + STA (wlan0 and wlan1 are connected) - returns TRUE
- *   STA + STA (wlan0 connected and wlan1 disconnected) - returns FALSE
- *   DUT with P2P-GO + P2P-CLIENT connection) - returns TRUE
- *
- *   \param  - None
- *
- *   \return - VOS_TRUE or VOS_FALSE
- *
- * --------------------------------------------------------------------------*/
-v_BOOL_t vos_max_concurrent_connections_reached (void)
-{
-    v_U8_t i = 0, j = 0;
-    hdd_context_t *pHddCtx;
-    v_CONTEXT_t pVosContext = vos_get_global_context(VOS_MODULE_ID_HDD, NULL);
-
-    if (NULL != pVosContext) {
-        pHddCtx = vos_get_context(VOS_MODULE_ID_HDD, pVosContext);
-        if (NULL != pHddCtx) {
-            for (i = 0; i < VOS_MAX_NO_OF_MODE; i++)
-                j += pHddCtx->no_of_active_sessions[i];
-
-            return (j > (pHddCtx->cfg_ini->gMaxConcurrentActiveSessions - 1));
-       }
-    }
-
-    return VOS_FALSE;
-}
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver

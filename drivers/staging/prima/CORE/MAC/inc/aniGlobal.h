@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,19 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
-/*
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -57,7 +40,6 @@
  */
 /*
  * Airgo Networks, Inc proprietary. All rights reserved
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * aniGlobal.h: MAC Modules Adapter Definitions.
  * Author:      V. K. Kandarpa
  * Date:    10/25/2002
@@ -115,15 +97,9 @@ typedef struct sAniSirGlobal *tpAniSirGlobal;
 #include "smeRrmInternal.h"
 #include "rrmGlobal.h"
 #endif
-<<<<<<< HEAD
-#if defined(FEATURE_WLAN_ESE) && !defined(FEATURE_WLAN_ESE_UPLOAD)
-#include "eseApi.h"
-#include "eseGlobal.h"
-=======
-#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+#if defined FEATURE_WLAN_CCX
 #include "ccxApi.h"
 #include "ccxGlobal.h"
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 #include "p2p_Api.h"
 
@@ -173,10 +149,6 @@ typedef struct sAniSirGlobal *tpAniSirGlobal;
 #endif //WLAN_FEATURE_CONCURRENT_P2P
 
 #define SPACE_ASCII_VALUE  32
-
-#ifdef FEATURE_WLAN_BATCH_SCAN
-#define EQUALS_TO_ASCII_VALUE (61)
-#endif
 
 // -------------------------------------------------------------------
 // Change channel generic scheme
@@ -244,12 +216,9 @@ typedef struct sLimTimers
     // CNF_WAIT timer
     TX_TIMER            *gpLimCnfWaitTimer;
 
-<<<<<<< HEAD
-=======
     // Send Disassociate frame threshold parameters
     TX_TIMER            gLimSendDisassocFrameThresholdTimer;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     TX_TIMER       gLimAddtsRspTimer;   // max wait for a response
 
     // Update OLBC Cache Timer
@@ -269,16 +238,10 @@ typedef struct sLimTimers
     TX_TIMER           gLimFTPreAuthRspTimer;
 #endif
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-    TX_TIMER           gLimEseTsmTimer;
-#endif
-=======
 #ifdef FEATURE_WLAN_CCX
     TX_TIMER           gLimCcxTsmTimer;
 #endif
     TX_TIMER           gLimRemainOnChannelTimer;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_TDLS_INTERNAL
     TX_TIMER           gLimTdlsDisRspWaitTimer;
     TX_TIMER           gLimTdlsLinkSetupRspTimeouTimer;
@@ -496,11 +459,6 @@ typedef struct sAniSirLim
 
     // Heart-Beat interval value
     tANI_U32   gLimHeartBeatCount;
-<<<<<<< HEAD
-    tSirMacAddr gLimHeartBeatApMac[2];
-    tANI_U8 gLimHeartBeatApMacIndex;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // Statistics to keep track of no. beacons rcvd in heart beat interval
     tANI_U16            gLimHeartBeatBeaconStats[MAX_NO_BEACONS_PER_HEART_BEAT_INTERVAL];
@@ -709,12 +667,6 @@ typedef struct sAniSirLim
 #ifdef FEATURE_WLAN_TDLS
     tANI_U8 gLimTDLSBufStaEnabled;
     tANI_U8 gLimTDLSUapsdMask;
-<<<<<<< HEAD
-    tANI_U8 gLimTDLSOffChannelEnabled;
-    // TDLS WMM Mode
-    tANI_U8 gLimTDLSWmmMode;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 
@@ -758,13 +710,10 @@ typedef struct sAniSirLim
     // Place holder for Pre-authentication node list
     struct tLimPreAuthNode *  pLimPreAuthList;
 
-<<<<<<< HEAD
-=======
     // Send Disassociate frame threshold parameters
     tANI_U16            gLimDisassocFrameThreshold;
     tANI_U16            gLimDisassocFrameCredit;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     // Assoc or ReAssoc Response Data/Frame
     void                *gLimAssocResponseData;
 
@@ -963,11 +912,7 @@ tLimMlmOemDataRsp       *gpLimMlmOemDataRsp;
     tANI_U32    mgmtFrameSessionId;
     tSirBackgroundScanMode gLimBackgroundScanMode;
 
-<<<<<<< HEAD
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-=======
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tpPESession  pSessionEntry;
     tANI_U8 reAssocRetryAttempt;
 #endif
@@ -975,21 +920,6 @@ tLimMlmOemDataRsp       *gpLimMlmOemDataRsp;
     tANI_U8 deferredMsgCnt;
     tSirDFSChannelList    dfschannelList;
     tANI_U8 deauthMsgCnt;
-<<<<<<< HEAD
-    tANI_U8 gLimIbssStaLimit;
-    tANI_U8 probeCounter;
-    tANI_U8 maxProbe;
-    tANI_U8 retryPacketCnt;
-
-    // Flag to debug remain on channel
-    tANI_BOOLEAN gDebugP2pRemainOnChannel;
-    /* Sequence number to keep track of
-     * start and end of remain on channel
-     * debug marker frame.
-     */
-    tANI_U32 remOnChnSeqNum;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tAniSirLim, *tpAniSirLim;
 
 typedef struct sLimMgmtFrameRegistration
@@ -1051,6 +981,13 @@ typedef struct sMacOpenParameters
     tANI_U32 frameTransRequired;
     tDriverType  driverType;
 } tMacOpenParameters;
+
+typedef enum
+{
+    HAL_STOP_TYPE_SYS_RESET,
+    HAL_STOP_TYPE_SYS_DEEP_SLEEP,
+    HAL_STOP_TYPE_RF_KILL   
+}tHalStopType;
 
 typedef struct sHalMacStartParameters
 {
@@ -1129,23 +1066,6 @@ typedef struct sAniSirGlobal
     v_BOOL_t isTdlsPowerSaveProhibited;
 #endif
     tANI_U8 fScanOffload;
-<<<<<<< HEAD
-    tANI_U8 isCoalesingInIBSSAllowed;
-    tANI_U32 fEnableDebugLog;
-    tANI_U32 fDeferIMPSTime;
-    tANI_BOOLEAN deferImps;
-
-#ifdef WLAN_FEATURE_11AC
-    /* Alow Mu BFormee session only if MU BF session doesnt exist.
-     */
-    v_BOOL_t isMuBfsessionexist;
-#endif
-
-    v_BOOL_t isCoexScoIndSet;
-    v_U8_t miracast_mode;
-    tANI_BOOLEAN miracastVendorConfig;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tAniSirGlobal;
 
 #ifdef FEATURE_WLAN_TDLS

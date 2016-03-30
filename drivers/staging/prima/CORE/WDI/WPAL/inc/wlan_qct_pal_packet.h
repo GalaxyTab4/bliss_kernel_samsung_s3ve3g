@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -53,7 +40,6 @@
  */
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if !defined( __WLAN_QCT_PAL_PACKET_H )
 #define __WLAN_QCT_PAL_PACKET_H
 
@@ -174,10 +160,6 @@ typedef struct
    wpt_log_data_stall_channel_type  dxeChannelInfo[WPT_NUM_TRPT_CHANNEL];
 } wpt_log_data_stall_type;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 //pPkt is a pointer to wpt_packet
 #define WPAL_PACKET_SET_BD_POINTER(pPkt, pBd)   ( (pPkt)->pBD = (pBd) )
 #define WPAL_PACKET_GET_BD_POINTER(pPkt)  ( (pPkt)->pBD )
@@ -386,28 +368,6 @@ wpt_status wpalIsPacketLocked( wpt_packet *pPacket);
 wpt_status wpalGetNumRxRawPacket(wpt_uint32 *numRxResource);
 
 /*---------------------------------------------------------------------------
-<<<<<<< HEAD
-   wpalGetNumRxPacketAllocFailures   Get number of times packet alloc failed
-       numRxResource  pointer of queried value
-
-   return:
-       eWLAN_PAL_STATUS_SUCCESS
----------------------------------------------------------------------------*/
-wpt_status wpalGetNumRxPacketAllocFailures(wpt_uint32 *numRxResource);
-
-/*---------------------------------------------------------------------------
-   wpalGetNumRxFreePacket   Query available RX Free buffer count
-   param:
-       numRxResource  pointer of queried value
-
-   return:
-       WPT_STATUS
----------------------------------------------------------------------------*/
-wpt_status wpalGetNumRxFreePacket(wpt_uint32 *numRxResource);
-
-/*---------------------------------------------------------------------------
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalPacketStallUpdateInfo – Update each channel information when stall
        detected, also power state and free resource count
 

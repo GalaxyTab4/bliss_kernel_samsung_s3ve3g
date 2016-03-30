@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,17 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/*
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -58,7 +43,6 @@
 * Copyright (c) 2013 Qualcomm Atheros, Inc.
 * All Rights Reserved.
 * Qualcomm Atheros Confidential and Proprietary.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   \file  limTrace.c
 
   \brief implementation for trace related APIs
@@ -80,10 +64,6 @@
 
 #include "limTrace.h"
 #include "limTimerUtils.h"
-<<<<<<< HEAD
-#include "vos_trace.h"
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 #ifdef LIM_TRACE_RECORD
@@ -122,11 +102,7 @@ static tANI_U8* __limTraceGetTimerString( tANI_U16 timerId )
 #endif
         CASE_RETURN_STRING(eLIM_REMAIN_CHN_TIMER);
         CASE_RETURN_STRING(eLIM_PERIODIC_PROBE_REQ_TIMER);
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-=======
 #ifdef FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         CASE_RETURN_STRING(eLIM_TSM_TIMER);
 #endif
         CASE_RETURN_STRING(eLIM_DISASSOC_ACK_TIMER);
@@ -163,21 +139,13 @@ static tANI_U8* __limTraceGetMgmtDropReasonString( tANI_U16 dropReason )
 
 void limTraceInit(tpAniSirGlobal pMac)
 {
-<<<<<<< HEAD
-    vosTraceRegister(VOS_MODULE_ID_PE, (tpvosTraceCb)&limTraceDump);
-=======
     macTraceRegister(pMac,  VOS_MODULE_ID_PE, limTraceDump);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 
 
 
-<<<<<<< HEAD
-void limTraceDump(tpAniSirGlobal pMac, tpvosTraceRecord pRecord, tANI_U16 recIndex)
-=======
 void limTraceDump(tpAniSirGlobal pMac, tpTraceRecord pRecord, tANI_U16 recIndex)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
 
     static char *frameSubtypeStr[LIM_TRACE_MAX_SUBTYPES] =
@@ -238,13 +206,8 @@ void limTraceDump(tpAniSirGlobal pMac, tpTraceRecord pRecord, tANI_U16 recIndex)
             break;
 
         case TRACE_CODE_TX_COMPLETE:
-<<<<<<< HEAD
-            limLog(pMac, LOGE, "%04d    %012u  S%d    %-14s  %d", recIndex, pRecord->time, pRecord->session,
-                                            "TX Complete", pRecord->data );
-=======
             limLog(pMac, LOGE, "%04d    %012u  S%d    %-14s  ", recIndex, pRecord->time, pRecord->session,
                                             "TX Complete" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 
         case TRACE_CODE_TX_SME_MSG:

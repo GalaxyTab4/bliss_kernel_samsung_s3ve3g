@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -53,7 +40,6 @@
  */
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /** ------------------------------------------------------------------------- *
     ------------------------------------------------------------------------- *
 
@@ -65,11 +51,8 @@
 
     $Id$
 
-<<<<<<< HEAD
-=======
     Copyright (C) 2006 Airgo Networks, Incorporated
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    ========================================================================== */
 
@@ -251,23 +234,12 @@ typedef enum
     eHAL_STATUS_FT_PREAUTH_KEY_SUCCESS,
     eHAL_STATUS_FT_PREAUTH_KEY_FAILED,
 #endif
-<<<<<<< HEAD
-    //CMD not Queued in SME
-    eHAL_STATUS_CMD_NOT_QUEUED,
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     // not a real status.  Just a way to mark the maximum in the enum.
     eHAL_STATUS_MAX
 
 } eHalStatus;
 
-typedef enum
-{
-    HAL_STOP_TYPE_SYS_RESET,
-    HAL_STOP_TYPE_SYS_DEEP_SLEEP,
-    HAL_STOP_TYPE_RF_KILL,
-}tHalStopType;
 
 // macro to check for SUCCESS value of the halStatus
 #define HAL_STATUS_SUCCESS( variable ) ( eHAL_STATUS_SUCCESS == ( variable ) )

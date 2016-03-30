@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( __VOS_MQ_H )
@@ -61,8 +49,6 @@
   \brief virtual Operating System Services (vOSS) message queue APIs
 
    Message Queue Definitions and API
-<<<<<<< HEAD
-=======
 <<<<<<< HEAD:CORE/VOSS/inc/vos_mq.h
   
    Copyright 2008 (c) Qualcomm, Incorporated.  All Rights Reserved.
@@ -76,7 +62,6 @@
    Qualcomm Technologies Confidential and Proprietary.
 
 >>>>>>> f7413b6... wlan: voss: remove obsolete "INTEGRATED_SOC" featurization:prima/CORE/VOSS/inc/vos_mq.h
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   ========================================================================*/
 
 /* $Header$ */
@@ -119,21 +104,9 @@ typedef struct vos_msg_s
      * Messages should use either bodyptr or bodyval; not both !!!.
      */
     void *bodyptr;
-<<<<<<< HEAD
-
-    v_U32_t bodyval;
-
-    /*
-     * Some messages provide a callback function.  The function signature
-     * must be agreed upon between the two entities exchanging the message
-     */
-    void *callback;
-
-=======
     
     v_U32_t bodyval;    
     
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } vos_msg_t;
 
 

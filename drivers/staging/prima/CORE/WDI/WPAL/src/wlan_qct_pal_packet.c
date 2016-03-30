@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -54,7 +41,6 @@
 
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**=========================================================================
   
   \file  wlan_qct_pal_packet.c
@@ -72,20 +58,12 @@
 #include "wlan_qct_pal_packet.h"
 #include "wlan_qct_pal_api.h"
 #include "wlan_qct_pal_trace.h"
-<<<<<<< HEAD
-#include "wlan_qct_os_status.h"
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #include "vos_packet.h"
 #include "vos_trace.h"
 #include "vos_list.h"
 
 #include <linux/skbuff.h>
 #include "dma-mapping.h"
-<<<<<<< HEAD
-#include <linux/wcnss_wlan.h>
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*Per spec definition*/
 #define WPAL_ETHERNET_PAKCET_HEADER_SIZE     14
@@ -166,11 +144,8 @@ VOS_STATUS wpalPacketRXLowResourceCB(vos_pkt_t *pPacket, v_VOID_t *userData)
 
    wpalPacketAvailableCB( (wpt_packet *)pPacket, userData );
 
-<<<<<<< HEAD
-=======
    wpalPacketAvailableCB = NULL;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    return VOS_STATUS_SUCCESS;
 }
 
@@ -201,22 +176,6 @@ wpt_packet * wpalPacketAlloc(wpt_packet_type pktType, wpt_uint32 nPktSize,
       break;
 
    case eWLAN_PAL_PKT_TYPE_RX_RAW:
-      /* Set the wpalPacketAvailableCB before we try to get a VOS
-       * packet from the 'free list' and reset it if vos_pkt_get_packet()
-       * returns a valid packet. This order is required to avoid the
-       * race condition:
-       * 1. The below call to vos_pkt_get_packet() in RX_Thread determines
-       *    that no more packets are available in the 'free list' and sets
-       *    the low resource callbacks.
-       * 2. in parallel vos_pkt_return_packet() is called in MC_Thread for a
-       *    Management frame before wpalPacketAlloc() gets a chance to set
-       *    wpalPacketAvailableCB and since the 'low resource callbacks'
-       *    are set the callback function - wpalPacketRXLowResourceCB is
-       *    executed,but since wpalPacketAvailableCB is still NULL the low
-       *    resource recovery fails.
-       */
-      wpalPacketAvailableCB = rxLowCB;
-
       vosStatus = vos_pkt_get_packet(&pVosPkt, VOS_PKT_TYPE_RX_RAW,
                                        nPktSize, 1, VOS_FALSE, 
                                        wpalPacketRXLowResourceCB, usrData);
@@ -225,8 +184,11 @@ wpt_packet * wpalPacketAlloc(wpt_packet_type pktType, wpt_uint32 nPktSize,
       /* Reserve the entire raw rx buffer for DXE */
       if( vosStatus == VOS_STATUS_SUCCESS )
       {
-        wpalPacketAvailableCB = NULL;
         vosStatus =  vos_pkt_reserve_head_fast( pVosPkt, &pData, nPktSize ); 
+      }
+      else
+      {
+        wpalPacketAvailableCB = rxLowCB;
       }
 #endif /* FEATURE_R33D */
       if((NULL != pVosPkt) && (VOS_STATUS_E_RESOURCES != vosStatus))
@@ -244,11 +206,7 @@ wpt_packet * wpalPacketAlloc(wpt_packet_type pktType, wpt_uint32 nPktSize,
 
    default:
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                  " try to allocate unsupported packet type (%d)", pktType);
-=======
                   " try to allocate unsupported packet type (%d)\n", pktType);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       break;
    }
 
@@ -318,11 +276,7 @@ wpt_uint32 wpalPacketGetLength(wpt_packet *pPkt)
    }
    else
    {
-<<<<<<< HEAD
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s  failed",
-=======
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s  failed\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          __func__);
    }
 
@@ -353,31 +307,12 @@ wpt_status wpalPacketRawTrimHead(wpt_packet *pPkt, wpt_uint32 size)
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
-<<<<<<< HEAD
-   if ((eWLAN_PAL_PKT_TYPE_TX_802_11_MGMT == WPAL_PACKET_GET_TYPE(pPkt)) ||
-               (eWLAN_PAL_PKT_TYPE_RX_RAW == WPAL_PACKET_GET_TYPE(pPkt)))
-   {
-       // Continue to trim the packet
-   }
-   else
-   {
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
-                "%s : neither 80211 managment packet nor RAW packet", __func__);
-      VOS_ASSERT(0);
-      return eWLAN_PAL_STATUS_E_INVAL;
-   }
-
-   if( !VOS_IS_STATUS_SUCCESS(vos_pkt_trim_head(WPAL_TO_VOS_PKT(pPkt), (v_SIZE_t)size)) )
-   {
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s  Invalid trim(%d)",
-=======
    VOS_ASSERT( (eWLAN_PAL_PKT_TYPE_TX_802_11_MGMT == WPAL_PACKET_GET_TYPE(pPkt)) ||
                (eWLAN_PAL_PKT_TYPE_RX_RAW == WPAL_PACKET_GET_TYPE(pPkt)) );
 
    if( !VOS_IS_STATUS_SUCCESS(vos_pkt_trim_head(WPAL_TO_VOS_PKT(pPkt), (v_SIZE_t)size)) )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s  Invalid trim(%d)\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          __func__, size);
       status = eWLAN_PAL_STATUS_E_INVAL;
    }
@@ -405,30 +340,11 @@ wpt_status wpalPacketRawTrimTail(wpt_packet *pPkt, wpt_uint32 size)
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
-<<<<<<< HEAD
-   if ((eWLAN_PAL_PKT_TYPE_TX_802_11_MGMT == WPAL_PACKET_GET_TYPE(pPkt)) ||
-               (eWLAN_PAL_PKT_TYPE_RX_RAW == WPAL_PACKET_GET_TYPE(pPkt)))
-   {
-       // Continue to trim the packet
-   }
-   else
-   {
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
-                "%s : neither 80211 managment packet nor RAW packet", __func__);
-      VOS_ASSERT(0);
-      return eWLAN_PAL_STATUS_E_INVAL;
-   }
-
-   if( !VOS_IS_STATUS_SUCCESS(vos_pkt_trim_tail(WPAL_TO_VOS_PKT(pPkt), (v_SIZE_t)size)) )
-   {
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s  Invalid trim(%d)",
-=======
    VOS_ASSERT( (eWLAN_PAL_PKT_TYPE_TX_802_11_MGMT == WPAL_PACKET_GET_TYPE(pPkt)) ||
                (eWLAN_PAL_PKT_TYPE_RX_RAW == WPAL_PACKET_GET_TYPE(pPkt)) );
    if( !VOS_IS_STATUS_SUCCESS(vos_pkt_trim_tail(WPAL_TO_VOS_PKT(pPkt), (v_SIZE_t)size)) )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s  Invalid trim(%d)\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          __func__, size);
       status = eWLAN_PAL_STATUS_E_INVAL;
    }
@@ -495,11 +411,7 @@ wpt_status wpalPacketSetRxLength(wpt_packet *pPkt, wpt_uint32 len)
    if( (eWLAN_PAL_PKT_TYPE_RX_RAW != WPAL_PACKET_GET_TYPE(pPkt)))
    {
      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                "%s  Invalid packet type(%d)",  __func__,
-=======
                 "%s  Invalid packet type(%d)\n",  __func__, 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 WPAL_PACKET_GET_TYPE(pPkt));
      return eWLAN_PAL_STATUS_E_INVAL;
    }
@@ -524,13 +436,7 @@ wpt_status wpalPacketSetRxLength(wpt_packet *pPkt, wpt_uint32 len)
 WPT_STATIC WPT_INLINE void* itGetOSPktAddrForDevice( wpt_packet *pPacket )
 {
    struct sk_buff *skb;
-<<<<<<< HEAD
-   struct device *wcnss_device = (struct device *)gContext.devHandle;
    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-=======
-   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if ( VOS_STATUS_SUCCESS != 
         vos_pkt_get_os_packet(WPAL_TO_VOS_PKT(pPacket), (void**)&skb, VOS_FALSE ))
    {
@@ -540,26 +446,15 @@ WPT_STATIC WPT_INLINE void* itGetOSPktAddrForDevice( wpt_packet *pPacket )
    {
      /*Map skb data into dma-able memory 
        (changes will be commited from cache) */
-<<<<<<< HEAD
-     return (void*)dma_map_single( wcnss_device, skb->data, skb->len, DMA_TO_DEVICE );
-=======
      return (void*)dma_map_single( NULL, skb->data, skb->len, DMA_TO_DEVICE );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 }/*itGetOSPktAddrForDevice*/
 
 WPT_STATIC WPT_INLINE void* itGetOSPktAddrFromDevice( wpt_packet *pPacket )
 {
-<<<<<<< HEAD
-   struct sk_buff *skb;
-   struct device *wcnss_device = (struct device *)gContext.devHandle;
-   /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-=======
 
    struct sk_buff *skb;
    /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if ( VOS_STATUS_SUCCESS != 
         vos_pkt_get_os_packet(WPAL_TO_VOS_PKT(pPacket), (void**)&skb, VOS_FALSE ))
    {
@@ -567,28 +462,9 @@ WPT_STATIC WPT_INLINE void* itGetOSPktAddrFromDevice( wpt_packet *pPacket )
    }
    else
    {
-<<<<<<< HEAD
-     if((uintptr_t)skb->data == (uintptr_t)skb->tail)
-     {
-#ifdef WLAN_BUG_ON_SKB_ERROR
-       wpalDevicePanic();
-#else
-       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_FATAL,
-                "%s: skb->data == skb->tail. Attempting recovery "
-                "skb:%p, head:%p, tail:%p, data:%p",
-                  __func__, skb, skb->head, skb->tail, skb->data);
-
-      skb->data = skb->head;
-#endif
-     }
-     /*Map skb data into dma-able memory 
-       (changes will be commited from cache) */
-     return (void*)dma_map_single( wcnss_device, skb->data, skb->len, DMA_FROM_DEVICE );
-=======
      /*Map skb data into dma-able memory 
        (changes will be commited from cache) */
      return (void*)dma_map_single( NULL, skb->data, skb->len, DMA_FROM_DEVICE );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 }/*itGetOSPktAddrFromDevice*/
 
@@ -598,26 +474,14 @@ WPT_STATIC WPT_INLINE void* itGetOSPktAddrFromDevice( wpt_packet *pPacket )
 */
 WPT_STATIC WPT_INLINE void itReturnOSPktAddrForDevice( wpt_packet *pPacket,  void* addr, wpt_uint32 size )
 {
-<<<<<<< HEAD
-   struct device *wcnss_device = (struct device *)gContext.devHandle;
-
-   dma_unmap_single( wcnss_device, (dma_addr_t)addr, size, DMA_TO_DEVICE );
-=======
  
    dma_unmap_single( NULL, (dma_addr_t)addr, size, DMA_TO_DEVICE );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 WPT_STATIC WPT_INLINE void itReturnOSPktAddrFromDevice( wpt_packet *pPacket, void* addr, wpt_uint32 size  )
 {
-<<<<<<< HEAD
-   struct device *wcnss_device = (struct device *)gContext.devHandle;
-
-   dma_unmap_single( wcnss_device, (dma_addr_t)addr, size, DMA_FROM_DEVICE );
-=======
 
    dma_unmap_single( NULL, (dma_addr_t)addr, size, DMA_FROM_DEVICE ); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 
@@ -640,11 +504,7 @@ wpt_status wpalIteratorInit(wpt_iterator *pIter, wpt_packet *pPacket)
    if (unlikely((NULL == pPacket)||(NULL==pIter)))
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                "%s : NULL input pointers %p %p", __func__, pPacket, pIter);
-=======
                 "%s : NULL input pointers %x %x", __func__, pPacket, pIter);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_INVAL;
    }
 
@@ -712,11 +572,7 @@ wpt_status wpalIteratorNext(wpt_iterator *pIter, wpt_packet *pPacket, void **ppA
       ( NULL == ppAddr ) || ( NULL == pLen )))
    {
      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                "%s  Invalid input parameters",  __func__ );
-=======
                 "%s  Invalid input parameters \n",  __func__ );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      return eWLAN_PAL_STATUS_E_INVAL;
    }
 
@@ -975,40 +831,6 @@ wpt_status wpalGetNumRxRawPacket(wpt_uint32 *numRxResource)
 }
 
 /*---------------------------------------------------------------------------
-<<<<<<< HEAD
-   wpalGetNumRxPacketAllocFailures   Get number of times packet alloc failed
-       numRxResource  pointer of queried value
-
-   return:
-       eWLAN_PAL_STATUS_SUCCESS
----------------------------------------------------------------------------*/
-wpt_status wpalGetNumRxPacketAllocFailures(wpt_uint32 *numRxResource)
-{
-   *numRxResource = (wpt_uint32)vos_pkt_get_num_of_rx_pkt_alloc_failures();
-
-   return eWLAN_PAL_STATUS_SUCCESS;
-}
-/*---------------------------------------------------------------------------
-   wpalGetNumRxFreePacket   Query available RX Free buffer count
-   param:
-       numRxResource  pointer of queried value
-
-   return:
-       WPT_STATUS
----------------------------------------------------------------------------*/
-wpt_status wpalGetNumRxFreePacket(wpt_uint32 *numRxResource)
-{
-   VOS_STATUS status;
-
-   status = vos_pkt_get_available_buffer_pool(VOS_PKT_TYPE_RX_RAW,
-                                              (v_SIZE_t *)numRxResource);
-
-   return WPAL_VOS_TO_WPAL_STATUS(status);
-}
-
-/*---------------------------------------------------------------------------
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     wpalPacketStallUpdateInfo – Update each channel information when stall
        detected, also power state and free resource count
 

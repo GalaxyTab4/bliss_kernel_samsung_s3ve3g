@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**=========================================================================
@@ -86,11 +74,7 @@
 #include <pmcApi.h>
 #include <wlan_hdd_misc.h>
 
-<<<<<<< HEAD
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-=======
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 static void cbNotifySetRoamPrefer5GHz(hdd_context_t *pHddCtx, unsigned long NotifyId)
 {
     sme_UpdateRoamPrefer5GHz((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->nRoamPrefer5GHz);
@@ -118,12 +102,6 @@ static void cbNotifySetRoamIntraBand(hdd_context_t *pHddCtx, unsigned long Notif
     sme_setRoamIntraBand((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->nRoamIntraBand);
 }
 
-static void cbNotifySetWESMode(hdd_context_t *pHddCtx, unsigned long NotifyId)
-{
-    // at the point this routine is called, the value in the cfg_ini table has already been updated
-    sme_UpdateWESMode((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->isWESModeEnabled);
-}
-
 static void cbNotifySetRoamScanNProbes(hdd_context_t *pHddCtx, unsigned long NotifyId)
 {
     sme_UpdateRoamScanNProbes((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->nProbes);
@@ -131,11 +109,23 @@ static void cbNotifySetRoamScanNProbes(hdd_context_t *pHddCtx, unsigned long Not
 
 static void cbNotifySetRoamScanHomeAwayTime(hdd_context_t *pHddCtx, unsigned long NotifyId)
 {
-<<<<<<< HEAD
+    tANI_U16 scanChannelMaxTime = 0;
+
+    /* Home Away Time should be atleast equal to (MaxDwell time + (2*RFS)),
+     * where RFS is the RF Switching time. It is twice RFS to consider the
+     * time to go off channel and return to the home channel. */
+
+     scanChannelMaxTime = sme_getNeighborScanMaxChanTime((tHalHandle)(pHddCtx->hHal));
+     if (pHddCtx->cfg_ini->nRoamScanHomeAwayTime < (scanChannelMaxTime + (2 * HDD_ROAM_SCAN_CHANNEL_SWITCH_TIME)))
+     {
+         VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
+                "%s: Invalid config, Home away time(%d) is less than (twice RF switching time + channel max time)(%d)",
+                " Hence enforcing home away time to disable (0)",
+                __func__, pHddCtx->cfg_ini->nRoamScanHomeAwayTime, (scanChannelMaxTime + (2 * HDD_ROAM_SCAN_CHANNEL_SWITCH_TIME)));
+         pHddCtx->cfg_ini->nRoamScanHomeAwayTime = 0;
+     }
+
      sme_UpdateRoamScanHomeAwayTime((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->nRoamScanHomeAwayTime, eANI_BOOLEAN_TRUE);
-=======
-    sme_UpdateRoamScanHomeAwayTime((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->nRoamScanHomeAwayTime, eANI_BOOLEAN_TRUE);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 #endif
 
@@ -152,27 +142,13 @@ static void NotifyIsFastRoamIniFeatureEnabled(hdd_context_t *pHddCtx, unsigned l
     // at the point this routine is called, the value in the cfg_ini table has already been updated
     sme_UpdateIsFastRoamIniFeatureEnabled((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->isFastRoamIniFeatureEnabled );
 }
-
-static void NotifyIsMAWCIniFeatureEnabled(hdd_context_t *pHddCtx, unsigned long NotifyId)
-{
-    /* at the point this routine is called, the value in the cfg_ini table has already been updated */
-    sme_UpdateIsMAWCIniFeatureEnabled((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->MAWCEnabled );
-}
 #endif
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-static void cbNotifySetEseFeatureEnabled(hdd_context_t *pHddCtx, unsigned long NotifyId)
-{
-    // at the point this routine is called, the value in the cfg_ini table has already been updated
-    sme_UpdateIsEseFeatureEnabled((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->isEseIniFeatureEnabled );
-=======
 #ifdef FEATURE_WLAN_CCX
 static void cbNotifySetCcxFeatureEnabled(hdd_context_t *pHddCtx, unsigned long NotifyId)
 {
     // at the point this routine is called, the value in the cfg_ini table has already been updated
     sme_UpdateIsCcxFeatureEnabled((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->isCcxIniFeatureEnabled );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 #endif
 
@@ -215,6 +191,22 @@ static void cbNotifySetNeighborScanMinChanTime(hdd_context_t *pHddCtx, unsigned 
 
 static void cbNotifySetNeighborScanMaxChanTime(hdd_context_t *pHddCtx, unsigned long NotifyId)
 {
+    tANI_U16 homeAwayTime = 0;
+
+    /* Home Away Time should be atleast equal to (MaxDwell time + (2*RFS)),
+    *  where RFS is the RF Switching time. It is twice RFS to consider the
+    *  time to go off channel and return to the home channel. */
+    homeAwayTime = sme_getRoamScanHomeAwayTime((tHalHandle)(pHddCtx->hHal));
+    if (homeAwayTime < (pHddCtx->cfg_ini->nNeighborScanMaxChanTime + (2 * HDD_ROAM_SCAN_CHANNEL_SWITCH_TIME)))
+    {
+        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
+               "%s: Invalid config, Home away time(%d) is less than (twice RF switching time + channel max time)(%d)",
+               " Hence enforcing home away time to disable (0)",
+               __func__, homeAwayTime, (pHddCtx->cfg_ini->nNeighborScanMaxChanTime + (2 * HDD_ROAM_SCAN_CHANNEL_SWITCH_TIME)));
+        homeAwayTime = 0;
+        pHddCtx->cfg_ini->nRoamScanHomeAwayTime = homeAwayTime;
+        sme_UpdateRoamScanHomeAwayTime((tHalHandle)(pHddCtx->hHal), homeAwayTime, eANI_BOOLEAN_FALSE);
+    }
     sme_setNeighborScanMaxChanTime((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->nNeighborScanMaxChanTime);
 }
 #endif
@@ -431,16 +423,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_ENABLE_IMPS_MIN,
                  CFG_ENABLE_IMPS_MAX ),
 
-<<<<<<< HEAD
-   REG_VARIABLE( CFG_SSR_PANIC_ON_FAILURE_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, fIsSsrPanicOnFailure,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_SSR_PANIC_ON_FAILURE_DEFAULT,
-                 CFG_SSR_PANIC_ON_FAILURE_MIN,
-                 CFG_SSR_PANIC_ON_FAILURE_MAX),
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_VARIABLE( CFG_ENABLE_LOGP_NAME, WLAN_PARAM_Integer,
                  hdd_config_t, fIsLogpEnabled,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -462,16 +444,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_IMPS_MAXIMUM_SLEEP_TIME_MIN,
                  CFG_IMPS_MAXIMUM_SLEEP_TIME_MAX ),
 
-<<<<<<< HEAD
-   REG_VARIABLE( CFG_DEFER_SCAN_TIME_INTERVAL, WLAN_PARAM_Integer,
-                 hdd_config_t, nDeferScanTimeInterval,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_DEFER_SCAN_TIME_INTERVAL_DEFAULT,
-                 CFG_DEFER_SCAN_TIME_INTERVAL_MIN,
-                 CFG_DEFER_SCAN_TIME_INTERVAL_MAX ),
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_VARIABLE( CFG_IMPS_MODERATE_SLEEP_TIME_NAME, WLAN_PARAM_Integer,
                  hdd_config_t, nImpsModSleepTime,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -651,6 +623,11 @@ REG_TABLE_ENTRY g_registry_table[] =
                         VAR_FLAGS_OPTIONAL,
                         (void *)CFG_INTF3_MAC_ADDR_DEFAULT ),
 
+   REG_VARIABLE_STRING( CFG_CRDA_DEFAULT_COUNTRY_CODE, WLAN_PARAM_String,
+                        hdd_config_t, crdaDefaultCountryCode,
+                        VAR_FLAGS_OPTIONAL,
+                        (void *)CFG_CRDA_DEFAULT_COUNTRY_CODE_DEFAULT ),
+
    REG_VARIABLE( CFG_AP_QOS_UAPSD_MODE_NAME , WLAN_PARAM_Integer,
                  hdd_config_t, apUapsdEnabled,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -761,16 +738,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_AP_LINK_MONITOR_PERIOD_MIN,
                  CFG_AP_LINK_MONITOR_PERIOD_MAX),
 
-<<<<<<< HEAD
-   REG_VARIABLE( CFG_GO_LINK_MONITOR_PERIOD_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, goLinkMonitorPeriod,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_GO_LINK_MONITOR_PERIOD_DEFAULT,
-                 CFG_GO_LINK_MONITOR_PERIOD_MIN,
-                 CFG_GO_LINK_MONITOR_PERIOD_MAX),
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_VARIABLE(CFG_DISABLE_PACKET_FILTER , WLAN_PARAM_Integer,
                  hdd_config_t, disablePacketFilter,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -1096,27 +1063,13 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_QOS_WMM_INFRA_UAPSD_BK_SUS_INTV_MIN,
                  CFG_QOS_WMM_INFRA_UAPSD_BK_SUS_INTV_MAX ),
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-=======
 #ifdef FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_VARIABLE( CFG_QOS_WMM_INFRA_INACTIVITY_INTERVAL_NAME, WLAN_PARAM_Integer,
                  hdd_config_t, InfraInactivityInterval,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
                  CFG_QOS_WMM_INFRA_INACTIVITY_INTERVAL_DEFAULT,
                  CFG_QOS_WMM_INFRA_INACTIVITY_INTERVAL_MIN,
                  CFG_QOS_WMM_INFRA_INACTIVITY_INTERVAL_MAX),
-<<<<<<< HEAD
-   REG_DYNAMIC_VARIABLE( CFG_ESE_FEATURE_ENABLED_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, isEseIniFeatureEnabled,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_ESE_FEATURE_ENABLED_DEFAULT,
-                 CFG_ESE_FEATURE_ENABLED_MIN,
-                 CFG_ESE_FEATURE_ENABLED_MAX,
-                 cbNotifySetEseFeatureEnabled, 0 ),
-#endif // FEATURE_WLAN_ESE
-=======
    REG_DYNAMIC_VARIABLE( CFG_CCX_FEATURE_ENABLED_NAME, WLAN_PARAM_Integer,
                  hdd_config_t, isCcxIniFeatureEnabled,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -1125,7 +1078,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_CCX_FEATURE_ENABLED_MAX,
                  cbNotifySetCcxFeatureEnabled, 0 ),
 #endif // FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #ifdef FEATURE_WLAN_LFR
    // flag to turn ON/OFF Legacy Fast Roaming
@@ -1136,25 +1088,10 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_LFR_FEATURE_ENABLED_MIN,
                  CFG_LFR_FEATURE_ENABLED_MAX,
                  NotifyIsFastRoamIniFeatureEnabled, 0 ),
-
-   /* flag to turn ON/OFF Motion assistance for Legacy Fast Roaming */
-   REG_DYNAMIC_VARIABLE( CFG_LFR_MAWC_FEATURE_ENABLED_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, MAWCEnabled,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_LFR_MAWC_FEATURE_ENABLED_DEFAULT,
-                 CFG_LFR_MAWC_FEATURE_ENABLED_MIN,
-                 CFG_LFR_MAWC_FEATURE_ENABLED_MAX,
-                 NotifyIsMAWCIniFeatureEnabled, 0 ),
-
 #endif // FEATURE_WLAN_LFR
 
-<<<<<<< HEAD
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-   // flag to turn ON/OFF 11r and ESE FastTransition
-=======
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
    // flag to turn ON/OFF 11r and CCX FastTransition
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_DYNAMIC_VARIABLE( CFG_FAST_TRANSITION_ENABLED_NAME, WLAN_PARAM_Integer,
                  hdd_config_t, isFastTransitionEnabled,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -1181,13 +1118,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                          CFG_IMMEDIATE_ROAM_RSSI_DIFF_MAX,
                          cbNotifySetImmediateRoamRssiDiff, 0),
 
-   REG_DYNAMIC_VARIABLE( CFG_ENABLE_WES_MODE_NAME, WLAN_PARAM_Integer,
-                         hdd_config_t, isWESModeEnabled,
-                         VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                         CFG_ENABLE_WES_MODE_NAME_DEFAULT,
-                         CFG_ENABLE_WES_MODE_NAME_MIN,
-                         CFG_ENABLE_WES_MODE_NAME_MAX,
-                         cbNotifySetWESMode, 0),
 #endif
 #ifdef FEATURE_WLAN_OKC
    REG_DYNAMIC_VARIABLE( CFG_OKC_FEATURE_ENABLED_NAME, WLAN_PARAM_Integer,
@@ -1389,37 +1319,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_TL_DELAYED_TRGR_FRM_INT_MIN,
                  CFG_TL_DELAYED_TRGR_FRM_INT_MAX ),
 
-<<<<<<< HEAD
-   REG_VARIABLE( CFG_REORDER_TIME_BK_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, BkReorderAgingTime,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_REORDER_TIME_BK_DEFAULT,
-                 CFG_REORDER_TIME_BK_MIN,
-                 CFG_REORDER_TIME_BK_MAX ),
-
-   REG_VARIABLE( CFG_REORDER_TIME_BE_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, BeReorderAgingTime,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_REORDER_TIME_BE_DEFAULT,
-                 CFG_REORDER_TIME_BE_MIN,
-                 CFG_REORDER_TIME_BE_MAX ),
-
-   REG_VARIABLE( CFG_REORDER_TIME_VI_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, ViReorderAgingTime,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_REORDER_TIME_VI_DEFAULT,
-                 CFG_REORDER_TIME_VI_MIN,
-                 CFG_REORDER_TIME_VI_MAX ),
-
-   REG_VARIABLE( CFG_REORDER_TIME_VO_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, VoReorderAgingTime,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_REORDER_TIME_VO_DEFAULT,
-                 CFG_REORDER_TIME_VO_MIN,
-                 CFG_REORDER_TIME_VO_MAX ),
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_VARIABLE_STRING( CFG_WOWL_PATTERN_NAME, WLAN_PARAM_String,
                         hdd_config_t, wowlPattern,
                         VAR_FLAGS_OPTIONAL,
@@ -1544,342 +1443,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                  CFG_BTC_DHCP_PROT_ON_SCO_MIN,
                  CFG_BTC_DHCP_PROT_ON_SCO_MAX ),
 
-   REG_VARIABLE( CFG_MWS_COEX_V1_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[0],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V1_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[0],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V1_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[0],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V1_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[0],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V2_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[1],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V2_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[1],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V2_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[1],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V2_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[1],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V3_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[2],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V3_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[2],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V3_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[2],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V3_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[2],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V4_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[3],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V4_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[3],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V4_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[3],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V4_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[3],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V5_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[4],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V5_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[4],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V5_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[4],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V5_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[4],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V6_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[5],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V6_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[5],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V6_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[5],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V6_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[5],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V7_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[6],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V7_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[6],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V7_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[6],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V7_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[6],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V8_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[7],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V8_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[7],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V8_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[7],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V8_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[7],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V9_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[8],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V9_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[8],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V9_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[8],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V9_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[8],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V10_WAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWANFreq[9],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V10_WLAN_FREQ_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimWLANFreq[9],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_DEFAULT,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MIN,
-                 CFG_MWS_COEX_VX_WLAN_FREQ_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V10_CONFIG_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig[9],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_V10_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexVictimConfig2[9],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_DEFAULT,
-                 CFG_MWS_COEX_VX_CONFIG_MIN,
-                 CFG_MWS_COEX_VX_CONFIG_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_MODEM_BACKOFF_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexModemBackoff,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_MODEM_BACKOFF_DEFAULT,
-                 CFG_MWS_COEX_MODEM_BACKOFF_MIN,
-                 CFG_MWS_COEX_MODEM_BACKOFF_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_CONFIG1_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexConfig[0],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_MIN,
-                 CFG_MWS_COEX_CONFIGX_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_CONFIG2_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexConfig[1],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_MIN,
-                 CFG_MWS_COEX_CONFIGX_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_CONFIG3_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexConfig[2],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_MIN,
-                 CFG_MWS_COEX_CONFIGX_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_CONFIG4_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexConfig[3],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_MIN,
-                 CFG_MWS_COEX_CONFIGX_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_CONFIG5_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexConfig[4],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_MIN,
-                 CFG_MWS_COEX_CONFIGX_MAX ),
-
-   REG_VARIABLE( CFG_MWS_COEX_CONFIG6_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, mwsCoexConfig[5],
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_DEFAULT,
-                 CFG_MWS_COEX_CONFIGX_MIN,
-                 CFG_MWS_COEX_CONFIGX_MAX ),
-
-   REG_VARIABLE( CFG_SAR_POWER_BACKOFF_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, SARPowerBackoff,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_SAR_POWER_BACKOFF_DEFAULT,
-                 CFG_SAR_POWER_BACKOFF_MIN,
-                 CFG_SAR_POWER_BACKOFF_MAX ),
-
    REG_VARIABLE( CFG_AP_LISTEN_MODE_NAME , WLAN_PARAM_Integer,
                  hdd_config_t, nEnableListenMode,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -2000,17 +1563,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                          CFG_EMPTY_SCAN_REFRESH_PERIOD_MIN,
                          CFG_EMPTY_SCAN_REFRESH_PERIOD_MAX,
                          cbNotifySetEmptyScanRefreshPeriod, 0 ),
-<<<<<<< HEAD
-
-    REG_VARIABLE( CFG_NEIGHBOR_INITIAL_FORCED_ROAM_TO_5GH_ENABLE_NAME, WLAN_PARAM_Integer,
-                          hdd_config_t, nNeighborInitialForcedRoamTo5GhEnable,
-                          VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                          CFG_NEIGHBOR_INITIAL_FORCED_ROAM_TO_5GH_ENABLE_DEFAULT,
-                          CFG_NEIGHBOR_INITIAL_FORCED_ROAM_TO_5GH_ENABLE_MIN,
-                          CFG_NEIGHBOR_INITIAL_FORCED_ROAM_TO_5GH_ENABLE_MAX),
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif /* WLAN_FEATURE_NEIGHBOR_ROAMING */
 
    REG_VARIABLE( CFG_QOS_WMM_BURST_SIZE_DEFN_NAME , WLAN_PARAM_Integer,
@@ -2176,13 +1728,6 @@ REG_TABLE_ENTRY g_registry_table[] =
                 CFG_VOS_TRACE_ENABLE_MIN,
                 CFG_VOS_TRACE_ENABLE_MAX ),
 
-   REG_VARIABLE( CFG_VOS_TRACE_ENABLE_PMC_NAME,  WLAN_PARAM_Integer,
-                 hdd_config_t, vosTraceEnablePMC,
-                 VAR_FLAGS_OPTIONAL,
-                 CFG_VOS_TRACE_ENABLE_DEFAULT,
-                 CFG_VOS_TRACE_ENABLE_MIN,
-                 CFG_VOS_TRACE_ENABLE_MAX ),
-
    REG_VARIABLE( CFG_VOS_TRACE_ENABLE_WDA_NAME, WLAN_PARAM_Integer,
                 hdd_config_t, vosTraceEnableWDA,
                 VAR_FLAGS_OPTIONAL,
@@ -2311,16 +1856,6 @@ REG_TABLE_ENTRY g_registry_table[] =
               CFG_ENABLE_DFS_CHNL_SCAN_MIN,
               CFG_ENABLE_DFS_CHNL_SCAN_MAX ),
 
-<<<<<<< HEAD
-   REG_VARIABLE( CFG_ENABLE_DFS_PNO_CHNL_SCAN_NAME, WLAN_PARAM_Integer,
-              hdd_config_t, enableDFSPnoChnlScan,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_ENABLE_DFS_PNO_CHNL_SCAN_DEFAULT,
-              CFG_ENABLE_DFS_PNO_CHNL_SCAN_MIN,
-              CFG_ENABLE_DFS_PNO_CHNL_SCAN_MAX ),
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_VARIABLE( CFG_ENABLE_DYNAMIC_DTIM_NAME, WLAN_PARAM_Integer,
               hdd_config_t, enableDynamicDTIM,
               VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -2374,11 +1909,7 @@ REG_TABLE_ENTRY g_registry_table[] =
                        CFG_LINK_SPEED_RSSI_LOW_MAX,
                        NULL, 0 ),
 
-<<<<<<< HEAD
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-=======
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_DYNAMIC_VARIABLE( CFG_ROAM_PREFER_5GHZ, WLAN_PARAM_Integer,
                        hdd_config_t, nRoamPrefer5GHz,
                        VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -2476,16 +2007,6 @@ REG_TABLE_ENTRY g_registry_table[] =
               CFG_VHT_ENABLE_TX_MCS_8_9_DEFAULT,
               CFG_VHT_ENABLE_TX_MCS_8_9_MIN,
               CFG_VHT_ENABLE_TX_MCS_8_9_MAX),
-<<<<<<< HEAD
-
-   REG_VARIABLE( CFG_VHT_AMPDU_LEN_EXP_NAME, WLAN_PARAM_Integer,
-              hdd_config_t, gVhtMaxAmpduLenExp,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_VHT_AMPDU_LEN_EXP_DEFAULT,
-              CFG_VHT_AMPDU_LEN_EXP_MIN,
-              CFG_VHT_AMPDU_LEN_EXP_MAX ),
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
    REG_VARIABLE( CFG_ENABLE_FIRST_SCAN_2G_ONLY_NAME, WLAN_PARAM_Integer,
@@ -2620,16 +2141,6 @@ REG_VARIABLE( CFG_TDLS_BUFFER_STA_SUPPORT_ENABLE, WLAN_PARAM_Integer,
               CFG_TDLS_BUFFER_STA_SUPPORT_ENABLE_MIN,
               CFG_TDLS_BUFFER_STA_SUPPORT_ENABLE_MAX ),
 
-<<<<<<< HEAD
-REG_VARIABLE( CFG_TDLS_OFF_CHANNEL_SUPPORT_ENABLE, WLAN_PARAM_Integer,
-              hdd_config_t, fEnableTDLSOffChannel,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_TDLS_OFF_CHANNEL_SUPPORT_ENABLE_DEFAULT,
-              CFG_TDLS_OFF_CHANNEL_SUPPORT_ENABLE_MIN,
-              CFG_TDLS_OFF_CHANNEL_SUPPORT_ENABLE_MAX ),
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 REG_VARIABLE( CFG_TDLS_PUAPSD_INACTIVITY_TIME, WLAN_PARAM_Integer,
               hdd_config_t, fTDLSPuapsdInactivityTimer,
               VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -2643,47 +2154,6 @@ REG_VARIABLE( CFG_TDLS_PUAPSD_RX_FRAME_THRESHOLD, WLAN_PARAM_Integer,
               CFG_TDLS_PUAPSD_RX_FRAME_THRESHOLD_DEFAULT,
               CFG_TDLS_PUAPSD_RX_FRAME_THRESHOLD_MIN,
               CFG_TDLS_PUAPSD_RX_FRAME_THRESHOLD_MAX ),
-<<<<<<< HEAD
-
-REG_VARIABLE( CFG_TDLS_EXTERNAL_CONTROL, WLAN_PARAM_Integer,
-              hdd_config_t, fTDLSExternalControl,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_TDLS_EXTERNAL_CONTROL_DEFAULT,
-              CFG_TDLS_EXTERNAL_CONTROL_MIN,
-              CFG_TDLS_EXTERNAL_CONTROL_MAX ),
-
-REG_VARIABLE( CFG_TDLS_WMM_MODE_ENABLE, WLAN_PARAM_Integer,
-              hdd_config_t, fEnableTDLSWmmMode,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_TDLS_WMM_MODE_ENABLE_DEFAULT,
-              CFG_TDLS_WMM_MODE_ENABLE_MIN,
-              CFG_TDLS_WMM_MODE_ENABLE_MAX ),
-
-REG_VARIABLE( CFG_TDLS_SCAN_COEX_SUPPORT_ENABLE, WLAN_PARAM_Integer,
-              hdd_config_t, fEnableTDLSScanCoexSupport,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_TDLS_SCAN_COEX_SUPPORT_ENABLE_DEFAULT,
-              CFG_TDLS_SCAN_COEX_SUPPORT_ENABLE_MIN,
-              CFG_TDLS_SCAN_COEX_SUPPORT_ENABLE_MAX ),
-#endif
-
-#ifdef WLAN_FEATURE_LINK_LAYER_STATS
-REG_VARIABLE( CFG_LINK_LAYER_STATS_ENABLE, WLAN_PARAM_Integer,
-              hdd_config_t, fEnableLLStats,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_LINK_LAYER_STATS_ENABLE_DEFAULT,
-              CFG_LINK_LAYER_STATS_ENABLE_MIN,
-              CFG_LINK_LAYER_STATS_ENABLE_MAX ),
-#endif
-#ifdef WLAN_FEATURE_EXTSCAN
-REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
-              hdd_config_t, fEnableEXTScan,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_EXTSCAN_ENABLE_DEFAULT,
-              CFG_EXTSCAN_ENABLE_MIN,
-              CFG_EXTSCAN_ENABLE_MAX ),
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 #ifdef WLAN_SOFTAP_VSTA_FEATURE
@@ -2709,8 +2179,6 @@ REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
               CFG_ACTIVEMODE_OFFLOAD_ENABLE_MIN,
               CFG_ACTIVEMODE_OFFLOAD_ENABLE_MAX ),
 #endif
-<<<<<<< HEAD
-=======
    REG_VARIABLE( CFG_ENABLE_LPWR_IMG_TRANSITION_NAME, WLAN_PARAM_Integer,
              hdd_config_t, enableLpwrImgTransition,
              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -2718,7 +2186,6 @@ REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
              CFG_ENABLE_LPWR_IMG_TRANSITION_MIN,
              CFG_ENABLE_LPWR_IMG_TRANSITION_MAX ),
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    REG_VARIABLE( CFG_SCAN_AGING_PARAM_NAME, WLAN_PARAM_Integer,
              hdd_config_t, scanAgingTimeout,
@@ -2777,15 +2244,6 @@ REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
              CFG_VHT_CSN_BEAMFORMEE_ANT_SUPPORTED_DEFAULT,
              CFG_VHT_CSN_BEAMFORMEE_ANT_SUPPORTED_MIN,
              CFG_VHT_CSN_BEAMFORMEE_ANT_SUPPORTED_MAX ),
-<<<<<<< HEAD
-   REG_VARIABLE( CFG_VHT_ENABLE_MU_BFORMEE_CAP_FEATURE, WLAN_PARAM_Integer,
-             hdd_config_t, enableMuBformee,
-             VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-             CFG_VHT_ENABLE_MU_BFORMEE_CAP_FEATURE_DEFAULT,
-             CFG_VHT_ENABLE_MU_BFORMEE_CAP_FEATURE_MIN,
-             CFG_VHT_ENABLE_MU_BFORMEE_CAP_FEATURE_MAX ),
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #endif
 
@@ -2898,8 +2356,6 @@ REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
                  CFG_SPLIT_SCAN_TRAFFIC_MONITOR_TIMER_MIN,
                  CFG_SPLIT_SCAN_TRAFFIC_MONITOR_TIMER_MAX ),
 
-<<<<<<< HEAD
-=======
    REG_VARIABLE( CFG_ENABLE_OXYNWK_NAME, WLAN_PARAM_Integer,
                  hdd_config_t, enableOxygenNwk,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
@@ -2907,7 +2363,6 @@ REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
                  CFG_ENABLE_OXYNWK_MIN,
                  CFG_ENABLE_OXYNWK_MAX ),
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    REG_VARIABLE( CFG_FLEX_CONNECT_POWER_FACTOR_NAME, WLAN_PARAM_Integer,
                  hdd_config_t, flexConnectPowerFactor,
                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_MINMAX,
@@ -2936,423 +2391,6 @@ REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
                  CFG_ENABLE_SNR_MONITORING_MIN,
                  CFG_ENABLE_SNR_MONITORING_MAX),
 
-<<<<<<< HEAD
-=======
-   REG_VARIABLE( CFG_AMSDU_SUPPORT_IN_AMPDU_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, isAmsduSupportInAMPDU,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_AMSDU_SUPPORT_IN_AMPDU_DEFAULT,
-                 CFG_AMSDU_SUPPORT_IN_AMPDU_MIN,
-                 CFG_AMSDU_SUPPORT_IN_AMPDU_MAX ),
-
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-#ifdef FEATURE_WLAN_SCAN_PNO
-   REG_VARIABLE( CFG_PNO_SCAN_SUPPORT, WLAN_PARAM_Integer,
-                 hdd_config_t, configPNOScanSupport,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_PNO_SCAN_SUPPORT_DEFAULT,
-                 CFG_PNO_SCAN_SUPPORT_DISABLE,
-                 CFG_PNO_SCAN_SUPPORT_ENABLE),
-
-   REG_VARIABLE( CFG_PNO_SCAN_TIMER_REPEAT_VALUE, WLAN_PARAM_Integer,
-                 hdd_config_t, configPNOScanTimerRepeatValue,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_PNO_SCAN_TIMER_REPEAT_VALUE_DEFAULT,
-                 CFG_PNO_SCAN_TIMER_REPEAT_VALUE_MIN,
-                 CFG_PNO_SCAN_TIMER_REPEAT_VALUE_MAX),
-#endif
-<<<<<<< HEAD
-   REG_VARIABLE( CFG_AMSDU_SUPPORT_IN_AMPDU_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, isAmsduSupportInAMPDU,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_AMSDU_SUPPORT_IN_AMPDU_DEFAULT,
-                 CFG_AMSDU_SUPPORT_IN_AMPDU_MIN,
-                 CFG_AMSDU_SUPPORT_IN_AMPDU_MAX ),
-
-   REG_VARIABLE( CFG_STRICT_5GHZ_PREF_BY_MARGIN , WLAN_PARAM_Integer,
-                 hdd_config_t, nSelect5GHzMargin,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_STRICT_5GHZ_PREF_BY_MARGIN_DEFAULT,
-                 CFG_STRICT_5GHZ_PREF_BY_MARGIN_MIN,
-                 CFG_STRICT_5GHZ_PREF_BY_MARGIN_MAX ),
-
-   REG_VARIABLE( CFG_COALESING_IN_IBSS_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, isCoalesingInIBSSAllowed,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_COALESING_IN_IBSS_DEFAULT,
-                 CFG_COALESING_IN_IBSS_MIN,
-                 CFG_COALESING_IN_IBSS_MAX ),
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-
-   REG_VARIABLE( CFG_DISABLE_ATH_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, cfgAthDisable,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_DISABLE_ATH_DEFAULT,
-                 CFG_DISABLE_ATH_MIN,
-                 CFG_DISABLE_ATH_MAX ),
-<<<<<<< HEAD
-=======
-
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-   REG_VARIABLE(CFG_BTC_ACTIVE_WLAN_LEN_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcActiveWlanLen,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_ACTIVE_WLAN_LEN_DEFAULT,
-                CFG_BTC_ACTIVE_WLAN_LEN_MIN,
-                CFG_BTC_ACTIVE_WLAN_LEN_MAX ),
-
-   REG_VARIABLE(CFG_BTC_ACTIVE_BT_LEN_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcActiveBtLen,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_ACTIVE_BT_LEN_DEFAULT,
-                CFG_BTC_ACTIVE_BT_LEN_MIN,
-                CFG_BTC_ACTIVE_BT_LEN_MAX ),
-
-   REG_VARIABLE(CFG_BTC_SAP_ACTIVE_WLAN_LEN_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcSapActiveWlanLen,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_SAP_ACTIVE_WLAN_LEN_DEFAULT,
-                CFG_BTC_SAP_ACTIVE_WLAN_LEN_MIN,
-                CFG_BTC_SAP_ACTIVE_WLAN_LEN_MAX ),
-
-   REG_VARIABLE(CFG_BTC_SAP_ACTIVE_BT_LEN_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcSapActiveBtLen,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_SAP_ACTIVE_BT_LEN_DEFAULT,
-                CFG_BTC_SAP_ACTIVE_BT_LEN_MIN,
-                CFG_BTC_SAP_ACTIVE_BT_LEN_MAX ),
-<<<<<<< HEAD
-
-#ifdef MEMORY_DEBUG
-   REG_VARIABLE(CFG_ENABLE_MEMORY_DEBUG_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, IsMemoryDebugSupportEnabled,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_ENABLE_MEMORY_DEBUG_DEFAULT,
-                CFG_ENABLE_MEMORY_DEBUG_MIN,
-                CFG_ENABLE_MEMORY_DEBUG_MAX ),
-#endif
-
-   REG_VARIABLE_STRING( CFG_OVERRIDE_COUNTRY_CODE, WLAN_PARAM_String,
-                hdd_config_t, overrideCountryCode,
-                VAR_FLAGS_OPTIONAL,
-               (void *)CFG_OVERRIDE_COUNTRY_CODE_DEFAULT),
-
-   REG_VARIABLE( CFG_ASD_PROBE_INTERVAL_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, gAsdProbeInterval,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_ASD_PROBE_INTERVAL_DEFAULT,
-                 CFG_ASD_PROBE_INTERVAL_MIN,
-                 CFG_ASD_PROBE_INTERVAL_MAX),
-
-   REG_VARIABLE( CFG_ASD_TRIGGER_THRESHOLD_NAME, WLAN_PARAM_SignedInteger,
-                 hdd_config_t, gAsdTriggerThreshold,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_ASD_TRIGGER_THRESHOLD_DEFAULT,
-                 CFG_ASD_TRIGGER_THRESHOLD_MIN,
-                 CFG_ASD_TRIGGER_THRESHOLD_MAX),
-
-   REG_VARIABLE( CFG_ASD_RTT_RSSI_HYST_THRESHOLD_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, gAsdRTTRssiHystThreshold,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_ASD_RTT_RSSI_HYST_THRESHOLD_DEFAULT,
-                 CFG_ASD_RTT_RSSI_HYST_THRESHOLD_MIN,
-                 CFG_ASD_RTT_RSSI_HYST_THRESHOLD_MAX),
-
-   REG_VARIABLE( CFG_DEBUG_P2P_REMAIN_ON_CHANNEL_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, debugP2pRemainOnChannel,
-                 VAR_FLAGS_OPTIONAL,
-                 CFG_DEBUG_P2P_REMAIN_ON_CHANNEL_DEFAULT,
-                 CFG_DEBUG_P2P_REMAIN_ON_CHANNEL_MIN,
-                 CFG_DEBUG_P2P_REMAIN_ON_CHANNEL_MAX ),
-
-   REG_VARIABLE(CFG_CTS2S_DURING_BTC_SCO_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcCTS2SduringSCO,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_CTS2S_DURING_BTC_SCO_DEFAULT,
-                CFG_CTS2S_DURING_BTC_SCO_MIN,
-                CFG_CTS2S_DURING_BTC_SCO_MAX ),
-
-   REG_VARIABLE( CFG_ENABLE_DEBUG_CONNECT_ISSUE, WLAN_PARAM_Integer,
-              hdd_config_t, gEnableDebugLog,
-              VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-              CFG_ENABLE_DEBUG_CONNECT_ISSUE_DEFAULT,
-              CFG_ENABLE_DEBUG_CONNECT_ISSUE_MIN ,
-              CFG_ENABLE_DEBUG_CONNECT_ISSUE_MAX),
-
-   REG_VARIABLE(CFG_OBSS_HT40_SCAN_ACTIVE_DWELL_TIME_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, nOBSSScanActiveDwellTime,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_OBSS_HT40_SCAN_ACTIVE_DWELL_TIME_DEFAULT,
-                CFG_OBSS_HT40_SCAN_ACTIVE_DWELL_TIME_MIN,
-                CFG_OBSS_HT40_SCAN_ACTIVE_DWELL_TIME_MAX ),
-
-   REG_VARIABLE(CFG_OBSS_HT40_SCAN_PASSIVE_DWELL_TIME_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, nOBSSScanPassiveDwellTime,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_OBSS_HT40_SCAN_PASSIVE_DWELL_TIME_DEFAULT,
-                CFG_OBSS_HT40_SCAN_PASSIVE_DWELL_TIME_MIN,
-                CFG_OBSS_HT40_SCAN_PASSIVE_DWELL_TIME_MAX ),
-
-   REG_VARIABLE(CFG_OBSS_HT40_SCAN_WIDTH_TRIGGER_INTERVAL_NAME,
-                WLAN_PARAM_Integer,
-                hdd_config_t, nOBSSScanWidthTriggerInterval,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_OBSS_HT40_SCAN_WIDTH_TRIGGER_INTERVAL_DEFAULT,
-                CFG_OBSS_HT40_SCAN_WIDTH_TRIGGER_INTERVAL_MIN,
-                CFG_OBSS_HT40_SCAN_WIDTH_TRIGGER_INTERVAL_MAX ),
-
-   REG_VARIABLE( CFG_ENABLE_STRICT_REGULATORY_FOR_FCC_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, gEnableStrictRegulatoryForFCC,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_ENABLE_STRICT_REGULATORY_FOR_FCC_DEFAULT,
-                CFG_ENABLE_STRICT_REGULATORY_FOR_FCC_MIN,
-                CFG_ENABLE_STRICT_REGULATORY_FOR_FCC_MAX ),
-
-   REG_VARIABLE( CFG_ADVERTISE_CONCURRENT_OPERATION_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, advertiseConcurrentOperation,
-                 VAR_FLAGS_OPTIONAL,
-                 CFG_ADVERTISE_CONCURRENT_OPERATION_DEFAULT,
-                 CFG_ADVERTISE_CONCURRENT_OPERATION_MIN,
-                 CFG_ADVERTISE_CONCURRENT_OPERATION_MAX ),
-
-   REG_VARIABLE( CFG_DEFAULT_RATE_INDEX_24GH, WLAN_PARAM_Integer,
-                 hdd_config_t, defaultRateIndex24Ghz,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_DEFAULT_RATE_INDEX_24GH_DEFAULT,
-                 CFG_DEFAULT_RATE_INDEX_24GH_MIN,
-                 CFG_DEFAULT_RATE_INDEX_24GH_MAX ),
-
-   REG_VARIABLE( CFG_SAP_DOT11_MODE_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, sapDot11Mode,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK,
-                 CFG_SAP_DOT11_MODE_DEFAULT,
-                 CFG_SAP_DOT11_MODE_MIN,
-                 CFG_SAP_DOT11_MODE_MAX ),
-
-   REG_VARIABLE(CFG_RA_FILTER_ENABLE_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgRAFilterEnable,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_RA_FILTER_ENABLE_DEFAULT,
-                CFG_RA_FILTER_ENABLE_MIN,
-                CFG_RA_FILTER_ENABLE_MAX ),
-
-   REG_VARIABLE(CFG_RA_RATE_LIMIT_INTERVAL_NAME, WLAN_PARAM_Integer,
-               hdd_config_t, cfgRARateLimitInterval,
-               VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-               CFG_RA_RATE_LIMIT_INTERVAL_DEFAULT,
-               CFG_RA_RATE_LIMIT_INTERVAL_MIN,
-               CFG_RA_RATE_LIMIT_INTERVAL_MAX ),
-
-   REG_VARIABLE( CFG_ROAMING_DFS_CHANNEL_NAME , WLAN_PARAM_Integer,
-                 hdd_config_t, allowDFSChannelRoam,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_ROAMING_DFS_CHANNEL_DEFAULT,
-                 CFG_ROAMING_DFS_CHANNEL_MIN,
-                 CFG_ROAMING_DFS_CHANNEL_MAX ),
-
-#ifdef WLAN_LOGGING_SOCK_SVC_ENABLE
-   REG_VARIABLE( CFG_WLAN_LOGGING_SUPPORT_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, wlanLoggingEnable,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_WLAN_LOGGING_SUPPORT_DEFAULT,
-                 CFG_WLAN_LOGGING_SUPPORT_DISABLE,
-                 CFG_WLAN_LOGGING_SUPPORT_ENABLE ),
-
-   REG_VARIABLE( CFG_WLAN_LOGGING_FE_CONSOLE_SUPPORT_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, wlanLoggingFEToConsole,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_WLAN_LOGGING_FE_CONSOLE_SUPPORT_DEFAULT,
-                 CFG_WLAN_LOGGING_FE_CONSOLE_SUPPORT_DISABLE,
-                 CFG_WLAN_LOGGING_FE_CONSOLE_SUPPORT_ENABLE ),
-
-   REG_VARIABLE( CFG_WLAN_LOGGING_NUM_BUF_NAME, WLAN_PARAM_Integer,
-                 hdd_config_t, wlanLoggingNumBuf,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_WLAN_LOGGING_NUM_BUF_DEFAULT,
-                 CFG_WLAN_LOGGING_NUM_BUF_MIN,
-                 CFG_WLAN_LOGGING_NUM_BUF_MAX ),
-#endif //WLAN_LOGGING_SOCK_SVC_ENABLE
-
-   REG_VARIABLE(CFG_INITIAL_DWELL_TIME_NAME, WLAN_PARAM_Integer,
-               hdd_config_t, nInitialDwellTime,
-               VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-               CFG_INITIAL_DWELL_TIME_DEFAULT,
-               CFG_INITIAL_DWELL_TIME_MIN,
-               CFG_INITIAL_DWELL_TIME_MAX ),
-
-   REG_VARIABLE(CFG_INITIAL_SCAN_SKIP_DFS_CH_NAME, WLAN_PARAM_Integer,
-               hdd_config_t, initialScanSkipDFSCh,
-               VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-               CFG_INITIAL_SCAN_SKIP_DFS_CH_DEFAULT,
-               CFG_INITIAL_SCAN_SKIP_DFS_CH_MIN,
-               CFG_INITIAL_SCAN_SKIP_DFS_CH_MAX),
-
-   REG_VARIABLE(CFG_BTC_FATAL_HID_NSNIFF_BLK_GUIDANCE_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcFatalHidnSniffBlkGuidance,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_FATAL_HID_NSNIFF_BLK_GUIDANCE_DEFAULT,
-                CFG_BTC_FATAL_HID_NSNIFF_BLK_GUIDANCE_MIN,
-                CFG_BTC_FATAL_HID_NSNIFF_BLK_GUIDANCE_MAX ),
-
-   REG_VARIABLE(CFG_BTC_CRITICAL_HID_NSNIFF_BLK_GUIDANCE_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcCriticalHidnSniffBlkGuidance,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_CRITICAL_HID_NSNIFF_BLK_GUIDANCE_DEFAULT,
-                CFG_BTC_CRITICAL_HID_NSNIFF_BLK_GUIDANCE_MIN,
-                CFG_BTC_CRITICAL_HID_NSNIFF_BLK_GUIDANCE_MAX ),
-
-   REG_VARIABLE(CFG_BTC_DYN_A2DP_TX_QUEUE_THOLD_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcA2dpTxQueueThold,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_DYN_A2DP_TX_QUEUE_THOLD_DEFAULT,
-                CFG_BTC_DYN_A2DP_TX_QUEUE_THOLD_MIN,
-                CFG_BTC_DYN_A2DP_TX_QUEUE_THOLD_MAX ),
-
-   REG_VARIABLE(CFG_BTC_DYN_OPP_TX_QUEUE_THOLD_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, cfgBtcOppTxQueueThold,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_BTC_DYN_OPP_TX_QUEUE_THOLD_DEFAULT,
-                CFG_BTC_DYN_OPP_TX_QUEUE_THOLD_MIN,
-                CFG_BTC_DYN_OPP_TX_QUEUE_THOLD_MAX ),
-
-#ifdef WLAN_FEATURE_11W
-   REG_VARIABLE(CFG_PMF_SA_QUERY_MAX_RETRIES_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, pmfSaQueryMaxRetries,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_PMF_SA_QUERY_MAX_RETRIES_DEFAULT,
-                CFG_PMF_SA_QUERY_MAX_RETRIES_MIN,
-                CFG_PMF_SA_QUERY_MAX_RETRIES_MAX ),
-
-   REG_VARIABLE(CFG_PMF_SA_QUERY_RETRY_INTERVAL_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, pmfSaQueryRetryInterval,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_PMF_SA_QUERY_RETRY_INTERVAL_DEFAULT,
-                CFG_PMF_SA_QUERY_RETRY_INTERVAL_MIN,
-                CFG_PMF_SA_QUERY_RETRY_INTERVAL_MAX ),
-#endif
-
-   REG_VARIABLE(CFG_DEFER_IMPS_FOR_TIME_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, deferImpsTime,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_DEFER_IMPS_FOR_TIME_DEFAULT,
-                CFG_DEFER_IMPS_FOR_TIME_MIN,
-                CFG_DEFER_IMPS_FOR_TIME_MAX),
-
-   REG_VARIABLE(CFG_ENABLE_DEAUTH_BEFORE_CONNECTION, WLAN_PARAM_Integer,
-                hdd_config_t, sendDeauthBeforeCon,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_ENABLE_DEAUTH_BEFORE_CONNECTION_DEFAULT,
-                CFG_ENABLE_DEAUTH_BEFORE_CONNECTION_MIN,
-                CFG_ENABLE_DEAUTH_BEFORE_CONNECTION_MAX),
-
-   REG_VARIABLE(CFG_ENABLE_MAC_ADDR_SPOOFING, WLAN_PARAM_Integer,
-                hdd_config_t, enableMacSpoofing,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_ENABLE_MAC_ADDR_SPOOFING_DEFAULT,
-                CFG_ENABLE_MAC_ADDR_SPOOFING_MIN,
-                CFG_ENABLE_MAC_ADDR_SPOOFING_MAX),
-
-   REG_VARIABLE(CFG_ENABLE_CH_AVOID, WLAN_PARAM_Integer,
-                 hdd_config_t, fenableCHAvoidance,
-                 VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                 CFG_ENABLE_CH_AVOID_DEFAULT,
-                 CFG_ENABLE_CH_AVOID_MIN,
-                 CFG_ENABLE_CH_AVOID_MAX ),
-
-   REG_VARIABLE(CFG_MAX_CONCURRENT_CONNECTIONS_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, gMaxConcurrentActiveSessions,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_MAX_CONCURRENT_CONNECTIONS_DEFAULT,
-                CFG_MAX_CONCURRENT_CONNECTIONS_MIN,
-                CFG_MAX_CONCURRENT_CONNECTIONS_MAX ),
-   REG_VARIABLE( CFG_ENABLE_DYNAMIC_WMMPS_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, enableDynamicWMMPS,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_ENABLE_DYNAMIC_WMM_PS_DEFAULT,
-                CFG_ENABLE_DYNAMIC_WMM_PS_MIN,
-                CFG_ENABLE_DYNAMIC_WMM_PS_MAX ),
-
-   REG_VARIABLE( CFG_MAX_UAPSD_CONSEC_SP_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, maxUapsdConsecSP,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_MAX_UAPSD_CONSEC_SP_DEFAULT,
-                CFG_MAX_UAPSD_CONSEC_SP_MIN,
-                CFG_MAX_UAPSD_CONSEC_SP_MAX ),
-
-   REG_VARIABLE( CFG_MAX_UAPSD_CONSEC_RX_CNT_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, maxUapsdConsecRxCnt,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_MAX_UAPSD_CONSEC_RX_CNT_DEFAULT,
-                CFG_MAX_UAPSD_CONSEC_RX_CNT_MIN,
-                CFG_MAX_UAPSD_CONSEC_RX_CNT_MAX ),
-
-   REG_VARIABLE( CFG_MAX_UAPSD_CONSEC_TX_CNT_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, maxUapsdConsecTxCnt,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_MAX_UAPSD_CONSEC_TX_CNT_DEFAULT,
-                CFG_MAX_UAPSD_CONSEC_TX_CNT_MIN,
-                CFG_MAX_UAPSD_CONSEC_TX_CNT_MAX ),
-
-   REG_VARIABLE( CFG_UAPSD_CONSEC_RX_CNT_MEAS_WINDOW_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, uapsdConsecRxCntMeasWindow,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_UAPSD_CONSEC_RX_CNT_MEAS_WINDOW_DEFAULT,
-                CFG_UAPSD_CONSEC_RX_CNT_MEAS_WINDOW_MIN,
-                CFG_UAPSD_CONSEC_RX_CNT_MEAS_WINDOW_MAX ),
-
-   REG_VARIABLE( CFG_UAPSD_CONSEC_TX_CNT_MEAS_WINDOW_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, uapsdConsecTxCntMeasWindow,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_UAPSD_CONSEC_TX_CNT_MEAS_WINDOW_DEFAULT,
-                CFG_UAPSD_CONSEC_TX_CNT_MEAS_WINDOW_MIN,
-                CFG_UAPSD_CONSEC_TX_CNT_MEAS_WINDOW_MAX ),
-
-   REG_VARIABLE( CFG_UAPSD_PSPOLL_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, maxPsPollInWmmUapsdMode,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_UAPSD_PSPOLL_DEFAULT,
-                CFG_UAPSD_PSPOLL_MIN,
-                CFG_UAPSD_PSPOLL_MAX ),
-
-   REG_VARIABLE( CFG_MAX_UAPSD_INACT_INTVL_NAME, WLAN_PARAM_Integer,
-                hdd_config_t, maxUapsdInactivityIntervals,
-                VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                CFG_MAX_UAPSD_INACT_INTVL_DEFAULT,
-                CFG_MAX_UAPSD_INACT_INTVL_MIN,
-                CFG_MAX_UAPSD_INACT_INTVL_MAX ),
-
-   REG_VARIABLE( CFG_DEBUG_DHCP, WLAN_PARAM_Integer,
-                  hdd_config_t, enableDhcpDebug,
-                  VAR_FLAGS_OPTIONAL |
-                  VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                  CFG_DEBUG_DHCP_DEFAULT,
-                  CFG_DEBUG_DHCP_DISABLE,
-                  CFG_DEBUG_DHCP_ENABLE ),
-
-   REG_VARIABLE( CFG_BURST_MODE_BE_TXOP_VALUE, WLAN_PARAM_Integer,
-                  hdd_config_t, burstModeTXOPValue,
-                  VAR_FLAGS_OPTIONAL |
-                  VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                  CFG_BURST_MODE_BE_TXOP_VALUE_DEFAULT,
-                  CFG_BURST_MODE_BE_TXOP_VALUE_MIN,
-                  CFG_BURST_MODE_BE_TXOP_VALUE_MAX ),
-   REG_VARIABLE( CFG_SAP_SCAN_BAND_PREFERENCE, WLAN_PARAM_Integer,
-                  hdd_config_t, acsScanBandPreference,
-                  VAR_FLAGS_OPTIONAL | VAR_FLAGS_RANGE_CHECK,
-                  CFG_SAP_SCAN_BAND_PREFERENCE_DEFAULT,
-                  CFG_SAP_SCAN_BAND_PREFERENCE_MIN,
-                  CFG_SAP_SCAN_BAND_PREFERENCE_MAX ),
-
-   REG_VARIABLE( CFG_ENABLE_DYNAMIC_RA_START_RATE_NAME, WLAN_PARAM_Integer,
-                  hdd_config_t, enableDynamicRAStartRate,
-                  VAR_FLAGS_OPTIONAL |
-                  VAR_FLAGS_RANGE_CHECK_ASSUME_DEFAULT,
-                  CFG_ENABLE_DYNAMIC_RA_START_RATE_DEFAULT,
-                  CFG_ENABLE_DYNAMIC_RA_START_RATE_MIN,
-                  CFG_ENABLE_DYNAMIC_RA_START_RATE_MAX),
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 };
 
 /*
@@ -3362,11 +2400,7 @@ REG_VARIABLE( CFG_EXTSCAN_ENABLE, WLAN_PARAM_Integer,
  * Function returns NULL if no new line character was found before end of
  * string was reached
  */
-<<<<<<< HEAD
-static char* get_next_line(char* str, char *str_end)
-=======
 static char* get_next_line(char* str)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
   char c;
 
@@ -3377,13 +2411,6 @@ static char* get_next_line(char* str)
   c = *str;
   while(c != '\n'  && c != '\0' && c != 0xd)  {
     str = str + 1;
-<<<<<<< HEAD
-    if (str > str_end)
-    {
-        return str;
-    }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     c = *str;
   }
 
@@ -3392,10 +2419,7 @@ static char* get_next_line(char* str)
   }
   else
   {
-<<<<<<< HEAD
-=======
     *str = '\0';
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return (str+1);
   }
 
@@ -3483,31 +2507,19 @@ VOS_STATUS hdd_parse_config_ini(hdd_context_t* pHddCtx)
 
    if(status)
    {
-<<<<<<< HEAD
-      hddLog(VOS_TRACE_LEVEL_FATAL, "%s: request_firmware failed %d",__func__, status);
-=======
       hddLog(VOS_TRACE_LEVEL_FATAL, "%s: request_firmware failed %d\n",__func__, status);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       vos_status = VOS_STATUS_E_FAILURE;
       goto config_exit;
    }
    if(!fw || !fw->data || !fw->size)
    {
-<<<<<<< HEAD
-      hddLog(VOS_TRACE_LEVEL_FATAL, "%s: %s download failed",
-=======
       hddLog(VOS_TRACE_LEVEL_FATAL, "%s: %s download failed\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
              __func__, WLAN_INI_FILE);
       vos_status = VOS_STATUS_E_FAILURE;
       goto config_exit;
    }
 
-<<<<<<< HEAD
-   hddLog(LOGE, "%s: qcom_cfg.ini Size %zu", __func__, fw->size);
-=======
    hddLog(LOG1, "%s: qcom_cfg.ini Size %d\n",__func__, fw->size);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    buffer = (char*)vos_mem_malloc(fw->size);
 
@@ -3523,30 +2535,7 @@ VOS_STATUS hdd_parse_config_ini(hdd_context_t* pHddCtx)
 
    while (buffer != NULL)
    {
-<<<<<<< HEAD
-      /*
-       * get_next_line function used to modify the \n and \r delimiter
-       * to \0 before returning, without checking if it is over parsing the
-       * source buffer. So changed the function not to modify the buffer
-       * passed to it and letting the calling/caller function to take
-       * care of the return pointer validation and modification of the buffer.
-       * So validating if the return pointer is not greater than the end
-       * buffer address and modifying the buffer value.
-       */
-      line = get_next_line(buffer, (pTemp + (fw->size-1)));
-      if(line > (pTemp + fw->size)) {
-         hddLog(VOS_TRACE_LEVEL_FATAL, "%s: INI file seems to be corrupted",
-                  __func__);
-         vos_status = VOS_STATUS_E_FAILURE;
-         goto config_exit;
-      }
-      else if(line) {
-         *(line - 1) = '\0';
-      }
-
-=======
       line = get_next_line(buffer);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       buffer = i_trim(buffer);
 
       hddLog(LOG1, "%s: item", buffer);
@@ -3576,11 +2565,7 @@ VOS_STATUS hdd_parse_config_ini(hdd_context_t* pHddCtx)
                   cfgIniTable[i].name= name;
                   cfgIniTable[i++].value= value;
                   if(i >= MAX_CFG_INI_ITEMS) {
-<<<<<<< HEAD
-                     hddLog(LOGE,"%s: Number of items in %s > %d",
-=======
                      hddLog(LOGE,"%s: Number of items in %s > %d \n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                         __func__, WLAN_INI_FILE, MAX_CFG_INI_ITEMS);
                      break;
                   }
@@ -3604,55 +2589,11 @@ config_exit:
 static void print_hdd_cfg(hdd_context_t *pHddCtx)
 {
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "*********Config values in HDD Adapter*******");
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [RTSThreshold] Value = %u",pHddCtx->cfg_ini->RTSThreshold) ;
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [RTSThreshold] Value = %lu",pHddCtx->cfg_ini->RTSThreshold) ;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [OperatingChannel] Value = [%u]",pHddCtx->cfg_ini->OperatingChannel);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [PowerUsageControl] Value = [%s]",pHddCtx->cfg_ini->PowerUsageControl);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [fIsImpsEnabled] Value = [%u]",pHddCtx->cfg_ini->fIsImpsEnabled);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [AutoBmpsTimerEnabled] Value = [%u]",pHddCtx->cfg_ini->fIsAutoBmpsTimerEnabled);
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nAutoBmpsTimerValue] Value = [%u]",pHddCtx->cfg_ini->nAutoBmpsTimerValue);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nVccRssiTrigger] Value = [%u]",pHddCtx->cfg_ini->nVccRssiTrigger);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH,
-            "Name = [gIbssBssid] Value =["MAC_ADDRESS_STR"]",
-            MAC_ADDR_ARRAY(pHddCtx->cfg_ini->IbssBssid.bytes));
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH,
-            "Name = [Intf0MacAddress] Value =["MAC_ADDRESS_STR"]",
-            MAC_ADDR_ARRAY(pHddCtx->cfg_ini->intfMacAddr[0].bytes));
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH,
-            "Name = [Intf1MacAddress] Value =["MAC_ADDRESS_STR"]",
-            MAC_ADDR_ARRAY(pHddCtx->cfg_ini->intfMacAddr[1].bytes));
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH,
-            "Name = [Intf2MacAddress] Value =["MAC_ADDRESS_STR"]",
-            MAC_ADDR_ARRAY(pHddCtx->cfg_ini->intfMacAddr[2].bytes));
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH,
-            "Name = [Intf3MacAddress] Value =["MAC_ADDRESS_STR"]",
-            MAC_ADDR_ARRAY(pHddCtx->cfg_ini->intfMacAddr[3].bytes));
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gApEnableUapsd] value = [%u]",pHddCtx->cfg_ini->apUapsdEnabled);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAPCntryCode] Value =[%c%c%c]",
-      pHddCtx->cfg_ini->apCntryCode[0],pHddCtx->cfg_ini->apCntryCode[1],
-      pHddCtx->cfg_ini->apCntryCode[2]);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gEnableApProt] value = [%u]", pHddCtx->cfg_ini->apProtEnabled);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAPAutoShutOff] Value = [%u]", pHddCtx->cfg_ini->nAPAutoShutOff);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gEnableListenMode] Value = [%u]", pHddCtx->cfg_ini->nEnableListenMode);
-  VOS_TRACE (VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gApProtection] value = [%u]",pHddCtx->cfg_ini->apProtection);
-  VOS_TRACE (VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gEnableApOBSSProt] value = [%u]",pHddCtx->cfg_ini->apOBSSProtEnabled);
-  VOS_TRACE (VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gApAutoChannelSelection] value = [%u]",pHddCtx->cfg_ini->apAutoChannelSelection);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ChannelBondingMode] Value = [%u]",pHddCtx->cfg_ini->nChannelBondingMode24GHz);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ChannelBondingMode] Value = [%u]",pHddCtx->cfg_ini->nChannelBondingMode5GHz);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [dot11Mode] Value = [%u]",pHddCtx->cfg_ini->dot11Mode);
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nAutoBmpsTimerValue] Value = [%lu]",pHddCtx->cfg_ini->nAutoBmpsTimerValue);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nVccRssiTrigger] Value = [%u]",pHddCtx->cfg_ini->nVccRssiTrigger);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gIbssBssid] Value =[0x%x 0x%x 0x%x 0x%x 0x%x 0x%x]",
@@ -3714,47 +2655,11 @@ static void print_hdd_cfg(hdd_context_t *pHddCtx)
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ChannelBondingMode] Value = [%lu]",pHddCtx->cfg_ini->nChannelBondingMode24GHz);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ChannelBondingMode] Value = [%lu]",pHddCtx->cfg_ini->nChannelBondingMode5GHz);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [dot11Mode] Value = [%lu]",pHddCtx->cfg_ini->dot11Mode);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [WmmMode] Value = [%u] ",pHddCtx->cfg_ini->WmmMode);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [UapsdMask] Value = [0x%x] ",pHddCtx->cfg_ini->UapsdMask);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [PktClassificationBasis] Value = [%u] ",pHddCtx->cfg_ini->PktClassificationBasis);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ImplicitQosIsEnabled] Value = [%u]",(int)pHddCtx->cfg_ini->bImplicitQosEnabled);
 
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdVoSrvIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdVoSrvIntv);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdVoSuspIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdVoSuspIntv);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdViSrvIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdViSrvIntv);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdViSuspIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdViSuspIntv);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdBeSrvIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdBeSrvIntv);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdBeSuspIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdBeSuspIntv);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdBkSrvIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdBkSrvIntv);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdBkSuspIntv] Value = [%u] ",pHddCtx->cfg_ini->InfraUapsdBkSuspIntv);
-#ifdef FEATURE_WLAN_ESE
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraInactivityInterval] Value = [%u] ",pHddCtx->cfg_ini->InfraInactivityInterval);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [EseEnabled] Value = [%u] ",pHddCtx->cfg_ini->isEseIniFeatureEnabled);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [FastTransitionEnabled] Value = [%u] ",pHddCtx->cfg_ini->isFastTransitionEnabled);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gTxPowerCap] Value = [%u] dBm ",pHddCtx->cfg_ini->nTxPowerCap);
-#endif
-#ifdef FEATURE_WLAN_LFR
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [FastRoamEnabled] Value = [%u] ",pHddCtx->cfg_ini->isFastRoamIniFeatureEnabled);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [MAWCEnabled] Value = [%u] ",pHddCtx->cfg_ini->MAWCEnabled);
-#endif
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [RoamRssiDiff] Value = [%u] ",pHddCtx->cfg_ini->RoamRssiDiff);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ImmediateRoamRssiDiff] Value = [%u] ",pHddCtx->cfg_ini->nImmediateRoamRssiDiff);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [isWESModeEnabled] Value = [%u] ",pHddCtx->cfg_ini->isWESModeEnabled);
-#endif
-#ifdef FEATURE_WLAN_OKC
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [OkcEnabled] Value = [%u] ",pHddCtx->cfg_ini->isOkcIniFeatureEnabled);
-#endif
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraDirAcVo] Value = [%u] ",pHddCtx->cfg_ini->InfraDirAcVo);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraNomMsduSizeAcVo] Value = [0x%x] ",pHddCtx->cfg_ini->InfraNomMsduSizeAcVo);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcVo] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMeanDataRateAcVo);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcVo] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMinPhyRateAcVo);
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdVoSrvIntv] Value = [%lu] ",pHddCtx->cfg_ini->InfraUapsdVoSrvIntv);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraUapsdVoSuspIntv] Value = [%lu] ",pHddCtx->cfg_ini->InfraUapsdVoSuspIntv);
 
@@ -3774,12 +2679,10 @@ static void print_hdd_cfg(hdd_context_t *pHddCtx)
 #endif
 #ifdef FEATURE_WLAN_LFR
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [FastRoamEnabled] Value = [%lu] ",pHddCtx->cfg_ini->isFastRoamIniFeatureEnabled);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [MAWCEnabled] Value = [%u] ",pHddCtx->cfg_ini->MAWCEnabled);
 #endif
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [RoamRssiDiff] Value = [%lu] ",pHddCtx->cfg_ini->RoamRssiDiff);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ImmediateRoamRssiDiff] Value = [%lu] ",pHddCtx->cfg_ini->nImmediateRoamRssiDiff);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [isWESModeEnabled] Value = [%lu] ",pHddCtx->cfg_ini->isWESModeEnabled);
 #endif
 #ifdef FEATURE_WLAN_OKC
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [OkcEnabled] Value = [%lu] ",pHddCtx->cfg_ini->isOkcIniFeatureEnabled);
@@ -3788,69 +2691,30 @@ static void print_hdd_cfg(hdd_context_t *pHddCtx)
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraNomMsduSizeAcVo] Value = [0x%x] ",pHddCtx->cfg_ini->InfraNomMsduSizeAcVo);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcVo] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMeanDataRateAcVo);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcVo] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMinPhyRateAcVo);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraSbaAcVo] Value = [0x%x] ",pHddCtx->cfg_ini->InfraSbaAcVo);
 
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraDirAcVi] Value = [%u] ",pHddCtx->cfg_ini->InfraDirAcVi);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraNomMsduSizeAcVi] Value = [0x%x] ",pHddCtx->cfg_ini->InfraNomMsduSizeAcVi);
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcVi] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMeanDataRateAcVi);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcVi] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMinPhyRateAcVi);
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcVi] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMeanDataRateAcVi);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcVi] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMinPhyRateAcVi);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraSbaAcVi] Value = [0x%x] ",pHddCtx->cfg_ini->InfraSbaAcVi);
 
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraDirAcBe] Value = [%u] ",pHddCtx->cfg_ini->InfraDirAcBe);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraNomMsduSizeAcBe] Value = [0x%x] ",pHddCtx->cfg_ini->InfraNomMsduSizeAcBe);
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcBe] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMeanDataRateAcBe);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcBe] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMinPhyRateAcBe);
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcBe] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMeanDataRateAcBe);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcBe] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMinPhyRateAcBe);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraSbaAcBe] Value = [0x%x] ",pHddCtx->cfg_ini->InfraSbaAcBe);
 
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraDirAcBk] Value = [%u] ",pHddCtx->cfg_ini->InfraDirAcBk);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraNomMsduSizeAcBk] Value = [0x%x] ",pHddCtx->cfg_ini->InfraNomMsduSizeAcBk);
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcBk] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMeanDataRateAcBk);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcBk] Value = [0x%x] ",pHddCtx->cfg_ini->InfraMinPhyRateAcBk);
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMeanDataRateAcBk] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMeanDataRateAcBk);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraMinPhyRateAcBk] Value = [0x%lx] ",pHddCtx->cfg_ini->InfraMinPhyRateAcBk);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [InfraSbaAcBk] Value = [0x%x] ",pHddCtx->cfg_ini->InfraSbaAcBk);
 
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [WfqBkWeight] Value = [%u] ",pHddCtx->cfg_ini->WfqBkWeight);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [WfqBeWeight] Value = [%u] ",pHddCtx->cfg_ini->WfqBeWeight);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [WfqViWeight] Value = [%u] ",pHddCtx->cfg_ini->WfqViWeight);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [WfqVoWeight] Value = [%u] ",pHddCtx->cfg_ini->WfqVoWeight);
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [DelayedTriggerFrmInt] Value = [%u] ",pHddCtx->cfg_ini->DelayedTriggerFrmInt);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [BkReorderAgingTime] Value = [%u] ",pHddCtx->cfg_ini->BkReorderAgingTime);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [BeReorderAgingTime] Value = [%u] ",pHddCtx->cfg_ini->BeReorderAgingTime);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [ViReorderAgingTime] Value = [%u] ",pHddCtx->cfg_ini->ViReorderAgingTime);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [VoReorderAgingTime] Value = [%u] ",pHddCtx->cfg_ini->VoReorderAgingTime);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [mcastBcastFilterSetting] Value = [%u] ",pHddCtx->cfg_ini->mcastBcastFilterSetting);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [fhostArpOffload] Value = [%u] ",pHddCtx->cfg_ini->fhostArpOffload);
-#ifdef WLAN_FEATURE_VOWIFI_11R
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [fFTResourceReqSupported] Value = [%u] ",pHddCtx->cfg_ini->fFTResourceReqSupported);
-#endif
-
-#ifdef WLAN_FEATURE_NEIGHBOR_ROAMING
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborReassocRssiThreshold] Value = [%u] ",pHddCtx->cfg_ini->nNeighborReassocRssiThreshold);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborLookupRssiThreshold] Value = [%u] ",pHddCtx->cfg_ini->nNeighborLookupRssiThreshold);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborScanMinChanTime] Value = [%u] ",pHddCtx->cfg_ini->nNeighborScanMinChanTime);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborScanMaxChanTime] Value = [%u] ",pHddCtx->cfg_ini->nNeighborScanMaxChanTime);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nMaxNeighborRetries] Value = [%u] ",pHddCtx->cfg_ini->nMaxNeighborReqTries);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborScanPeriod] Value = [%u] ",pHddCtx->cfg_ini->nNeighborScanPeriod);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborScanResultsRefreshPeriod] Value = [%u] ",pHddCtx->cfg_ini->nNeighborResultsRefreshPeriod);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nEmptyScanRefreshPeriod] Value = [%u] ",pHddCtx->cfg_ini->nEmptyScanRefreshPeriod);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborInitialForcedRoamTo5GhEnable] Value = [%u] ",pHddCtx->cfg_ini->nNeighborInitialForcedRoamTo5GhEnable);
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [DelayedTriggerFrmInt] Value = [%lu] ",pHddCtx->cfg_ini->DelayedTriggerFrmInt);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [mcastBcastFilterSetting] Value = [%u] ",pHddCtx->cfg_ini->mcastBcastFilterSetting);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [fhostArpOffload] Value = [%u] ",pHddCtx->cfg_ini->fhostArpOffload);
@@ -3867,7 +2731,6 @@ static void print_hdd_cfg(hdd_context_t *pHddCtx)
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborScanPeriod] Value = [%lu] ",pHddCtx->cfg_ini->nNeighborScanPeriod);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nNeighborScanResultsRefreshPeriod] Value = [%lu] ",pHddCtx->cfg_ini->nNeighborResultsRefreshPeriod);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nEmptyScanRefreshPeriod] Value = [%lu] ",pHddCtx->cfg_ini->nEmptyScanRefreshPeriod);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [burstSizeDefinition] Value = [0x%x] ",pHddCtx->cfg_ini->burstSizeDefinition);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [tsInfoAckPolicy] Value = [0x%x] ",pHddCtx->cfg_ini->tsInfoAckPolicy);
@@ -3894,18 +2757,10 @@ static void print_hdd_cfg(hdd_context_t *pHddCtx)
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gApDataAvailPollInterVal] Value = [%u] ",pHddCtx->cfg_ini->apDataAvailPollPeriodInMs);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gEnableBypass11d] Value = [%u] ",pHddCtx->cfg_ini->enableBypass11d);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gEnableDFSChnlScan] Value = [%u] ",pHddCtx->cfg_ini->enableDFSChnlScan);
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gEnableDFSPnoChnlScan] Value = [%u] ",pHddCtx->cfg_ini->enableDFSPnoChnlScan);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gReportMaxLinkSpeed] Value = [%u] ",pHddCtx->cfg_ini->reportMaxLinkSpeed);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [thermalMitigationEnable] Value = [%u] ",pHddCtx->cfg_ini->thermalMitigationEnable);
-#ifdef WLAN_FEATURE_11AC
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gVhtChannelWidth] value = [%u]",pHddCtx->cfg_ini->vhtChannelWidth);
-=======
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gReportMaxLinkSpeed] Value = [%u] ",pHddCtx->cfg_ini->reportMaxLinkSpeed);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [thermalMitigationEnable] Value = [%u] ",pHddCtx->cfg_ini->thermalMitigationEnable);
 #ifdef WLAN_FEATURE_11AC
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gVhtChannelWidth] value = [%u]\n",pHddCtx->cfg_ini->vhtChannelWidth);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [enableFirstScan2GOnly] Value = [%u] ",pHddCtx->cfg_ini->enableFirstScan2GOnly);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [skipDfsChnlInP2pSearch] Value = [%u] ",pHddCtx->cfg_ini->skipDfsChnlInP2pSearch);
@@ -3920,29 +2775,6 @@ static void print_hdd_cfg(hdd_context_t *pHddCtx)
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gFlexConnectPowerFactor] Value = [%u] ", pHddCtx->cfg_ini->flexConnectPowerFactor);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gEnableIbssHeartBeatOffload] Value = [%u] ", pHddCtx->cfg_ini->enableIbssHeartBeatOffload);
   VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAntennaDiversity] Value = [%u] ", pHddCtx->cfg_ini->antennaDiversity);
-<<<<<<< HEAD
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gGoLinkMonitorPeriod] Value = [%u]",pHddCtx->cfg_ini->goLinkMonitorPeriod);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gApLinkMonitorPeriod] Value = [%u]",pHddCtx->cfg_ini->apLinkMonitorPeriod);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gGoKeepAlivePeriod] Value = [%u]",pHddCtx->cfg_ini->goKeepAlivePeriod);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gApKeepAlivePeriod]Value = [%u]",pHddCtx->cfg_ini->apKeepAlivePeriod);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAmsduSupportInAMPDU] Value = [%u] ",pHddCtx->cfg_ini->isAmsduSupportInAMPDU);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [nSelect5GHzMargin] Value = [%u] ",pHddCtx->cfg_ini->nSelect5GHzMargin);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gCoalesingInIBSS] Value = [%u] ",pHddCtx->cfg_ini->isCoalesingInIBSSAllowed);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [overrideCountryCode] Value = [%s] ",pHddCtx->cfg_ini->overrideCountryCode);
-
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAsdProbeInterval] Value = [%u]",pHddCtx->cfg_ini->gAsdProbeInterval);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAsdTriggerThreshold] Value = [%hhd]",pHddCtx->cfg_ini->gAsdTriggerThreshold);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAsdRTTRssiHystThreshold]Value = [%u]",pHddCtx->cfg_ini->gAsdRTTRssiHystThreshold);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gRoamtoDFSChannel] Value = [%u] ",pHddCtx->cfg_ini->allowDFSChannelRoam);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gMaxConcurrentActiveSessions] Value = [%u] ", pHddCtx->cfg_ini->gMaxConcurrentActiveSessions);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAcsScanBandPreference] Value = [%u] ",pHddCtx->cfg_ini->acsScanBandPreference);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gACSBandSwitchThreshold] value = [%u]\n",pHddCtx->cfg_ini->acsBandSwitchThreshold);
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gDeferScanTimeInterval] value = [%u]\n",pHddCtx->cfg_ini->nDeferScanTimeInterval);
-=======
-  VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "Name = [gAmsduSupportInAMPDU] Value = [%lu] ",pHddCtx->cfg_ini->isAmsduSupportInAMPDU);
-
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 
@@ -4010,7 +2842,7 @@ VOS_STATUS hdd_cfg_get_config(hdd_context_t *pHddCtx, char *pBuf, int buflen)
       {
          snprintf(valueStr, CFG_VALUE_MAX_LEN, "(unhandled)");
       }
-      curlen = scnprintf(configStr, CFG_ENTRY_MAX_LEN,
+      curlen = snprintf(configStr, CFG_ENTRY_MAX_LEN,
                         "%s=[%s]%s\n",
                         pRegEntry->RegName,
                         valueStr,
@@ -4100,11 +2932,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
    // sanity test
    if (MAX_CFG_INI_ITEMS < cRegTableEntries)
    {
-<<<<<<< HEAD
-      hddLog(LOGE, "%s: MAX_CFG_INI_ITEMS too small, must be at least %ld",
-=======
       hddLog(LOGE, "%s: MAX_CFG_INI_ITEMS too small, must be at least %d",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
              __func__, cRegTableEntries);
    }
 
@@ -4130,11 +2958,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
          // If successfully read from the registry, use the value read.
          // If not, use the default value.
          if ( match_status == VOS_STATUS_SUCCESS && (WLAN_PARAM_Integer == pRegEntry->RegType)) {
-<<<<<<< HEAD
-            rv = kstrtou32(value_str, 10, &value);
-=======
             rv = kstrtoul(value_str, 10, &value);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             if (rv < 0) {
                 hddLog(LOGE, "%s: Reg Parameter %s invalid. Enforcing default",
                        __func__, pRegEntry->RegName);
@@ -4142,11 +2966,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
             }
          }
          else if ( match_status == VOS_STATUS_SUCCESS && (WLAN_PARAM_HexInteger == pRegEntry->RegType)) {
-<<<<<<< HEAD
-            rv = kstrtou32(value_str, 16, &value);
-=======
             rv = kstrtoul(value_str, 16, &value);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             if (rv < 0) {
                 hddLog(LOGE, "%s: Reg paramter %s invalid. Enforcing default",
                        __func__, pRegEntry->RegName);
@@ -4162,22 +2982,14 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
          {
             if ( value > pRegEntry->VarMax )
             {
-<<<<<<< HEAD
-               hddLog(LOGE, "%s: Reg Parameter %s > allowed Maximum [%u > %lu]. Enforcing Maximum",
-=======
                hddLog(LOGE, "%s: Reg Parameter %s > allowed Maximum [%lu > %lu]. Enforcing Maximum",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                       __func__, pRegEntry->RegName, value, pRegEntry->VarMax );
                value = pRegEntry->VarMax;
             }
 
             if ( value < pRegEntry->VarMin )
             {
-<<<<<<< HEAD
-               hddLog(LOGE, "%s: Reg Parameter %s < allowed Minimum [%u < %lu]. Enforcing Minimum",
-=======
                hddLog(LOGE, "%s: Reg Parameter %s < allowed Minimum [%lu < %lu]. Enforcing Minimum",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                       __func__, pRegEntry->RegName, value, pRegEntry->VarMin);
                value = pRegEntry->VarMin;
             }
@@ -4187,22 +2999,14 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
          {
             if ( value > pRegEntry->VarMax )
             {
-<<<<<<< HEAD
-               hddLog(LOGE, "%s: Reg Parameter %s > allowed Maximum [%u > %lu]. Enforcing Default= %lu",
-=======
                hddLog(LOGE, "%s: Reg Parameter %s > allowed Maximum [%lu > %lu]. Enforcing Default= %lu",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   __func__, pRegEntry->RegName, value, pRegEntry->VarMax, pRegEntry->VarDefault  );
                value = pRegEntry->VarDefault;
             }
 
             if ( value < pRegEntry->VarMin )
             {
-<<<<<<< HEAD
-               hddLog(LOGE, "%s: Reg Parameter %s < allowed Minimum [%u < %lu]. Enforcing Default= %lu",
-=======
                hddLog(LOGE, "%s: Reg Parameter %s < allowed Minimum [%lu < %lu]. Enforcing Default= %lu",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   __func__, pRegEntry->RegName, value, pRegEntry->VarMin, pRegEntry->VarDefault  );
                value = pRegEntry->VarDefault;
             }
@@ -4217,11 +3021,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
          // If not, use the default value.
          if (VOS_STATUS_SUCCESS == match_status)
          {
-<<<<<<< HEAD
-            rv = kstrtos32(value_str, 10, &svalue);
-=======
             rv = kstrtol(value_str, 10, &svalue);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             if (rv < 0) {
                 hddLog(VOS_TRACE_LEVEL_WARN, "%s: Reg Parameter %s invalid. Enforcing Default",
                        __func__, pRegEntry->RegName);
@@ -4239,11 +3039,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
             if ( svalue > (v_S31_t)pRegEntry->VarMax )
             {
                hddLog(LOGE, "%s: Reg Parameter %s > allowed Maximum "
-<<<<<<< HEAD
-                      "[%d > %d]. Enforcing Maximum", __func__,
-=======
                       "[%ld > %ld]. Enforcing Maximum", __func__,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                       pRegEntry->RegName, svalue, (int)pRegEntry->VarMax );
                svalue = (v_S31_t)pRegEntry->VarMax;
             }
@@ -4251,11 +3047,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
             if ( svalue < (v_S31_t)pRegEntry->VarMin )
             {
                hddLog(LOGE, "%s: Reg Parameter %s < allowed Minimum "
-<<<<<<< HEAD
-                      "[%d < %d]. Enforcing Minimum",  __func__,
-=======
                       "[%ld < %ld]. Enforcing Minimum",  __func__,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                       pRegEntry->RegName, svalue, (int)pRegEntry->VarMin);
                svalue = (v_S31_t)pRegEntry->VarMin;
             }
@@ -4266,11 +3058,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
             if ( svalue > (v_S31_t)pRegEntry->VarMax )
             {
                hddLog(LOGE, "%s: Reg Parameter %s > allowed Maximum "
-<<<<<<< HEAD
-                      "[%d > %d]. Enforcing Default= %d",
-=======
                       "[%ld > %ld]. Enforcing Default= %ld",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                       __func__, pRegEntry->RegName, svalue,
                       (int)pRegEntry->VarMax,
                       (int)pRegEntry->VarDefault  );
@@ -4280,11 +3068,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
             if ( svalue < (v_S31_t)pRegEntry->VarMin )
             {
                hddLog(LOGE, "%s: Reg Parameter %s < allowed Minimum "
-<<<<<<< HEAD
-                      "[%d < %d]. Enforcing Default= %d",
-=======
                       "[%ld < %ld]. Enforcing Default= %ld",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                       __func__, pRegEntry->RegName, svalue,
                       (int)pRegEntry->VarMin,
                       (int)pRegEntry->VarDefault);
@@ -4299,11 +3083,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
       else if ( WLAN_PARAM_String == pRegEntry->RegType )
       {
 #ifdef WLAN_CFG_DEBUG
-<<<<<<< HEAD
-         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "RegName = %s, VarOffset %u VarSize %u VarDefault %s",
-=======
          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH, "RegName = %s, VarOffset %u VarSize %u VarDefault %s\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             pRegEntry->RegName, pRegEntry->VarOffset, pRegEntry->VarSize, (char*)pRegEntry->VarDefault);
 #endif
 
@@ -4312,11 +3092,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
             len_value_str = strlen(value_str);
 
             if(len_value_str > (pRegEntry->VarSize - 1)) {
-<<<<<<< HEAD
-               hddLog(LOGE, "%s: Invalid Value=[%s] specified for Name=[%s] in %s",
-=======
                hddLog(LOGE, "%s: Invalid Value=[%s] specified for Name=[%s] in %s\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   __func__, value_str, pRegEntry->RegName, WLAN_INI_FILE);
                cbOutString = utilMin( strlen( (char *)pRegEntry->VarDefault ), pRegEntry->VarSize - 1 );
                memcpy( pField, (void *)(pRegEntry->VarDefault), cbOutString );
@@ -4339,11 +3115,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
       else if ( WLAN_PARAM_MacAddr == pRegEntry->RegType )
       {
          if(pRegEntry->VarSize != VOS_MAC_ADDR_SIZE) {
-<<<<<<< HEAD
-               hddLog(LOGE, "%s: Invalid VarSize %u for Name=[%s]",
-=======
                hddLog(LOGE, "%s: Invalid VarSize %u for Name=[%s]\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    __func__, pRegEntry->VarSize, pRegEntry->RegName);
             continue;
          }
@@ -4351,11 +3123,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
          if ( match_status == VOS_STATUS_SUCCESS) {
             len_value_str = strlen(value_str);
             if(len_value_str != (VOS_MAC_ADDR_SIZE*2)) {
-<<<<<<< HEAD
-               hddLog(LOGE, "%s: Invalid MAC addr [%s] specified for Name=[%s] in %s",
-=======
                hddLog(LOGE, "%s: Invalid MAC addr [%s] specified for Name=[%s] in %s\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   __func__, value_str, pRegEntry->RegName, WLAN_INI_FILE);
             }
             else
@@ -4370,11 +3138,7 @@ static VOS_STATUS hdd_apply_cfg_ini( hdd_context_t *pHddCtx, tCfgIniEntry* iniTa
       }
       else
       {
-<<<<<<< HEAD
-         hddLog(LOGE, "%s: Unknown param type for name[%s] in registry table",
-=======
          hddLog(LOGE, "%s: Unknown param type for name[%s] in registry table\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             __func__, pRegEntry->RegName);
       }
 
@@ -4426,7 +3190,6 @@ static void hdd_set_btc_config(hdd_context_t *pHddCtx)
 {
    hdd_config_t *pConfig = pHddCtx->cfg_ini;
    tSmeBtcConfig btcParams;
-   int i;
 
    sme_BtcGetConfig(pHddCtx->hHal, &btcParams);
 
@@ -4447,20 +3210,6 @@ static void hdd_set_btc_config(hdd_context_t *pHddCtx)
    btcParams.btcMaxScoBlockPerc = pConfig->btcMaxScoBlockPerc;
    btcParams.btcDhcpProtOnA2dp = pConfig->btcDhcpProtOnA2dp;
    btcParams.btcDhcpProtOnSco = pConfig->btcDhcpProtOnSco;
-
-   for (i = 0; i < 10; i++)
-   {
-      btcParams.mwsCoexVictimWANFreq[i] = pConfig->mwsCoexVictimWANFreq[i];
-      btcParams.mwsCoexVictimWLANFreq[i] = pConfig->mwsCoexVictimWLANFreq[i];
-      btcParams.mwsCoexVictimConfig[i] = pConfig->mwsCoexVictimConfig[i];
-      btcParams.mwsCoexVictimConfig2[i] = pConfig->mwsCoexVictimConfig2[i];
-   }
-   for (i = 0; i < 6; i++)
-   {
-      btcParams.mwsCoexConfig[i] = pConfig->mwsCoexConfig[i];
-   }
-   btcParams.mwsCoexModemBackoff = pConfig->mwsCoexModemBackoff;
-   btcParams.SARPowerBackoff = pConfig->SARPowerBackoff;
 
    sme_BtcSetConfig(pHddCtx->hHal, &btcParams);
 }
@@ -4521,11 +3270,7 @@ static void hdd_set_power_save_config(hdd_context_t *pHddCtx, tSmeConfigParams *
 
    if (sme_SetConfigPowerSave(pHddCtx->hHal, ePMC_BEACON_MODE_POWER_SAVE, &bmpsParams)== eHAL_STATUS_FAILURE)
    {
-<<<<<<< HEAD
-      hddLog(LOGE, "SetConfigPowerSave failed to set BMPS params");
-=======
       hddLog(LOGE, "SetConfigPowerSave failed to set BMPS params\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if(pConfig->fIsAutoBmpsTimerEnabled)
@@ -4575,46 +3320,28 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
 #endif
 
    hdd_config_t *pConfig = pHddCtx->cfg_ini;
-<<<<<<< HEAD
-   tSirMacHTCapabilityInfo *htCapInfo;
-   tANI_U32 temp32;
-   tANI_U16 temp16;
-=======
    tSirMacHTCapabilityInfo htCapInfo;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_SHORT_GI_20MHZ,
       pConfig->ShortGI20MhzEnable, NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_SHORT_GI_20MHZ to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_SHORT_GI_20MHZ to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_CAL_CONTROL, pConfig->Calibration,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_CAL_CONTROL to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_CAL_CONTROL to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_CAL_PERIOD, pConfig->CalibrationPeriod,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_CAL_PERIOD to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_CAL_PERIOD to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if ( 0 != pConfig->Cfg1Id )
@@ -4623,11 +3350,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
       {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE, "Could not pass on Cfg1Id to CCM");
-=======
          hddLog(LOGE, "Could not pass on Cfg1Id to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
 
    }
@@ -4638,11 +3361,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
       {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE, "Could not pass on Cfg2Id to CCM");
-=======
          hddLog(LOGE, "Could not pass on Cfg2Id to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
    }
 
@@ -4652,11 +3371,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
       {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE, "Could not pass on Cfg3Id to CCM");
-=======
          hddLog(LOGE, "Could not pass on Cfg3Id to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
    }
 
@@ -4666,11 +3381,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
       {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE, "Could not pass on Cfg4Id to CCM");
-=======
          hddLog(LOGE, "Could not pass on Cfg4Id to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
    }
 
@@ -4680,11 +3391,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
       {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE, "Could not pass on Cfg5Id to CCM");
-=======
          hddLog(LOGE, "Could not pass on Cfg5Id to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
    }
 
@@ -4692,44 +3399,28 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_BA_AUTO_SETUP to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_BA_AUTO_SETUP to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_FIXED_RATE, pConfig->TxRate,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_FIXED_RATE to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_FIXED_RATE to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_RX_AMPDU_FACTOR,
       pConfig->MaxRxAmpduFactor, NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Could not pass on WNI_CFG_HT_AMPDU_PARAMS_MAX_RX_AMPDU_FACTOR to CCM");
-=======
       hddLog(LOGE,"Could not pass on WNI_CFG_HT_AMPDU_PARAMS_MAX_RX_AMPDU_FACTOR to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_SHORT_PREAMBLE, pConfig->fIsShortPreamble,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Could not pass on WNI_CFG_SHORT_PREAMBLE to CCM");
-=======
       hddLog(LOGE,"Could not pass on WNI_CFG_SHORT_PREAMBLE to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (pConfig->fIsAutoIbssBssid)
@@ -4738,11 +3429,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          sizeof(v_BYTE_t) * VOS_MAC_ADDR_SIZE, NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
       {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE,"Could not pass on WNI_CFG_BSSID to CCM");
-=======
          hddLog(LOGE,"Could not pass on WNI_CFG_BSSID to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
    }
    else
@@ -4750,274 +3437,154 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
       if ( VOS_FALSE == vos_is_macaddr_group( &pConfig->IbssBssid ))
       {
          VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_MED,
-<<<<<<< HEAD
-                    "MAC Addr (IBSS BSSID) read from Registry is: " MAC_ADDRESS_STR,
-                    MAC_ADDR_ARRAY(pConfig->IbssBssid.bytes));
-=======
                     "MAC Addr (IBSS BSSID) read from Registry is: %02x-%02x-%02x-%02x-%02x-%02x",
                     pConfig->IbssBssid.bytes[0], pConfig->IbssBssid.bytes[1], pConfig->IbssBssid.bytes[2],
                     pConfig->IbssBssid.bytes[3], pConfig->IbssBssid.bytes[4], pConfig->IbssBssid.bytes[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          if (ccmCfgSetStr(pHddCtx->hHal, WNI_CFG_BSSID, pConfig->IbssBssid.bytes,
             sizeof(v_BYTE_t) * VOS_MAC_ADDR_SIZE, NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
          {
             fStatus = FALSE;
-<<<<<<< HEAD
-            hddLog(LOGE,"Could not pass on WNI_CFG_BSSID to CCM");
-=======
             hddLog(LOGE,"Could not pass on WNI_CFG_BSSID to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
          }
       }
       else
       {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE,"Could not pass on WNI_CFG_BSSID to CCM");
-      }
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PASSIVE_MINIMUM_CHANNEL_TIME,
-        pConfig->nPassiveMinChnTime, NULL,
-        eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_PASSIVE_MINIMUM_CHANNEL_TIME"
-                     " to CCM\n");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PASSIVE_MAXIMUM_CHANNEL_TIME,
-        pConfig->nPassiveMaxChnTime, NULL,
-        eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_PASSIVE_MAXIMUM_CHANNEL_TIME"
-                     " to CCM\n");
-   }
-
-=======
          hddLog(LOGE,"Could not pass on WNI_CFG_BSSID to CCM\n");
       }
    }
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_BEACON_INTERVAL, pConfig->nBeaconInterval,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_BEACON_INTERVAL to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_BEACON_INTERVAL to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_PS_POLL, pConfig->nMaxPsPoll,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_PS_POLL to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_MAX_PS_POLL to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_CURRENT_RX_ANTENNA, pConfig-> nRxAnt, NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Failure: Could not pass on WNI_CFG_CURRENT_RX_ANTENNA configuration info to HAL"  );
-=======
       hddLog(LOGE, "Failure: Could not pass on WNI_CFG_CURRENT_RX_ANTENNA configuration info to HAL\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_LOW_GAIN_OVERRIDE, pConfig->fIsLowGainOverride,
          NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_LOW_GAIN_OVERRIDE to HAL");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_LOW_GAIN_OVERRIDE to HAL\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RSSI_FILTER_PERIOD, pConfig->nRssiFilterPeriod,
          NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_RSSI_FILTER_PERIOD to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_RSSI_FILTER_PERIOD to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_IGNORE_DTIM, pConfig->fIgnoreDtim,
          NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_IGNORE_DTIM configuration to CCM"  );
-=======
       hddLog(LOGE, "Could not pass on WNI_IGNORE_DTIM configuration to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PS_ENABLE_HEART_BEAT, pConfig->fEnableFwHeartBeatMonitoring,
                     NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Failure: Could not pass on WNI_CFG_PS_HEART_BEAT configuration info to CCM");
-=======
       hddLog(LOGE, "Failure: Could not pass on WNI_CFG_PS_HEART_BEAT configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PS_ENABLE_BCN_FILTER, pConfig->fEnableFwBeaconFiltering,
                     NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Failure: Could not pass on WNI_CFG_PS_BCN_FILTER configuration info to CCM");
-=======
       hddLog(LOGE, "Failure: Could not pass on WNI_CFG_PS_BCN_FILTER configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PS_ENABLE_RSSI_MONITOR, pConfig->fEnableFwRssiMonitoring,
                     NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Failure: Could not pass on WNI_CFG_PS_RSSI_MONITOR configuration info to CCM");
-=======
       hddLog(LOGE, "Failure: Could not pass on WNI_CFG_PS_RSSI_MONITOR configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PS_DATA_INACTIVITY_TIMEOUT, pConfig->nDataInactivityTimeout,
                     NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Failure: Could not pass on WNI_CFG_PS_DATA_INACTIVITY_TIMEOUT configuration info to CCM");
-=======
       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_PS_DATA_INACTIVITY_TIMEOUT configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_NTH_BEACON_FILTER, pConfig->nthBeaconFilter,
                     NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Failure: Could not pass on WNI_CFG_NTH_BEACON_FILTER configuration info to CCM");
-=======
       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_NTH_BEACON_FILTER configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_LTE_COEX, pConfig->enableLTECoex,
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_LTE_COEX to CCM");
-=======
         hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_LTE_COEX to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_PHY_AGC_LISTEN_MODE, pConfig->nEnableListenMode,
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_PHY_AGC_LISTEN_MODE to CCM");
-=======
         hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_PHY_AGC_LISTEN_MODE to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_AP_KEEP_ALIVE_TIMEOUT, pConfig->apKeepAlivePeriod,
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE, "Could not pass on WNI_CFG_AP_KEEP_ALIVE_TIMEOUT to CCM");
-=======
         hddLog(LOGE, "Could not pass on WNI_CFG_AP_KEEP_ALIVE_TIMEOUT to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_GO_KEEP_ALIVE_TIMEOUT, pConfig->goKeepAlivePeriod,
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE, "Could not pass on WNI_CFG_GO_KEEP_ALIVE_TIMEOUT to CCM");
-=======
         hddLog(LOGE, "Could not pass on WNI_CFG_GO_KEEP_ALIVE_TIMEOUT to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_AP_LINK_MONITOR_TIMEOUT, pConfig->apLinkMonitorPeriod,
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE, "Could not pass on WNI_CFG_AP_LINK_MONITOR_TIMEOUT to CCM");
-     }
-
-    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_GO_LINK_MONITOR_TIMEOUT, pConfig->goLinkMonitorPeriod,
-        NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-     {
-        fStatus = FALSE;
-        hddLog(LOGE, "Could not pass on WNI_CFG_GO_LINK_MONITOR_TIMEOUT to CCM");
-     }
-
-
-=======
         hddLog(LOGE, "Could not pass on WNI_CFG_AP_LINK_MONITOR_TIMEOUT to CCM\n");
      }
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if defined WLAN_FEATURE_VOWIFI
     if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RRM_ENABLED, pConfig->fRrmEnable,
                      NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
        fStatus = FALSE;
-<<<<<<< HEAD
-       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RRM_ENABLE configuration info to CCM");
-=======
        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RRM_ENABLE configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RRM_OPERATING_CHAN_MAX, pConfig->nInChanMeasMaxDuration,
                      NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
        fStatus = FALSE;
-<<<<<<< HEAD
-       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RRM_OPERATING_CHAN_MAX configuration info to CCM");
-=======
        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RRM_OPERATING_CHAN_MAX configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RRM_NON_OPERATING_CHAN_MAX, pConfig->nOutChanMeasMaxDuration,
                      NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
        fStatus = FALSE;
-<<<<<<< HEAD
-       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RRM_OUT_CHAN_MAX configuration info to CCM");
-=======
        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RRM_OUT_CHAN_MAX configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MCAST_BCAST_FILTER_SETTING, pConfig->mcastBcastFilterSetting,
@@ -5028,172 +3595,108 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
                       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_SINGLE_TID_RC configuration info to CCM");
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_SINGLE_TID_RC configuration info to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TELE_BCN_WAKEUP_EN, pConfig->teleBcnWakeupEn,
                       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_WAKEUP_EN configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_WAKEUP_EN configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TELE_BCN_TRANS_LI, pConfig->nTeleBcnTransListenInterval,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_TRANS_LI configuration info to CCM"  );
-=======
       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_TRANS_LI configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TELE_BCN_MAX_LI, pConfig->nTeleBcnMaxListenInterval,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_MAX_LI configuration info to CCM"  );
-=======
       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_MAX_LI configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TELE_BCN_TRANS_LI_IDLE_BCNS, pConfig->nTeleBcnTransLiNumIdleBeacons,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_TRANS_LI_IDLE_BCNS configuration info to CCM"  );
-=======
       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_TRANS_LI_IDLE_BCNS configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TELE_BCN_MAX_LI_IDLE_BCNS, pConfig->nTeleBcnMaxLiNumIdleBeacons,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_MAX_LI_IDLE_BCNS configuration info to CCM"  );
-=======
       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_TELE_BCN_MAX_LI_IDLE_BCNS configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RF_SETTLING_TIME_CLK, pConfig->rfSettlingTimeUs,
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RF_SETTLING_TIME_CLK configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RF_SETTLING_TIME_CLK configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
      if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_INFRA_STA_KEEP_ALIVE_PERIOD, pConfig->infraStaKeepAlivePeriod,
                       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_INFRA_STA_KEEP_ALIVE_PERIOD configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_INFRA_STA_KEEP_ALIVE_PERIOD configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
     if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_DYNAMIC_PS_POLL_VALUE, pConfig->dynamicPsPollValue,
                      NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
        fStatus = FALSE;
-<<<<<<< HEAD
-       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_DYNAMIC_PS_POLL_VALUE configuration info to CCM"  );
-=======
        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_DYNAMIC_PS_POLL_VALUE configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PS_NULLDATA_AP_RESP_TIMEOUT, pConfig->nNullDataApRespTimeout,
                NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
        fStatus = FALSE;
-<<<<<<< HEAD
-       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_PS_NULLDATA_DELAY_TIMEOUT configuration info to CCM"  );
-=======
        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_PS_NULLDATA_DELAY_TIMEOUT configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_AP_DATA_AVAIL_POLL_PERIOD, pConfig->apDataAvailPollPeriodInMs,
                NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
     {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_AP_DATA_AVAIL_POLL_PERIOD configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_AP_DATA_AVAIL_POLL_PERIOD configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_FRAGMENTATION_THRESHOLD, pConfig->FragmentationThreshold,
                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
     {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_FRAGMENTATION_THRESHOLD configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_FRAGMENTATION_THRESHOLD configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RTS_THRESHOLD, pConfig->RTSThreshold,
                         NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
     {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RTS_THRESHOLD configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_RTS_THRESHOLD configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_11D_ENABLED, pConfig->Is11dSupportEnabled,
                         NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
     {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_11D_ENABLED configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_11D_ENABLED configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_HEART_BEAT_THRESHOLD, pConfig->HeartbeatThresh24,
                         NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
     {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE,"Failure: Could not pass on WNI_CFG_HEART_BEAT_THRESHOLD configuration info to CCM"  );
-=======
         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_HEART_BEAT_THRESHOLD configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_AP_DATA_AVAIL_POLL_PERIOD, pConfig->apDataAvailPollPeriodInMs,
                NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE,"Failure: Could not pass on WNI_CFG_AP_DATA_AVAIL_POLL_PERIOD configuration info to CCM"  );
-=======
       hddLog(LOGE,"Failure: Could not pass on WNI_CFG_AP_DATA_AVAIL_POLL_PERIOD configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_CLOSE_LOOP,
@@ -5201,11 +3704,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
        ==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_CLOSE_LOOP to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_CLOSE_LOOP to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TX_PWR_CTRL_ENABLE,
@@ -5213,22 +3712,14 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
                    ==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_TX_PWR_CTRL_ENABLE to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_TX_PWR_CTRL_ENABLE to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_SHORT_GI_40MHZ,
       pConfig->ShortGI40MhzEnable, NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_SHORT_GI_40MHZ to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_SHORT_GI_40MHZ to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
 
@@ -5236,11 +3727,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_MC_ADDR_LIST to CCM");
-=======
         hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_MC_ADDR_LIST to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
 #ifdef WLAN_FEATURE_11AC
@@ -5262,11 +3749,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
                ==eHAL_STATUS_FAILURE)
            {
                fStatus = FALSE;
-<<<<<<< HEAD
-               hddLog(LOGE, "Could not pass on WNI_CFG_VHT_BASIC_MCS_SET to CCM");
-=======
                hddLog(LOGE, "Could not pass on WNI_CFG_VHT_BASIC_MCS_SET to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            }
 
            ccmCfgGetInt(pHddCtx->hHal, WNI_CFG_VHT_RX_MCS_MAP, &temp);
@@ -5277,11 +3760,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
                ==eHAL_STATUS_FAILURE)
            {
               fStatus = FALSE;
-<<<<<<< HEAD
-              hddLog(LOGE, "Could not pass on WNI_CFG_VHT_RX_MCS_MAP to CCM");
-=======
               hddLog(LOGE, "Could not pass on WNI_CFG_VHT_RX_MCS_MAP to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            }
 
            ccmCfgGetInt(pHddCtx->hHal, WNI_CFG_VHT_TX_MCS_MAP, &temp);
@@ -5292,33 +3771,8 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
                ==eHAL_STATUS_FAILURE)
            {
                fStatus = FALSE;
-<<<<<<< HEAD
-               hddLog(LOGE, "Could not pass on WNI_CFG_VHT_TX_MCS_MAP to CCM");
-           }
-=======
                hddLog(LOGE, "Could not pass on WNI_CFG_VHT_TX_MCS_MAP to CCM\n");
            }
-
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-           /* Currently shortGI40Mhz is used for shortGI80Mhz */
-           if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_VHT_SHORT_GI_80MHZ,
-               pConfig->ShortGI40MhzEnable, NULL, eANI_BOOLEAN_FALSE)
-               == eHAL_STATUS_FAILURE)
-           {
-               fStatus = FALSE;
-               hddLog(LOGE, "Could not pass WNI_VHT_SHORT_GI_80MHZ to CCM\n");
-           }
-<<<<<<< HEAD
-           if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_VHT_AMPDU_LEN_EXPONENT,
-               pConfig->gVhtMaxAmpduLenExp, NULL, eANI_BOOLEAN_FALSE)
-               ==eHAL_STATUS_FAILURE)
-           {
-               fStatus = FALSE;
-               hddLog(LOGE, "Could not pass on WNI_CFG_VHT_AMPDU_LEN_EXPONENT to CCM");
-           }
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        }
    }
 #endif
@@ -5327,11 +3781,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
         NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
      {
         fStatus = FALSE;
-<<<<<<< HEAD
-        hddLog(LOGE, "Could not pass on WNI_CFG_NUM_BUFF_ADVERT to CCM");
-=======
         hddLog(LOGE, "Could not pass on WNI_CFG_NUM_BUFF_ADVERT to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_HT_RX_STBC,
@@ -5339,23 +3789,6 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          ==eHAL_STATUS_FAILURE)
      {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE, "Could not pass on WNI_CFG_HT_RX_STBC to CCM");
-     }
-
-     ccmCfgGetInt(pHddCtx->hHal, WNI_CFG_HT_CAP_INFO, &temp32);
-     temp16 = temp32 & 0xffff;
-     htCapInfo = (tSirMacHTCapabilityInfo *)&temp16;
-     htCapInfo->rxSTBC = pConfig->enableRxSTBC;
-     temp32 = temp16;
-
-     if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_HT_CAP_INFO,
-                     temp32, NULL, eANI_BOOLEAN_FALSE)
-         ==eHAL_STATUS_FAILURE)
-     {
-         fStatus = FALSE;
-         hddLog(LOGE, "Could not pass on WNI_CFG_HT_CAP_INFO to CCM");
-=======
          hddLog(LOGE, "Could not pass on WNI_CFG_HT_RX_STBC to CCM\n");
      }
 
@@ -5368,7 +3801,6 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
      {
          fStatus = FALSE;
          hddLog(LOGE, "Could not pass on WNI_CFG_HT_CAP_INFO to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
      if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_VHT_RXSTBC,
@@ -5376,11 +3808,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          ==eHAL_STATUS_FAILURE)
      {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE, "Could not pass on WNI_CFG_VHT_RXSTBC to CCM");
-=======
          hddLog(LOGE, "Could not pass on WNI_CFG_VHT_RXSTBC to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 
 #ifdef WLAN_SOFTAP_VSTA_FEATURE
@@ -5398,11 +3826,7 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
          NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
      {
          fStatus = FALSE;
-<<<<<<< HEAD
-         hddLog(LOGE,"Failure: Could not pass on WNI_CFG_ASSOC_STA_LIMIT configuration info to CCM"  );
-=======
          hddLog(LOGE,"Failure: Could not pass on WNI_CFG_ASSOC_STA_LIMIT configuration info to CCM\n"  );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      }
 #endif
    if(ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_LPWR_IMG_TRANSITION,
@@ -5410,22 +3834,14 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
        ==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_LPWR_IMG_TRANSITION to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_LPWR_IMG_TRANSITION to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_MCC_ADAPTIVE_SCHED, pConfig->enableMCCAdaptiveScheduler,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
    {
       fStatus = FALSE;
-<<<<<<< HEAD
-      hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_MCC_ADAPTIVE_SCHED to CCM");
-=======
       hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_MCC_ADAPTIVE_SCHED to CCM\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    }
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_DISABLE_LDPC_WITH_TXBF_AP, pConfig->disableLDPCWithTxbfAP,
       NULL, eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
@@ -5471,19 +3887,6 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
       fStatus = FALSE;
       hddLog(LOGE, "Could not pass on WNI_CFG_TDLS_QOS_WMM_UAPSD_MASK to CCM");
    }
-<<<<<<< HEAD
-
-   if (TRUE == pConfig->fEnableTDLSScanCoexSupport)
-   {
-      /* TDLSScanCoexistance feature is supported when the DUT acts as only
-       * the Sleep STA and hence explicitly disable the BufferSta capability
-       * on the DUT. DUT's Buffer STA capability is explicitly disabled to
-       * ensure that the TDLS peer shall not go to TDLS power save mode.
-       */
-      pConfig->fEnableTDLSBufferSta = FALSE;
-   }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TDLS_BUF_STA_ENABLED,
                     pConfig->fEnableTDLSBufferSta, NULL,
                     eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
@@ -5505,26 +3908,6 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
       fStatus = FALSE;
       hddLog(LOGE, "Could not pass on WNI_CFG_TDLS_RX_FRAME_THRESHOLD to CCM");
    }
-<<<<<<< HEAD
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TDLS_OFF_CHANNEL_ENABLED,
-                    pConfig->fEnableTDLSOffChannel, NULL,
-                    eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_TDLS_BUF_STA_ENABLED to CCM\n");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_TDLS_WMM_MODE_ENABLED,
-                    pConfig->fEnableTDLSWmmMode, NULL,
-                    eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_TDLS_WMM_MODE_ENABLED to CCM\n");
-   }
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
    if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_ADAPT_RX_DRAIN,
@@ -5552,261 +3935,6 @@ v_BOOL_t hdd_update_config_dat( hdd_context_t *pHddCtx )
       hddLog(LOGE, "Could not pass on WNI_CFG_ANTENNA_DIVESITY to CCM");
    }
 
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ATH_DISABLE,
-                    pConfig->cfgAthDisable, NULL,
-                    eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_ATH_DISABLE to CCM");
-   }
-
-<<<<<<< HEAD
-  if (ccmCfgSetInt(pHddCtx->hHal,
-=======
-   if (ccmCfgSetInt(pHddCtx->hHal,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                    WNI_CFG_BTC_ACTIVE_WLAN_LEN,
-                    pConfig->cfgBtcActiveWlanLen,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on WNI_BTC_ACTIVE_WLAN_LEN to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_ACTIVE_BT_LEN,
-                    pConfig->cfgBtcActiveBtLen,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on WNI_BTC_ACTIVE_BT_LEN to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_SAP_ACTIVE_WLAN_LEN,
-                    pConfig->cfgBtcSapActiveWlanLen,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on WNI_BTC_ACTIVE_WLAN_LEN to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_SAP_ACTIVE_BT_LEN,
-                    pConfig->cfgBtcSapActiveBtLen,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on WNI_BTC_ACTIVE_BT_LEN to CCM");
-   }
-<<<<<<< HEAD
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ASD_PROBE_INTERVAL,
-                    pConfig->gAsdProbeInterval, NULL,
-                    eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_ASD_PROBE_INTERVAL to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ASD_TRIGGER_THRESHOLD,
-                    pConfig->gAsdTriggerThreshold, NULL,
-                    eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_ASD_TRIGGER_THRESHOLD to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ASD_RTT_RSSI_HYST_THRESHOLD,
-                    pConfig->gAsdRTTRssiHystThreshold, NULL,
-                    eANI_BOOLEAN_FALSE)==eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_ASD_RSSI_HYST_THRESHOLD to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_DEBUG_P2P_REMAIN_ON_CHANNEL,
-                    pConfig->debugP2pRemainOnChannel,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE,
-              "Could not pass on WNI_CFG_DEBUG_P2P_REMAIN_ON_CHANNEL to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_CTS2S_DURING_SCO,
-                    pConfig->cfgBtcCTS2SduringSCO,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on WNI_CFG_BTC_CTS2S_DURING_SCO to CCM");
-   }
-
-   if(ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_DEFAULT_RATE_INDEX_24GHZ,
-                    defHddRateToDefCfgRate(pConfig->defaultRateIndex24Ghz),
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on WNI_CFG_DEFAULT_RATE_INDEX_24GHZ to"
-                    " CCM\n");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RA_FILTER_ENABLE, pConfig->cfgRAFilterEnable,
-      NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_RA_FILTER_ENABLE to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_RA_RATE_LIMIT_INTERVAL, pConfig->cfgRARateLimitInterval,
-      NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_RA_FILTER_ENABLE to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_FATAL_HID_NSNIFF_BLK_GUIDANCE,
-                    pConfig->cfgBtcFatalHidnSniffBlkGuidance,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-			       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on"
-                     "WNI_CFG_BTC_FATAL_HID_NSNIFF_BLK_GUIDANCE to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_CRITICAL_HID_NSNIFF_BLK_GUIDANCE,
-                    pConfig->cfgBtcCriticalHidnSniffBlkGuidance,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-			       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on"
-                    "WNI_CFG_BTC_CRITICAL_HID_NSNIFF_BLK_GUIDANCE to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_DYN_A2DP_TX_QUEUE_THOLD,
-                    pConfig->cfgBtcA2dpTxQueueThold,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-			       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on"
-                    "WNI_CFG_BTC_DYN_A2DP_TX_QUEUE_THOLD to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal,
-                    WNI_CFG_BTC_DYN_OPP_TX_QUEUE_THOLD,
-                    pConfig->cfgBtcOppTxQueueThold,
-                    NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-			       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on"
-                    "WNI_CFG_BTC_DYN_OPP_TX_QUEUE_THOLD to CCM");
-   }
-
-#ifdef WLAN_FEATURE_11W
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PMF_SA_QUERY_MAX_RETRIES,
-                    pConfig->pmfSaQueryMaxRetries, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_SA_QUERY_MAX_RETRIES to CCM");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_PMF_SA_QUERY_RETRY_INTERVAL,
-                    pConfig->pmfSaQueryRetryInterval, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_SA_QUERY_RETRY_INTERVAL to CCM");
-   }
-#endif
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_UAPSD_CONSEC_SP,
-                    pConfig->maxUapsdConsecSP, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_UAPSD_CONSEC_SP");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_UAPSD_CONSEC_RX_CNT,
-                    pConfig->maxUapsdConsecRxCnt, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_UAPSD_CONSEC_RX_CNT");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_UAPSD_CONSEC_TX_CNT,
-                    pConfig->maxUapsdConsecTxCnt, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_UAPSD_CONSEC_TX_CNT");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_UAPSD_CONSEC_TX_CNT_MEAS_WINDOW,
-                    pConfig->uapsdConsecTxCntMeasWindow, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_UAPSD_CONSEC_TX_CNT_MEAS_WINDOW");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_UAPSD_CONSEC_RX_CNT_MEAS_WINDOW,
-                    pConfig->uapsdConsecRxCntMeasWindow, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_UAPSD_CONSEC_RX_CNT_MEAS_WINDOW");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_PSPOLL_IN_WMM_UAPSD_PS_MODE,
-                    pConfig->maxPsPollInWmmUapsdMode, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_PSPOLL_IN_WMM_UAPSD_PS_MODE");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_MAX_UAPSD_INACTIVITY_INTERVALS,
-                    pConfig->maxUapsdInactivityIntervals, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_MAX_UAPSD_INACTIVITY_INTERVALS");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_DYNAMIC_WMMPS,
-                    pConfig->enableDynamicWMMPS, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_ENABLE_DYNAMIC_WMMPS");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_BURST_MODE_BE_TXOP_VALUE,
-                    pConfig->burstModeTXOPValue, NULL,
-                    eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-      fStatus = FALSE;
-      hddLog(LOGE, "Could not pass on WNI_CFG_BURST_MODE_BE_TXOP_VALUE ");
-   }
-
-   if (ccmCfgSetInt(pHddCtx->hHal, WNI_CFG_ENABLE_DYNAMIC_RA_START_RATE,
-               pConfig->enableDynamicRAStartRate,
-               NULL, eANI_BOOLEAN_FALSE) == eHAL_STATUS_FAILURE)
-   {
-       fStatus = FALSE;
-       hddLog(LOGE, "Could not pass on"
-               "WNI_CFG_ENABLE_DYNAMIC_RA_START_RATE to CCM");
-   }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    return fStatus;
 }
 
@@ -5827,100 +3955,19 @@ VOS_STATUS hdd_set_sme_config( hdd_context_t *pHddCtx )
 {
    VOS_STATUS status = VOS_STATUS_SUCCESS;
    eHalStatus halStatus;
-<<<<<<< HEAD
-   tpSmeConfigParams smeConfig;
-
-   hdd_config_t *pConfig = pHddCtx->cfg_ini;
-
-   smeConfig = vos_mem_malloc(sizeof(tSmeConfigParams));
-    if (NULL == smeConfig)
-   {
-       VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR, "%s smeConfig allocation failed",__func__);
-       return eHAL_STATUS_FAILED_ALLOC;
-   }
-   vos_mem_zero( smeConfig, sizeof( tSmeConfigParams ) );
-
-   VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH,
-              "%s bWmmIsEnabled=%d 802_11e_enabled=%d dot11Mode=%d", __func__,
-=======
    tSmeConfigParams smeConfig;
 
    hdd_config_t *pConfig = pHddCtx->cfg_ini;
-
 
    vos_mem_zero( &smeConfig, sizeof( smeConfig ) );
 
    VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO_HIGH,
               "%s bWmmIsEnabled=%d 802_11e_enabled=%d dot11Mode=%d\n", __func__,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
               pConfig->WmmMode, pConfig->b80211eIsEnabled, pConfig->dot11Mode);
 
    // Config params obtained from the registry
-
-<<<<<<< HEAD
-   smeConfig->csrConfig.RTSThreshold             = pConfig->RTSThreshold;
-   smeConfig->csrConfig.FragmentationThreshold   = pConfig->FragmentationThreshold;
-   smeConfig->csrConfig.shortSlotTime            = pConfig->ShortSlotTimeEnabled;
-   smeConfig->csrConfig.Is11dSupportEnabled      = pConfig->Is11dSupportEnabled;
-   smeConfig->csrConfig.HeartbeatThresh24        = pConfig->HeartbeatThresh24;
-
-   smeConfig->csrConfig.phyMode                  = hdd_cfg_xlate_to_csr_phy_mode ( pConfig->dot11Mode );
-
-   if( (pConfig->dot11Mode == eHDD_DOT11_MODE_abg) ||
-       (pConfig->dot11Mode == eHDD_DOT11_MODE_11b) ||
-       (pConfig->dot11Mode == eHDD_DOT11_MODE_11g) ||
-       (pConfig->dot11Mode == eHDD_DOT11_MODE_11b_ONLY) ||
-       (pConfig->dot11Mode == eHDD_DOT11_MODE_11g_ONLY))
-   {
-       smeConfig->csrConfig.channelBondingMode24GHz  = 0;
-       smeConfig->csrConfig.channelBondingMode5GHz  = 0;
-   }
-   else
-   {
-       smeConfig->csrConfig.channelBondingMode24GHz   = pConfig->nChannelBondingMode24GHz;
-       smeConfig->csrConfig.channelBondingMode5GHz   = pConfig->nChannelBondingMode5GHz;
-   }
-   smeConfig->csrConfig.TxRate                   = pConfig->TxRate;
-   smeConfig->csrConfig.nScanResultAgeCount      = pConfig->ScanResultAgeCount;
-   smeConfig->csrConfig.scanAgeTimeNCNPS         = pConfig->nScanAgeTimeNCNPS;
-   smeConfig->csrConfig.scanAgeTimeNCPS          = pConfig->nScanAgeTimeNCPS;
-   smeConfig->csrConfig.scanAgeTimeCNPS          = pConfig->nScanAgeTimeCNPS;
-   smeConfig->csrConfig.scanAgeTimeCPS           = pConfig->nScanAgeTimeCPS;
-   smeConfig->csrConfig.AdHocChannel24           = pConfig->OperatingChannel;
-   smeConfig->csrConfig.fEnforce11dChannels      = pConfig->fEnforce11dChannels;
-   smeConfig->csrConfig.fSupplicantCountryCodeHasPriority     = pConfig->fSupplicantCountryCodeHasPriority;
-   smeConfig->csrConfig.fEnforceCountryCodeMatch = pConfig->fEnforceCountryCodeMatch;
-   smeConfig->csrConfig.fEnforceDefaultDomain    = pConfig->fEnforceDefaultDomain;
-   smeConfig->csrConfig.bCatRssiOffset           = pConfig->nRssiCatGap;
-   smeConfig->csrConfig.vccRssiThreshold         = pConfig->nVccRssiTrigger;
-   smeConfig->csrConfig.vccUlMacLossThreshold    = pConfig->nVccUlMacLossThreshold;
-   smeConfig->csrConfig.nRoamingTime             = pConfig->nRoamingTime;
-   smeConfig->csrConfig.IsIdleScanEnabled        = pConfig->nEnableIdleScan;
-   smeConfig->csrConfig.nInitialDwellTime        = pConfig->nInitialDwellTime;
-   smeConfig->csrConfig.nActiveMaxChnTime        = pConfig->nActiveMaxChnTime;
-   smeConfig->csrConfig.nActiveMinChnTime        = pConfig->nActiveMinChnTime;
-   smeConfig->csrConfig.nPassiveMaxChnTime       = pConfig->nPassiveMaxChnTime;
-   smeConfig->csrConfig.nPassiveMinChnTime       = pConfig->nPassiveMinChnTime;
-   smeConfig->csrConfig.nActiveMaxChnTimeBtc     = pConfig->nActiveMaxChnTimeBtc;
-   smeConfig->csrConfig.nActiveMinChnTimeBtc     = pConfig->nActiveMinChnTimeBtc;
-   smeConfig->csrConfig.disableAggWithBtc        = pConfig->disableAggWithBtc;
-#ifdef WLAN_AP_STA_CONCURRENCY
-   smeConfig->csrConfig.nActiveMaxChnTimeConc    = pConfig->nActiveMaxChnTimeConc;
-   smeConfig->csrConfig.nActiveMinChnTimeConc    = pConfig->nActiveMinChnTimeConc;
-   smeConfig->csrConfig.nPassiveMaxChnTimeConc   = pConfig->nPassiveMaxChnTimeConc;
-   smeConfig->csrConfig.nPassiveMinChnTimeConc   = pConfig->nPassiveMinChnTimeConc;
-   smeConfig->csrConfig.nRestTimeConc            = pConfig->nRestTimeConc;
-   smeConfig->csrConfig.nNumStaChanCombinedConc  = pConfig->nNumStaChanCombinedConc;
-   smeConfig->csrConfig.nNumP2PChanCombinedConc  = pConfig->nNumP2PChanCombinedConc;
-
-#endif
-   smeConfig->csrConfig.Is11eSupportEnabled      = pConfig->b80211eIsEnabled;
-   smeConfig->csrConfig.WMMSupportMode           = pConfig->WmmMode;
-
-#if defined WLAN_FEATURE_VOWIFI
-   smeConfig->rrmConfig.rrmEnabled = pConfig->fRrmEnable;
-   smeConfig->rrmConfig.maxRandnInterval = pConfig->nRrmRandnIntvl;
-=======
+   if (is_crda_regulatory_entry_valid() == VOS_TRUE)
+       sme_setRegInfo(pHddCtx->hHal, pConfig->crdaDefaultCountryCode);
    smeConfig.csrConfig.RTSThreshold             = pConfig->RTSThreshold;
    smeConfig.csrConfig.FragmentationThreshold   = pConfig->FragmentationThreshold;
    smeConfig.csrConfig.shortSlotTime            = pConfig->ShortSlotTimeEnabled;
@@ -5970,47 +4017,10 @@ VOS_STATUS hdd_set_sme_config( hdd_context_t *pHddCtx )
 #if defined WLAN_FEATURE_VOWIFI
    smeConfig.rrmConfig.rrmEnabled = pConfig->fRrmEnable;
    smeConfig.rrmConfig.maxRandnInterval = pConfig->nRrmRandnIntvl;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
    //Remaining config params not obtained from registry
    // On RF EVB beacon using channel 1.
 #ifdef WLAN_FEATURE_11AC
-<<<<<<< HEAD
-    smeConfig->csrConfig.nVhtChannelWidth = pConfig->vhtChannelWidth;
-    smeConfig->csrConfig.enableTxBF = pConfig->enableTxBF;
-    smeConfig->csrConfig.txBFCsnValue = pConfig->txBFCsnValue;
-    smeConfig->csrConfig.enableVhtFor24GHz = pConfig->enableVhtFor24GHzBand;
-    /* Consider Mu-beamformee only if SU-beamformee is enabled */
-    if ( pConfig->enableTxBF )
-        smeConfig->csrConfig.enableMuBformee = pConfig->enableMuBformee;
-    else
-        smeConfig->csrConfig.enableMuBformee = 0;
-#endif
-   smeConfig->csrConfig.AdHocChannel5G            = pConfig->AdHocChannel5G;
-   smeConfig->csrConfig.AdHocChannel24            = pConfig->AdHocChannel24G;
-   smeConfig->csrConfig.ProprietaryRatesEnabled   = 0;
-   smeConfig->csrConfig.HeartbeatThresh50         = 40;
-   smeConfig->csrConfig.bandCapability            = pConfig->nBandCapability;
-   if (pConfig->nBandCapability == eCSR_BAND_24)
-   {
-       smeConfig->csrConfig.Is11hSupportEnabled       = 0;
-   } else {
-       smeConfig->csrConfig.Is11hSupportEnabled       = pConfig->Is11hSupportEnabled;
-   }
-   smeConfig->csrConfig.cbChoice                  = 0;
-   smeConfig->csrConfig.bgScanInterval            = 0;
-   smeConfig->csrConfig.eBand                     = pConfig->nBandCapability;
-   smeConfig->csrConfig.nTxPowerCap = pConfig->nTxPowerCap;
-   smeConfig->csrConfig.fEnableBypass11d          = pConfig->enableBypass11d;
-   smeConfig->csrConfig.fEnableDFSChnlScan        = pConfig->enableDFSChnlScan;
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-   smeConfig->csrConfig.nRoamPrefer5GHz           = pConfig->nRoamPrefer5GHz;
-   smeConfig->csrConfig.nRoamIntraBand            = pConfig->nRoamIntraBand;
-   smeConfig->csrConfig.nProbes                   = pConfig->nProbes;
-   smeConfig->csrConfig.nRoamScanHomeAwayTime     = pConfig->nRoamScanHomeAwayTime;
-#endif
-   smeConfig->csrConfig.fFirstScanOnly2GChnl      = pConfig->enableFirstScan2GOnly;
-=======
     smeConfig.csrConfig.nVhtChannelWidth = pConfig->vhtChannelWidth;
     smeConfig.csrConfig.enableTxBF = pConfig->enableTxBF;
     smeConfig.csrConfig.txBFCsnValue = pConfig->txBFCsnValue;
@@ -6037,19 +4047,24 @@ VOS_STATUS hdd_set_sme_config( hdd_context_t *pHddCtx )
    smeConfig.csrConfig.nRoamPrefer5GHz           = pConfig->nRoamPrefer5GHz;
    smeConfig.csrConfig.nRoamIntraBand            = pConfig->nRoamIntraBand;
    smeConfig.csrConfig.nProbes                   = pConfig->nProbes;
+
+   if (pConfig->nRoamScanHomeAwayTime < (pConfig->nNeighborScanMaxChanTime + (2 * HDD_ROAM_SCAN_CHANNEL_SWITCH_TIME)))
+   {
+       VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
+              "%s: Invalid config, Home away time(%d) is less than twice RF switching time + channel max time(%d)"
+              " Hence enforcing home away time to disable (0)",
+              __func__, pConfig->nRoamScanHomeAwayTime,
+              (pConfig->nNeighborScanMaxChanTime + (2 * HDD_ROAM_SCAN_CHANNEL_SWITCH_TIME)));
+       pConfig->nRoamScanHomeAwayTime = 0;
+   }
    smeConfig.csrConfig.nRoamScanHomeAwayTime     = pConfig->nRoamScanHomeAwayTime;
 #endif
    smeConfig.csrConfig.fFirstScanOnly2GChnl      = pConfig->enableFirstScan2GOnly;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    //FIXME 11d config is hardcoded
    if ( VOS_STA_SAP_MODE != hdd_get_conparam())
    {
-<<<<<<< HEAD
-      smeConfig->csrConfig.Csr11dinfo.Channels.numChannels = 0;
-=======
       smeConfig.csrConfig.Csr11dinfo.Channels.numChannels = 0;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
       /* if there is a requirement that HDD will control the default
        * channel list & country code (say from .ini file) we need to
@@ -6063,23 +4078,6 @@ VOS_STATUS hdd_set_sme_config( hdd_context_t *pHddCtx )
 
       if (memcmp(pConfig->apCntryCode, CFG_AP_COUNTRY_CODE_DEFAULT, 3) != 0)
          sme_setRegInfo(pHddCtx->hHal, pConfig->apCntryCode);
-<<<<<<< HEAD
-      sme_set11dinfo(pHddCtx->hHal, smeConfig);
-   }
-   hdd_set_power_save_config(pHddCtx, smeConfig);
-   hdd_set_btc_config(pHddCtx);
-
-#ifdef WLAN_FEATURE_VOWIFI_11R
-   smeConfig->csrConfig.csr11rConfig.IsFTResourceReqSupported = pConfig->fFTResourceReqSupported;
-#endif
-#ifdef FEATURE_WLAN_LFR
-   smeConfig->csrConfig.isFastRoamIniFeatureEnabled = pConfig->isFastRoamIniFeatureEnabled;
-   smeConfig->csrConfig.MAWCEnabled = pConfig->MAWCEnabled;
-#endif
-#ifdef FEATURE_WLAN_ESE
-   smeConfig->csrConfig.isEseIniFeatureEnabled = pConfig->isEseIniFeatureEnabled;
-   if( pConfig->isEseIniFeatureEnabled )
-=======
       sme_set11dinfo(pHddCtx->hHal, &smeConfig);
    }
    hdd_set_power_save_config(pHddCtx, &smeConfig);
@@ -6090,78 +4088,18 @@ VOS_STATUS hdd_set_sme_config( hdd_context_t *pHddCtx )
 #endif
 #ifdef FEATURE_WLAN_LFR
    smeConfig.csrConfig.isFastRoamIniFeatureEnabled = pConfig->isFastRoamIniFeatureEnabled;
-   smeConfig.csrConfig.MAWCEnabled = pConfig->MAWCEnabled;
 #endif
 #ifdef FEATURE_WLAN_CCX
    smeConfig.csrConfig.isCcxIniFeatureEnabled = pConfig->isCcxIniFeatureEnabled;
    if( pConfig->isCcxIniFeatureEnabled )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    {
        pConfig->isFastTransitionEnabled = TRUE;
    }
 #endif
-<<<<<<< HEAD
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-   smeConfig->csrConfig.isFastTransitionEnabled = pConfig->isFastTransitionEnabled;
-   smeConfig->csrConfig.RoamRssiDiff = pConfig->RoamRssiDiff;
-   smeConfig->csrConfig.nImmediateRoamRssiDiff = pConfig->nImmediateRoamRssiDiff;
-   smeConfig->csrConfig.isWESModeEnabled = pConfig->isWESModeEnabled;
-#endif
-#ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
-   smeConfig->csrConfig.isRoamOffloadScanEnabled = pConfig->isRoamOffloadScanEnabled;
-   smeConfig->csrConfig.bFastRoamInConIniFeatureEnabled = pConfig->bFastRoamInConIniFeatureEnabled;
-
-   if (0 == smeConfig->csrConfig.isRoamOffloadScanEnabled)
-   {
-       /* Disable roaming in concurrency if roam scan offload is disabled */
-       smeConfig->csrConfig.bFastRoamInConIniFeatureEnabled = 0;
-   }
-#endif
-#ifdef WLAN_FEATURE_NEIGHBOR_ROAMING
-   smeConfig->csrConfig.neighborRoamConfig.nNeighborReassocRssiThreshold = pConfig->nNeighborReassocRssiThreshold;
-   smeConfig->csrConfig.neighborRoamConfig.nNeighborLookupRssiThreshold = pConfig->nNeighborLookupRssiThreshold;
-   smeConfig->csrConfig.neighborRoamConfig.nNeighborScanMaxChanTime = pConfig->nNeighborScanMaxChanTime;
-   smeConfig->csrConfig.neighborRoamConfig.nNeighborScanMinChanTime = pConfig->nNeighborScanMinChanTime;
-   smeConfig->csrConfig.neighborRoamConfig.nNeighborScanTimerPeriod = pConfig->nNeighborScanPeriod;
-   smeConfig->csrConfig.neighborRoamConfig.nMaxNeighborRetries = pConfig->nMaxNeighborReqTries;
-   smeConfig->csrConfig.neighborRoamConfig.nNeighborResultsRefreshPeriod = pConfig->nNeighborResultsRefreshPeriod;
-   smeConfig->csrConfig.neighborRoamConfig.nEmptyScanRefreshPeriod = pConfig->nEmptyScanRefreshPeriod;
-   //Making Forced 5G roaming to tightly coupled with the gEnableFirstScan2GOnly=1 only.
-   if(pConfig->enableFirstScan2GOnly)
-   {
-       smeConfig->csrConfig.neighborRoamConfig.nNeighborInitialForcedRoamTo5GhEnable = pConfig->nNeighborInitialForcedRoamTo5GhEnable;
-   }
-   hdd_string_to_u8_array( pConfig->neighborScanChanList,
-                                        smeConfig->csrConfig.neighborRoamConfig.neighborScanChanList.channelList,
-                                        &smeConfig->csrConfig.neighborRoamConfig.neighborScanChanList.numChannels,
-                                        WNI_CFG_VALID_CHANNEL_LIST_LEN );
-#endif
-
-   smeConfig->csrConfig.addTSWhenACMIsOff = pConfig->AddTSWhenACMIsOff;
-   smeConfig->csrConfig.fValidateList = pConfig->fValidateScanList;
-   smeConfig->csrConfig.allowDFSChannelRoam = pConfig->allowDFSChannelRoam;
-   //Enable/Disable MCC
-   smeConfig->csrConfig.fEnableMCCMode = pConfig->enableMCC;
-   smeConfig->csrConfig.fAllowMCCGODiffBI = pConfig->allowMCCGODiffBI;
-
-   //Scan Results Aging Time out value
-   smeConfig->csrConfig.scanCfgAgingTime = pConfig->scanAgingTimeout;
-
-   smeConfig->csrConfig.enableTxLdpc = pConfig->enableTxLdpc;
-
-   smeConfig->csrConfig.isAmsduSupportInAMPDU = pConfig->isAmsduSupportInAMPDU;
-   smeConfig->csrConfig.nSelect5GHzMargin = pConfig->nSelect5GHzMargin;
-   smeConfig->csrConfig.initialScanSkipDFSCh = pConfig->initialScanSkipDFSCh;
-
-   smeConfig->csrConfig.isCoalesingInIBSSAllowed =
-                       pHddCtx->cfg_ini->isCoalesingInIBSSAllowed;
-
-=======
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
    smeConfig.csrConfig.isFastTransitionEnabled = pConfig->isFastTransitionEnabled;
    smeConfig.csrConfig.RoamRssiDiff = pConfig->RoamRssiDiff;
    smeConfig.csrConfig.nImmediateRoamRssiDiff = pConfig->nImmediateRoamRssiDiff;
-   smeConfig.csrConfig.isWESModeEnabled = pConfig->isWESModeEnabled;
 #endif
 #ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
    smeConfig.csrConfig.isRoamOffloadScanEnabled = pConfig->isRoamOffloadScanEnabled;
@@ -6203,32 +4141,9 @@ VOS_STATUS hdd_set_sme_config( hdd_context_t *pHddCtx )
    // Prop IE enabling/disabling option
    smeConfig.csrConfig.enableOxygenNwk = pConfig->enableOxygenNwk;
 
-   smeConfig.csrConfig.isAmsduSupportInAMPDU = pConfig->isAmsduSupportInAMPDU;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-
    /* update SSR config */
    sme_UpdateEnableSSR((tHalHandle)(pHddCtx->hHal), pHddCtx->cfg_ini->enableSSR);
    /* Update the Directed scan offload setting */
-<<<<<<< HEAD
-   smeConfig->fScanOffload =  pHddCtx->cfg_ini->fScanOffload;
-
-   smeConfig->csrConfig.scanBandPreference =
-                     pHddCtx->cfg_ini->acsScanBandPreference;
-
-   smeConfig->fEnableDebugLog = pHddCtx->cfg_ini->gEnableDebugLog;
-   smeConfig->csrConfig.sendDeauthBeforeCon = pConfig->sendDeauthBeforeCon;
-
-   smeConfig->fDeferIMPSTime = pHddCtx->cfg_ini->deferImpsTime;
-
-   halStatus = sme_UpdateConfig( pHddCtx->hHal, smeConfig);
-   if ( !HAL_STATUS_SUCCESS( halStatus ) )
-   {
-      status = VOS_STATUS_E_FAILURE;
-      hddLog(LOGE, "sme_UpdateConfig() return failure %d", halStatus);
-   }
-
-   vos_mem_free(smeConfig);
-=======
    smeConfig.fScanOffload =  pHddCtx->cfg_ini->fScanOffload;
 
    halStatus = sme_UpdateConfig( pHddCtx->hHal, &smeConfig);
@@ -6238,7 +4153,6 @@ VOS_STATUS hdd_set_sme_config( hdd_context_t *pHddCtx )
    }
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    return status;
 }
 
@@ -6365,32 +4279,20 @@ VOS_STATUS hdd_execute_config_command(hdd_context_t *pHddCtx, char *command)
    switch (pRegEntry->RegType)
    {
    case WLAN_PARAM_Integer:
-<<<<<<< HEAD
-      rv = kstrtou32(value_str, 10, &value);
-=======
       rv = kstrtoul(value_str, 10, &value);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       if (rv < 0)
           goto done;
       if (value < pRegEntry->VarMin)
       {
          // out of range
-<<<<<<< HEAD
-         hddLog(LOGE, "%s: invalid command, value %u < min value %lu",
-=======
          hddLog(LOGE, "%s: invalid command, value %u < min value %u",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, value, pRegEntry->VarMin);
          goto done;
       }
       if (value > pRegEntry->VarMax)
       {
          // out of range
-<<<<<<< HEAD
-         hddLog(LOGE, "%s: invalid command, value %u > max value %lu",
-=======
          hddLog(LOGE, "%s: invalid command, value %u > max value %u",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, value, pRegEntry->VarMax);
          goto done;
       }
@@ -6398,32 +4300,20 @@ VOS_STATUS hdd_execute_config_command(hdd_context_t *pHddCtx, char *command)
       break;
 
    case WLAN_PARAM_HexInteger:
-<<<<<<< HEAD
-      rv = kstrtou32(value_str, 16, &value);
-=======
       rv = kstrtoul(value_str, 16, &value);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       if (rv < 0)
          goto done;
       if (value < pRegEntry->VarMin)
       {
          // out of range
-<<<<<<< HEAD
-         hddLog(LOGE, "%s: invalid command, value %x < min value %lx",
-=======
          hddLog(LOGE, "%s: invalid command, value %x < min value %x",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, value, pRegEntry->VarMin);
          goto done;
       }
       if (value > pRegEntry->VarMax)
       {
          // out of range
-<<<<<<< HEAD
-         hddLog(LOGE, "%s: invalid command, value %x > max value %lx",
-=======
          hddLog(LOGE, "%s: invalid command, value %x > max value %x",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, value, pRegEntry->VarMax);
          goto done;
       }
@@ -6431,11 +4321,7 @@ VOS_STATUS hdd_execute_config_command(hdd_context_t *pHddCtx, char *command)
       break;
 
    case WLAN_PARAM_SignedInteger:
-<<<<<<< HEAD
-      rv = kstrtos32(value_str, 10, &svalue);
-=======
       rv = kstrtol(value_str, 10, &svalue);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       if (rv < 0)
          goto done;
       if (svalue < (v_S31_t)pRegEntry->VarMin)
@@ -6462,11 +4348,7 @@ VOS_STATUS hdd_execute_config_command(hdd_context_t *pHddCtx, char *command)
          // too big
          hddLog(LOGE,
                 "%s: invalid command, string [%s] length "
-<<<<<<< HEAD
-                "%zu exceeds maximum length %u",
-=======
                 "%u exceeds maximum length %u",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, value_str,
                 len_value_str, (pRegEntry->VarSize - 1));
          goto done;
@@ -6482,11 +4364,7 @@ VOS_STATUS hdd_execute_config_command(hdd_context_t *pHddCtx, char *command)
          // out of range
          hddLog(LOGE,
                 "%s: invalid command, MAC address [%s] length "
-<<<<<<< HEAD
-                "%zu is not expected length %u",
-=======
                 "%u is not expected length %u",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, value_str,
                 len_value_str, (VOS_MAC_ADDR_SIZE * 2));
          goto done;

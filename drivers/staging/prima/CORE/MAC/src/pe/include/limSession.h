@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( __LIM_SESSION_H )
@@ -120,19 +108,11 @@ typedef struct sPESession           // Added to Support BT-AMP
     tpSirSmeJoinReq         pLimJoinReq;            // handle to sme join req
     tpSirSmeJoinReq         pLimReAssocReq;         //handle to sme reassoc req
     tpLimMlmJoinReq         pLimMlmJoinReq;         //handle to MLM join Req
-<<<<<<< HEAD
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-=======
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     void                    *pLimMlmReassocRetryReq; //keep reasoc req for retry
 #endif
     void                    *pLimMlmReassocReq;      //handle to MLM reassoc Req
     tANI_U16                channelChangeReasonCode;
-<<<<<<< HEAD
-    tANI_U16                channelChangeCSA;        // channel change flag for CSA
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U8                 dot11mode;
     tANI_U8                 htCapability;
     /* Supported Channel Width Set: 0-20MHz 1 - 40MHz */
@@ -212,11 +192,7 @@ typedef struct sPESession           // Added to Support BT-AMP
     tANI_U32                RICDataLen;             //Used to store the Ric data received in the assoc response
     tANI_U8                 *ricData;
 #endif
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-=======
 #ifdef FEATURE_WLAN_CCX    
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U32                tspecLen;               //Used to store the TSPEC IEs received in the assoc response
     tANI_U8                 *tspecIes;
 #endif
@@ -305,19 +281,11 @@ typedef struct sPESession           // Added to Support BT-AMP
     tAniBool            is11Rconnection;
 #endif
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-    tAniBool            isESEconnection;
-    tEsePEContext       eseContext;
-#endif
-#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
-=======
 #ifdef FEATURE_WLAN_CCX
     tAniBool            isCCXconnection;
     tCcxPEContext       ccxContext;
 #endif
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tAniBool            isFastTransitionEnabled;
 #endif
 #ifdef FEATURE_WLAN_LFR
@@ -357,10 +325,6 @@ typedef struct sPESession           // Added to Support BT-AMP
     tANI_U8    apCenterChan;
     tANI_U8    apChanWidth;
     tANI_U8    txBFIniFeatureEnabled;
-<<<<<<< HEAD
-    tANI_U8    txMuBformee;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
     tANI_U8            spectrumMgtEnabled;
     /* *********************11H related*****************************/
@@ -386,34 +350,13 @@ typedef struct sPESession           // Added to Support BT-AMP
     tANI_U16  gLimNumOfCurrentSTAs;
 #ifdef FEATURE_WLAN_TDLS
     tANI_U32  peerAIDBitmap[2];
-<<<<<<< HEAD
-    tANI_BOOLEAN tdlsChanSwitProhibited;
-#endif
-    tANI_BOOLEAN fWaitForProbeRsp;
-    tANI_BOOLEAN fIgnoreCapsChange;
-=======
 #endif
     tANI_BOOLEAN fWaitForProbeRsp;
     tANI_BOOLEAN fIgnoreCapsChange;
     tANI_U8    oxygenNwkIniFeatureEnabled;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-    tANI_BOOLEAN fDeauthReceived;
 #ifdef FEATURE_WLAN_DIAG_SUPPORT_LIM
     tANI_S8 rssi;
 #endif
-    tANI_U8 isAmsduSupportInAMPDU;
-<<<<<<< HEAD
-    tANI_U8 isCoalesingInIBSSAllowed;
-    tANI_BOOLEAN isCiscoVendorAP;
-    /* To hold OBSS Scan IE Parameters */
-    tSirOBSSHT40Param obssHT40ScanParam;
-    /* flag to indicate country code in beacon */
-    tANI_U8  countryInfoPresent;
-    /*  DSCP to UP mapping for HS 2.0 */
-    tSirQosMapSet QosMapSet;
-    tANI_U8  isKeyInstalled;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }tPESession, *tpPESession;
 
 #define LIM_MAX_ACTIVE_SESSIONS 4

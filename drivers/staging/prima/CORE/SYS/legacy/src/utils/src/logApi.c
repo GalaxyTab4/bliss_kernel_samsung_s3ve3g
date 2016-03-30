@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,16 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/*
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -55,7 +41,6 @@
 
 /*
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * logApi.cc - Handles log messages for all the modules.
  * Author:        Kevin Nguyen
  * Date:          02/27/02
@@ -166,7 +151,7 @@ void logDbg(tpAniSirGlobal pMac, tANI_U8 modId, tANI_U32 debugLevel, const char 
 #endif
 }
 
-VOS_TRACE_LEVEL getVosDebugLevel(tANI_U32 debugLevel)
+static inline VOS_TRACE_LEVEL getVosDebugLevel(tANI_U32 debugLevel)
 {
     switch(debugLevel)
     {
@@ -196,11 +181,10 @@ static inline VOS_MODULE_ID getVosModuleId(tANI_U8 modId)
         case SIR_HAL_MODULE_ID:
         case SIR_PHY_MODULE_ID:
             return VOS_MODULE_ID_WDA;
-        case SIR_PMM_MODULE_ID:
-            return VOS_MODULE_ID_PMC;
 
         case SIR_LIM_MODULE_ID:
         case SIR_SCH_MODULE_ID:
+        case SIR_PMM_MODULE_ID:
         case SIR_CFG_MODULE_ID:
         case SIR_MNT_MODULE_ID:
         case SIR_DPH_MODULE_ID:

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*===========================================================================
@@ -115,11 +103,7 @@
 // replaced by WLAN_STA_ASSOC_DONE_IND
 #define WLAN_BTC_SOFTAP_BSS_START      0x11
 
-<<<<<<< HEAD
-#define WLAN_SVC_SAP_RESTART_IND 0x108
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 // Event data for WLAN_BTC_QUERY_STATE_RSP & WLAN_STA_ASSOC_DONE_IND
 typedef struct
 {
@@ -132,11 +116,6 @@ typedef enum eAniNlModuleTypes {
    ANI_NL_MSG_PUMAC = ANI_NL_MSG_BASE + 0x01,// PTT Socket App
    ANI_NL_MSG_PTT   = ANI_NL_MSG_BASE + 0x07,// Quarky GUI
    WLAN_NL_MSG_BTC,
-<<<<<<< HEAD
-   ANI_NL_MSG_LOG   = ANI_NL_MSG_BASE + 0x0C,
-   WLAN_NL_MSG_SVC,
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    ANI_NL_MSG_MAX  
 } tAniNlModTypes, tWlanNlModTypes;
 

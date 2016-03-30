@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /******************************************************************************
@@ -75,10 +63,6 @@
 #endif /* FEATURE_WLAN_DIAG_SUPPORT */
 static void btcLogEvent (tHalHandle hHal, tpSmeBtEvent pBtEvent);
 static void btcRestoreHeartBeatMonitoringHandle(void* hHal);
-<<<<<<< HEAD
-static void btcEnableUapsdTimerExpiryHandler(void* hHal);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 static void btcUapsdCheck( tpAniSirGlobal pMac, tpSmeBtEvent pBtEvent );
 VOS_STATUS btcCheckHeartBeatMonitoring(tHalHandle hHal, tpSmeBtEvent pBtEvent);
 static void btcPowerStateCB( v_PVOID_t pContext, tPmcState pmcState );
@@ -99,8 +83,6 @@ VOS_STATUS btcOpen (tHalHandle hHal)
 {
    tpAniSirGlobal pMac = PMAC_STRUCT(hHal);
    VOS_STATUS vosStatus;
-   int i;
-
    /* Initialize BTC configuartion. */
    pMac->btc.btcConfig.btcExecutionMode = BTC_SMART_COEXISTENCE;
    pMac->btc.btcConfig.btcConsBtSlotsToBlockDuringDhcp = 0;
@@ -128,22 +110,6 @@ VOS_STATUS btcOpen (tHalHandle hHal)
    pMac->btc.btcHBActive = VOS_TRUE;
    pMac->btc.btcScanCompromise = VOS_FALSE;
 
-   for (i = 0; i < MWS_COEX_MAX_VICTIM_TABLE; i++)
-   {
-      pMac->btc.btcConfig.mwsCoexVictimWANFreq[i] = 0;
-      pMac->btc.btcConfig.mwsCoexVictimWLANFreq[i] = 0;
-      pMac->btc.btcConfig.mwsCoexVictimConfig[i] = 0;
-      pMac->btc.btcConfig.mwsCoexVictimConfig2[i] = 0;
-   }
-
-   for (i = 0; i < MWS_COEX_MAX_CONFIG; i++)
-   {
-      pMac->btc.btcConfig.mwsCoexConfig[i] = 0;
-   }
-
-   pMac->btc.btcConfig.mwsCoexModemBackoff = 0;
-   pMac->btc.btcConfig.SARPowerBackoff = 0;
-
    vosStatus = vos_timer_init( &pMac->btc.restoreHBTimer,
                       VOS_TIMER_TYPE_SW,
                       btcRestoreHeartBeatMonitoringHandle,
@@ -152,20 +118,6 @@ VOS_STATUS btcOpen (tHalHandle hHal)
        VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "btcOpen: Fail to init timer");
        return VOS_STATUS_E_FAILURE;
    }
-<<<<<<< HEAD
-
-   vosStatus = vos_timer_init( &pMac->btc.enableUapsdTimer,
-                      VOS_TIMER_TYPE_SW,
-                      btcEnableUapsdTimerExpiryHandler,
-                      (void*) hHal);
-
-   if (!VOS_IS_STATUS_SUCCESS(vosStatus)) {
-       VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "btcOpen: Fail to init Uapsd timer");
-       return VOS_STATUS_E_FAILURE;
-   }
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if( !HAL_STATUS_SUCCESS(pmcRegisterDeviceStateUpdateInd( pMac, btcPowerStateCB, pMac )) )
    {
        VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "btcOpen: Fail to register PMC callback");
@@ -193,19 +145,6 @@ VOS_STATUS btcClose (tHalHandle hHal)
        VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "btcClose: Fail to destroy timer");
        return VOS_STATUS_E_FAILURE;
    }
-<<<<<<< HEAD
-
-   if (VOS_TIMER_STATE_RUNNING ==
-       vos_timer_getCurrentState(&pMac->btc.enableUapsdTimer))
-       vos_timer_stop(&pMac->btc.enableUapsdTimer);
-   vosStatus = vos_timer_destroy(&pMac->btc.enableUapsdTimer);
-   if (!VOS_IS_STATUS_SUCCESS(vosStatus)) {
-       VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "btcClose: Fail to destroy uapsd timer");
-       return VOS_STATUS_E_FAILURE;
-   }
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    if(!HAL_STATUS_SUCCESS(
       pmcDeregisterDeviceStateUpdateInd(pMac, btcPowerStateCB)))
    {
@@ -494,24 +433,6 @@ void btcRestoreHeartBeatMonitoringHandle(tHalHandle hHal)
     }
 }
 
-<<<<<<< HEAD
-/* ---------------------------------------------------------------------------
-    \fn btcEnableUapsdTimerExpiryHandler
-    \brief  Timer handler to handle the timeout condition when Uapsd timer
-            expires, in this case negotiate for uapsd settings with the AP.
-    \param  hHal - The handle returned by macOpen.
-    \return VOID
-  ---------------------------------------------------------------------------*/
-void btcEnableUapsdTimerExpiryHandler(tHalHandle hHal)
-{
-    tpAniSirGlobal pMac = PMAC_STRUCT(hHal);
-
-    pMac->btc.btcUapsdOk = VOS_TRUE;
-    smsLog(pMac, LOG1, FL("Uapsd Timer Expired, Enable Uapsd"));
-    sme_QoSUpdateUapsdBTEvent(pMac);
-}
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /* ---------------------------------------------------------------------------
     \fn btcSetConfig
@@ -1013,12 +934,6 @@ static VOS_STATUS btcDeferAclComplete( tpAniSirGlobal pMac, tpSmeBtEvent pEvent 
         }
         else
         {
-<<<<<<< HEAD
-            smsLog(pMac, LOGE, FL(" cannot find match for failed "
-                   "BT_EVENT_ACL_CONNECTION_COMPLETE of bdAddr "
-                   MAC_ADDRESS_STR),
-                   MAC_ADDR_ARRAY(pEvent->uEventParam.btAclConnection.bdAddr));
-=======
             smsLog( pMac, LOGE, FL(" cannot find match for failed BT_EVENT_ACL_CONNECTION_COMPLETE of bdAddr (%02X-%02X-%02X-%02X-%02X-%02X)"),
                 pEvent->uEventParam.btAclConnection.bdAddr[0],
                 pEvent->uEventParam.btAclConnection.bdAddr[1],
@@ -1026,7 +941,6 @@ static VOS_STATUS btcDeferAclComplete( tpAniSirGlobal pMac, tpSmeBtEvent pEvent 
                 pEvent->uEventParam.btAclConnection.bdAddr[3],
                 pEvent->uEventParam.btAclConnection.bdAddr[4],
                 pEvent->uEventParam.btAclConnection.bdAddr[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             status = VOS_STATUS_E_EMPTY;
         }
     }while(0);
@@ -1188,12 +1102,6 @@ static VOS_STATUS btcDeferSyncComplete( tpAniSirGlobal pMac, tpSmeBtEvent pEvent
         }
         else
         {
-<<<<<<< HEAD
-            smsLog(pMac, LOGE, FL(" cannot find match for "
-                   "BT_EVENT_SYNC_CONNECTION_COMPLETE of bdAddr "
-                   MAC_ADDRESS_STR),
-                   MAC_ADDR_ARRAY(pEvent->uEventParam.btSyncConnection.bdAddr));
-=======
             smsLog( pMac, LOGE, FL(" cannot find match for BT_EVENT_SYNC_CONNECTION_COMPLETE of bdAddr (%02X-%02X-%02X-%02X-%02X-%02X)"),
                 pEvent->uEventParam.btSyncConnection.bdAddr[0],
                 pEvent->uEventParam.btSyncConnection.bdAddr[1],
@@ -1201,7 +1109,6 @@ static VOS_STATUS btcDeferSyncComplete( tpAniSirGlobal pMac, tpSmeBtEvent pEvent
                 pEvent->uEventParam.btSyncConnection.bdAddr[3],
                 pEvent->uEventParam.btSyncConnection.bdAddr[4],
                 pEvent->uEventParam.btSyncConnection.bdAddr[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             status = VOS_STATUS_E_EMPTY;
         }
     }while(0);
@@ -1753,10 +1660,6 @@ static void btcPowerStateCB( v_PVOID_t pContext, tPmcState pmcState )
   ---------------------------------------------------------------------------*/
 static void btcLogEvent (tHalHandle hHal, tpSmeBtEvent pBtEvent)
 {
-<<<<<<< HEAD
-   v_U8_t bdAddrRev[6];
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "%s: "
                "Bluetooth Event %d received", __func__, pBtEvent->btEventType);
    switch(pBtEvent->btEventType)
@@ -1773,18 +1676,6 @@ static void btcLogEvent (tHalHandle hHal, tpSmeBtEvent pBtEvent)
                pBtEvent->uEventParam.btSyncConnection.scoInterval,
                pBtEvent->uEventParam.btSyncConnection.scoWindow,
                pBtEvent->uEventParam.btSyncConnection.retransmisisonWindow);
-<<<<<<< HEAD
-
-          bdAddrRev[0] = pBtEvent->uEventParam.btSyncConnection.bdAddr[5];
-          bdAddrRev[1] = pBtEvent->uEventParam.btSyncConnection.bdAddr[4];
-          bdAddrRev[2] = pBtEvent->uEventParam.btSyncConnection.bdAddr[3];
-          bdAddrRev[3] = pBtEvent->uEventParam.btSyncConnection.bdAddr[2];
-          bdAddrRev[4] = pBtEvent->uEventParam.btSyncConnection.bdAddr[1];
-          bdAddrRev[5] = pBtEvent->uEventParam.btSyncConnection.bdAddr[0];
-
-          VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "BD ADDR = "
-                    MAC_ADDRESS_STR, MAC_ADDR_ARRAY(bdAddrRev));
-=======
           VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "BD ADDR = "
                "0x%x 0x%x 0x%x 0x%x 0x%x 0x%x",
                pBtEvent->uEventParam.btSyncConnection.bdAddr[5],
@@ -1793,7 +1684,6 @@ static void btcLogEvent (tHalHandle hHal, tpSmeBtEvent pBtEvent)
                pBtEvent->uEventParam.btSyncConnection.bdAddr[2],
                pBtEvent->uEventParam.btSyncConnection.bdAddr[1],
                pBtEvent->uEventParam.btSyncConnection.bdAddr[0]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           break;
       case BT_EVENT_CREATE_ACL_CONNECTION:
       case BT_EVENT_ACL_CONNECTION_COMPLETE:
@@ -1801,18 +1691,6 @@ static void btcLogEvent (tHalHandle hHal, tpSmeBtEvent pBtEvent)
                "connectionHandle = %d status = %d ",
                pBtEvent->uEventParam.btAclConnection.connectionHandle,
                pBtEvent->uEventParam.btAclConnection.status);
-<<<<<<< HEAD
-
-          bdAddrRev[0] = pBtEvent->uEventParam.btAclConnection.bdAddr[5];
-          bdAddrRev[1] = pBtEvent->uEventParam.btAclConnection.bdAddr[4];
-          bdAddrRev[2] = pBtEvent->uEventParam.btAclConnection.bdAddr[3];
-          bdAddrRev[3] = pBtEvent->uEventParam.btAclConnection.bdAddr[2];
-          bdAddrRev[4] = pBtEvent->uEventParam.btAclConnection.bdAddr[1];
-          bdAddrRev[5] = pBtEvent->uEventParam.btAclConnection.bdAddr[0];
-
-          VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "BD ADDR = "
-                    MAC_ADDRESS_STR, MAC_ADDR_ARRAY(bdAddrRev));
-=======
           VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "BD ADDR = "
                "0x%x 0x%x 0x%x 0x%x 0x%x 0x%x",
                pBtEvent->uEventParam.btAclConnection.bdAddr[5],
@@ -1821,7 +1699,6 @@ static void btcLogEvent (tHalHandle hHal, tpSmeBtEvent pBtEvent)
                pBtEvent->uEventParam.btAclConnection.bdAddr[2],
                pBtEvent->uEventParam.btAclConnection.bdAddr[1],
                pBtEvent->uEventParam.btAclConnection.bdAddr[0]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           break;
       case BT_EVENT_MODE_CHANGED:
           VOS_TRACE(VOS_MODULE_ID_SME, VOS_TRACE_LEVEL_ERROR, "ACL Mode change : "
@@ -1884,25 +1761,15 @@ void btcUapsdCheck( tpAniSirGlobal pMac, tpSmeBtEvent pBtEvent )
            if( !fMoreSCO && !pMac->btc.fA2DPUp )
            {
                //All SCO is disconnected
-<<<<<<< HEAD
-               smsLog( pMac, LOGE, "BT event (DISCONNECTION) happens, UAPSD-allowed flag (%d) change to TRUE",
-                        pMac->btc.btcUapsdOk );
-               pMac->btc.btcUapsdOk = VOS_TRUE;
-=======
                pMac->btc.btcUapsdOk = VOS_TRUE;
                smsLog( pMac, LOGE, "BT event (DISCONNECTION) happens, UAPSD-allowed flag (%d) change to TRUE",
                         pBtEvent->btEventType, pMac->btc.btcUapsdOk );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            }
        }
        break;
    case BT_EVENT_DEVICE_SWITCHED_OFF:
        smsLog( pMac, LOGE, "BT event (DEVICE_OFF) happens, UAPSD-allowed flag (%d) change to TRUE",
-<<<<<<< HEAD
-                        pMac->btc.btcUapsdOk );
-=======
                         pBtEvent->btEventType, pMac->btc.btcUapsdOk );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        //Clean up SCO
        for(i=0; i < BT_MAX_SCO_SUPPORT; i++)
        {
@@ -2079,84 +1946,26 @@ eHalStatus btcHandleCoexInd(tHalHandle hHal, void* pMsg)
      {
          if (pMac->roam.configParam.disableAggWithBtc)
          {
-<<<<<<< HEAD
-             ccmCfgSetInt(pMac, WNI_CFG_DEL_ALL_RX_TX_BA_SESSIONS_2_4_G_BTC, 1,
-=======
              ccmCfgSetInt(pMac, WNI_CFG_DEL_ALL_RX_BA_SESSIONS_2_4_G_BTC, 1,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                              NULL, eANI_BOOLEAN_FALSE);
-             pMac->btc.btcBssfordisableaggr[0] = pSmeCoexInd->coexIndData[0] & 0xFF;
-             pMac->btc.btcBssfordisableaggr[1] = pSmeCoexInd->coexIndData[0] >> 8;
-             pMac->btc.btcBssfordisableaggr[2] = pSmeCoexInd->coexIndData[1] & 0xFF;
-             pMac->btc.btcBssfordisableaggr[3] = pSmeCoexInd->coexIndData[1]  >> 8;
-             pMac->btc.btcBssfordisableaggr[4] = pSmeCoexInd->coexIndData[2] & 0xFF;
-             pMac->btc.btcBssfordisableaggr[5] = pSmeCoexInd->coexIndData[2] >> 8;
-<<<<<<< HEAD
-             smsLog(pMac, LOGW, "Coex indication in %s(), "
-                    "type - SIR_COEX_IND_TYPE_DISABLE_AGGREGATION_IN_2p4 "
-                    "for BSSID "MAC_ADDRESS_STR,__func__,
-                    MAC_ADDR_ARRAY(pMac->btc.btcBssfordisableaggr));
-=======
              smsLog(pMac, LOGW,
-             "Coex indication in %s(), \
-              type - SIR_COEX_IND_TYPE_DISABLE_AGGREGATION_IN_2p4 \
-              for BSSID %02x:%02x:%02x:%02x:%02x:%02x",__func__,
-              pMac->btc.btcBssfordisableaggr[0],pMac->btc.btcBssfordisableaggr[1],
-              pMac->btc.btcBssfordisableaggr[2],pMac->btc.btcBssfordisableaggr[3],
-              pMac->btc.btcBssfordisableaggr[4],pMac->btc.btcBssfordisableaggr[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+             "Coex indication in %s(), type - SIR_COEX_IND_TYPE_DISABLE_AGGREGATION_IN_2p4",
+                 __func__);
          }
      }
      else if (pSmeCoexInd->coexIndType == SIR_COEX_IND_TYPE_ENABLE_AGGREGATION_IN_2p4)
      {
          if (pMac->roam.configParam.disableAggWithBtc)
          {
-<<<<<<< HEAD
-             ccmCfgSetInt(pMac, WNI_CFG_DEL_ALL_RX_TX_BA_SESSIONS_2_4_G_BTC, 0,
-=======
              ccmCfgSetInt(pMac, WNI_CFG_DEL_ALL_RX_BA_SESSIONS_2_4_G_BTC, 0,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                              NULL, eANI_BOOLEAN_FALSE);
              smsLog(pMac, LOGW,
              "Coex indication in %s(), type - SIR_COEX_IND_TYPE_ENABLE_AGGREGATION_IN_2p4",
                  __func__);
          }
      }
-<<<<<<< HEAD
-     else if (pSmeCoexInd->coexIndType == SIR_COEX_IND_TYPE_DISABLE_UAPSD)
-     {
-         smsLog(pMac, LOG1, FL("DISABLE UAPSD BT Event received"));
-
-         if (IS_DYNAMIC_WMM_PS_ENABLED) {
-             if (pMac->btc.btcUapsdOk == VOS_TRUE) {
-                 pMac->btc.btcUapsdOk = VOS_FALSE;
-                 sme_QoSUpdateUapsdBTEvent(pMac);
-             }
-             else {
-                 if (VOS_TIMER_STATE_RUNNING ==
-                     vos_timer_getCurrentState(&pMac->btc.enableUapsdTimer)) {
-                     smsLog(pMac, LOG1, FL("Stop Uapsd Timer"));
-                     vos_timer_stop(&pMac->btc.enableUapsdTimer);
-                 }
-             }
-         }
-     }
-     else if (pSmeCoexInd->coexIndType == SIR_COEX_IND_TYPE_ENABLE_UAPSD)
-     {
-         smsLog(pMac, LOG1, FL("ENABLE UAPSD BT Event received"));
-
-         if (IS_DYNAMIC_WMM_PS_ENABLED) {
-             if (pMac->btc.btcUapsdOk == VOS_FALSE) {
-                smsLog(pMac, LOG1, FL("Start Uapsd Timer"));
-                vos_timer_start(&pMac->btc.enableUapsdTimer, BTC_MAX_ENABLE_UAPSD_TIMER);
-             }
-         }
-     }
-     else // unknown indication type
-=======
      // unknown indication type
      else
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      {
         smsLog(pMac, LOGE, "unknown Coex indication type in %s()", __func__);
      }

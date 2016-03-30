@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*===========================================================================
@@ -266,11 +254,7 @@ void WLANTLPrintPktsRcvdPerRateIdx(v_PVOID_t pAdapter, v_U8_t staId, v_BOOL_t fl
         /* printing int the below format
          * " rateIndex = pktCount "*/
         TLLOG1(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                         "%d = %d", ii+1,
-=======
                          "%d = %ld", ii+1,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                          tlCtxt->atlSTAClients[staId]->trafficStatistics.pktCounterRateIdx[ii]));
     }
 
@@ -325,11 +309,7 @@ void WLANTLPrintPktsRcvdPerRssi(v_PVOID_t pAdapter, v_U8_t staId, v_BOOL_t flush
         /* prints are in the below format
          * " fromRSSI - toRSSI = pktCount " */
         TLLOG1(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                         " %d - %d = %d",
-=======
                          " %d - %d = %ld",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                          ii, ii+(MAX_RSSI_INTERVAL - 1), count));
     }
     return;
@@ -646,11 +626,7 @@ VOS_STATUS WLANTL_StatHandleRXFrame
      tlCtxt->atlSTAClients[STAid]->trafficStatistics.pktCounterRssi[(v_U16_t)((WDA_GET_RX_RSSI_DB(pBDHeader)) * (-1))]++;
 #endif
    TLLOG1(VOS_TRACE (VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_INFO_MED,
-<<<<<<< HEAD
-                  "****Received rate Index = %d type=%d subtype=%d****",
-=======
                   "****Received rate Index = %ld type=%d subtype=%d****\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   statistics->rxRate,WDA_GET_RX_TYPE(pBDHeader),WDA_GET_RX_SUBTYPE(pBDHeader)));
 
    statistics->rxBcnt += (packetSize - WLANHAL_RX_BD_HEADER_SIZE);
@@ -920,108 +896,13 @@ VOS_STATUS WLANTL_HSGetRSSI
    return status;
 }
 
-<<<<<<< HEAD
-#ifdef WLAN_FEATURE_LINK_LAYER_STATS
-
-/*==========================================================================
-
-   FUNCTION WLANTL_HSGetDataRSSI
-
-   DESCRIPTION
-
-   PARAMETERS
-
-   RETURN VALUE
-
-============================================================================*/
-VOS_STATUS WLANTL_HSGetDataRSSI
-(
-   v_PVOID_t        pAdapter,
-   v_PVOID_t        pBDHeader,
-   v_U8_t           STAid,
-   v_S7_t          *currentAvgRSSI
-)
-{
-   WLANTL_CbType   *tlCtxt = VOS_GET_TL_CB(pAdapter);
-   VOS_STATUS       status = VOS_STATUS_SUCCESS;
-   v_S7_t           currentRSSI, currentRSSI0, currentRSSI1;
-   WLANTL_CURRENT_HO_STATE_TYPE *currentHO = NULL;
-
-
-   if(NULL == tlCtxt)
-   {
-      TLLOGE(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_ERROR,
-                  "Invalid TL handle"));
-      return VOS_STATUS_E_INVAL;
-   }
-
-   if ( NULL == tlCtxt->atlSTAClients[STAid] )
-   {
-       TLLOGE(VOS_TRACE( VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_ERROR,
-           "WLAN TL:Client Memory was not allocated on %s", __func__));
-       return VOS_STATUS_E_FAILURE;
-   }
-
-   /*
-    * Compute RSSI only for the last MPDU of an AMPDU.
-    * Only last MPDU carries the Phy Stats Values
-    */
-    if (WDA_IS_RX_AN_AMPDU (pBDHeader)) {
-       if (!WDA_IS_RX_LAST_MPDU(pBDHeader)) {
-           return VOS_STATUS_E_FAILURE;
-          }
-    }
-
-   currentHO = &tlCtxt->hoSupport.currentHOState;
-
-   currentRSSI0 = WLANTL_GETRSSI0(pBDHeader);
-   currentRSSI1 = WLANTL_GETRSSI0(pBDHeader);
-   currentRSSI  = (currentRSSI0 > currentRSSI1) ? currentRSSI0 : currentRSSI1;
-
-   if (0 == currentRSSI)
-      return VOS_STATUS_E_INVAL;
-
-#ifdef WLANTL_HO_UTEST
-   TLHS_UtestHandleNewRSSI(&currentRSSI, pAdapter);
-#endif /* WLANTL_HO_UTEST */
-
-   if(0 == tlCtxt->atlSTAClients[STAid]->rssiDataAvg)
-   {
-      *currentAvgRSSI = currentRSSI;
-   }
-   else
-   {
-      *currentAvgRSSI = ((tlCtxt->atlSTAClients[STAid]->rssiDataAvg  *
-                          tlCtxt->atlSTAClients[STAid]->rssiDataAlpha) +
-                         (currentRSSI *
-                     (10 - tlCtxt->atlSTAClients[STAid]->rssiDataAlpha))) / 10;
-   }
-
-
-   tlCtxt->atlSTAClients[STAid]->rssiDataAvg = *currentAvgRSSI;
-
-   TLLOG1(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_INFO,
-          "Current new Data RSSI is %d, averaged Data RSSI is %d",
-          currentRSSI, *currentAvgRSSI));
-   return status;
-}
-#endif
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*==========================================================================
 
    FUNCTION
 
-<<<<<<< HEAD
-   DESCRIPTION
-
-   PARAMETERS
-=======
    DESCRIPTION 
     
    PARAMETERS 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    RETURN VALUE
 
@@ -1596,11 +1477,7 @@ VOS_STATUS WLANTL_HSRegRSSIIndicationCB
             for(sIdx = (currentHO->numThreshold - 1); (sIdx > idx) || (sIdx == idx); sIdx--)
             {
                TLLOG1(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_INFO, "Shift %d array to %d", sIdx, sIdx + 1));
-<<<<<<< HEAD
-               vos_mem_copy(&hoSupport->registeredInd[sIdx + 1], &hoSupport->registeredInd[sIdx], sizeof(WLANTL_HO_RSSI_INDICATION_TYPE));
-=======
                memcpy(&hoSupport->registeredInd[sIdx + 1], &hoSupport->registeredInd[sIdx], sizeof(WLANTL_HO_RSSI_INDICATION_TYPE));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                memset(&hoSupport->registeredInd[sIdx], 0, sizeof(WLANTL_HO_RSSI_INDICATION_TYPE));
                if(0 == sIdx)
                {
@@ -1813,11 +1690,7 @@ VOS_STATUS WLANTL_HSDeregRSSIIndicationCB
             for(sIdx = idx; sIdx < (currentHO->numThreshold - 1); sIdx++)
             {
                TLLOG1(VOS_TRACE(VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_INFO,"Shift up from %d to %d", sIdx + 1, sIdx));
-<<<<<<< HEAD
-               vos_mem_copy(&hoSupport->registeredInd[sIdx], &hoSupport->registeredInd[sIdx + 1], sizeof(WLANTL_HO_RSSI_INDICATION_TYPE));
-=======
                memcpy(&hoSupport->registeredInd[sIdx], &hoSupport->registeredInd[sIdx + 1], sizeof(WLANTL_HO_RSSI_INDICATION_TYPE));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             }
          }
          break;
@@ -2177,8 +2050,4 @@ VOS_STATUS WLANTL_HSSerializeTlIndication
    return status;   
 }
 
-<<<<<<< HEAD
-#endif //WLAN_FEATURE_NEIGHBOR_ROAMING
-=======
 #endif //FEATURE_WLAN_GEN6_ROAMING || WLAN_FEATURE_NEIGHBOR_ROAMING
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver

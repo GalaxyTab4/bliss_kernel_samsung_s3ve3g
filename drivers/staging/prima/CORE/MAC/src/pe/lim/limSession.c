@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**=========================================================================
@@ -73,13 +61,8 @@
 #include "limDebug.h"
 #include "limSession.h"
 #include "limUtils.h"
-<<<<<<< HEAD
-#if defined(FEATURE_WLAN_ESE) && !defined(FEATURE_WLAN_ESE_UPLOAD)
-#include "eseApi.h"
-=======
-#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+#ifdef FEATURE_WLAN_CCX
 #include "ccxApi.h"
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 /*--------------------------------------------------------------------------
@@ -157,10 +140,6 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
             {
                 limLog(pMac, LOGE, FL("memory allocate failed!"));
                 vos_mem_free(pMac->lim.gpSession[i].dph.dphHashTable.pHashTable);
-<<<<<<< HEAD
-                pMac->lim.gpSession[i].dph.dphHashTable.pHashTable = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 return NULL;
             }
             pMac->lim.gpSession[i].dph.dphHashTable.size = numSta;
@@ -175,11 +154,6 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
                 PELOGE(limLog(pMac, LOGE, FL("memory allocate failed!"));)
                 vos_mem_free(pMac->lim.gpSession[i].dph.dphHashTable.pHashTable);
                 vos_mem_free(pMac->lim.gpSession[i].dph.dphHashTable.pDphNodeArray);
-<<<<<<< HEAD
-                pMac->lim.gpSession[i].dph.dphHashTable.pHashTable = NULL;
-                pMac->lim.gpSession[i].dph.dphHashTable.pDphNodeArray = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 return NULL;
             }
             vos_mem_set(pMac->lim.gpSession[i].gpLimPeerIdxpool,
@@ -201,19 +175,11 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
             pMac->lim.gpSession[i].is11Rconnection = FALSE;
 #endif
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-            pMac->lim.gpSession[i].isESEconnection = FALSE;
-#endif
-
-#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
-=======
 #ifdef FEATURE_WLAN_CCX
             pMac->lim.gpSession[i].isCCXconnection = FALSE;
 #endif
 
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             pMac->lim.gpSession[i].isFastTransitionEnabled = FALSE;
 #endif
 #ifdef FEATURE_WLAN_LFR
@@ -229,20 +195,9 @@ tpPESession peCreateSession(tpAniSirGlobal pMac, tANI_U8 *bssid , tANI_U8* sessi
 #ifdef FEATURE_WLAN_TDLS
             vos_mem_set(pMac->lim.gpSession[i].peerAIDBitmap,
                   sizeof(pMac->lim.gpSession[i].peerAIDBitmap), 0);
-<<<<<<< HEAD
-            pMac->lim.gpSession[i].tdlsChanSwitProhibited = 0;
 #endif
             pMac->lim.gpSession[i].fWaitForProbeRsp = 0;
             pMac->lim.gpSession[i].fIgnoreCapsChange = 0;
-            limLog(pMac, LOG1, FL("Create a new sessionId (%d) with BSSID: "
-               MAC_ADDRESS_STR " Max No. of STA %d"),
-               pMac->lim.gpSession[i].peSessionId,
-               MAC_ADDR_ARRAY(bssid), numSta);
-=======
-#endif
-            pMac->lim.gpSession[i].fWaitForProbeRsp = 0;
-            pMac->lim.gpSession[i].fIgnoreCapsChange = 0;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             return(&pMac->lim.gpSession[i]);
         }
     }
@@ -397,14 +352,7 @@ void peDeleteSession(tpAniSirGlobal pMac, tpPESession psessionEntry)
     tANI_U16 n;
     TX_TIMER *timer_ptr;
 
-<<<<<<< HEAD
-    limLog(pMac, LOGW, FL("Trying to delete a session %d Opmode %d BssIdx %d"
-           " BSSID: " MAC_ADDRESS_STR), psessionEntry->peSessionId,
-           psessionEntry->operMode, psessionEntry->bssIdx,
-           MAC_ADDR_ARRAY(psessionEntry->bssId));
-=======
     limLog(pMac, LOGW, FL("Trying to delete a session %d.\n "), psessionEntry->peSessionId);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     for (n = 0; n < pMac->lim.maxStation; n++)
     {
@@ -418,24 +366,8 @@ void peDeleteSession(tpAniSirGlobal pMac, tpPESession psessionEntry)
             }
         }
     }
-<<<<<<< HEAD
-
-#ifdef WLAN_FEATURE_11AC
-
-    /* Unblock the MuBF for other session if the MuBf session is deleted
-     */
-    if(psessionEntry->txMuBformee)
-    {
-        pMac->isMuBfsessionexist = FALSE;
-    }
-
-#endif
-
-    if (psessionEntry->pLimStartBssReq != NULL)
-=======
     
     if(psessionEntry->pLimStartBssReq != NULL)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     {
         vos_mem_free( psessionEntry->pLimStartBssReq );
         psessionEntry->pLimStartBssReq = NULL;
@@ -524,11 +456,7 @@ void peDeleteSession(tpAniSirGlobal pMac, tpPESession psessionEntry)
         psessionEntry->limAssocResponseData = NULL;
     }
 
-<<<<<<< HEAD
-#if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_ESE) || defined(FEATURE_WLAN_LFR)
-=======
 #if  defined (WLAN_FEATURE_VOWIFI_11R) || defined (FEATURE_WLAN_CCX) || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (NULL != psessionEntry->pLimMlmReassocRetryReq)
     {
         vos_mem_free( psessionEntry->pLimMlmReassocRetryReq);
@@ -542,13 +470,8 @@ void peDeleteSession(tpAniSirGlobal pMac, tpPESession psessionEntry)
         psessionEntry->pLimMlmReassocReq = NULL;
     }
 
-<<<<<<< HEAD
-#if defined(FEATURE_WLAN_ESE) && !defined(FEATURE_WLAN_ESE_UPLOAD)
-    limCleanupEseCtxt(pMac, psessionEntry);
-=======
-#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+#ifdef FEATURE_WLAN_CCX
     limCleanupCcxCtxt(pMac, psessionEntry); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
     psessionEntry->valid = FALSE;

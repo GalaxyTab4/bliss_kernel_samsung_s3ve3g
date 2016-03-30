@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2015 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -53,7 +40,6 @@
  */
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*===========================================================================
 
                       s a p M o d u l e . C
@@ -67,13 +53,10 @@
   DEPENDENCIES:
 
   Are listed for each API below.
-<<<<<<< HEAD
-=======
 
   Copyright (c) 2010 Qualcomm Technologies, Inc.
   All Rights Reserved.
   Qualcomm Technologies Confidential and Proprietary
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 ===========================================================================*/
 
 /*===========================================================================
@@ -295,16 +278,7 @@ WLANSAP_Start
         return VOS_STATUS_E_FAULT;
     }
 
-<<<<<<< HEAD
-    if (!VOS_IS_STATUS_SUCCESS(vos_spin_lock_init(&pSapCtx->staInfo_lock)))
-    {
-        VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
-                 "WLANSAP_Start failed init staInfo_lock\n");
-        return VOS_STATUS_E_FAULT;
-    }
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return VOS_STATUS_SUCCESS;
 }/* WLANSAP_Start */
@@ -637,11 +611,6 @@ WLANSAP_StartBss
 
         /* Channel selection is auto or configured */
         pSapCtx->channel = pConfig->channel;
-<<<<<<< HEAD
-        pSapCtx->scanBandPreference = pConfig->scanBandPreference;
-        pSapCtx->acsBandSwitchThreshold = pConfig->acsBandSwitchThreshold;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         pSapCtx->pUsrContext = pUsrContext;
 
         //Set the BSSID to your "self MAC Addr" read the mac address from Configuation ITEM received from HDD
@@ -670,8 +639,7 @@ WLANSAP_StartBss
             //then we just follow that sessions country info (whether
             //present or not doesn't maater as we have to follow whatever
             //STA session does)
-            if ((0 == sme_GetConcurrentOperationChannel(hHal)) &&
-                pConfig->ieee80211d)
+            if (0 == sme_GetConcurrentOperationChannel(hHal))
             {
                 /* Setting the region/country  information */
                 sme_setRegInfo(hHal, pConfig->countryCode);
@@ -1104,16 +1072,10 @@ WLANSAP_ModifyACL
     if (staInWhiteList && staInBlackList)
     {
         VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                "Peer mac "MAC_ADDRESS_STR" found in white and black lists."
-                "Initial lists passed incorrect. Cannot execute this command.",
-                MAC_ADDR_ARRAY(pPeerStaMac));
-=======
                 "Peer mac %02x:%02x:%02x:%02x:%02x:%02x found in white and black lists."
                 "Initial lists passed incorrect. Cannot execute this command.",
                 pPeerStaMac[0], pPeerStaMac[1], pPeerStaMac[2], pPeerStaMac[3],
                 pPeerStaMac[4], pPeerStaMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_E_FAILURE;
 
     }
@@ -1129,28 +1091,18 @@ WLANSAP_ModifyACL
                 if (pSapCtx->nAcceptMac == MAX_ACL_MAC_ADDRESS)
                 {
                     VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                            "White list is already maxed out. Cannot accept "MAC_ADDRESS_STR,
-                            MAC_ADDR_ARRAY(pPeerStaMac));
-=======
                             "White list is already maxed out. Cannot accept %02x:%02x:%02x:%02x:%02x:%02x",
                             pPeerStaMac[0], pPeerStaMac[1], pPeerStaMac[2], pPeerStaMac[3],
                             pPeerStaMac[4], pPeerStaMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     return VOS_STATUS_E_FAILURE;
                 }
                 if (staInWhiteList)
                 {
                     //Do nothing if already present in white list. Just print a warning
                     VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_WARN,
-<<<<<<< HEAD
-                            "MAC address already present in white list "MAC_ADDRESS_STR,
-                            MAC_ADDR_ARRAY(pPeerStaMac));
-=======
                             "MAC address already present in white list %02x:%02x:%02x:%02x:%02x:%02x",
                             pPeerStaMac[0], pPeerStaMac[1], pPeerStaMac[2], pPeerStaMac[3],
                             pPeerStaMac[4], pPeerStaMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 } else
                 {
                     if (staInBlackList)
@@ -1179,14 +1131,9 @@ WLANSAP_ModifyACL
                 else
                 {
                     VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_WARN,
-<<<<<<< HEAD
-                            "MAC address to be deleted is not present in the white list "MAC_ADDRESS_STR,
-                            MAC_ADDR_ARRAY(pPeerStaMac));
-=======
                             "MAC address to be deleted is not present in the white list %02x:%02x:%02x:%02x:%02x:%02x",
                             pPeerStaMac[0], pPeerStaMac[1], pPeerStaMac[2], pPeerStaMac[3],
                             pPeerStaMac[4], pPeerStaMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     return VOS_STATUS_E_FAILURE;
                 }
             }
@@ -1207,28 +1154,18 @@ WLANSAP_ModifyACL
                 if (pSapCtx->nDenyMac == MAX_ACL_MAC_ADDRESS)
                 {
                     VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                            "Black list is already maxed out. Cannot accept "MAC_ADDRESS_STR,
-                            MAC_ADDR_ARRAY(pPeerStaMac));
-=======
                             "Black list is already maxed out. Cannot accept %02x:%02x:%02x:%02x:%02x:%02x",
                             pPeerStaMac[0], pPeerStaMac[1], pPeerStaMac[2], pPeerStaMac[3],
                             pPeerStaMac[4], pPeerStaMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     return VOS_STATUS_E_FAILURE;
                 }
                 if (staInBlackList)
                 {
                     //Do nothing if already present in white list
                     VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_WARN,
-<<<<<<< HEAD
-                            "MAC address already present in black list "MAC_ADDRESS_STR,
-                            MAC_ADDR_ARRAY(pPeerStaMac));
-=======
                             "MAC address already present in black list %02x:%02x:%02x:%02x:%02x:%02x",
                             pPeerStaMac[0], pPeerStaMac[1], pPeerStaMac[2], pPeerStaMac[3],
                             pPeerStaMac[4], pPeerStaMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 } else
                 {
                     if (staInWhiteList)
@@ -1257,14 +1194,9 @@ WLANSAP_ModifyACL
                 else
                 {
                     VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_WARN,
-<<<<<<< HEAD
-                            "MAC address to be deleted is not present in the black list "MAC_ADDRESS_STR,
-                            MAC_ADDR_ARRAY(pPeerStaMac));
-=======
                             "MAC address to be deleted is not present in the black list %02x:%02x:%02x:%02x:%02x:%02x",
                             pPeerStaMac[0], pPeerStaMac[1], pPeerStaMac[2], pPeerStaMac[3],
                             pPeerStaMac[4], pPeerStaMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     return VOS_STATUS_E_FAILURE;
                 }
             }
@@ -1351,12 +1283,7 @@ WLANSAP_DisassocSta
 
     IN
     pvosGCtx            : Pointer to vos global context structure
-<<<<<<< HEAD
-    pDelStaParams       : Pointer to parameters of the station to
-                          deauthenticate
-=======
     pPeerStaMac         : Mac address of the station to deauthenticate
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   RETURN VALUE
     The VOS_STATUS code associated with performing the operation
@@ -1369,11 +1296,7 @@ VOS_STATUS
 WLANSAP_DeauthSta
 (
     v_PVOID_t  pvosGCtx,
-<<<<<<< HEAD
-    struct tagCsrDelStaParams *pDelStaParams
-=======
     v_U8_t *pPeerStaMac
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 )
 {
     eHalStatus halStatus = eHAL_STATUS_FAILURE;
@@ -1391,13 +1314,8 @@ WLANSAP_DeauthSta
         return vosStatus;
     }
 
-<<<<<<< HEAD
-    halStatus = sme_RoamDeauthSta(VOS_GET_HAL_CB(pSapCtx->pvosGCtx),
-                                  pSapCtx->sessionId, pDelStaParams);
-=======
     halStatus = sme_RoamDeauthSta(VOS_GET_HAL_CB(pSapCtx->pvosGCtx), pSapCtx->sessionId,
                             pPeerStaMac);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (halStatus == eHAL_STATUS_SUCCESS)
     {
@@ -1430,11 +1348,7 @@ WLANSAP_DeauthSta
 ============================================================================*/
 VOS_STATUS
 WLANSAP_SetChannelRange(tHalHandle hHal,v_U8_t startChannel, v_U8_t endChannel,
-<<<<<<< HEAD
-                              eSapOperatingBand operatingBand)
-=======
                               v_U8_t operatingBand)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
 
     v_U8_t    validChannelFlag =0;
@@ -1473,55 +1387,26 @@ WLANSAP_SetChannelRange(tHalHandle hHal,v_U8_t startChannel, v_U8_t endChannel,
     }
     switch(operatingBand)
     {
-<<<<<<< HEAD
-       case eSAP_RF_SUBBAND_2_4_GHZ:
-=======
        case RF_SUBBAND_2_4_GHZ:
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           bandStartChannel = RF_CHAN_1;
           bandEndChannel = RF_CHAN_14;
           break;
 
-<<<<<<< HEAD
-       case eSAP_RF_SUBBAND_5_LOW_GHZ:
-=======
        case RF_SUBBAND_5_LOW_GHZ:
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           bandStartChannel = RF_CHAN_36;
           bandEndChannel = RF_CHAN_64;
           break;
 
-<<<<<<< HEAD
-       case eSAP_RF_SUBBAND_5_MID_GHZ:
-          bandStartChannel = RF_CHAN_100;
-#ifndef FEATURE_WLAN_CH144
-          bandEndChannel = RF_CHAN_140;
-#else
-          bandEndChannel = RF_CHAN_144;
-#endif /* FEATURE_WLAN_CH144 */
-          break;
-
-       case eSAP_RF_SUBBAND_5_HIGH_GHZ:
-=======
        case RF_SUBBAND_5_MID_GHZ:
           bandStartChannel = RF_CHAN_100;
           bandEndChannel = RF_CHAN_140;
           break;
 
        case RF_SUBBAND_5_HIGH_GHZ:
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
           bandStartChannel = RF_CHAN_149;
           bandEndChannel = RF_CHAN_165;
           break;
 
-<<<<<<< HEAD
-       case eSAP_RF_SUBBAND_5_ALL_GHZ:
-          bandStartChannel = RF_CHAN_36;
-          bandEndChannel = RF_CHAN_165;
-          break;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        default:
           VOS_TRACE( VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_ERROR,
                    "Invalid operatingBand value on WLANSAP_SetChannelRange");
@@ -2496,52 +2381,3 @@ VOS_STATUS WLANSAP_DeRegisterMgmtFrame( v_PVOID_t pvosGCtx, tANI_U16 frameType,
 
     return VOS_STATUS_E_FAULT;
 }
-<<<<<<< HEAD
-
-/*==========================================================================
-  FUNCTION    WLANSAP_PopulateDelStaParams
-
-  DESCRIPTION
-  This API is used to populate del station parameters
-  DEPENDENCIES
-  NA.
-
-  PARAMETERS
-  IN
-  mac:           pointer to peer mac address.
-  reason_code:   Reason code for the disassoc/deauth.
-  subtype:       subtype points to either disassoc/deauth frame.
-  pDelStaParams: address where parameters to be populated.
-
-  RETURN VALUE NONE
-
-  SIDE EFFECTS
-============================================================================*/
-void WLANSAP_PopulateDelStaParams(const v_U8_t *mac,
-                                  v_U16_t reason_code,
-                                  v_U8_t subtype,
-                                  struct tagCsrDelStaParams *pDelStaParams)
-{
-        if (NULL == mac)
-            memset(pDelStaParams->peerMacAddr, 0xff, VOS_MAC_ADDR_SIZE);
-        else
-            vos_mem_copy(pDelStaParams->peerMacAddr, mac, VOS_MAC_ADDR_SIZE);
-
-        if (reason_code == 0)
-            pDelStaParams->reason_code = eCsrForcedDeauthSta;
-        else
-            pDelStaParams->reason_code = reason_code;
-
-        if (subtype == (SIR_MAC_MGMT_DEAUTH >> 4) ||
-            subtype == (SIR_MAC_MGMT_DISASSOC >> 4))
-            pDelStaParams->subtype = subtype;
-        else
-            pDelStaParams->subtype = (SIR_MAC_MGMT_DEAUTH >> 4);
-
-        VOS_TRACE(VOS_MODULE_ID_SAP, VOS_TRACE_LEVEL_INFO,
-               FL("Delete STA with RC:%hu subtype:%hhu MAC::" MAC_ADDRESS_STR),
-                   pDelStaParams->reason_code, pDelStaParams->subtype,
-                   MAC_ADDR_ARRAY(pDelStaParams->peerMacAddr));
-}
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver

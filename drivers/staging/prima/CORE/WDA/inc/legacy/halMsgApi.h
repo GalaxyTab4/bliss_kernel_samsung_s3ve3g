@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,16 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -55,7 +41,6 @@
 
 /*
  * */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifndef _HALMSGAPI_H_
 #define _HALMSGAPI_H_
 
@@ -308,19 +293,11 @@ typedef struct
 
     /*if this is a P2P Capable Sta*/
     tANI_U8     p2pCapableSta;
-<<<<<<< HEAD
-    tANI_U32    currentOperChan;
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef WLAN_FEATURE_11AC
     tANI_U8    vhtCapable;
     tANI_U8    vhtTxChannelWidthSet;
     tANI_U8    vhtTxBFCapable;
-<<<<<<< HEAD
-    tANI_U8    vhtTxMUBformeeCapable;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
     tANI_U8    htLdpcCapable;
@@ -896,19 +873,13 @@ typedef struct
     tANI_U16 paramChangeBitmap;
 }tUpdateBeaconParams, *tpUpdateBeaconParams;
 
-<<<<<<< HEAD
-=======
 #ifdef WLAN_FEATURE_11AC
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct 
 {
    tANI_U16   opMode;
    tANI_U16  staId;
 }tUpdateVHTOpMode, *tpUpdateVHTOpMode;
-<<<<<<< HEAD
-=======
 #endif
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 //HAL MSG: SIR_HAL_UPDATE_CF_IND
 typedef struct
@@ -953,18 +924,6 @@ typedef struct
 }tUpdateDtimParams, *tpUpdateDtimParams;
 */
 
-<<<<<<< HEAD
-typedef enum
-{
-    eHAL_CHANNEL_SWITCH_SOURCE_SCAN,
-    eHAL_CHANNEL_SWITCH_SOURCE_LISTEN,
-    eHAL_CHANNEL_SWITCH_SOURCE_MCC,
-    eHAL_CHANNEL_SWITCH_SOURCE_CSA,
-    eHAL_CHANNEL_SWITCH_SOURCE_MAX = 0x7fffffff
-} eHalChanSwitchSource;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 //HAL MSG: SIR_HAL_CHNL_SWITCH_REQ
 typedef struct
@@ -981,11 +940,6 @@ typedef struct
     tSirMacAddr selfStaMacAddr;
                         //the request has power constraints, this should be applied only to that session
 #endif
-<<<<<<< HEAD
-    eHalChanSwitchSource channelSwitchSrc;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     /* VO Wifi comment: BSSID is needed to identify which session issued this request. As the 
        request has power constraints, this should be applied only to that session */
     /* V IMP: Keep bssId field at the end of this msg. It is used to mantain backward compatbility
@@ -1316,11 +1270,7 @@ typedef struct sEnterBmpsParams
     //if association is based on ProbeRsp instead of beacon.
     tANI_U8 dtimPeriod;
 
-<<<<<<< HEAD
-    // For ESE and 11R Roaming
-=======
     // For CCX and 11R Roaming
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U8  bRssiFilterEnable;
     tANI_U32 rssiFilterPeriod;
     tANI_U32 numBeaconPerRssiAverage;
@@ -1352,15 +1302,6 @@ typedef struct sMaxTxPowerParams
     tPowerdBm  power;
 }tMaxTxPowerParams, *tpMaxTxPowerParams;
 
-<<<<<<< HEAD
-typedef struct sMaxTxPowerPerBandParams
-{
-    eCsrBand   bandInfo;
-    tPowerdBm  power;
-}tMaxTxPowerPerBandParams, *tpMaxTxPowerPerBandParams;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sAddStaSelfParams
 {
    tSirMacAddr selfMacAddr;
@@ -1368,14 +1309,6 @@ typedef struct sAddStaSelfParams
    tANI_U32 status;
 }tAddStaSelfParams, *tpAddStaSelfParams;
 
-<<<<<<< HEAD
-typedef struct sAbortScanParams
-{
-   tANI_U8 SessionId;
-}tAbortScanParams, *tpAbortScanParams;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sDelStaSelfParams
 {
    tSirMacAddr selfMacAddr;
@@ -1383,14 +1316,6 @@ typedef struct sDelStaSelfParams
    tANI_U32 status;
 }tDelStaSelfParams, *tpDelStaSelfParams;
 
-<<<<<<< HEAD
-typedef struct
-{
-    tSirMacAddr macAddr;
-} tSpoofMacAddrReqParams, *tpSpoofMacAddrReqParams;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sP2pPsParams
 {
    tANI_U8   opp_ps;
@@ -1402,12 +1327,6 @@ typedef struct sP2pPsParams
    tANI_U8   psSelection;
 }tP2pPsParams, *tpP2pPsParams;
 
-<<<<<<< HEAD
-#define HAL_MAX_SUPP_CHANNELS 128
-#define HAL_MAX_SUPP_OPER_CLASSES 32
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 typedef struct sTdlsLinkEstablishParams
 {
    tANI_U16  staIdx;
@@ -1415,33 +1334,9 @@ typedef struct sTdlsLinkEstablishParams
    tANI_U8   uapsdQueues;
    tANI_U8   maxSp;
    tANI_U8   isBufsta;
-<<<<<<< HEAD
-   tANI_U8   isOffChannelSupported;
-   tANI_U8   peerCurrOperClass;
-   tANI_U8   selfCurrOperClass;
-   tANI_U8   validChannelsLen;
-   tANI_U8   validChannels[HAL_MAX_SUPP_CHANNELS];
-   tANI_U8   validOperClassesLen;
-   tANI_U8   validOperClasses[HAL_MAX_SUPP_OPER_CLASSES];
    tANI_U32  status;
 }tTdlsLinkEstablishParams, *tpTdlsLinkEstablishParams;
 
-// tdlsoffchan
-typedef struct sTdlsChanSwitchParams
-{
-   tANI_U16  staIdx;
-   tANI_U8   tdlsOffCh;        // Target Off Channel
-   tANI_U8   tdlsOffChBwOffset;// Target Off Channel Bandwidth offset
-   tANI_U8   tdlsSwMode;     // TDLS Off Channel Mode
-   tANI_U8   operClass;      //Operating class corresponding to target channel
-   tANI_U32  status;
-}tTdlsChanSwitchParams, *tpTdlsChanSwitchParams;
-
-=======
-   tANI_U32  status;
-}tTdlsLinkEstablishParams, *tpTdlsLinkEstablishParams;
-
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 static inline void halGetTxTSFtimer(tpAniSirGlobal pMac, 
                                                 tSirMacTimeStamp *pTime)
 {

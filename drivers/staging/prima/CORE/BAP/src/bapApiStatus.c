@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*===========================================================================
@@ -613,20 +601,12 @@ WLAN_BAPReadLocalAMPAssoc
     vos_mem_copy( 
             btamp_ASSOC.AMP_Assoc_MAC_Addr.mac_addr,   
             btampContext->self_mac_addr, 
-<<<<<<< HEAD
-            sizeof(btampContext->self_mac_addr));
-=======
             sizeof(btampContext->self_mac_addr)); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /*Save the local AMP assoc info*/
     vos_mem_copy(btampContext->btamp_AMP_Assoc.HC_mac_addr,
                  btampContext->self_mac_addr, 
-<<<<<<< HEAD
-                 sizeof(btampContext->self_mac_addr));
-=======
                  sizeof(btampContext->self_mac_addr)); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
     /* JEZ090303: This logic should return a single channel list with the */ 
@@ -637,11 +617,7 @@ WLAN_BAPReadLocalAMPAssoc
         /* Return the local Preferred Channel List */ 
         /* Return both the Regulatory Info and one channel list */ 
         btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.present = 1; 
-<<<<<<< HEAD
-        vos_mem_copy (btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.country, "XXX", 3);
-=======
         memcpy (btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.country, "XXX", 3); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         /*Save the local AMP assoc info*/
         vos_mem_copy(btampContext->btamp_AMP_Assoc.HC_pref_country, "XXX", 3);
 
@@ -678,11 +654,7 @@ WLAN_BAPReadLocalAMPAssoc
         /* Return the local Preferred Channel List */ 
         /* Return only the Regulatory Info */ 
         btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.present = 1; 
-<<<<<<< HEAD
-        vos_mem_copy (btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.country, "XXX", 3);
-=======
         memcpy (btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.country, "XXX", 3); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.num_triplets = 1; 
         btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.triplets[0][0] = 201; 
         btamp_ASSOC.AMP_Assoc_Preferred_Channel_List.triplets[0][1] = 254; 
@@ -704,11 +676,7 @@ WLAN_BAPReadLocalAMPAssoc
     /* We really want him to use our channel.  Since we only support one.*/ 
     /* Return the local Connected Channel */ 
     btamp_ASSOC.AMP_Assoc_Connected_Channel.present = 1; 
-<<<<<<< HEAD
-    vos_mem_copy (btamp_ASSOC.AMP_Assoc_Connected_Channel.country, "XXX", 3);
-=======
     memcpy (btamp_ASSOC.AMP_Assoc_Connected_Channel.country, "XXX", 3); 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     btamp_ASSOC.AMP_Assoc_Connected_Channel.num_triplets = 2; 
     btamp_ASSOC.AMP_Assoc_Connected_Channel.triplets[0][0] = 201; 
     btamp_ASSOC.AMP_Assoc_Connected_Channel.triplets[0][1] = 254; 

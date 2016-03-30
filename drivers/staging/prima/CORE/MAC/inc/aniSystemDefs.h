@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,15 +37,11 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
-<<<<<<< HEAD
-=======
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file aniSystemDefs.h contains definitions used by
  * various ANI entities
  * Author:    Chandra Modumudi
@@ -114,11 +99,7 @@ typedef enum eAniAuthType
 #if defined WLAN_FEATURE_VOWIFI_11R
     eSIR_FT_AUTH,
 #endif
-<<<<<<< HEAD
-#if defined FEATURE_WLAN_ESE
-=======
 #if defined FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     eSIR_LEAP_AUTH = 0x80,
 #endif
     eSIR_AUTO_SWITCH,
@@ -196,11 +177,7 @@ typedef struct sSirAddie
     tANI_U8        addIEdata[SIR_MAC_MAX_IE_LENGTH+2];
 } tSirAddie, *tpSirAddie;
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-=======
 #ifdef FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 // The CCKM IE needs to be in the
 // Join and Reassoc Req.
@@ -266,34 +243,6 @@ typedef struct sBoaCommand
     tANI_U8     length;
     tANI_U8     cmd[64];
 }tBoaCommand;
-
-
-typedef __ani_attr_pre_packed struct sTrafStrmMetrics
-{
-    tANI_U16      UplinkPktQueueDly;
-    tANI_U16      UplinkPktQueueDlyHist[4];
-    tANI_U32      UplinkPktTxDly;
-    tANI_U16      UplinkPktLoss;
-    tANI_U16      UplinkPktCount;
-    tANI_U8       RoamingCount;
-    tANI_U16      RoamingDly;
-} __ani_attr_packed tTrafStrmMetrics, *tpTrafStrmMetrics;
-
-
-typedef __ani_attr_pre_packed struct sBcnReportFields
-{
-    tANI_U8       ChanNum;
-    tANI_U8       Spare;
-    tANI_U16      MeasDuration;
-    tANI_U8       PhyType;
-    tANI_U8       RecvSigPower;
-    tSirMacAddr   Bssid;
-    tANI_U32      ParentTsf;
-    tANI_U32      TargetTsf[2];
-    tANI_U16      BcnInterval;
-    tANI_U16      CapabilityInfo;
-} __ani_attr_packed tBcnReportFields, *tpBcnReportFields;
-
 
 #endif /* __ANI_SYSTEM_DEFS_H */
 

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -54,7 +41,6 @@
 
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**=========================================================================
   
   \file  wlan_qct_pal_sync.c
@@ -92,11 +78,7 @@ wpt_status wpalMutexInit(wpt_mutex *pMutex)
    if( vos_lock_init( (vos_lock_t*)pMutex  ) != VOS_STATUS_SUCCESS )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                 " mutex init fail");
-=======
                  " mutex init fail\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_FAILURE;
    }
 
@@ -117,11 +99,7 @@ wpt_status wpalMutexDelete(wpt_mutex *pMutex)
    if( vos_lock_destroy( (vos_lock_t*)pMutex  ) != VOS_STATUS_SUCCESS )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                 " mutex delete fail");
-=======
                  " mutex delete fail\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_FAILURE;
    }
 
@@ -142,11 +120,7 @@ wpt_status wpalMutexAcquire(wpt_mutex *pMutex)
    if( vos_lock_acquire( (vos_lock_t*)pMutex  ) != VOS_STATUS_SUCCESS )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                 " mutex acquire fail");
-=======
                  " mutex acquire fail\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_FAILURE;
    }
 
@@ -167,11 +141,7 @@ wpt_status wpalMutexRelease(wpt_mutex *pMutex)
    if( vos_lock_release( (vos_lock_t*)pMutex ) != VOS_STATUS_SUCCESS )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                 " mutex release");
-=======
                  " mutex release\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_FAILURE;
    }
 
@@ -192,11 +162,7 @@ wpt_status wpalEventInit(wpt_event *pEvent)
    if( vos_event_init( (vos_event_t*)pEvent ) != VOS_STATUS_SUCCESS )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                 " create event fail");
-=======
                  " create event fail\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_FAILURE;
    }
 
@@ -218,11 +184,7 @@ wpt_status wpalEventDelete(wpt_event *pEvent)
    if( vos_event_destroy( (vos_event_t*)pEvent ) != VOS_STATUS_SUCCESS )
    {
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, 
-<<<<<<< HEAD
-                 " delete event fail");
-=======
                  " delete event fail\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       return eWLAN_PAL_STATUS_E_FAILURE;
    }
 

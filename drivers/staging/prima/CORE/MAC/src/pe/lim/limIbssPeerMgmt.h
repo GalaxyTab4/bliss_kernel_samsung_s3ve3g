@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,15 +37,11 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
-<<<<<<< HEAD
-=======
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limIbssPeerMgmt.h contains prototypes for
  * the utility functions LIM uses to maintain peers in IBSS.
  * Author:        Chandra Modumudi
@@ -69,11 +54,6 @@
 #include "sirCommon.h"
 #include "limUtils.h"
 
-<<<<<<< HEAD
-#define IBSS_STATIONS_USED_DURING_INIT 4  //(broadcast + self + p2p + softap)
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 void limIbssInit(tpAniSirGlobal);
 void limIbssDelete(tpAniSirGlobal,tpPESession psessionEntry);
 tSirRetStatus limIbssCoalesce(tpAniSirGlobal, tpSirMacMgmtHdr, tpSchBeaconStruct, tANI_U8*,tANI_U32, tANI_U16,tpPESession);

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #ifndef WLAN_HDD_FTM_H
@@ -72,11 +60,7 @@
 #define WLAN_FTM_PHY_CMD         100
 #define SIR_HAL_FTM_CMD          10
 #define QUALCOMM_MODULE_TYPE     2
-<<<<<<< HEAD
-#define WLAN_FTM_COMMAND_TIME_OUT 10000
-=======
 #define WLAN_FTM_COMMAND_TIME_OUT 1000
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define PHYDBG_PREAMBLE_NOT_SUPPORTED 0xFF
 /* Private ioctls and their sub-ioctls */
 #define WLAN_FTM_PRIV_SET_INT_GET_NONE    (SIOCIWFIRSTPRIV + 0)
@@ -90,13 +74,6 @@
 #define WE_CLEAR_RX_PKT_CNT   8
 #define WE_RX                 9
 #define WE_ENABLE_CHAIN      10
-#define WE_SET_PWR_CNTL_MODE 11
-#define WE_ENABLE_DPD        12
-#define WE_SET_CB            13
-<<<<<<< HEAD
-#define WE_TX_CW_RF_GEN      14
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /* Private ioctls and their sub-ioctls */
 #define WLAN_FTM_PRIV_SET_NONE_GET_INT    (SIOCIWFIRSTPRIV + 1)
@@ -128,15 +105,7 @@
 #define WLAN_FTM_PRIV_SET_NONE_GET_NONE   (SIOCIWFIRSTPRIV + 6)
 #define WE_SET_NV_DEFAULTS    1
 
-<<<<<<< HEAD
-#define WLAN_FTM_PRIV_SET_VAR_INT_GET_NONE   (SIOCIWFIRSTPRIV + 7)
-#define WE_SET_TX_WF_GAIN  1
-
 #define WE_FTM_MAX_STR_LEN 1024
-#define MAX_FTM_VAR_ARGS  7
-=======
-#define WE_FTM_MAX_STR_LEN 1024
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define MAX_NV_TABLE_SIZE  40000
 

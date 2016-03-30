@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #ifndef WLAN_QCT_WLANSAP_H
@@ -260,18 +248,6 @@ typedef enum  {
     eSAP_WPSPBC_ONE_WPSPBC_PROBE_REQ_IN120S,    /* One WPS probe request in 120 second  */
 }eWPSPBCOverlap;
 
-<<<<<<< HEAD
-typedef enum {
-        eSAP_RF_SUBBAND_2_4_GHZ      = 0,
-        eSAP_RF_SUBBAND_5_LOW_GHZ    = 1,    //Low & Mid U-NII
-        eSAP_RF_SUBBAND_5_MID_GHZ    = 2,    //ETSI
-        eSAP_RF_SUBBAND_5_HIGH_GHZ   = 3,    //High U-NII
-        eSAP_RF_SUBBAND_4_9_GHZ      = 4,
-        eSAP_RF_SUBBAND_5_ALL_GHZ    = 5,    //All 5 GHZ,
-}eSapOperatingBand;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*----------------------------------------------------------------------------
  *  Typedefs
  * -------------------------------------------------------------------------*/
@@ -480,16 +456,6 @@ typedef struct sap_Config {
     v_U32_t         ht_op_mode_fixed;
     tVOS_CON_MODE   persona; /*Tells us which persona it is GO or AP for now*/
 
-<<<<<<< HEAD
-#ifdef WLAN_FEATURE_11W
-    v_BOOL_t        mfpRequired;
-    v_BOOL_t        mfpCapable;
-#endif
-    eCsrBand        scanBandPreference;
-    v_U16_t         acsBandSwitchThreshold;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tsap_Config_t;
 
 typedef enum {
@@ -614,17 +580,6 @@ typedef struct sap_SoftapStats_s {
 #endif
 } tSap_SoftapStats, *tpSap_SoftapStats;
 
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_CH_AVOID
-/* Store channel safty information */
-typedef struct
-{
-   v_U16_t   channelNumber;
-   v_BOOL_t  isSafe;
-} safeChannelType;
-#endif /* FEATURE_WLAN_CH_AVOID */
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 int sapSetPreferredChannel(tANI_U8* ptr);
 void sapCleanupChannelList(void);
@@ -1056,12 +1011,7 @@ WLANSAP_DisassocSta
 
     IN
     pvosGCtx            : Pointer to vos global context structure
-<<<<<<< HEAD
-    pDelStaParams       : Pointer to parameters of the station to
-                          deauthenticate
-=======
     pPeerStaMac         : Mac address of the station to deauthenticate
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    
   RETURN VALUE
     The VOS_STATUS code associated with performing the operation  
@@ -1073,12 +1023,7 @@ WLANSAP_DisassocSta
 VOS_STATUS 
 WLANSAP_DeauthSta
 (
-<<<<<<< HEAD
-    v_PVOID_t  pvosGCtx,
-    struct tagCsrDelStaParams *pDelStaParams
-=======
     v_PVOID_t  pvosGCtx, v_U8_t *pPeerStaMac
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 );
 
 /*==========================================================================
@@ -1106,11 +1051,7 @@ WLANSAP_DeauthSta
 ============================================================================*/
 VOS_STATUS
 WLANSAP_SetChannelRange(tHalHandle hHal,v_U8_t startChannel, v_U8_t endChannel, 
-<<<<<<< HEAD
-                              eSapOperatingBand operatingBand);
-=======
                               v_U8_t operatingBand);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /*==========================================================================
   FUNCTION    WLANSAP_SetKeySta
@@ -1614,34 +1555,6 @@ VOS_STATUS WLANSAP_DeRegisterMgmtFrame( v_PVOID_t pvosGCtx, tANI_U16 frameType,
                                       tANI_U8* matchData, tANI_U16 matchLen );
 
 
-<<<<<<< HEAD
-/*==========================================================================
-  FUNCTION    WLANSAP_PopulateDelStaParams
-
-  DESCRIPTION
-  This API is used to populate del station parameters
-  DEPENDENCIES
-  NA.
-
-  PARAMETERS
-  IN
-  mac:           pointer to peer mac address.
-  reason_code:   Reason code for the disassoc/deauth.
-  subtype:       subtype points to either disassoc/deauth frame.
-  pDelStaParams: address where parameters to be populated.
-
-  RETURN VALUE NONE
-
-  SIDE EFFECTS
-============================================================================*/
-
-void WLANSAP_PopulateDelStaParams(const v_U8_t *mac,
-                                 v_U16_t reason_code,
-                                 v_U8_t subtype,
-                                 struct tagCsrDelStaParams *pDelStaParams);
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef __cplusplus
  }
 #endif 

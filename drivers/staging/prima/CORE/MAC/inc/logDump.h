@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -23,20 +19,10 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-<<<<<<< HEAD
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/*============================================================================
-=======
 /*============================================================================
 Copyright (c) 2007 Qualcomm Technologies, Inc.
 All Rights Reserved.
 Qualcomm Technologies Confidential and Proprietary
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 logDump.h
 

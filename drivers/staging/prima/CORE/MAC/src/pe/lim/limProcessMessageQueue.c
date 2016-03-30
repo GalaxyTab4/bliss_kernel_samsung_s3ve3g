@@ -1,36 +1,4 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
- *
- * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
- *
- *
- * Permission to use, copy, modify, and/or distribute this software for
- * any purpose with or without fee is hereby granted, provided that the
- * above copyright notice and this permission notice appear in all
- * copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
- * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
- * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
- * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
- * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
- * PERFORMANCE OF THIS SOFTWARE.
- */
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
-/*
-=======
   * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
   *
   * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
@@ -52,7 +20,6 @@
 */
 /*
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file lim ProcessMessageQueue.cc contains the code
  * for processing LIM message Queue.
  * Author:        Chandra Modumudi
@@ -87,13 +54,8 @@
 #if defined WLAN_FEATURE_VOWIFI
 #include "rrmApi.h"
 #endif
-<<<<<<< HEAD
-#if defined(FEATURE_WLAN_ESE) && !defined(FEATURE_WLAN_ESE_UPLOAD)
-#include "eseApi.h"
-=======
-#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+#if defined FEATURE_WLAN_CCX
 #include "ccxApi.h"
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 #if defined WLAN_FEATURE_VOWIFI_11R
@@ -108,16 +70,6 @@
 #include "vos_packet.h"
 #include "vos_memory.h"
 
-/* This value corresponds to 500 ms */
-#define MAX_PROBEREQ_TIME 5000
-
-<<<<<<< HEAD
-#ifdef WLAN_FEATURE_EXTSCAN
-#define  SIZE_OF_FIXED_PARAM 12
-#endif
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 void limLogSessionStates(tpAniSirGlobal pMac);
 
 /** -------------------------------------------------------------
@@ -213,11 +165,7 @@ defMsgDecision(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
 *    handled by limHandleFramesInScanState before __limHandleBeacon call is invoked.
 * Not scanning, no session:
 *    there should not be any beacon coming, if coming, should be dropped.
-<<<<<<< HEAD
-* Not Scanning, 
-=======
 * Not Scanning,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 */
 static void
 __limHandleBeacon(tpAniSirGlobal pMac, tpSirMsgQ pMsg, tpPESession psessionEntry)
@@ -278,23 +226,10 @@ limDeferMsg(tpAniSirGlobal pMac, tSirMsgQ *pMsg)
 
     if (retCode == TX_SUCCESS)
     {
-<<<<<<< HEAD
-        limLog(pMac, LOG1,
-               FL("Deferred message(0x%X) limSmeState %d (prev sme state %d)"
-                  " sysRole %d mlm state %d (prev mlm state %d)"),
-               pMsg->type, pMac->lim.gLimSmeState, pMac->lim.gLimPrevSmeState,
-               pMac->lim.gLimSystemRole, pMac->lim.gLimMlmState,
-               pMac->lim.gLimPrevMlmState);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         MTRACE(macTraceMsgRx(pMac, NO_SESSION, LIM_TRACE_MAKE_RXMSG(pMsg->type, LIM_MSG_DEFERRED));)
     }
     else
     {
-<<<<<<< HEAD
-        limLog(pMac, LOG1, FL("Dropped lim message (0x%X)"), pMsg->type);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         MTRACE(macTraceMsgRx(pMac, NO_SESSION, LIM_TRACE_MAKE_RXMSG(pMsg->type, LIM_MSG_DROPPED));)
     }
 
@@ -343,11 +278,7 @@ limHandleFramesInScanState(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pRxPa
     {
         if (psessionEntry == NULL)
             limProcessBeaconFrameNoSession(pMac, pRxPacketInfo);
-<<<<<<< HEAD
-        else 
-=======
         else
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             limProcessBeaconFrame(pMac, pRxPacketInfo,psessionEntry);
     }
     else if ((fc.type == SIR_MAC_MGMT_FRAME) && (fc.subType == SIR_MAC_MGMT_PROBE_RSP))
@@ -368,15 +299,9 @@ limHandleFramesInScanState(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pRxPa
     else
     {
         *deferMsg = true;
-<<<<<<< HEAD
-        return; 
-    }
- 
-=======
         return;
     }
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     limPktFree(pMac, HAL_TXRX_FRM_802_11_MGMT, pRxPacketInfo, (void *) limMsg->bodyptr);
     return;
 
@@ -392,15 +317,6 @@ limHandleFramesInScanState(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pRxPa
 \ -------------------------------------------------------------- */
 static void limHandleUnknownA2IndexFrames(tpAniSirGlobal pMac, void *pRxPacketInfo,tpPESession psessionEntry)
 {
-<<<<<<< HEAD
-      /* addr2 mismatch interrupt occurred this means previous 
-       disassociation was not successful
-       In Volans pRxPacketInfo only contains pointer 48-bit address2 field */
-       /*Send disassociation message again*/
-       //Dinesh need one more arguement. 
-       //limSendDisassocMgmtFrame(pMac, eSIR_MAC_CLASS3_FRAME_FROM_NON_ASSOC_STA_REASON,(tANI_U8 *) pRxPacketInfo);
-    //TODO: verify this   
-=======
       /* addr2 mismatch interrupt occurred this means previous
        disassociation was not successful
        In Volans pRxPacketInfo only contains pointer 48-bit address2 field */
@@ -408,7 +324,6 @@ static void limHandleUnknownA2IndexFrames(tpAniSirGlobal pMac, void *pRxPacketIn
        //Dinesh need one more arguement.
        //limSendDisassocMgmtFrame(pMac, eSIR_MAC_CLASS3_FRAME_FROM_NON_ASSOC_STA_REASON,(tANI_U8 *) pRxPacketInfo);
     //TODO: verify this
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     //This could be a public action frame.
     if( psessionEntry->limSystemRole == eLIM_P2P_DEVICE_ROLE )
         limProcessActionFrameNoSession(pMac, (tANI_U8 *) pRxPacketInfo);
@@ -466,11 +381,7 @@ static void limHandleUnknownA2IndexFrames(tpAniSirGlobal pMac, void *pRxPacketIn
  * limCheckMgmtRegisteredFrames()
  *
  *FUNCTION:
-<<<<<<< HEAD
- * This function is called to process to check if received frame match with 
-=======
  * This function is called to process to check if received frame match with
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * any of the registered frame from HDD. If yes pass this frame to SME.
  *
  *LOGIC:
@@ -514,26 +425,16 @@ limCheckMgmtRegisteredFrames(tpAniSirGlobal pMac, tANI_U8 *pBd,
         if ( (type == SIR_MAC_MGMT_FRAME) && (fc.type == SIR_MAC_MGMT_FRAME)
               && (subType == SIR_MAC_MGMT_RESERVED15) )
         {
-<<<<<<< HEAD
-            limLog( pMac, LOG3, 
-=======
             limLog( pMac, LOG3,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 FL("rcvd frame match with SIR_MAC_MGMT_RESERVED15"));
             match = VOS_TRUE;
             break;
         }
 
         if (pLimMgmtRegistration->frameType == frameType)
-<<<<<<< HEAD
-        { 
-            if (pLimMgmtRegistration->matchLen > 0)
-            {   
-=======
         {
             if (pLimMgmtRegistration->matchLen > 0)
             {
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 if (pLimMgmtRegistration->matchLen <= framelen)
                 {
                     if (vos_mem_compare(pLimMgmtRegistration->matchData,
@@ -547,42 +448,19 @@ limCheckMgmtRegisteredFrames(tpAniSirGlobal pMac, tANI_U8 *pBd,
             }
             else
             {
-<<<<<<< HEAD
-                /* found match! */   
-=======
                 /* found match! */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 match = VOS_TRUE;
                 break;
             }
         }
-<<<<<<< HEAD
-             
-        vosStatus = 
-          vos_list_peek_next ( &pMac->lim.gLimMgmtFrameRegistratinQueue, 
-                              (vos_list_node_t*) pLimMgmtRegistration, 
-=======
 
         vosStatus =
           vos_list_peek_next ( &pMac->lim.gLimMgmtFrameRegistratinQueue,
                               (vos_list_node_t*) pLimMgmtRegistration,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                               (vos_list_node_t**) &pNext );
         pLimMgmtRegistration = pNext;
         pNext = NULL;
     }
-<<<<<<< HEAD
-   
-    if (match)
-    {
-        limLog( pMac, LOG1, 
-                FL("rcvd frame match with registered frame params"));
-
-        /* Indicate this to SME */
-        limSendSmeMgmtFrameInd( pMac, pLimMgmtRegistration->sessionId,
-                                pBd, psessionEntry, 0);
-    
-=======
 
     if (match)
     {
@@ -595,7 +473,6 @@ limCheckMgmtRegisteredFrames(tpAniSirGlobal pMac, tANI_U8 *pBd,
                      pLimMgmtRegistration->sessionId,
                      WDA_GET_RX_CH(pBd), psessionEntry, 0);
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         if ( (type == SIR_MAC_MGMT_FRAME) && (fc.type == SIR_MAC_MGMT_FRAME)
               && (subType == SIR_MAC_MGMT_RESERVED15) )
         {
@@ -608,157 +485,6 @@ limCheckMgmtRegisteredFrames(tpAniSirGlobal pMac, tANI_U8 *pBd,
     return match;
 } /*** end  limCheckMgmtRegisteredFrames() ***/
 
-<<<<<<< HEAD
-#ifdef WLAN_FEATURE_EXTSCAN
-
-void
-limProcessEXTScanRealTimeData(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
-{
-    tpSirMacMgmtHdr       pHdr = NULL;
-    eHalStatus            status;
-    void                  *pCallbackContext;
-    tANI_U8               rfBand = 0;
-    tANI_U8               rxChannelInBD = 0;
-    tSirMacFrameCtl       fc;
-    tDot11fBeacon         *pBeacon = NULL;
-    tDot11fProbeResponse  *pProbeResponse = NULL;
-    tSirWifiFullScanResultEvent tEXTScanFullScanResult;
-
-    pHdr = WDA_GET_RX_MAC_HEADER(pRxPacketInfo);
-    fc = pHdr->fc;
-
-    limLog(pMac, LOG2,
-             FL("Received EXTScan Real Time data with length=%d from "),
-             WDA_GET_RX_MPDU_LEN(pRxPacketInfo));
-
-    limPrintMacAddr(pMac, pHdr->sa, LOG2);
-
-    vos_mem_set((tANI_U8 *) &tEXTScanFullScanResult,
-                sizeof(tSirWifiFullScanResultEvent), 0);
-
-    tEXTScanFullScanResult.ap.ts = vos_get_monotonic_boottime();
-
-    vos_mem_copy(&tEXTScanFullScanResult.ap.bssid,
-                 pHdr->bssId, sizeof(tSirMacAddr));
-
-    limPrintMacAddr(pMac, pHdr->bssId, LOG2);
-
-
-    rfBand = WDA_GET_RX_RFBAND(pRxPacketInfo);
-    rxChannelInBD = WDA_GET_RX_CH(pRxPacketInfo);
-
-    if ((!rfBand) || IS_5G_BAND(rfBand))
-    {
-        rxChannelInBD = limUnmapChannel(rxChannelInBD);
-    }
-
-    tEXTScanFullScanResult.ap.channel =
-            (tANI_U32)vos_chan_to_freq(rxChannelInBD);
-    tEXTScanFullScanResult.ap.rssi = WDA_GET_RX_RSSI_DB(pRxPacketInfo);
-
-    if (fc.subType == SIR_MAC_MGMT_BEACON)
-    {
-        limLog( pMac, LOG2, FL("Beacon "));
-
-        pBeacon = vos_mem_malloc(sizeof(tDot11fBeacon));
-        if ( NULL == pBeacon ){
-            limLog(pMac, LOGE, FL("Failed to allocate memory\n") );
-            return;
-        }
-
-        vos_mem_set( ( tANI_U8* )pBeacon, sizeof(tDot11fBeacon), 0 );
-        // delegate to the framesc-generated code,
-        status = dot11fUnpackBeacon( pMac,
-                    (tANI_U8 *)WDA_GET_RX_MPDU_DATA(pRxPacketInfo),
-                    WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo), pBeacon );
-
-        if ( DOT11F_FAILED( status ) )
-        {
-            limLog(pMac, LOGE, FL("Failed to parse a Beacons"
-                        "(%d):\n"), status);
-            vos_mem_free(pBeacon);
-            return;
-        }
-        if ( pBeacon->SSID.present )
-        {
-            vos_mem_copy(tEXTScanFullScanResult.ap.ssid,
-                pBeacon->SSID.ssid,
-                pBeacon->SSID.num_ssid);
-        }
-        //NULL Terminate the string.
-        tEXTScanFullScanResult.ap.ssid[pBeacon->SSID.num_ssid] = 0;
-        tEXTScanFullScanResult.ap.beaconPeriod =
-                                       pBeacon->BeaconInterval.interval;
-        tEXTScanFullScanResult.ap.capability =
-                                   *((tANI_U16 *)&pBeacon->Capabilities);
-        vos_mem_free(pBeacon);
-    }
-    else if (fc.subType == SIR_MAC_MGMT_PROBE_RSP)
-    {
-        limLog( pMac, LOG2, FL("Probe rsp "));
-
-        pProbeResponse = vos_mem_malloc(sizeof(tDot11fProbeResponse));
-        if ( NULL == pProbeResponse ){
-            limLog(pMac, LOGE, FL("Failed to allocate memory\n") );
-            return;
-        }
-
-        vos_mem_set( ( tANI_U8* )pProbeResponse,
-                                sizeof(tDot11fProbeResponse), 0);
-        //delegate to the framesc-generated code,
-        status = dot11fUnpackProbeResponse( pMac,
-                    (tANI_U8 *)WDA_GET_RX_MPDU_DATA(pRxPacketInfo),
-                    WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo), pProbeResponse );
-
-        if ( DOT11F_FAILED( status ) )
-        {
-            limLog(pMac, LOGE, FL("Failed to parse a Probe"
-                        "Response (%d:\n"), status);
-            vos_mem_free(pProbeResponse);
-            return;
-        }
-        if ( pProbeResponse->SSID.present )
-        {
-            vos_mem_copy(tEXTScanFullScanResult.ap.ssid,
-                pProbeResponse->SSID.ssid,
-                pProbeResponse->SSID.num_ssid);
-        }
-        //NULL Terminate the string.
-        tEXTScanFullScanResult.ap.ssid[pProbeResponse->SSID.num_ssid] = 0;
-        tEXTScanFullScanResult.ap.beaconPeriod =
-                                    pProbeResponse->BeaconInterval.interval;
-        tEXTScanFullScanResult.ap.capability =
-                            *(((tANI_U16 *)&pProbeResponse->Capabilities));
-
-        vos_mem_free(pBeacon);
-    }
-    else
-    {
-        limLog( pMac, LOGE, FL("Wrong frame Type %d, Subtype %d for LFR"),
-                fc.type, fc.subType);
-        VOS_ASSERT(0);
-        return;
-    }
-
-    tEXTScanFullScanResult.requestId = pMac->sme.extScanStartReqId;
-    tEXTScanFullScanResult.ieLength =
-                   WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo) - SIZE_OF_FIXED_PARAM;
-    tEXTScanFullScanResult.ie =(tSirInformationElement *)
-        ((tANI_U8 *)WDA_GET_RX_MPDU_DATA(pRxPacketInfo) + SIZE_OF_FIXED_PARAM);
-
-    pCallbackContext = pMac->sme.pEXTScanCallbackContext;
-    if(pMac->sme.pEXTScanIndCb)
-    {
-        pMac->sme.pEXTScanIndCb(pCallbackContext,
-                SIR_HAL_EXTSCAN_FULL_SCAN_RESULT_IND,
-                (tANI_U8 *)&tEXTScanFullScanResult);
-    }
-
-    return;
-} /*** end limProcessEXTScanRealTimeData() ***/
-#endif /* WLAN_FEATURE_EXTSCAN */
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**
  * limHandle80211Frames()
@@ -781,11 +507,7 @@ limProcessEXTScanRealTimeData(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo)
  * @return None
  */
 
-<<<<<<< HEAD
-static void 
-=======
 static void
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
 {
     tANI_U8          *pRxPacketInfo = NULL;
@@ -799,19 +521,6 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
     *pDeferMsg= false;
     limGetBDfromRxPacket(pMac, limMsg->bodyptr, (tANI_U32 **)&pRxPacketInfo);
 
-<<<<<<< HEAD
-#ifdef WLAN_FEATURE_EXTSCAN
-
-    if ( WDA_GET_EXTSCANFULLSCANRESIND(pRxPacketInfo))
-    {
-        limLog( pMac, LOG2, FL("Notify EXTSCAN scan results to the HDD"));
-        limProcessEXTScanRealTimeData(pMac, pRxPacketInfo);
-        goto end;
-    }
-#endif //WLAN_FEATURE_EXTSCAN
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pHdr = WDA_GET_RX_MAC_HEADER(pRxPacketInfo);
     isFrmFt = WDA_GET_RX_FT_DONE(pRxPacketInfo);
     fcOffset = (v_U8_t)WDA_GET_RX_MPDU_HEADER_OFFSET(pRxPacketInfo);
@@ -825,16 +534,6 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
                        WDA_GET_RX_MPDU_HEADER_LEN(pRxPacketInfo));
 #endif
 
-<<<<<<< HEAD
-        if ((fc.type == SIR_MAC_MGMT_FRAME) &&
-                (fc.subType != SIR_MAC_MGMT_BEACON))
-        {
-            limLog(pMac, LOG1, FL("RX MGMT - Type %hu, SubType %hu, Seq.no %d"),
-                    fc.type, fc.subType,
-                    ((pHdr->seqControl.seqNumHi << 4) | (pHdr->seqControl.seqNumLo)));
-        }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
     if ( WDA_GET_ROAMCANDIDATEIND(pRxPacketInfo))
     {
@@ -863,17 +562,10 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
         goto end;
     }
 #endif //WLAN_FEATURE_ROAM_SCAN_OFFLOAD
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-    if (fc.type == SIR_MAC_DATA_FRAME && isFrmFt) 
-    {
-#if 0 // Ese TBD Need to PORT
-=======
 #ifdef FEATURE_WLAN_CCX
     if (fc.type == SIR_MAC_DATA_FRAME && isFrmFt)
     {
 #if 0 // CCX TBD Need to PORT
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         tpSirMacDot3Hdr pDataFrmHdr;
 
         pDataFrmHdr = (tpSirMacDot3Hdr)((tANI_U8 *)pBD+ WLANHAL_RX_BD_GET_MPDU_H_OFFSET(pBD));
@@ -885,15 +577,9 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
             return;
         }
 
-<<<<<<< HEAD
-        if (!psessionEntry->isESEconnection)
-        {
-            limLog( pMac, LOGE, FL("LIM received Type %d, Subtype %d in Non ESE connection"),
-=======
         if (!psessionEntry->isCCXconnection)
         {
             limLog( pMac, LOGE, FL("LIM received Type %d, Subtype %d in Non CCX connection"),
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     fc.type, fc.subType);
             limPktFree(pMac, HAL_TXRX_FRM_802_11_MGMT, pBD, limMsg->bodyptr);
             return;
@@ -901,11 +587,7 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
         limLog( pMac, LOGE, FL("Processing IAPP Frm from SA:"));
         limPrintMacAddr(pMac, pDataFrmHdr->sa, LOGE);
 #else
-<<<<<<< HEAD
-        printk("%s: Need to port handling of IAPP frames to PRIMA for ESE", __func__);
-=======
         printk("%s: Need to port handling of IAPP frames to PRIMA for CCX", __func__);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 
@@ -915,11 +597,7 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
     if((psessionEntry = peFindSessionByBssid(pMac,pHdr->bssId,&sessionId))== NULL)
     {
 #ifdef WLAN_FEATURE_VOWIFI_11R
-<<<<<<< HEAD
-        if (fc.subType == SIR_MAC_MGMT_AUTH) 
-=======
         if (fc.subType == SIR_MAC_MGMT_AUTH)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         {
 #ifdef WLAN_FEATURE_VOWIFI_11R_DEBUG
             limLog( pMac, LOG1, FL("ProtVersion %d, Type %d, Subtype %d rateIndex=%d"),
@@ -940,22 +618,12 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
           )
         {
 
-<<<<<<< HEAD
-            if((psessionEntry = peFindSessionByPeerSta(pMac,pHdr->sa,&sessionId))== NULL) 
-=======
             if((psessionEntry = peFindSessionByPeerSta(pMac,pHdr->sa,&sessionId))== NULL)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             {
                limLog(pMac, LOG1, FL("session does not exist for given bssId"));
                limPktFree(pMac, HAL_TXRX_FRM_802_11_MGMT, pRxPacketInfo, limMsg->bodyptr);
                return;
             }
-<<<<<<< HEAD
-            else
-               limLog(pMac,LOG1,"SessionId:%d Session Exist for given Bssid",
-                       psessionEntry->peSessionId);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
         //  For p2p resp frames search for valid session with DA as
         //  BSSID will be SA and session will be present with DA only
@@ -968,11 +636,7 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
 
     /* Check if frame is registered by HDD */
     if(limCheckMgmtRegisteredFrames(pMac, pRxPacketInfo, psessionEntry))
-<<<<<<< HEAD
-    {        
-=======
     {
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         limLog( pMac, LOG1, FL("Received frame is passed to SME"));
         limPktFree(pMac, HAL_TXRX_FRM_802_11_MGMT, pRxPacketInfo, limMsg->bodyptr);
         return;
@@ -985,11 +649,7 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
         limLog(pMac, LOGE, FL("Unexpected frame with protVersion %d received"),
            fc.protVer);
         limPktFree(pMac, HAL_TXRX_FRM_802_11_MGMT, pRxPacketInfo, (void *) limMsg->bodyptr);
-<<<<<<< HEAD
-#ifdef WLAN_DEBUG            
-=======
 #ifdef WLAN_DEBUG
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         pMac->lim.numProtErr++;
 #endif
         return;
@@ -1011,24 +671,11 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
         limLog( pMac, LOGW, FL( "gLimSystemRole is %d. Exiting..." ),psessionEntry->limSystemRole );
         limPktFree(pMac, HAL_TXRX_FRM_802_11_MGMT, pRxPacketInfo, (void *) limMsg->bodyptr);
 
-<<<<<<< HEAD
-#ifdef WLAN_DEBUG        
-=======
 #ifdef WLAN_DEBUG
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         pMac->lim.numProtErr++;
 #endif
         return;
     }
-<<<<<<< HEAD
- #endif     //HACK to continue scanning    
-
-
-#ifdef WLAN_DEBUG    
-    pMac->lim.numMAC[fc.type][fc.subType]++;
-#endif
-    
-=======
  #endif     //HACK to continue scanning
 
 
@@ -1036,7 +683,6 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
     pMac->lim.numMAC[fc.type][fc.subType]++;
 #endif
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     switch (fc.type)
     {
         case SIR_MAC_MGMT_FRAME:
@@ -1049,11 +695,7 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
                                                                 fc.type, fc.subType);
                     return;
             }
-<<<<<<< HEAD
-                #endif   //HACK to continue scanning 
-=======
                 #endif   //HACK to continue scanning
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             // Received Management frame
             switch (fc.subType)
             {
@@ -1144,17 +786,6 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
         {
 #ifdef FEATURE_WLAN_TDLS_INTERNAL
             /*
-<<<<<<< HEAD
-             * if we reach here, following cases are possible. 
-             * Possible cases: a) if frame translation is disabled.
-             *                 b) Some frame with ADRR2 filter enabled may come
-             *                    here.
-             */ 
-            tANI_U8 *dataOffset = WDA_GET_RX_MPDU_DATA(pRxPacketInfo);
-            tANI_U8 *rfc1042Hdr = (tANI_U8 *)(dataOffset + RFC1042_HDR_LENGTH) ;
-            tANI_U16 ethType = GET_BE16(rfc1042Hdr) ;
-            VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_ERROR, 
-=======
              * if we reach here, following cases are possible.
              * Possible cases: a) if frame translation is disabled.
              *                 b) Some frame with ADRR2 filter enabled may come
@@ -1164,7 +795,6 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
             tANI_U8 *rfc1042Hdr = (tANI_U8 *)(dataOffset + RFC1042_HDR_LENGTH) ;
             tANI_U16 ethType = GET_BE16(rfc1042Hdr) ;
             VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_ERROR,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                 ("TDLS frame with 80211 Header")) ;
             if(ETH_TYPE_89_0d == ethType)
             {
@@ -1173,25 +803,14 @@ limHandle80211Frames(tpAniSirGlobal pMac, tpSirMsgQ limMsg, tANI_U8 *pDeferMsg)
                 {
                     limProcessTdlsFrame(pMac, (tANI_U32*)pRxPacketInfo) ;
                 }
-<<<<<<< HEAD
-            }     
-#endif
-#if defined(FEATURE_WLAN_ESE) && !defined(FEATURE_WLAN_ESE_UPLOAD)
-             /* We accept data frame (IAPP frame) only if Session is
-              * present and ese connection is established on that
-              * session
-              */
-             if (psessionEntry && psessionEntry->isESEconnection) {
-=======
             }
 #endif
-#if defined(FEATURE_WLAN_CCX) && !defined(FEATURE_WLAN_CCX_UPLOAD)
+#ifdef FEATURE_WLAN_CCX
              /* We accept data frame (IAPP frame) only if Session is
               * present and ccx connection is established on that
               * session
               */
              if (psessionEntry && psessionEntry->isCCXconnection) {
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  limProcessIappFrame(pMac, pRxPacketInfo, psessionEntry);
              }
 #endif
@@ -1223,24 +842,6 @@ end:
  * @param  pMac      Pointer to Global MAC structure
  * @return eHAL_STATUS_SUCCESS or eHAL_STATUS_FAILURE
  */
-<<<<<<< HEAD
-eHalStatus limSendStopScanOffloadReq(tpAniSirGlobal pMac, tANI_U8 SessionId)
-{
-    tSirMsgQ msg;
-    tSirRetStatus rc = eSIR_SUCCESS;
-    tAbortScanParams *pAbortScanParams;
-
-    pAbortScanParams = vos_mem_malloc(sizeof(tAbortScanParams));
-    if (NULL == pAbortScanParams)
-    {
-        limLog(pMac, LOGP, FL("Memory allocation failed for AbortScanParams"));
-        return eHAL_STATUS_FAILURE;
-    }
-
-    pAbortScanParams->SessionId = SessionId;
-    msg.type = WDA_STOP_SCAN_OFFLOAD_REQ;
-    msg.bodyptr = pAbortScanParams;
-=======
 eHalStatus limSendStopScanOffloadReq(tpAniSirGlobal pMac)
 {
     tSirMsgQ msg;
@@ -1248,26 +849,16 @@ eHalStatus limSendStopScanOffloadReq(tpAniSirGlobal pMac)
 
     msg.type = WDA_STOP_SCAN_OFFLOAD_REQ;
     msg.bodyptr = NULL;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     msg.bodyval = 0;
 
     rc = wdaPostCtrlMsg(pMac, &msg);
     if (rc != eSIR_SUCCESS)
     {
-<<<<<<< HEAD
-        limLog(pMac, LOGE, FL("wdaPostCtrlMsg() return failure"));
-        vos_mem_free(pAbortScanParams);
-        return eHAL_STATUS_FAILURE;
-    }
-
-    limLog(pMac, LOG1, FL("Abort ongoing offload scan."));
-=======
         limLog(pMac, LOGE, FL("wdaPostCtrlMsg() return failure"),
                pMac);
         return eHAL_STATUS_FAILURE;
     }
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return eHAL_STATUS_SUCCESS;
 
 }
@@ -1286,16 +877,6 @@ eHalStatus limSendStopScanOffloadReq(tpAniSirGlobal pMac)
  * @return None
  */
 void
-<<<<<<< HEAD
-limProcessAbortScanInd(tpAniSirGlobal pMac, tANI_U8 SessionId)
-{
-#ifdef FEATURE_WLAN_DIAG_SUPPORT_LIM //FEATURE_WLAN_DIAG_SUPPORT 
-    limDiagEventReport(pMac, WLAN_PE_DIAG_SCAN_ABORT_IND_EVENT, NULL, 0, 0);
-#endif //FEATURE_WLAN_DIAG_SUPPORT
-    
-    /* Deactivate the gLimBackgroundScanTimer as part of the abort scan.
-     * SME should send WNI_CFG_BACKGROUND_SCAN_PERIOD indication 
-=======
 limProcessAbortScanInd(tpAniSirGlobal pMac)
 {
 #ifdef FEATURE_WLAN_DIAG_SUPPORT_LIM //FEATURE_WLAN_DIAG_SUPPORT
@@ -1304,7 +885,6 @@ limProcessAbortScanInd(tpAniSirGlobal pMac)
 
     /* Deactivate the gLimBackgroundScanTimer as part of the abort scan.
      * SME should send WNI_CFG_BACKGROUND_SCAN_PERIOD indication
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      * to start the background scan again
      */
     PELOG2(limLog(pMac, LOG2, FL("Processing AbortScan Ind"));)
@@ -1314,11 +894,7 @@ limProcessAbortScanInd(tpAniSirGlobal pMac)
     if (pMac->fScanOffload)
     {
         /* send stop scan cmd to fw if scan offload is enabled. */
-<<<<<<< HEAD
-        limSendStopScanOffloadReq(pMac, SessionId);
-=======
         limSendStopScanOffloadReq(pMac);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     else
     {
@@ -1443,37 +1019,7 @@ void limProcessOemDataRsp(tpAniSirGlobal pMac, tANI_U32* body)
 
 #endif
 
-static tANI_BOOLEAN limAgeOutProbeReq( tpAniSirGlobal pMac, tpSirMsgQ  limMsg,
-                                       vos_pkt_t  *pVosPkt )
-{
-    tANI_U8    *pRxPacketInfo = NULL;
-    tSirMacFrameCtl  fc;
-    tpSirMacMgmtHdr    pHdr=NULL;
-    tANI_BOOLEAN match = VOS_FALSE;
 
-    limGetBDfromRxPacket(pMac, limMsg->bodyptr, (tANI_U32 **)&pRxPacketInfo);
-    pHdr = WDA_GET_RX_MAC_HEADER(pRxPacketInfo);
-    fc = pHdr->fc;
-    if ( fc.subType == SIR_MAC_MGMT_PROBE_REQ )
-    {
-        if(  vos_timer_get_system_ticks() - pVosPkt->timestamp >= MAX_PROBEREQ_TIME )
-        {
-            // drop packet
-           limLog(pMac, LOGE,
-           FL("Dropping Aged Out probe requests. Peer MAC is "MAC_ADDRESS_STR),
-                MAC_ADDR_ARRAY(pHdr->sa));
-
-            vos_pkt_return_packet(pVosPkt);
-            match = VOS_TRUE;
-        }
-    }
-    return match;
-}
-
-<<<<<<< HEAD
-=======
-
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  * limProcessMessages
  *
@@ -1514,11 +1060,7 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         limMsg->bodyptr = NULL;
         return;
     }
-<<<<<<< HEAD
-#ifdef WLAN_DEBUG    
-=======
 #ifdef WLAN_DEBUG
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pMac->lim.numTot++;
 #endif
 
@@ -1563,55 +1105,29 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
 
         case WDA_INIT_SCAN_RSP:
             limProcessInitScanRsp(pMac, limMsg->bodyptr);
-<<<<<<< HEAD
-            limMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 
         case WDA_START_SCAN_RSP:
             limProcessStartScanRsp(pMac, limMsg->bodyptr);
-<<<<<<< HEAD
-            limMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 
         case WDA_END_SCAN_RSP:
             limProcessEndScanRsp(pMac, limMsg->bodyptr);
-<<<<<<< HEAD
-            limMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 
         case WDA_FINISH_SCAN_RSP:
             limProcessFinishScanRsp(pMac, limMsg->bodyptr);
-<<<<<<< HEAD
-            limMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 #ifdef FEATURE_OEM_DATA_SUPPORT
         case WDA_START_OEM_DATA_RSP:
             limProcessOemDataRsp(pMac, limMsg->bodyptr);
-<<<<<<< HEAD
-            limMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 #endif
 
         case WDA_SWITCH_CHANNEL_RSP:
             limProcessSwitchChannelRsp(pMac, limMsg->bodyptr);
-<<<<<<< HEAD
-            limMsg->bodyptr = NULL;
-            break;
-            
-=======
             break;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef ANI_SIR_IBSS_PEER_CACHING
         case WDA_IBSS_STA_ADD:
             limIbssStaAdd(pMac, limMsg->bodyptr);
@@ -1619,16 +1135,10 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
 #endif
         case SIR_BB_XPORT_MGMT_MSG:
             // These messages are from Peer MAC entity.
-<<<<<<< HEAD
-#ifdef WLAN_DEBUG                
-            pMac->lim.numBbt++;
-#endif
-=======
 #ifdef WLAN_DEBUG
             pMac->lim.numBbt++;
 #endif
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             {
                 v_U16_t     pktLen = 0;
                 vos_pkt_t  *pVosPkt;
@@ -1636,21 +1146,12 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                 tSirMsgQ    limMsgNew;
 #ifdef FEATURE_WLAN_TDLS_INTERNAL
                 tANI_U32    *pBD = NULL ;
-<<<<<<< HEAD
-#endif 
-
-                /* The original limMsg which we were deferring have the 
-                 * bodyPointer point to 'BD' instead of 'Vos pkt'. If we don't make a copy
-                 * of limMsg, then vos_pkt_peek_data will overwrite the limMsg->bodyPointer. 
-                 * and next time when we try to process the msg, we will try to use 'BD' as 
-=======
 #endif
 
                 /* The original limMsg which we were deferring have the
                  * bodyPointer point to 'BD' instead of 'Vos pkt'. If we don't make a copy
                  * of limMsg, then vos_pkt_peek_data will overwrite the limMsg->bodyPointer.
                  * and next time when we try to process the msg, we will try to use 'BD' as
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  * 'Vos Pkt' which will cause a crash
                  */
                 vos_mem_copy((tANI_U8*)&limMsgNew, (tANI_U8*)limMsg,
@@ -1662,36 +1163,12 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
 
                 if( !VOS_IS_STATUS_SUCCESS(vosStatus) )
                 {
-<<<<<<< HEAD
-                    limDecrementPendingMgmtCount(pMac);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     vos_pkt_return_packet(pVosPkt);
                     break;
 
                 }
-
-                /*
-                * putting a check for age out probe request frames
-                * such that any probe req more than 0.5 sec old can directly
-                * be dropped. With this, there won't be blocking of MC thread.
-                */
-
-                if( limAgeOutProbeReq ( pMac, &limMsgNew, pVosPkt ))
-                {
-<<<<<<< HEAD
-                   limDecrementPendingMgmtCount(pMac);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-                   break;
-                }
-
 #ifdef FEATURE_WLAN_TDLS_INTERNAL
-<<<<<<< HEAD
-                /* 
-=======
                 /*
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  * TDLS frames comes as translated frames as well as
                  * MAC 802.11 data frames..
                  */
@@ -1708,7 +1185,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                 }
                 else
 #endif
-
                 limHandle80211Frames(pMac, &limMsgNew, &deferMsg);
 
                 if ( deferMsg == true )
@@ -1721,27 +1197,15 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                                 pMac->lim.gLimSystemRole,  pMac->lim.gLimMlmState,  pMac->lim.gLimPrevMlmState);)
                             limLogSessionStates(pMac);
                             limPrintMsgName(pMac, LOGE, limMsg->type);
-<<<<<<< HEAD
-                            limDecrementPendingMgmtCount(pMac);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                             vos_pkt_return_packet(pVosPkt);
                         }
                 }
                 else
                 {
-<<<<<<< HEAD
-                    /* PE is not deferring this 802.11 frame so we need to call vos_pkt_return. 
-                     * Asumption here is when Rx mgmt frame processing is done,
-                     * voss packet could be freed here.
-                     */
-                    limDecrementPendingMgmtCount(pMac);
-=======
                     /* PE is not deferring this 802.11 frame so we need to call vos_pkt_return.
                      * Asumption here is when Rx mgmt frame processing is done,
                      * voss packet could be freed here.
                      */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     vos_pkt_return_packet(pVosPkt);
                 }
             }
@@ -1760,11 +1224,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         case eWNI_SME_TDLS_ADD_STA_REQ:
         case eWNI_SME_TDLS_DEL_STA_REQ:
         case eWNI_SME_TDLS_LINK_ESTABLISH_REQ:
-<<<<<<< HEAD
-// tdlsoffchan
-        case eWNI_SME_TDLS_CHANNEL_SWITCH_REQ:
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 #ifdef FEATURE_WLAN_TDLS_INTERNAL
         case eWNI_SME_TDLS_DISCOVERY_START_REQ:
@@ -1777,21 +1236,11 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
             break;
 
         case eWNI_SME_SCAN_ABORT_IND:
-<<<<<<< HEAD
-        {
-            tANI_U8 *pSessionId = (tANI_U8 *)limMsg->bodyptr;
-            limProcessAbortScanInd(pMac, *pSessionId);
-            vos_mem_free((v_VOID_t *)limMsg->bodyptr);
-            limMsg->bodyptr = NULL;
-            break;
-        }
-=======
             vos_mem_free((v_VOID_t *)limMsg->bodyptr);
             limMsg->bodyptr = NULL;
             limProcessAbortScanInd(pMac);
             break;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         case eWNI_SME_START_REQ:
         case eWNI_SME_SYS_READY_IND:
 #ifndef WNI_ASKEY_NON_SUPPORT_FEATURE
@@ -1830,13 +1279,8 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         case eWNI_SME_NEIGHBOR_REPORT_REQ_IND:
         case eWNI_SME_BEACON_REPORT_RESP_XMIT_IND:
 #endif
-<<<<<<< HEAD
-#if defined FEATURE_WLAN_ESE
-        case eWNI_SME_ESE_ADJACENT_AP_REPORT:
-=======
 #if defined FEATURE_WLAN_CCX
         case eWNI_SME_CCX_ADJACENT_AP_REPORT:
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 #ifdef WLAN_FEATURE_VOWIFI_11R
         case eWNI_SME_FT_UPDATE_KEY:
@@ -1853,22 +1297,9 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         case eWNI_SME_GLOBAL_STAT_REQ:
         case eWNI_SME_STAT_SUMM_REQ:
         case eWNI_SME_GET_STATISTICS_REQ:
-<<<<<<< HEAD
-#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
-        case eWNI_SME_GET_ROAM_RSSI_REQ:
-#endif
-#if defined(FEATURE_WLAN_ESE) && defined(FEATURE_WLAN_ESE_UPLOAD)
-        case eWNI_SME_GET_TSM_STATS_REQ:
-#endif /* FEATURE_WLAN_ESE && FEATURE_WLAN_ESE_UPLOAD */
-        case eWNI_SME_MAC_SPOOF_ADDR_IND:
-=======
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
         case eWNI_SME_GET_ROAM_RSSI_REQ:
 #endif
-#if defined(FEATURE_WLAN_CCX) && defined(FEATURE_WLAN_CCX_UPLOAD)
-        case eWNI_SME_GET_TSM_STATS_REQ:
-#endif /* FEATURE_WLAN_CCX && FEATURE_WLAN_CCX_UPLOAD */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             // These messages are from HDD
             limProcessNormalHddMsg(pMac, limMsg, false);   //no need to response to hdd
             break;
@@ -1986,31 +1417,13 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
 #endif
         case SIR_HAL_P2P_NOA_ATTR_IND:
             {
-<<<<<<< HEAD
-                tpPESession psessionEntry = &pMac->lim.gpSession[0];  
-                tANI_U8  i;
-                
-=======
                 tpPESession psessionEntry = &pMac->lim.gpSession[0];
                 tANI_U8  i;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 limLog(pMac, LOGW, FL("Received message Noa_ATTR %x"), limMsg->type);
                 for(i=0; i < pMac->lim.maxBssId; i++)
                 {
                     psessionEntry = &pMac->lim.gpSession[i];
-<<<<<<< HEAD
-                    if   ( (psessionEntry != NULL) && (psessionEntry->valid) && 
-                        (psessionEntry->pePersona == VOS_P2P_GO_MODE))
-                    { //Save P2P attributes for P2P Go persona
-                    
-                        vos_mem_copy(&psessionEntry->p2pGoPsUpdate, limMsg->bodyptr,
-                                     sizeof(tSirP2PNoaAttr));
-
-                        limLog(pMac, LOG2, FL(" &psessionEntry->bssId "
-                                     MAC_ADDRESS_STR " ctWin=%d oppPsFlag=%d"),
-                                     MAC_ADDR_ARRAY(psessionEntry->bssId),
-=======
                     if   ( (psessionEntry != NULL) && (psessionEntry->valid) &&
                         (psessionEntry->pePersona == VOS_P2P_GO_MODE))
                     { //Save P2P attributes for P2P Go persona
@@ -2025,7 +1438,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                                      psessionEntry->bssId[3],
                                      psessionEntry->bssId[4],
                                      psessionEntry->bssId[5],
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                      psessionEntry->p2pGoPsUpdate.ctWin,
                                      psessionEntry->p2pGoPsUpdate.oppPsFlag);
 
@@ -2035,28 +1447,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                                      psessionEntry->p2pGoPsUpdate.uNoa1Interval,
                                      psessionEntry->p2pGoPsUpdate.uNoa1StartTime);
 
-<<<<<<< HEAD
-                        
-                        break;
-                    }
-                }
-                
-            }
-            vos_mem_free(limMsg->bodyptr);
-            limMsg->bodyptr = NULL;
-            
-            break;
-
-            
-        /* eWNI_SME_PRE_CHANNEL_SWITCH_FULL_POWER Message comes after the
-         * device comes out of full power for the full power request sent 
-         * because of channel switch with switch count as 0, so call the same 
-         * function used in timeout case(i.e SIR_LIM_CHANNEL_SWITCH_TIMEOUT) 
-         * for switching the channel*/
-        case eWNI_SME_PRE_CHANNEL_SWITCH_FULL_POWER:
-            if ( !tx_timer_running(&pMac->lim.limTimers.gLimChannelSwitchTimer) )
-            {  
-=======
 
                         break;
                     }
@@ -2077,7 +1467,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         case eWNI_SME_PRE_CHANNEL_SWITCH_FULL_POWER:
             if ( !tx_timer_running(&pMac->lim.limTimers.gLimChannelSwitchTimer) )
             {
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 limProcessChannelSwitchTimeout(pMac);
             }
             vos_mem_free(limMsg->bodyptr);
@@ -2115,43 +1504,18 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
            vos_mem_free(limMsg->bodyptr);
            limMsg->bodyptr = NULL;
            break;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
         case SIR_LIM_ADDTS_RSP_TIMEOUT:
             limProcessSmeReqMessages(pMac,limMsg);
             break;
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-        case SIR_LIM_ESE_TSM_TIMEOUT:
-#ifndef FEATURE_WLAN_ESE_UPLOAD
-            limProcessTsmTimeoutHandler(pMac,limMsg);
-#endif /* FEATURE_WLAN_ESE_UPLOAD */
-            break;
-        case WDA_TSM_STATS_RSP:
-#ifdef FEATURE_WLAN_ESE_UPLOAD
-            limSendSmePEEseTsmRsp(pMac, (tAniGetTsmStatsRsp *)limMsg->bodyptr);
-#else
-            limProcessHalEseTsmRsp(pMac, limMsg);
-#endif /* FEATURE_WLAN_ESE_UPLOAD */
-=======
 #ifdef FEATURE_WLAN_CCX
         case SIR_LIM_CCX_TSM_TIMEOUT:
-#ifndef FEATURE_WLAN_CCX_UPLOAD
             limProcessTsmTimeoutHandler(pMac,limMsg);
-#endif /* FEATURE_WLAN_CCX_UPLOAD */
             break;
         case WDA_TSM_STATS_RSP:
-#ifdef FEATURE_WLAN_CCX_UPLOAD
-            limSendSmePECcxTsmRsp(pMac, (tAniGetTsmStatsRsp *)limMsg->bodyptr);
-#else
             limProcessHalCcxTsmRsp(pMac, limMsg);
-#endif /* FEATURE_WLAN_CCX_UPLOAD */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 #endif
         case WDA_ADD_TS_RSP:
@@ -2174,11 +1538,7 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
          case SIR_LIM_BEACON_GEN_IND: {
 
                 if( pMac->lim.gLimSystemRole != eLIM_AP_ROLE )
-<<<<<<< HEAD
-                    schProcessPreBeaconInd(pMac, limMsg);    
-=======
                     schProcessPreBeaconInd(pMac, limMsg);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
                 }
                 break;
@@ -2217,11 +1577,7 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                   * normal processing
                     */
 
-<<<<<<< HEAD
-            #if 0 
-=======
             #if 0
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             PELOG1(limLog(pMac, LOG1, FL("Heartbeat timeout, SME %d, MLME %d, #bcn %d"),
                    pMac->lim.gLimSmeState, pMac->lim.gLimMlmState,
                    pMac->lim.gLimRxedBeaconCntDuringHB);)
@@ -2251,8 +1607,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
             }
             else
             {
-<<<<<<< HEAD
-=======
 #if defined(FEATURE_WLAN_TDLS) && defined(FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP)
                  tpPESession psessionEntry = &pMac->lim.gpSession[0];
                  for (i=0; i < pMac->lim.maxBssId; i++)
@@ -2273,7 +1627,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                      }
                  }
 #endif
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  if (NULL == limMsg->bodyptr)
                  {
                      limHandleHeartBeatTimeout(pMac);
@@ -2286,11 +1639,7 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
             break;
 
         case SIR_LIM_PROBE_HB_FAILURE_TIMEOUT:
-<<<<<<< HEAD
-            limHandleHeartBeatFailureTimeout(pMac);            
-=======
             limHandleHeartBeatFailureTimeout(pMac);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 
         case SIR_LIM_CHANNEL_SCAN_TIMEOUT:
@@ -2306,8 +1655,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
             limTriggerBackgroundScan(pMac);
             break;
 
-<<<<<<< HEAD
-=======
 
         case SIR_LIM_HASH_MISS_THRES_TIMEOUT:
 
@@ -2318,7 +1665,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
             pMac->lim.gLimDisassocFrameCredit = 0;
             break;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         case SIR_LIM_CNF_WAIT_TIMEOUT:
 
             /*
@@ -2384,39 +1730,22 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         case SIR_LIM_TDLS_DISCOVERY_RSP_WAIT:
         {
             //fetch the sessionEntry based on the sessionId
-<<<<<<< HEAD
-            tpPESession psessionEntry = peFindSessionBySessionId(pMac, 
-                         pMac->lim.limTimers.gLimTdlsDisRspWaitTimer.sessionId) ;
-            if(NULL == psessionEntry) 
-=======
             tpPESession psessionEntry = peFindSessionBySessionId(pMac,
                          pMac->lim.limTimers.gLimTdlsDisRspWaitTimer.sessionId) ;
             if(NULL == psessionEntry)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             {
               limLog(pMac, LOGP,FL("Session Does not exist for given sessionID %d"), pMac->lim.limTimers.gLimTdlsDisRspWaitTimer.sessionId);
               return;
             }
-<<<<<<< HEAD
-            
-            VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR, 
-                                ("Discovery Rsp timer expires ")) ;
-#if 0 // TDLS_hklee: D13 no need to open Addr2 unknown data packet 
-=======
 
             VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                                 ("Discovery Rsp timer expires ")) ;
 #if 0 // TDLS_hklee: D13 no need to open Addr2 unknown data packet
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             /* restore RXP filters */
             limSetLinkState(pMac, eSIR_LINK_FINISH_TDLS_DISCOVERY_STATE,
                                             psessionEntry->bssId) ;
 #endif
-<<<<<<< HEAD
-            limSendSmeTdlsDisRsp(pMac, eSIR_SUCCESS, 
-=======
             limSendSmeTdlsDisRsp(pMac, eSIR_SUCCESS,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                 eWNI_SME_TDLS_DISCOVERY_START_RSP) ;
             break ;
         }
@@ -2429,14 +1758,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         {
             tANI_U8 *peerMac = (tANI_U8 *)limMsg->bodyval ;
             tLimTdlsLinkSetupPeer *setupPeer = NULL ;
-<<<<<<< HEAD
- 
-            VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_ERROR,
-                                ("TDLS setup rsp timer expires ")) ;
-            VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_INFO,
-                      ("TDLS setup rsp timer expires for peer:"
-                      MAC_ADDRESS_STR), MAC_ADDR_ARRAY(peerMac));
-=======
 
             VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_ERROR,
                                 ("TDLS setup rsp timer expires ")) ;
@@ -2450,7 +1771,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                                     peerMac[3],
                                     peerMac[4],
                                     peerMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
             limTdlsFindLinkPeer(pMac, peerMac, &setupPeer) ;
             if(NULL != setupPeer)
@@ -2458,11 +1778,7 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                 limTdlsDelLinkPeer( pMac, peerMac) ;
             }
 
-<<<<<<< HEAD
-            limSendSmeTdlsLinkStartRsp(pMac, eSIR_FAILURE, peerMac, 
-=======
             limSendSmeTdlsLinkStartRsp(pMac, eSIR_FAILURE, peerMac,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                             eWNI_SME_TDLS_LINK_START_RSP) ;
             break ;
         }
@@ -2474,10 +1790,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
             VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_ERROR,
                                 ("TDLS setup CNF timer expires ")) ;
             VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_INFO,
-<<<<<<< HEAD
-                      ("TDLS setup CNF timer expires for peer: "
-                       MAC_ADDRESS_STR), MAC_ADDR_ARRAY(peerMac));
-=======
                       ("TDLS setup CNF timer expires for peer:")) ;
             VOS_TRACE(VOS_MODULE_ID_PE, VOS_TRACE_LEVEL_INFO,
                          ("%02X, %02X, %02X,%02X, %02X, %02X"),
@@ -2487,7 +1799,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
                                     peerMac[3],
                                     peerMac[4],
                                     peerMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             limTdlsFindLinkPeer(pMac, peerMac, &setupPeer) ;
             if(NULL != setupPeer)
             {
@@ -2512,21 +1823,13 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
 
         case WDA_ADD_STA_SELF_RSP:
             limProcessAddStaSelfRsp(pMac, limMsg);
-<<<<<<< HEAD
-            break; 
-=======
             break;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         case WDA_DEL_STA_SELF_RSP:
             limProcessDelStaSelfRsp(pMac, limMsg);
             break;
 
         case WDA_DELETE_BSS_RSP:
-<<<<<<< HEAD
-            limHandleDeleteBssRsp(pMac,limMsg); //wrapper routine to handle delete bss response 
-=======
             limHandleDeleteBssRsp(pMac,limMsg); //wrapper routine to handle delete bss response
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             break;
 
         case WDA_SET_BSSKEY_RSP:
@@ -2554,11 +1857,7 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
         case WDA_GET_STATISTICS_RSP:
             limSendSmePEStatisticsRsp ( pMac, limMsg->type, (void *)limMsg->bodyptr);
             break;
-<<<<<<< HEAD
-#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
-=======
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         case WDA_GET_ROAM_RSSI_RSP:
             limSendSmePEGetRoamRssiRsp ( pMac, limMsg->type, (void *)limMsg->bodyptr);
             break;
@@ -2593,18 +1892,10 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
            /*a message from HAL indicating addr2 mismatch interrupt occurred
              limMsg->bodyptr contains only pointer to 48-bit addr2 field*/
            //Dinesh fix this. the third parameter should be sessionentry.
-<<<<<<< HEAD
-           //limHandleUnknownA2IndexFrames(pMac, (void *)limMsg->bodyptr); 
-
-           /*Free message body pointer*/ 
-           vos_mem_free((v_VOID_t *)(limMsg->bodyptr));
-           limMsg->bodyptr = NULL;
-=======
            //limHandleUnknownA2IndexFrames(pMac, (void *)limMsg->bodyptr);
 
            /*Free message body pointer*/
            vos_mem_free((v_VOID_t *)(limMsg->bodyptr));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            break;
        }
 
@@ -2620,15 +1911,9 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
        pSession = linkStateParams->session;
        if(linkStateParams->ft)
        {
-<<<<<<< HEAD
-          limSendReassocReqWithFTIEsMgmtFrame(pMac, 
-                                              pSession->pLimMlmReassocReq,
-                                              pSession); 
-=======
           limSendReassocReqWithFTIEsMgmtFrame(pMac,
                                               pSession->pLimMlmReassocReq,
                                               pSession);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        }
 #endif
        if( linkStateParams->callback )
@@ -2636,10 +1921,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
           linkStateParams->callback( pMac, linkStateParams->callbackArg );
        }
        vos_mem_free((v_VOID_t *)(limMsg->bodyptr));
-<<<<<<< HEAD
-       limMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
        break;
 
 #ifdef WLAN_FEATURE_PACKET_FILTERING
@@ -2672,63 +1953,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
 #endif
         }
         break;
-<<<<<<< HEAD
-    case eWNI_SME_HT40_OBSS_SCAN_IND:
-        {
-            tpPESession     psessionEntry = NULL;
-            tANI_U8         sessionId;
-            tSirSmeHT40OBSSScanInd *ht40ScanInd =
-                (tSirSmeHT40OBSSScanInd *)limMsg->bodyptr;
-
-            psessionEntry = peFindSessionByBssid(pMac, ht40ScanInd->peerMacAddr,
-                    &sessionId);
-
-            if (psessionEntry != NULL)
-            {
-                if( IS_HT40_OBSS_SCAN_FEATURE_ENABLE &&
-                        psessionEntry->htSupportedChannelWidthSet ==
-                        WNI_CFG_CHANNEL_BONDING_MODE_ENABLE )
-                {
-                    VOS_TRACE(VOS_MODULE_ID_PE,VOS_TRACE_LEVEL_INFO,
-                            "OBSS Scan Start Req: session id %d"
-                            "htSupportedChannelWidthSet %d", psessionEntry->peSessionId,
-                            psessionEntry->htSupportedChannelWidthSet);
-                    limSendHT40OBSSScanInd(pMac, psessionEntry);
-                }
-                else
-                {
-                    VOS_TRACE(VOS_MODULE_ID_PE,VOS_TRACE_LEVEL_INFO,
-                            "OBSS Scan not started: htSupportedChannelWidthSet- %d"
-                            " session id %d", psessionEntry->htSupportedChannelWidthSet,
-                            psessionEntry->peSessionId);
-                }
-            }
-            else
-            {
-                VOS_TRACE(VOS_MODULE_ID_PE,VOS_TRACE_LEVEL_INFO,
-                        "OBSS Scan not started: session id is NULL");
-            }
-            vos_mem_free(limMsg->bodyptr);
-            limMsg->bodyptr = NULL;
-        }
-        break;
-    case eWNI_SME_HT40_STOP_OBSS_SCAN_IND:
-        {
-           tpPESession     psessionEntry = NULL;
-           tANI_U8 sessionId = (tANI_U8)limMsg->bodyval ;
-
-           psessionEntry = &pMac->lim.gpSession[sessionId];
-           /* Sending LIM STOP OBSS SCAN Indication
-                     Stop command support is only for debugging purpose */
-           if ( IS_HT40_OBSS_SCAN_FEATURE_ENABLE )
-              limSendHT40OBSSStopScanInd(pMac, psessionEntry);
-           else
-              VOS_TRACE(VOS_MODULE_ID_PE,VOS_TRACE_LEVEL_ERROR,
-                   "OBSS Scan Stop not started ");
-        }
-        break;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_TDLS
         case WDA_SET_TDLS_LINK_ESTABLISH_REQ_RSP:
         {
@@ -2763,43 +1987,6 @@ limProcessMessages(tpAniSirGlobal pMac, tpSirMsgQ  limMsg)
             limMsg->bodyptr = NULL;
             break;
         }
-<<<<<<< HEAD
-
-        case WDA_SET_TDLS_CHAN_SWITCH_REQ_RSP:
-        {
-            tpPESession     psessionEntry;
-            tANI_U8         sessionId;
-            tTdlsChanSwitchParams *pTdlsChanSwitchParams;
-            pTdlsChanSwitchParams = (tTdlsChanSwitchParams*) limMsg->bodyptr;
-
-            if((psessionEntry = peFindSessionByStaId(pMac,
-                                                     pTdlsChanSwitchParams->staIdx,
-                                                     &sessionId))== NULL)
-            {
-                limLog(pMac, LOGE, FL("session %u  does not exist.\n"), sessionId);
-                /* Still send the eWNI_SME_TDLS_LINK_ESTABLISH_RSP message to SME
-                   with session id as zero and status as FAILURE so, that message
-                   queued in SME queue can be freed to prevent the SME cmd buffer leak */
-                limSendSmeTdlsChanSwitchReqRsp(pMac,
-                                                  0,
-                                                  NULL,
-                                                  NULL,
-                                                  eSIR_FAILURE);
-            }
-            else
-            {
-                limSendSmeTdlsChanSwitchReqRsp(pMac,
-                                                  psessionEntry->smeSessionId,
-                                                  NULL,
-                                                  NULL,
-                                                  pTdlsChanSwitchParams->status) ;
-            }
-            vos_mem_free((v_VOID_t *)(limMsg->bodyptr));
-            limMsg->bodyptr = NULL;
-            break;
-        }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
     case WDA_RX_SCAN_EVENT:
@@ -2873,11 +2060,7 @@ limProcessDeferredMessageQueue(tpAniSirGlobal pMac)
         {
             vos_mem_copy((tANI_U8*) &limMsg,
                     (tANI_U8*) readMsg, sizeof(tSirMsgQ));
-<<<<<<< HEAD
-            size--; 
-=======
             size--;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             limProcessMessages(pMac, &limMsg);
 
             if((limIsSystemInScanState(pMac)) || (true != GET_LIM_PROCESS_DEFD_MESGS(pMac)) ||
@@ -2900,11 +2083,7 @@ void limProcessNormalHddMsg(tpAniSirGlobal pMac, tSirMsgQ *pLimMsg, tANI_U8 fRsp
 {
     tANI_BOOLEAN fDeferMsg = eANI_BOOLEAN_TRUE;
 
-<<<<<<< HEAD
-    /* Added For BT-AMP Support */  
-=======
     /* Added For BT-AMP Support */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if ((pMac->lim.gLimSystemRole == eLIM_AP_ROLE) ||(pMac->lim.gLimSystemRole == eLIM_BT_AMP_AP_ROLE )
                                                    ||(pMac->lim.gLimSystemRole == eLIM_BT_AMP_STA_ROLE)
                                                    ||(pMac->lim.gLimSystemRole == eLIM_UNKNOWN_ROLE))
@@ -2939,11 +2118,7 @@ void limProcessNormalHddMsg(tpAniSirGlobal pMac, tSirMsgQ *pLimMsg, tANI_U8 fRsp
         // or if radar is detected, Defer processsing this message
         if (limDeferMsg(pMac, pLimMsg) != TX_SUCCESS)
         {
-<<<<<<< HEAD
-#ifdef WLAN_DEBUG            
-=======
 #ifdef WLAN_DEBUG
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             pMac->lim.numSme++;
 #endif
             PELOGE(limLog(pMac, LOGE, FL("Unable to Defer message(0x%X) limSmeState %d (prev sme state %d) sysRole %d mlm state %d (prev mlm state %d)"),
@@ -2953,10 +2128,6 @@ void limProcessNormalHddMsg(tpAniSirGlobal pMac, tSirMsgQ *pLimMsg, tANI_U8 fRsp
             limPrintMsgName(pMac, LOGE, pLimMsg->type);
             // Release body
             vos_mem_free(pLimMsg->bodyptr);
-<<<<<<< HEAD
-            pLimMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
     }
     else
@@ -2969,11 +2140,7 @@ void limProcessNormalHddMsg(tpAniSirGlobal pMac, tSirMsgQ *pLimMsg, tANI_U8 fRsp
             // distinquish and send response to host
             pMac->lim.gLimRspReqd = eANI_BOOLEAN_TRUE;
         }
-<<<<<<< HEAD
-#ifdef WLAN_DEBUG            
-=======
 #ifdef WLAN_DEBUG
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         pMac->lim.numSme++;
 #endif
         if(limProcessSmeReqMessages(pMac, pLimMsg))
@@ -2981,10 +2148,6 @@ void limProcessNormalHddMsg(tpAniSirGlobal pMac, tSirMsgQ *pLimMsg, tANI_U8 fRsp
             // Release body
             // limProcessSmeReqMessage consumed the buffer. We can free it.
             vos_mem_free(pLimMsg->bodyptr);
-<<<<<<< HEAD
-            pLimMsg->bodyptr = NULL;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
     }
 }
@@ -3067,16 +2230,8 @@ handleHTCapabilityandHTInfo(struct sAniSirGlobal *pMac, tpPESession psessionEntr
      */
     if (psessionEntry != NULL)
     {
-<<<<<<< HEAD
-        psessionEntry->htCapability =
-                  IS_DOT11_MODE_HT(psessionEntry->dot11mode);
-        psessionEntry->beaconParams.fLsigTXOPProtectionFullSupport =
-                  (tANI_U8)macHTInfoField3.lsigTXOPProtectionFullSupport;
-       limInitOBSSScanParams(pMac, psessionEntry);
-=======
         psessionEntry->htCapability = IS_DOT11_MODE_HT(psessionEntry->dot11mode);
         psessionEntry->beaconParams.fLsigTXOPProtectionFullSupport = (tANI_U8)macHTInfoField3.lsigTXOPProtectionFullSupport;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 }
 
@@ -3090,13 +2245,8 @@ void limLogSessionStates(tpAniSirGlobal pMac)
         if(pMac->lim.gpSession[i].valid)
         {
             PELOG1(limLog(pMac, LOG1, FL("Session[%d] sysRole(%d) limSmeState %d (prev sme state %d) mlm state %d (prev mlm state %d)"),
-<<<<<<< HEAD
-                   i, pMac->lim.gpSession[i].limSystemRole,  pMac->lim.gpSession[i].limSmeState,  
-                   pMac->lim.gpSession[i].limPrevSmeState,   pMac->lim.gpSession[i].limMlmState,  
-=======
                    i, pMac->lim.gpSession[i].limSystemRole,  pMac->lim.gpSession[i].limSmeState,
                    pMac->lim.gpSession[i].limPrevSmeState,   pMac->lim.gpSession[i].limMlmState,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    pMac->lim.gpSession[i].limPrevMlmState);)
         }
     }

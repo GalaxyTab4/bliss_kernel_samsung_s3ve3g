@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 //==================================================================
@@ -59,11 +47,7 @@
 //
 //  Author:       Larry Cawley
 // 
-<<<<<<< HEAD
-//
-=======
 //  Copyright 2002, Woodside Networks, Inc.  All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 //
 //  Change History:
 //  04/09/2002 - LAC - Initial version.
@@ -154,13 +138,8 @@ typedef struct sPolFileHeader {
 
   tPolFileVersion FileVersion;
   tPolFileVersion HWCapabilities;
-<<<<<<< HEAD
-  unsigned int   FileLength;
-  unsigned int   NumDirectoryEntries;
-=======
   unsigned long   FileLength;
   unsigned long   NumDirectoryEntries;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 } tPolFileHeader;
 
@@ -179,15 +158,9 @@ typedef enum ePolFileDirTypes {
 
 typedef struct sPolFileDirEntry {
 
-<<<<<<< HEAD
-  unsigned int DirEntryType;
-  unsigned int DirEntryFileOffset;
-  unsigned int DirEntryLength;
-=======
   unsigned long DirEntryType;
   unsigned long DirEntryFileOffset;
   unsigned long DirEntryLength;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 } tPolFileDirEntry;
 

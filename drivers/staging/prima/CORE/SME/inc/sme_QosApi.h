@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -53,7 +40,6 @@
  */
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if !defined( __SME_QOSAPI_H )
 #define __SME_QOSAPI_H
 
@@ -257,10 +243,6 @@ typedef struct
   v_U32_t                         min_phy_rate;
   v_U16_t                         surplus_bw_allowance;
   v_U16_t                         medium_time;
-<<<<<<< HEAD
-  v_U8_t                          expec_psb_byapp;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } sme_QosWmmTspecInfo;
 
 
@@ -399,48 +381,4 @@ v_BOOL_t sme_QosIsTSInfoAckPolicyValid(tpAniSirGlobal pMac,
     sme_QosWmmTspecInfo * pQoSInfo,
     v_U8_t sessionId);
 
-<<<<<<< HEAD
-/*--------------------------------------------------------------------------
-  \brief sme_QosTspecActive() - The SME QoS API exposed to HDD to
-  check no of active Tspecs
-
-  \param pMac - The handle returned by macOpen.
-  \param ac - Determines type of Access Category
-  \param sessionId - sessionId returned by sme_OpenSession.
-
-  \return VOS_TRUE -When there is no error with pSession
-
-  \sa
-  --------------------------------------------------------------------------*/
-v_BOOL_t sme_QosTspecActive(tpAniSirGlobal pMac,
-    WLANTL_ACEnumType ac, v_U8_t sessionId, v_U8_t *pActiveTspec);
-
-
-/*--------------------------------------------------------------------------
-  \brief sme_QosUpdateHandOff() - Function which can be called to update
-   Hand-off state of SME QoS Session
-  \param sessionId - session id
-  \param updateHandOff - value True/False to update the handoff flag
-
-  \sa
-
--------------------------------------------------------------------------*/
-void sme_QosUpdateHandOff(v_U8_t sessionId,
-     v_BOOL_t updateHandOff);
-
-
-/*--------------------------------------------------------------------------
-  \brief sme_UpdateDSCPtoUPMapping() - Function which can be called to update
-   qos mapping table maintained in HDD
-  \param hHal - The handle returned by macOpen.
-  \param dscpmapping - pointer to the qos mapping structure in HDD
-  \param sessionId - session id
-
-  \sa
--------------------------------------------------------------------------*/
-VOS_STATUS sme_UpdateDSCPtoUPMapping(tHalHandle hHal,
-    sme_QosWmmUpType* dscpmapping, v_U8_t sessionId);
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif //#if !defined( __SME_QOSAPI_H )

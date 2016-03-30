@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**=========================================================================
@@ -96,14 +84,7 @@
 #include <linux/vmalloc.h>
 #include "wlan_hdd_cfg80211.h"
 
-<<<<<<< HEAD
-#include <linux/wcnss_wlan.h>
-
 #include "sapApi.h"
-#include "vos_trace.h"
-=======
-#include "sapApi.h"
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 
@@ -190,16 +171,6 @@ VOS_STATUS vos_preOpen ( v_CONTEXT_t *pVosContext )
 
    *pVosContext = gpVosContext;
 
-<<<<<<< HEAD
-   /* Initialize the spinlock */
-   vos_trace_spin_lock_init();
-   /* it is the right time to initialize MTRACE structures */
-   #if defined(TRACE_RECORD)
-       vosTraceInit();
-   #endif
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    return VOS_STATUS_SUCCESS;
 
 } /* vos_preOpen()*/
@@ -261,11 +232,7 @@ VOS_STATUS vos_preClose( v_CONTEXT_t *pVosContext )
        SYS, MAC, SME, WDA and TL.
       
   
-<<<<<<< HEAD
-  \param  devHandle: pointer to the OS specific device handle
-=======
   \param  hddContextSize: Size of the HDD context to allocate.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  
   
   \return VOS_STATUS_SUCCESS - Scheduler was successfully initialized and 
@@ -280,11 +247,7 @@ VOS_STATUS vos_preClose( v_CONTEXT_t *pVosContext )
   \sa vos_preOpen()
   
 ---------------------------------------------------------------------------*/
-<<<<<<< HEAD
-VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle )
-=======
 VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, v_SIZE_t hddContextSize )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 {
    VOS_STATUS vStatus      = VOS_STATUS_SUCCESS;
@@ -307,10 +270,6 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, v_SIZE_t hddContextSize )
    /* Initialize the timer module */
    vos_timer_module_init();
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /* Initialize the probe event */
    if (vos_event_init(&gpVosContext->ProbeEvent) != VOS_STATUS_SUCCESS)
    {
@@ -373,11 +332,7 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, v_SIZE_t hddContextSize )
    */
    macOpenParms.frameTransRequired = 1;
    macOpenParms.driverType         = eDRIVER_TYPE_PRODUCTION;
-<<<<<<< HEAD
-   vStatus = WDA_open( gpVosContext, devHandle, &macOpenParms );
-=======
    vStatus = WDA_open( gpVosContext, gpVosContext->pHDDContext, &macOpenParms );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    if (!VOS_IS_STATUS_SUCCESS(vStatus))
    {
@@ -413,7 +368,7 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, v_SIZE_t hddContextSize )
       goto err_packet_close;
    }
 
-#ifndef CONFIG_ENABLE_LINUX_REG
+
    /* initialize the NV module */
    vStatus = vos_nv_open();
    if (!VOS_IS_STATUS_SUCCESS(vStatus))
@@ -423,7 +378,6 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, v_SIZE_t hddContextSize )
                 "%s: Failed to initialize the NV module", __func__);
      goto err_sys_close;
    }
-#endif
 
    /* If we arrive here, both threads dispacthing messages correctly */
    
@@ -443,6 +397,10 @@ VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, v_SIZE_t hddContextSize )
      VOS_ASSERT(0);
      goto err_nv_close;
    }
+/* call crda before sme_Open which will read NV and store the default country code */
+   wlan_hdd_get_crda_regd_entry(
+      ((hdd_context_t*)(gpVosContext->pHDDContext))->wiphy,
+      ((hdd_context_t*)(gpVosContext->pHDDContext))->cfg_ini);
 
    /* Now proceed to open the SME */
    vStatus = sme_Open(gpVosContext->pMACContext);
@@ -484,13 +442,9 @@ err_mac_close:
    macClose(gpVosContext->pMACContext);
 
 err_nv_close:
-
-#ifndef CONFIG_ENABLE_LINUX_REG
    vos_nv_close();
-
-err_sys_close:
-#endif
-
+   
+err_sys_close:   
    sysClose(gpVosContext);
 
 err_packet_close:
@@ -499,7 +453,7 @@ err_packet_close:
 err_wda_close:
    WDA_close(gpVosContext);
 
-err_sched_close:
+err_sched_close:   
    vos_sched_close(gpVosContext);
 
 
@@ -550,37 +504,11 @@ VOS_STATUS vos_preStart( v_CONTEXT_t vosContext )
    VOS_TRACE(VOS_MODULE_ID_SYS, VOS_TRACE_LEVEL_INFO,
              "vos prestart");
 
-<<<<<<< HEAD
-   if (gpVosContext != pVosContext)
-   {
-      VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-                "%s: Context mismatch", __func__);
-      VOS_ASSERT(0);
-      return VOS_STATUS_E_INVAL;
-   }
-
-   if (pVosContext->pMACContext == NULL)
-   {
-       VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-            "%s: MAC NULL context", __func__);
-       VOS_ASSERT(0);
-       return VOS_STATUS_E_INVAL;
-   }
-
-   if (pVosContext->pWDAContext == NULL)
-   {
-       VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-          "%s: WDA NULL context", __func__);
-       VOS_ASSERT(0);
-       return VOS_STATUS_E_INVAL;
-   }
-=======
    VOS_ASSERT(gpVosContext == pVosContext);
 
    VOS_ASSERT( NULL != pVosContext->pMACContext);
 
    VOS_ASSERT( NULL != pVosContext->pWDAContext);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    /* call macPreStart */
    vStatus = macPreStart(gpVosContext->pMACContext);
@@ -618,11 +546,7 @@ VOS_STATUS vos_preStart( v_CONTEXT_t vosContext )
       if ( vStatus == VOS_STATUS_E_TIMEOUT )
       {
          VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-          "%s: Timeout occurred before WDA complete", __func__);
-=======
           "%s: Timeout occurred before WDA complete\n", __func__);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
       }
       else
       {
@@ -742,14 +666,6 @@ VOS_STATUS vos_start( v_CONTEXT_t vosContext )
      }
      VOS_ASSERT(0);
      vos_event_reset( &(gpVosContext->wdaCompleteEvent) );
-<<<<<<< HEAD
-     if (vos_is_logp_in_progress(VOS_MODULE_ID_VOSS, NULL))
-     {
-       if (isSsrPanicOnFailure())
-           VOS_BUG(0);
-     }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      WDA_setNeedShutdown(vosContext);
      return VOS_STATUS_E_FAILURE;
   }
@@ -762,15 +678,7 @@ VOS_STATUS vos_start( v_CONTEXT_t vosContext )
   if ( vStatus != VOS_STATUS_SUCCESS )
   {
      VOS_TRACE( VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                 "%s: Failed to start WDA - WDA_shutdown needed", __func__);
-     if ( vStatus == VOS_STATUS_E_TIMEOUT )
-      {
-         WDA_setNeedShutdown(vosContext);
-      }
-=======
                  "%s: Failed to start WDA", __func__);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
      return VOS_STATUS_E_FAILURE;
   }
   VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_INFO,
@@ -823,7 +731,7 @@ VOS_STATUS vos_start( v_CONTEXT_t vosContext )
 
 
 err_sme_stop:
-  sme_Stop(pVosContext->pMACContext, HAL_STOP_TYPE_SYS_RESET);
+  sme_Stop(pVosContext->pMACContext, TRUE);
     
 err_mac_stop:
   macStop( pVosContext->pMACContext, HAL_STOP_TYPE_SYS_RESET );
@@ -971,7 +879,6 @@ VOS_STATUS vos_close( v_CONTEXT_t vosContext )
 
   ((pVosContextType)vosContext)->pMACContext = NULL;
 
-#ifndef CONFIG_ENABLE_LINUX_REG
   vosStatus = vos_nv_close();
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -979,7 +886,7 @@ VOS_STATUS vos_close( v_CONTEXT_t vosContext )
          "%s: Failed to close NV", __func__);
      VOS_ASSERT( VOS_IS_STATUS_SUCCESS( vosStatus ) );
   }
-#endif
+
 
   vosStatus = sysClose( vosContext );
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
@@ -1120,7 +1027,6 @@ v_VOID_t* vos_get_context( VOS_MODULE_ID moduleId,
 
     case VOS_MODULE_ID_SME:
     case VOS_MODULE_ID_PE:
-    case VOS_MODULE_ID_PMC:
     {
       /* 
       ** In all these cases, we just return the MAC Context
@@ -1242,31 +1148,6 @@ void vos_set_load_unload_in_progress(VOS_MODULE_ID moduleId, v_U8_t value)
    gpVosContext->isLoadUnloadInProgress = value;
 }
 
-v_U8_t vos_is_reinit_in_progress(VOS_MODULE_ID moduleId, v_VOID_t *moduleContext)
-{
-  if (gpVosContext == NULL)
-  {
-    VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-        "%s: global voss context is NULL", __func__);
-    return 1;
-  }
-
-   return gpVosContext->isReInitInProgress;
-}
-
-void vos_set_reinit_in_progress(VOS_MODULE_ID moduleId, v_U8_t value)
-{
-  if (gpVosContext == NULL)
-  {
-    VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_ERROR,
-        "%s: global voss context is NULL", __func__);
-    return;
-  }
-
-   gpVosContext->isReInitInProgress = value;
-}
-
-
 /**---------------------------------------------------------------------------
   
   \brief vos_alloc_context() - allocate a context within the VOSS global Context
@@ -1351,7 +1232,6 @@ VOS_STATUS vos_alloc_context( v_VOID_t *pVosContext, VOS_MODULE_ID moduleID,
     }
     case VOS_MODULE_ID_SME:
     case VOS_MODULE_ID_PE:
-    case VOS_MODULE_ID_PMC:
     case VOS_MODULE_ID_HDD:
     case VOS_MODULE_ID_HDD_SOFTAP:
     default:
@@ -1477,7 +1357,6 @@ VOS_STATUS vos_free_context( v_VOID_t *pVosContext, VOS_MODULE_ID moduleID,
     case VOS_MODULE_ID_HDD:
     case VOS_MODULE_ID_SME:
     case VOS_MODULE_ID_PE:
-    case VOS_MODULE_ID_PMC:
     case VOS_MODULE_ID_HDD_SOFTAP:
     default:
     {     
@@ -1836,14 +1715,6 @@ VOS_STATUS vos_rx_mq_serialize( VOS_MQ_ID msgQueueId, vos_msg_t *pMsg )
        pTargetMq = &(gpVosContext->vosSched.wdiRxMq);
        break;
     }
-<<<<<<< HEAD
-    case VOS_MQ_ID_TL:
-    {
-       pTargetMq = &(gpVosContext->vosSched.tlRxMq);
-       break;
-    }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     default:
 
@@ -1996,13 +1867,6 @@ vos_fetch_tl_cfg_parms
   pTLConfig->ucAcWeights[1] = pConfig->WfqBeWeight;
   pTLConfig->ucAcWeights[2] = pConfig->WfqViWeight;
   pTLConfig->ucAcWeights[3] = pConfig->WfqVoWeight;
-<<<<<<< HEAD
-  pTLConfig->ucReorderAgingTime[0] = pConfig->BkReorderAgingTime;/*WLANTL_AC_BK*/
-  pTLConfig->ucReorderAgingTime[1] = pConfig->BeReorderAgingTime;/*WLANTL_AC_BE*/
-  pTLConfig->ucReorderAgingTime[2] = pConfig->ViReorderAgingTime;/*WLANTL_AC_VI*/
-  pTLConfig->ucReorderAgingTime[3] = pConfig->VoReorderAgingTime;/*WLANTL_AC_VO*/
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   pTLConfig->uDelayedTriggerFrmInt = pConfig->DelayedTriggerFrmInt;
   pTLConfig->uMinFramesProcThres = pConfig->MinFramesProcThres;
 
@@ -2013,11 +1877,7 @@ v_BOOL_t vos_is_apps_power_collapse_allowed(void* pHddCtx)
   return hdd_is_apps_power_collapse_allowed((hdd_context_t*) pHddCtx);
 }
 
-<<<<<<< HEAD
-void vos_abort_mac_scan(v_U8_t sessionId)
-=======
 void vos_abort_mac_scan(void)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     hdd_context_t *pHddCtx = NULL;
     v_CONTEXT_t pVosContext        = NULL;
@@ -2036,16 +1896,10 @@ void vos_abort_mac_scan(void)
        return;
     }
 
-<<<<<<< HEAD
-    hdd_abort_mac_scan(pHddCtx, sessionId, eCSR_SCAN_ABORT_DEFAULT);
-    return;
-}
-=======
     hdd_abort_mac_scan(pHddCtx);
     return;
 }
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*---------------------------------------------------------------------------
 
   \brief vos_shutdown() - shutdown VOS
@@ -2104,8 +1958,6 @@ VOS_STATUS vos_shutdown(v_CONTEXT_t vosContext)
 
   ((pVosContextType)vosContext)->pMACContext = NULL;
 
-<<<<<<< HEAD
-=======
   vosStatus = vos_nv_close();
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -2114,7 +1966,6 @@ VOS_STATUS vos_shutdown(v_CONTEXT_t vosContext)
      VOS_ASSERT( VOS_IS_STATUS_SUCCESS( vosStatus ) );
   }
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   vosStatus = sysClose( vosContext );
   if (!VOS_IS_STATUS_SUCCESS(vosStatus))
   {
@@ -2295,39 +2146,6 @@ VOS_STATUS vos_wlanRestart(void)
 v_VOID_t vos_fwDumpReq(tANI_U32 cmd, tANI_U32 arg1, tANI_U32 arg2,
                         tANI_U32 arg3, tANI_U32 arg4)
 {
-<<<<<<< HEAD
-   WDA_HALDumpCmdReq(NULL, cmd, arg1, arg2, arg3, arg4, NULL);
-}
-
-v_U64_t vos_get_monotonic_boottime(void)
-{
-    struct timespec ts;
-    wcnss_get_monotonic_boottime(&ts);
-    return (((v_U64_t)ts.tv_sec * 1000000) + (ts.tv_nsec / 1000));
-}
-
-/**---------------------------------------------------------------------------
-
-  \brief vos_randomize_n_bytes() - HDD Random Mac Addr Generator
-
-  This generates the random mac address for WLAN interface
-
-  \param  - mac_addr - pointer to Mac address
-
-  \return -  0 for success, < 0 for failure
-
-  --------------------------------------------------------------------------*/
-
-VOS_STATUS  vos_randomize_n_bytes(void *start_addr, tANI_U32 n)
-{
-
-    if (start_addr == NULL )
-        return VOS_STATUS_E_FAILURE;
-
-    get_random_bytes( start_addr, n);
-
-    return eHAL_STATUS_SUCCESS;
-=======
    VOS_STATUS vStatus          = VOS_STATUS_SUCCESS;
 
    /* Reset wda wait event */
@@ -2355,5 +2173,4 @@ VOS_STATUS  vos_randomize_n_bytes(void *start_addr, tANI_U32 n)
 
    return;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }

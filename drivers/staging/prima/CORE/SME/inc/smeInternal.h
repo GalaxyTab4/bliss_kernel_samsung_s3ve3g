@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2011-2015 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,18 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -55,7 +39,6 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if !defined( __SMEINTERNAL_H )
 #define __SMEINTERNAL_H
 
@@ -102,10 +85,6 @@ typedef enum eSmeCommandType
     eSmeCommandRemoveKey,
     eSmeCommandAddStaSession,
     eSmeCommandDelStaSession,
-<<<<<<< HEAD
-    eSmeCommandPnoReq,
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_TDLS
     //eSmeTdlsCommandMask = 0x80000,  //To identify TDLS commands <TODO>
     //These can be considered as csr commands. 
@@ -113,10 +92,6 @@ typedef enum eSmeCommandType
     eSmeCommandTdlsAddPeer, 
     eSmeCommandTdlsDelPeer, 
     eSmeCommandTdlsLinkEstablish,
-<<<<<<< HEAD
-    eSmeCommandTdlsChannelSwitch, // tdlsoffchan
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef FEATURE_WLAN_TDLS_INTERNAL
     eSmeCommandTdlsDiscovery,
     eSmeCommandTdlsLinkSetup,
@@ -158,17 +133,6 @@ typedef enum eSmeState
 #define SME_IS_START(pMac)  (SME_STATE_STOP != (pMac)->sme.state)
 #define SME_IS_READY(pMac)  (SME_STATE_READY == (pMac)->sme.state)
 
-<<<<<<< HEAD
-/* HDD Callback function */
-typedef void(*pEncryptMsgRSPCb)(void *pUserData, void *infoParam);
-
-typedef struct tagSmeEncMsgHddCbkInfo
-{
-   void *pUserData;
-   pEncryptMsgRSPCb pEncMsgCbk;
-}tSmeEncMsgHddCbkInfo;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 typedef struct tagSmeStruct
 {
@@ -183,37 +147,12 @@ typedef struct tagSmeStruct
     void *pTxPerHitCbContext;
     tVOS_CON_MODE currDeviceMode;
 #ifdef FEATURE_WLAN_LPHB
-<<<<<<< HEAD
-    void (*pLphbIndCb) (void *pAdapter, void *indParam);
-=======
     void (*pLphbWaitTimeoutCb) (void *pAdapter, void *indParam);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif /* FEATURE_WLAN_LPHB */
     //pending scan command list
     tDblLinkList smeScanCmdPendingList;
     //active scan command list
     tDblLinkList smeScanCmdActiveList;
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_CH_AVOID
-    void (*pChAvoidNotificationCb) (void *pAdapter, void *indParam);
-#endif /* FEATURE_WLAN_CH_AVOID */
-
-#ifdef WLAN_FEATURE_LINK_LAYER_STATS
-   /* HDD callback to be called after receiving Link Layer Stats Results IND from FW */
-   void(*pLinkLayerStatsIndCallback)(void *callbackContext,
-                                     int indType, void *pRsp, tANI_U8 *macAddr );
-   void *pLinkLayerStatsCallbackContext;
-#endif
-#ifdef WLAN_FEATURE_EXTSCAN
-   void (*pEXTScanIndCb) (void *, const tANI_U16, void *);
-   /* Use this request ID while sending Full Scan Results */
-   int  extScanStartReqId;
-   void *pEXTScanCallbackContext;
-#endif /* WLAN_FEATURE_EXTSCAN */
-   tSmeEncMsgHddCbkInfo pEncMsgInfoParams;
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tSmeStruct, *tpSmeStruct;
 
 

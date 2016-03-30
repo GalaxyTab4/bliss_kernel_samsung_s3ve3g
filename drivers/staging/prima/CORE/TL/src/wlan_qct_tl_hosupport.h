@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #ifndef WLAN_QCT_TL_HOSUPPORT_H
@@ -94,30 +82,6 @@ when        who    what, where, why
 ===========================================================================*/
 #include "wlan_qct_tl.h" 
 
-<<<<<<< HEAD
-#ifdef WLAN_FEATURE_LINK_LAYER_STATS
-/*==========================================================================
-
-   FUNCTION
-
-   DESCRIPTION
-
-   PARAMETERS
-
-   RETURN VALUE
-
-============================================================================*/
-VOS_STATUS WLANTL_HSGetDataRSSI
-(
-   v_PVOID_t        pAdapter,
-   v_PVOID_t        pBDHeader,
-   v_U8_t           STAid,
-   v_S7_t          *currentAvgRSSI
-);
-#endif
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if defined WLAN_FEATURE_NEIGHBOR_ROAMING
 /*----------------------------------------------------------------------------
  * Include Files
@@ -354,10 +318,6 @@ VOS_STATUS WLANTL_StatHandleTXFrame
    WLANTL_MetaInfoType *txMetaInfo
 );
 
-<<<<<<< HEAD
-#endif
-=======
 #endif //FEATURE_WLAN_GEN6_ROAMING
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #endif /* WLAN_QCT_TL_HOSUPPORT_H */

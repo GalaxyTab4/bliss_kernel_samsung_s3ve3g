@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,15 +37,11 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*
  *
-<<<<<<< HEAD
-=======
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limPropExtsUtils.cc contains the utility functions
  * to populate, parse proprietary extensions required to
  * support ANI feature set.
@@ -83,10 +68,6 @@
 #include "limTrace.h"
 #include "limSession.h"
 #define LIM_GET_NOISE_MAX_TRY 5
-<<<<<<< HEAD
-#define LIM_OPERATING_EXT_IDENTIFIER 201
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /**
  * limExtractApCapability()
  *
@@ -118,11 +99,7 @@ limExtractApCapability(tpAniSirGlobal pMac, tANI_U8 *pIE, tANI_U16 ieLen,
 #if !defined WLAN_FEATURE_VOWIFI
     tANI_U32            localPowerConstraints = 0;
 #endif
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pBeaconStruct = vos_mem_malloc(sizeof(tSirProbeRespBeacon));
 
     if ( NULL == pBeaconStruct )
@@ -172,59 +149,11 @@ limExtractApCapability(tpAniSirGlobal pMac, tANI_U8 *pIE, tANI_U16 ieLen,
         // Extract the UAPSD flag from WMM Parameter element
         if (pBeaconStruct->wmeEdcaPresent)
             *uapsd = pBeaconStruct->edcaParams.qosInfo.uapsd;
-<<<<<<< HEAD
-
-        /* Get MaxTxPwr from country IE if present.
-           If the channel number field has a positive  integer value less
-           than 201, then it contains a positive integer value that indicates
-           the lowest channel number in the subband */
-
-        if (pBeaconStruct->countryInfoPresent &&
-            pBeaconStruct->countryInfoParam.channelTransmitPower[0].channelNumber < LIM_OPERATING_EXT_IDENTIFIER )
-        {
-            int i;
-            tANI_U8 firstChannel =0, numChannels =0;
-            tANI_U8 channel = psessionEntry->currentOperChannel;
-
-            for (i=0; i < pBeaconStruct->countryInfoParam.numIntervals; ++i)
-            {
-                if (i >= COUNTRY_INFO_MAX_CHANNEL)
-                    break;
-
-                firstChannel = pBeaconStruct->countryInfoParam.channelTransmitPower[i].channelNumber;
-                numChannels = pBeaconStruct->countryInfoParam.channelTransmitPower[i].numChannel;
-
-                if ((channel >= firstChannel) &&
-                    (channel < (firstChannel + numChannels)))
-                    break;
-            }
-
-            if (i < pBeaconStruct->countryInfoParam.numIntervals && i < COUNTRY_INFO_MAX_CHANNEL)
-            {
-                *localConstraint = pBeaconStruct->countryInfoParam.channelTransmitPower[i].maxTransmitPower;
-            }
-        }
-#if defined FEATURE_WLAN_ESE
-=======
 #if defined FEATURE_WLAN_CCX
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         /* If there is Power Constraint Element specifically,
          * adapt to it. Hence there is else condition check
          * for this if statement.
          */
-<<<<<<< HEAD
-        if ( pBeaconStruct->eseTxPwr.present)
-        {
-            *localConstraint = pBeaconStruct->eseTxPwr.power_limit;
-        }
-#endif
-        if (pBeaconStruct->powerConstraintPresent)
-        {
-            *localConstraint -= pBeaconStruct->localPowerConstraint.localPowerConstraints;
-        }
-#if !defined WLAN_FEATURE_VOWIFI
-        localPowerConstraints = (tANI_U32)pBeaconStruct->localPowerConstraint.localPowerConstraints;
-=======
         if ( pBeaconStruct->ccxTxPwr.present)
         {
             *localConstraint = pBeaconStruct->ccxTxPwr.power_limit;
@@ -247,20 +176,11 @@ limExtractApCapability(tpAniSirGlobal pMac, tANI_U8 *pIE, tANI_U16 ieLen,
 #endif
         }
 #if !defined WLAN_FEATURE_VOWIFI
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         if (cfgSetInt(pMac, WNI_CFG_LOCAL_POWER_CONSTRAINT, localPowerConstraints) != eSIR_SUCCESS)
         {
             limLog(pMac, LOGP, FL("Could not update local power constraint to cfg."));
         }
 #endif
-<<<<<<< HEAD
-        psessionEntry->countryInfoPresent = FALSE; /* Initializing before first use */
-        if (pBeaconStruct->countryInfoPresent)
-        {
-            psessionEntry->countryInfoPresent = TRUE;
-        }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     vos_mem_free(pBeaconStruct);
     return;

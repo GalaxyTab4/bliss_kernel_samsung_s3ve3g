@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,16 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/*
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -56,7 +42,6 @@
 
 /*
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limScanResultUtils.h contains the utility definitions
  * LIM uses for maintaining and accessing scan results on STA.
  * Author:        Chandra Modumudi
@@ -92,13 +77,13 @@ void    limReInitLfrScanResults(tpAniSirGlobal);
 tANI_U32 limDeactivateMinChannelTimerDuringScan(tpAniSirGlobal);
 void    limCheckAndAddBssDescription(tpAniSirGlobal, tpSirProbeRespBeacon, tANI_U8 *, tANI_BOOLEAN, tANI_U8);
 #if defined WLAN_FEATURE_VOWIFI
-eHalStatus    limCollectBssDescription(tpAniSirGlobal,
+void    limCollectBssDescription(tpAniSirGlobal,
                                  tSirBssDescription *,
                                  tpSirProbeRespBeacon,
                                  tANI_U8 *,
                                  tANI_U8);
 #else
-eHalStatus    limCollectBssDescription(tpAniSirGlobal,
+void    limCollectBssDescription(tpAniSirGlobal,
                                  tSirBssDescription *,
                                  tpSirProbeRespBeacon,
                                  tANI_U8 *);

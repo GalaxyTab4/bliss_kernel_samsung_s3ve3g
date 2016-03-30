@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /*===========================================================================
@@ -343,26 +331,7 @@ v_UINT_t tx_timer_create_intern_debug( v_PVOID_t pMacGlobal, TX_TIMER *timer_ptr
 {
     VOS_STATUS status;
 
-<<<<<<< HEAD
-    if (NULL == expiration_function)
-    {
-        VOS_TRACE(VOS_MODULE_ID_SYS, VOS_TRACE_LEVEL_ERROR,
-                "NULL timer expiration");
-        VOS_ASSERT(0);
-        return TX_TIMER_ERROR;
-    }
-
-    if(NULL == name_ptr)
-    {
-
-        VOS_TRACE(VOS_MODULE_ID_SYS, VOS_TRACE_LEVEL_ERROR,
-                "NULL name pointer for timer");
-        VOS_ASSERT(0);
-        return TX_TIMER_ERROR;
-    }
-=======
     VOS_ASSERT((NULL != expiration_function) && (NULL != name_ptr));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if (!initScheduleTimeInTicks)
         return TX_TICK_ERROR;
@@ -420,10 +389,7 @@ v_UINT_t tx_timer_create_intern( v_PVOID_t pMacGlobal, TX_TIMER *timer_ptr,
 {
     VOS_STATUS status;
 
-<<<<<<< HEAD
-=======
     VOS_ASSERT((NULL != expiration_function) && (NULL != name_ptr));
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if((NULL == name_ptr) || (NULL == expiration_function))
         return TX_TIMER_ERROR;
 

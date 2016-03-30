@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #ifndef __P2P_H
@@ -67,29 +55,16 @@
 #define WAIT_CANCEL_REM_CHAN    1000
 #define WAIT_REM_CHAN_READY     1000
 #define WAIT_CHANGE_CHANNEL_FOR_OFFCHANNEL_TX 3000
-<<<<<<< HEAD
-#define READY_EVENT_PROPOGATE_TIME 2
+#define WAIT_TIME_FOR_P2PGO_CONNECTION 10000
 
 #define ACTION_FRAME_DEFAULT_WAIT 200
 
-#define ESTIMATED_ROC_DUR_REQD_FOR_ACTION_TX 20
-
-=======
-
-#define ACTION_FRAME_DEFAULT_WAIT 200
-
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define WLAN_HDD_GET_TYPE_FRM_FC(__fc__)         (((__fc__) & 0x0F) >> 2)
 #define WLAN_HDD_GET_SUBTYPE_FRM_FC(__fc__)      (((__fc__) & 0xF0) >> 4)
 #define WLAN_HDD_80211_FRM_DA_OFFSET             4
 #define P2P_WILDCARD_SSID_LEN                    7
 #define P2P_WILDCARD_SSID                        "DIRECT-"
-<<<<<<< HEAD
-#define ACTION_FRAME_RSP_WAIT 500
-#define ACTION_FRAME_ACK_WAIT 300
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef WLAN_FEATURE_11W
 #define WLAN_HDD_SET_WEP_FRM_FC(__fc__)     ( (__fc__) = ((__fc__) | 0x40))
 #endif //WLAN_FEATURE_11W
@@ -172,17 +147,12 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
 void hdd_remainChanReadyHandler( hdd_adapter_t *pAdapter );
 void hdd_sendActionCnf( hdd_adapter_t *pAdapter, tANI_BOOLEAN actionSendSuccess );
 int wlan_hdd_check_remain_on_channel(hdd_adapter_t *pAdapter);
-<<<<<<< HEAD
-VOS_STATUS wlan_hdd_cancel_existing_remain_on_channel(hdd_adapter_t *pAdapter);
-
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct wireless_dev *wdev,
-=======
 void wlan_hdd_cancel_existing_remain_on_channel(hdd_adapter_t *pAdapter);
+void hdd_start_p2p_go_connection_in_progress_timer( hdd_adapter_t *pAdapter );
+v_VOID_t wlan_hdd_p2p_go_connection_in_progresscb (v_PVOID_t userData );
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
 int wlan_hdd_action( struct wiphy *wiphy, struct wireless_dev *wdev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan, bool offchan,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
                      enum nl80211_channel_type channel_type,
@@ -192,32 +162,20 @@ int wlan_hdd_action( struct wiphy *wiphy, struct wireless_dev *wdev,
                      const u8 *buf, size_t len,  bool no_cck,
                      bool dont_wait_for_ack, u64 *cookie );
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
-<<<<<<< HEAD
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-=======
 int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan, bool offchan,
                      enum nl80211_channel_type channel_type,
                      bool channel_type_valid, unsigned int wait,
                      const u8 *buf, size_t len,  bool no_cck,
                      bool dont_wait_for_ack, u64 *cookie );
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-<<<<<<< HEAD
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-=======
 int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan, bool offchan,
                      enum nl80211_channel_type channel_type,
                      bool channel_type_valid, unsigned int wait,
                      const u8 *buf, size_t len, u64 *cookie );
 #else
-<<<<<<< HEAD
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-=======
 int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan,
                      enum nl80211_channel_type channel_type,
                      bool channel_type_valid,

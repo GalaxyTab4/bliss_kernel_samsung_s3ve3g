@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**========================================================================
@@ -67,18 +55,10 @@
 #include <wlan_hdd_hostapd.h>
 #include <net/cfg80211.h>
 #include "sme_Api.h"
-<<<<<<< HEAD
-#include "sme_QosApi.h"
-#include "wlan_hdd_p2p.h"
-#include "sapApi.h"
-#include "wlan_hdd_main.h"
-#include "vos_trace.h"
-=======
 #include "wlan_hdd_p2p.h"
 #include "sapApi.h"
 #include "wlan_hdd_main.h"
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #include <linux/netdevice.h>
 #include <linux/skbuff.h>
 #include <linux/etherdevice.h>
@@ -86,46 +66,9 @@
 #ifdef FEATURE_WLAN_TDLS
 #include "wlan_hdd_tdls.h"
 #endif
-<<<<<<< HEAD
-#include "wlan_hdd_trace.h"
-#include "vos_types.h"
-#include "vos_trace.h"
-#include "vos_sched.h"
 
 //Ms to Micro Sec
 #define MS_TO_MUS(x)   ((x)*1000);
-tANI_U8* hdd_getActionString( tANI_U16 MsgType )
-{
-    switch (MsgType)
-    {
-       CASE_RETURN_STRING(SIR_MAC_ACTION_SPECTRUM_MGMT);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_QOS_MGMT);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_DLP);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_BLKACK);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_PUBLIC_USAGE);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_RRM);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_FAST_BSS_TRNST);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_HT);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_SA_QUERY);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_PROT_DUAL_PUB);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_WNM);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_UNPROT_WNM);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_TDLS);
-       CASE_RETURN_STRING(SIR_MAC_ACITON_MESH);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_MULTIHOP);
-       CASE_RETURN_STRING(SIR_MAC_SELF_PROTECTED);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_WME);
-       CASE_RETURN_STRING(SIR_MAC_ACTION_VHT);
-       default:
-           return ("UNKNOWN");
-    }
-}
-
-=======
-
-//Ms to Micro Sec
-#define MS_TO_MUS(x)   ((x)*1000);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #ifdef WLAN_FEATURE_P2P_DEBUG
 #define MAX_P2P_ACTION_FRAME_TYPE 9
@@ -172,95 +115,24 @@ static void hdd_wlan_tx_complete( hdd_adapter_t* pAdapter,
                                   tANI_BOOLEAN actionSendSuccess );
 
 static void hdd_sendMgmtFrameOverMonitorIface( hdd_adapter_t *pMonAdapter,
-<<<<<<< HEAD
-                                               tANI_U32 nFrameLength,
-                                               tANI_U8* pbFrames,
-                                               tANI_U8 frameType );
-
-static v_BOOL_t hdd_p2p_is_action_type_rsp( const u8 *buf )
-{
-    tActionFrmType actionFrmType;
-    const u8 *ouiPtr;
-
-    if ( buf[WLAN_HDD_PUBLIC_ACTION_FRAME_CATEGORY_OFFSET] !=
-               WLAN_HDD_PUBLIC_ACTION_FRAME ) {
-        return VOS_FALSE;
-    }
-
-    if ( buf[WLAN_HDD_PUBLIC_ACTION_FRAME_ACTION_OFFSET] !=
-               WLAN_HDD_VENDOR_SPECIFIC_ACTION ) {
-        return VOS_FALSE;
-    }
-
-    ouiPtr = &buf[WLAN_HDD_PUBLIC_ACTION_FRAME_OUI_OFFSET];
-
-    if ( WPA_GET_BE24(ouiPtr) != WLAN_HDD_WFA_OUI ) {
-        return VOS_FALSE;
-    }
-
-    if ( buf[WLAN_HDD_PUBLIC_ACTION_FRAME_OUI_TYPE_OFFSET] !=
-               WLAN_HDD_WFA_P2P_OUI_TYPE ) {
-        return VOS_FALSE;
-    }
-
-    actionFrmType = buf[WLAN_HDD_PUBLIC_ACTION_FRAME_SUB_TYPE_OFFSET];
-    if ( actionFrmType != WLAN_HDD_INVITATION_REQ &&
-        actionFrmType != WLAN_HDD_GO_NEG_REQ &&
-        actionFrmType != WLAN_HDD_DEV_DIS_REQ &&
-        actionFrmType != WLAN_HDD_PROV_DIS_REQ )
-        return VOS_TRUE;
-    else
-        return VOS_FALSE;
-}
-
-=======
                                                tANI_U32 nFrameLength, 
                                                tANI_U8* pbFrames,
                                                tANI_U8 frameType );
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 eHalStatus wlan_hdd_remain_on_channel_callback( tHalHandle hHal, void* pCtx,
                                                 eHalStatus status )
 {
     hdd_adapter_t *pAdapter = (hdd_adapter_t*) pCtx;
     hdd_cfg80211_state_t *cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
     hdd_remain_on_chan_ctx_t *pRemainChanCtx = cfgState->remain_on_chan_ctx;
-<<<<<<< HEAD
-    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
-
-    if (pHddCtx == NULL)
-    {
-        hddLog(LOGE, "%s: Hdd Context is NULL", __func__);
-        return eHAL_STATUS_FAILURE;
-    }
-    if (pRemainChanCtx == NULL)
-=======
 
     if( pRemainChanCtx == NULL )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     {
        hddLog( LOGW,
           "%s: No Rem on channel pending for which Rsp is received", __func__);
        return eHAL_STATUS_SUCCESS;
     }
 
-<<<<<<< HEAD
-    mutex_lock(&pHddCtx->roc_lock);
-    hddLog( VOS_TRACE_LEVEL_INFO,
-            "Received ROC rsp (request type %d, channel %d, cookie %llu",
-            pRemainChanCtx->rem_on_chan_request,
-            pRemainChanCtx->chan.center_freq,
-            pRemainChanCtx->cookie);
-    cfgState->remain_on_chan_ctx = NULL;
-    vos_timer_stop(&pRemainChanCtx->hdd_remain_on_chan_timer);
-    vos_timer_destroy(&pRemainChanCtx->hdd_remain_on_chan_timer);
-    mutex_unlock(&pHddCtx->roc_lock);
-    if ( REMAIN_ON_CHANNEL_REQUEST == pRemainChanCtx->rem_on_chan_request )
-    {
-        if( cfgState->buf )
-        {
-           hddLog( LOGP,
-=======
     hddLog( LOG1, "Received remain on channel rsp");
 
     cfgState->remain_on_chan_ctx = NULL;
@@ -270,7 +142,6 @@ eHalStatus wlan_hdd_remain_on_channel_callback( tHalHandle hHal, void* pCtx,
         if( cfgState->buf )
         {
            hddLog( LOGP, 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                    "%s: We need to receive yet an ack from one of tx packet",
                    __func__);
         }
@@ -312,126 +183,6 @@ eHalStatus wlan_hdd_remain_on_channel_callback( tHalHandle hHal, void* pCtx,
                 (SIR_MAC_MGMT_FRAME << 2) | ( SIR_MAC_MGMT_PROBE_REQ << 4),
                 NULL, 0 );
     }
-<<<<<<< HEAD
-    if (pRemainChanCtx->action_pkt_buff.frame_ptr != NULL
-       && pRemainChanCtx->action_pkt_buff.frame_length != 0)
-    {
-        vos_mem_free(pRemainChanCtx->action_pkt_buff.frame_ptr);
-    }
-    vos_mem_free( pRemainChanCtx );
-    pRemainChanCtx = NULL;
-    if (eHAL_STATUS_SUCCESS != status)
-        complete(&pAdapter->rem_on_chan_ready_event);
-    complete(&pAdapter->cancel_rem_on_chan_var);
-    pAdapter->is_roc_inprogress = FALSE;
-    hdd_allow_suspend();
-    return eHAL_STATUS_SUCCESS;
-}
-
-VOS_STATUS wlan_hdd_cancel_existing_remain_on_channel(hdd_adapter_t *pAdapter)
-{
-    hdd_cfg80211_state_t *cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
-    hdd_remain_on_chan_ctx_t *pRemainChanCtx = cfgState->remain_on_chan_ctx;
-    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
-    int status = 0;
-
-    if (NULL == pHddCtx)
-    {
-        hddLog(LOGE, "%s: HddCtx is NULL", __func__);
-        return VOS_STATUS_E_FAILURE;
-    }
-
-    mutex_lock(&pHddCtx->roc_lock);
-    if(cfgState->remain_on_chan_ctx != NULL)
-    {
-        hddLog(VOS_TRACE_LEVEL_INFO,
-               "Cancel Existing ROC (cookie=%llu)",
-                cfgState->remain_on_chan_ctx->cookie);
-
-        vos_timer_stop(&cfgState->remain_on_chan_ctx->hdd_remain_on_chan_timer);
-
-        /* Wait till remain on channel ready indication before issuing cancel
-         * remain on channel request, otherwise if remain on channel not
-         * received and if the driver issues cancel remain on channel then lim
-         * will be in unknown state.
-         */
-        if (pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress != TRUE)
-        {
-            status = wait_for_completion_interruptible_timeout(
-                                        &pAdapter->rem_on_chan_ready_event,
-                                        msecs_to_jiffies(WAIT_REM_CHAN_READY));
-            if (0 >= status)
-            {
-                hddLog( LOGE,
-                       "%s: timeout waiting for remain on channel"
-                       " ready indication %d",
-                        __func__, status);
-                pRemainChanCtx->is_pending_roc_cancelled = TRUE;
-                mutex_unlock(&pHddCtx->roc_lock);
-                return VOS_STATUS_E_FAILURE;
-            }
-
-            INIT_COMPLETION(pAdapter->cancel_rem_on_chan_var);
-            pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress = TRUE;
-            mutex_unlock(&pHddCtx->roc_lock);
-
-             /* Issue abort remain on chan request to sme.
-              * The remain on channel callback will make sure the remain_on_chan
-              * expired event is sent.
-              */
-              if (( WLAN_HDD_INFRA_STATION == pAdapter->device_mode ) ||
-                 ( WLAN_HDD_P2P_CLIENT == pAdapter->device_mode ) ||
-                 ( WLAN_HDD_P2P_DEVICE == pAdapter->device_mode ))
-              {
-                  sme_CancelRemainOnChannel( WLAN_HDD_GET_HAL_CTX( pAdapter ),
-                                                     pAdapter->sessionId );
-              }
-              else if ( (WLAN_HDD_SOFTAP== pAdapter->device_mode) ||
-                      (WLAN_HDD_P2P_GO == pAdapter->device_mode))
-              {
-                   WLANSAP_CancelRemainOnChannel(
-                          (WLAN_HDD_GET_CTX(pAdapter))->pvosContext);
-              }
-
-              status = wait_for_completion_interruptible_timeout(
-                                       &pAdapter->cancel_rem_on_chan_var,
-                                       msecs_to_jiffies(WAIT_CANCEL_REM_CHAN));
-              if (0 >= status)
-              {
-                  hddLog( LOGE,
-                          "%s: timeout waiting for cancel remain on channel"
-                          " ready indication %d",
-                           __func__, status);
-              }
-              hdd_allow_suspend();
-         }
-         else
-         {
-              hddLog( LOG1,
-                      "ROC timer cancellation in progress,"
-                      " wait for completion");
-              mutex_unlock(&pHddCtx->roc_lock);
-              status = wait_for_completion_interruptible_timeout(
-                                     &pAdapter->cancel_rem_on_chan_var,
-                                     msecs_to_jiffies(WAIT_CANCEL_REM_CHAN));
-              if (0 >= status)
-              {
-                  hddLog( LOGE,
-                          "%s:wait on cancel_rem_on_chan_var failed %d",
-                           __func__, status);
-                  return VOS_STATUS_E_FAILURE;
-              }
-              return VOS_STATUS_SUCCESS;
-         }
-    }
-    else
-    {
-       hddLog(LOG1,
-               "%s: remain_on_chan_ctx is NULL", __func__);
-       mutex_unlock(&pHddCtx->roc_lock);
-    }
-    return VOS_STATUS_SUCCESS;
-=======
 
     vos_mem_free( pRemainChanCtx );
     complete(&pAdapter->cancel_rem_on_chan_var);
@@ -493,7 +244,6 @@ void wlan_hdd_cancel_existing_remain_on_channel(hdd_adapter_t *pAdapter)
                     __func__);
         }
     }
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 
 int wlan_hdd_check_remain_on_channel(hdd_adapter_t *pAdapter)
@@ -514,64 +264,13 @@ int wlan_hdd_check_remain_on_channel(hdd_adapter_t *pAdapter)
         }
         else
         {
-<<<<<<< HEAD
-           hddLog(VOS_TRACE_LEVEL_DEBUG,
-                   "Cannot Cancel Existing Remain on Channel");
-=======
            hddLog( LOG1, "Cannot Cancel Existing Remain on Channel");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            status = -EBUSY;
         }
      }
    }
    return status;
 }
-<<<<<<< HEAD
-void wlan_hdd_remain_on_chan_timeout(void *data)
-{
-    hdd_adapter_t *pAdapter = (hdd_adapter_t *)data;
-    hdd_remain_on_chan_ctx_t *pRemainChanCtx;
-    hdd_cfg80211_state_t *cfgState;
-    if ( NULL == pAdapter )
-    {
-        hddLog( LOGE, FL("pAdapter is NULL !!!"));
-        return;
-    }
-    cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
-    pRemainChanCtx = cfgState->remain_on_chan_ctx;
-    if (NULL == pRemainChanCtx)
-    {
-        hddLog( LOGE, FL("No Remain on channel is pending"));
-        return;
-    }
-    if ( TRUE == pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress )
-    {
-        hddLog( LOGE, FL("Cancellation already in progress"));
-        return;
-    }
-
-    pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress = TRUE;
-    INIT_COMPLETION(pAdapter->cancel_rem_on_chan_var);
-    hddLog( LOG1,"%s: Cancel Remain on Channel on timeout", __func__);
-    if ( ( WLAN_HDD_INFRA_STATION == pAdapter->device_mode ) ||
-          ( WLAN_HDD_P2P_CLIENT == pAdapter->device_mode ) ||
-           ( WLAN_HDD_P2P_DEVICE == pAdapter->device_mode )
-       )
-    {
-        sme_CancelRemainOnChannel( WLAN_HDD_GET_HAL_CTX( pAdapter ),
-                                                     pAdapter->sessionId );
-    }
-    else if ( ( WLAN_HDD_SOFTAP== pAdapter->device_mode ) ||
-                  ( WLAN_HDD_P2P_GO == pAdapter->device_mode )
-                )
-    {
-         WLANSAP_CancelRemainOnChannel(
-                         (WLAN_HDD_GET_CTX(pAdapter))->pvosContext);
-    }
-    hdd_allow_suspend();
-}
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
                                    struct net_device *dev,
@@ -585,36 +284,6 @@ static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
     hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
     hdd_remain_on_chan_ctx_t *pRemainChanCtx;
     hdd_cfg80211_state_t *cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
-<<<<<<< HEAD
-    VOS_STATUS vos_status = VOS_STATUS_E_FAILURE;
-    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
-    hdd_adapter_list_node_t *pAdapterNode = NULL, *pNext = NULL;
-    hdd_adapter_t *pAdapter_temp;
-    VOS_STATUS status;
-    v_BOOL_t isGoPresent = VOS_FALSE;
-    VOS_STATUS checkReadyInd;
-    hddLog(VOS_TRACE_LEVEL_INFO, "%s: device_mode = %d",
-                                 __func__,pAdapter->device_mode);
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
-    hddLog(VOS_TRACE_LEVEL_INFO,
-           "chan(hw_val)0x%x chan(centerfreq) %d chan type 0x%x, dur %d,"
-           " request type %d, cookie %llu",
-           chan->hw_value, chan->center_freq, channel_type, duration,
-           request_type, *cookie);
-#else
-     hddLog(VOS_TRACE_LEVEL_INFO,
-            "chan(hw_val)0x%x chan(centerfreq) %d, duration %d"
-            " reuest type %d, cookie %llu", chan->hw_value, chan->center_freq,
-            duration, request_type, *cookie );
-#endif
-    //Cancel existing remain On Channel if any
-    checkReadyInd = wlan_hdd_cancel_existing_remain_on_channel(pAdapter);
-    if (VOS_STATUS_SUCCESS != checkReadyInd)
-    {
-       hddLog( LOGE, FL("Cancel Roc in progress"));
-       return -EBUSY;
-    }
-=======
     hddLog(VOS_TRACE_LEVEL_INFO, "%s: device_mode = %d",
                                  __func__,pAdapter->device_mode);
 
@@ -629,24 +298,15 @@ static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
 #endif
     //Cancel existing remain On Channel if any
     wlan_hdd_cancel_existing_remain_on_channel(pAdapter);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     /* When P2P-GO and if we are trying to unload the driver then
      * wlan driver is keep on receiving the remain on channel command
      * and which is resulting in crash. So not allowing any remain on
      * channel requets when Load/Unload is in progress*/
-<<<<<<< HEAD
-    if (WLAN_HDD_IS_LOAD_UNLOAD_IN_PROGRESS(((hdd_context_t *)pAdapter->pHddCtx))
-        || hdd_isConnectionInProgress((hdd_context_t *)pAdapter->pHddCtx, VOS_TRUE))
-    {
-        hddLog( LOGE,
-               "%s: Wlan Load/Unload  or Connection is in progress", __func__);
-=======
     if (((hdd_context_t*)pAdapter->pHddCtx)->isLoadUnloadInProgress)
     {
         hddLog( LOGE,
                 "%s: Wlan Load/Unload is in progress", __func__);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return -EBUSY;
     }
 
@@ -673,46 +333,12 @@ static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
 #endif
     pRemainChanCtx->duration = duration;
     pRemainChanCtx->dev = dev;
-<<<<<<< HEAD
-    *cookie = (uintptr_t) pRemainChanCtx;
-=======
     *cookie = (tANI_U32) pRemainChanCtx;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     pRemainChanCtx->cookie = *cookie;
     pRemainChanCtx->rem_on_chan_request = request_type;
     cfgState->remain_on_chan_ctx = pRemainChanCtx;
     cfgState->current_freq = chan->center_freq;
-<<<<<<< HEAD
-    pRemainChanCtx->action_pkt_buff.freq = 0;
-    pRemainChanCtx->action_pkt_buff.frame_ptr = NULL;
-    pRemainChanCtx->action_pkt_buff.frame_length = 0;
-    pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress = FALSE;
-    pRemainChanCtx->is_pending_roc_cancelled = FALSE;
-    /* Initialize Remain on chan timer */
-    vos_status = vos_timer_init(&pRemainChanCtx->hdd_remain_on_chan_timer,
-                                VOS_TIMER_TYPE_SW,
-                                wlan_hdd_remain_on_chan_timeout,
-                                pAdapter);
-    if (vos_status != VOS_STATUS_SUCCESS)
-    {
-         hddLog(VOS_TRACE_LEVEL_ERROR,
-             "%s: Not able to initalize remain_on_chan timer", __func__);
-    }
-    status =  hdd_get_front_adapter ( pHddCtx, &pAdapterNode );
-    while ( NULL != pAdapterNode && VOS_STATUS_SUCCESS == status )
-    {
-        pAdapter_temp = pAdapterNode->pAdapter;
-        if (WLAN_HDD_P2P_GO == pAdapter_temp->device_mode)
-        {
-            isGoPresent = VOS_TRUE;
-        }
-        status = hdd_get_next_adapter ( pHddCtx, pAdapterNode, &pNext );
-        pAdapterNode = pNext;
-    }
-    hdd_prevent_suspend();
-=======
     
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     INIT_COMPLETION(pAdapter->rem_on_chan_ready_event);
 
     //call sme API to start remain on channel.
@@ -724,23 +350,6 @@ static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
         tANI_U8 sessionId = pAdapter->sessionId;
         //call sme API to start remain on channel.
         sme_RemainOnChannel(
-<<<<<<< HEAD
-             WLAN_HDD_GET_HAL_CTX(pAdapter), sessionId,
-             chan->hw_value, duration,
-             wlan_hdd_remain_on_channel_callback, pAdapter,
-             (tANI_U8)(request_type == REMAIN_ON_CHANNEL_REQUEST)? TRUE:FALSE);
-
-        if( REMAIN_ON_CHANNEL_REQUEST == request_type)
-        {
-            if( eHAL_STATUS_SUCCESS != sme_RegisterMgmtFrame(
-                                      WLAN_HDD_GET_HAL_CTX(pAdapter),
-                                      sessionId, (SIR_MAC_MGMT_FRAME << 2) |
-                                      (SIR_MAC_MGMT_PROBE_REQ << 4), NULL, 0 ))
-            {
-                hddLog(VOS_TRACE_LEVEL_ERROR,
-                       "sme_RegisterMgmtFrame returned fail");
-            }
-=======
                        WLAN_HDD_GET_HAL_CTX(pAdapter), sessionId,
                        chan->hw_value, duration,
                        wlan_hdd_remain_on_channel_callback, pAdapter,
@@ -751,7 +360,6 @@ static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
             sme_RegisterMgmtFrame(WLAN_HDD_GET_HAL_CTX(pAdapter),
                                    sessionId, (SIR_MAC_MGMT_FRAME << 2) |
                                   (SIR_MAC_MGMT_PROBE_REQ << 4), NULL, 0 );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
 
     }
@@ -770,10 +378,6 @@ static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
                     "%s: WLANSAP_RemainOnChannel returned fail", __func__);
            cfgState->remain_on_chan_ctx = NULL;
            vos_mem_free (pRemainChanCtx);
-<<<<<<< HEAD
-            hdd_allow_suspend();
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
            return -EINVAL;
         }
 
@@ -787,28 +391,15 @@ static int wlan_hdd_request_remain_on_channel( struct wiphy *wiphy,
                     "%s: WLANSAP_RegisterMgmtFrame returned fail", __func__);
             WLANSAP_CancelRemainOnChannel(
                     (WLAN_HDD_GET_CTX(pAdapter))->pvosContext);
-<<<<<<< HEAD
-            hdd_allow_suspend();
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             return -EINVAL;
         }
 
     }
-<<<<<<< HEAD
-
-    pAdapter->is_roc_inprogress = TRUE;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return 0;
 
 }
 
-<<<<<<< HEAD
-int __wlan_hdd_cfg80211_remain_on_channel( struct wiphy *wiphy,
-=======
 int wlan_hdd_cfg80211_remain_on_channel( struct wiphy *wiphy,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
                                 struct wireless_dev *wdev,
 #else
@@ -823,14 +414,6 @@ int wlan_hdd_cfg80211_remain_on_channel( struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
     struct net_device *dev = wdev->netdev;
 #endif
-<<<<<<< HEAD
-    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR( dev );
-
-    MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                     TRACE_CODE_HDD_REMAIN_ON_CHANNEL,
-                     pAdapter->sessionId, REMAIN_ON_CHANNEL_REQUEST));
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     return wlan_hdd_request_remain_on_channel(wiphy, dev,
                                         chan,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
@@ -840,66 +423,6 @@ int wlan_hdd_cfg80211_remain_on_channel( struct wiphy *wiphy,
                                         REMAIN_ON_CHANNEL_REQUEST);
 }
 
-<<<<<<< HEAD
-int wlan_hdd_cfg80211_remain_on_channel( struct wiphy *wiphy,
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-                                struct wireless_dev *wdev,
-#else
-                                struct net_device *dev,
-#endif
-                                struct ieee80211_channel *chan,
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
-                                enum nl80211_channel_type channel_type,
-#endif
-                                unsigned int duration, u64 *cookie )
-{
-   int ret;
-
-   vos_ssr_protect(__func__);
-   ret = __wlan_hdd_cfg80211_remain_on_channel(wiphy,
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-                                               wdev,
-#else
-                                               dev,
-#endif
-                                               chan,
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
-                                               channel_type,
-#endif
-                                               duration, cookie);
-   vos_ssr_unprotect(__func__);
-
-   return ret;
-}
-
-
-void hdd_remainChanReadyHandler( hdd_adapter_t *pAdapter )
-{
-    hdd_cfg80211_state_t *cfgState = NULL;
-    hdd_remain_on_chan_ctx_t* pRemainChanCtx = NULL;
-    VOS_STATUS status;
-    if (NULL == pAdapter)
-    {
-       hddLog(LOGE, FL("pAdapter is NULL"));
-       return;
-    }
-    cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
-    pRemainChanCtx = cfgState->remain_on_chan_ctx;
-    hddLog( LOG1, "Ready on chan ind");
-    if( pRemainChanCtx != NULL )
-    {
-        MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                         TRACE_CODE_HDD_REMAINCHANREADYHANDLER,
-                         pAdapter->sessionId, pRemainChanCtx->duration));
-        //start timer for actual duration
-        status = vos_timer_start(&pRemainChanCtx->hdd_remain_on_chan_timer,
-                                (pRemainChanCtx->duration));
-        if (VOS_STATUS_SUCCESS!=status)
-        {
-            hddLog( LOGE, FL("Remain on Channel timer start failed"));
-        }
-        if( REMAIN_ON_CHANNEL_REQUEST == pRemainChanCtx->rem_on_chan_request)
-=======
 void hdd_remainChanReadyHandler( hdd_adapter_t *pAdapter )
 {
     hdd_cfg80211_state_t *cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
@@ -910,7 +433,6 @@ void hdd_remainChanReadyHandler( hdd_adapter_t *pAdapter )
     if( pRemainChanCtx != NULL )
     {
         if( REMAIN_ON_CHANNEL_REQUEST == pRemainChanCtx->rem_on_chan_request )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         {
             cfg80211_ready_on_channel(
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
@@ -918,11 +440,7 @@ void hdd_remainChanReadyHandler( hdd_adapter_t *pAdapter )
 #else
                                pAdapter->dev,
 #endif
-<<<<<<< HEAD
-                               (uintptr_t)pRemainChanCtx,
-=======
                                (tANI_U32)pRemainChanCtx,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                &pRemainChanCtx->chan,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
                                pRemainChanCtx->chan_type,
@@ -930,60 +448,12 @@ void hdd_remainChanReadyHandler( hdd_adapter_t *pAdapter )
                                pRemainChanCtx->duration, GFP_KERNEL );
         }
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-<<<<<<< HEAD
-        else if( OFF_CHANNEL_ACTION_TX == pRemainChanCtx->rem_on_chan_request)
-=======
         else if( OFF_CHANNEL_ACTION_TX == pRemainChanCtx->rem_on_chan_request )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         {
             complete(&pAdapter->offchannel_tx_event);
         }
 #endif
-<<<<<<< HEAD
-        // Check for cached action frame
-        if ( pRemainChanCtx->action_pkt_buff.frame_length != 0 )
-        {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-            cfg80211_rx_mgmt( pAdapter->dev->ieee80211_ptr,
-                              pRemainChanCtx->action_pkt_buff.freq, 0,
-                              pRemainChanCtx->action_pkt_buff.frame_ptr,
-                              pRemainChanCtx->action_pkt_buff.frame_length,
-                              GFP_ATOMIC );
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
-            cfg80211_rx_mgmt( pAdapter->dev,
-                              pRemainChanCtx->action_pkt_buff.freq, 0,
-                              pRemainChanCtx->action_pkt_buff.frame_ptr,
-                              pRemainChanCtx->action_pkt_buff.frame_length,
-                              GFP_ATOMIC );
-#else
-            cfg80211_rx_mgmt( pAdapter->dev,
-                              pRemainChanCtx->action_pkt_buff.freq,
-                              pRemainChanCtx->action_pkt_buff.frame_ptr,
-                              pRemainChanCtx->action_pkt_buff.frame_length,
-                              GFP_ATOMIC );
-#endif //LINUX_VERSION_CODE
-            hddLog( LOGE, "%s: Sent cached action frame to supplicant", __func__);
-            vos_mem_free(pRemainChanCtx->action_pkt_buff.frame_ptr);
-            pRemainChanCtx->action_pkt_buff.frame_length = 0;
-            pRemainChanCtx->action_pkt_buff.freq = 0;
-            pRemainChanCtx->action_pkt_buff.frame_ptr = NULL;
-        }
-        hddLog( VOS_TRACE_LEVEL_INFO, "Ready on chan ind (cookie=%llu)",
-                pRemainChanCtx->cookie);
         complete(&pAdapter->rem_on_chan_ready_event);
-        if (TRUE == pRemainChanCtx->is_pending_roc_cancelled)
-        {
-            /* since pRemainChanCtx->is_pending_roc_cancelled is
-             * set, it means Cancel Reamain on channel command is
-             * pending because remain on channel event was not
-             * ready when cancel ROC  was issued.So issue
-             * cancel ROC now.
-             */
-            wlan_hdd_cancel_existing_remain_on_channel(pAdapter);
-        }
-=======
-        complete(&pAdapter->rem_on_chan_ready_event);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     else
     {
@@ -992,11 +462,7 @@ void hdd_remainChanReadyHandler( hdd_adapter_t *pAdapter )
     return;
 }
 
-<<<<<<< HEAD
-int __wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
-=======
 int wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
                                                 struct wireless_dev *wdev,
 #else
@@ -1009,20 +475,9 @@ int wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
 #endif
     hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
     hdd_cfg80211_state_t *cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
-<<<<<<< HEAD
-    hdd_remain_on_chan_ctx_t *pRemainChanCtx = cfgState->remain_on_chan_ctx;
-    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
-    int status;
-    u64 cookie_dummy;
-    cookie_dummy = cookie << 32;
-    MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                     TRACE_CODE_HDD_CFG80211_CANCEL_REMAIN_ON_CHANNEL,
-                     pAdapter->sessionId, cookie_dummy));
-=======
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
     int status;
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     hddLog( LOG1, "Cancel remain on channel req");
 
     status = wlan_hdd_validate_context(pHddCtx);
@@ -1033,78 +488,15 @@ int wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
                    "%s: HDD context is not valid", __func__);
         return status;
     }
-<<<<<<< HEAD
-    hddLog( LOG1, "Cancel remain on channel req (cookie = %llu)", cookie);
-
     /* FIXME cancel currently running remain on chan.
      * Need to check cookie and cancel accordingly
      */
-    mutex_lock(&pHddCtx->roc_lock);
-=======
-    /* FIXME cancel currently running remain on chan.
-     * Need to check cookie and cancel accordingly
-     */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if( (cfgState->remain_on_chan_ctx == NULL) ||
         (cfgState->remain_on_chan_ctx->cookie != cookie) )
     {
         hddLog( LOGE,
             "%s: No Remain on channel pending with specified cookie value",
              __func__);
-<<<<<<< HEAD
-        mutex_unlock(&pHddCtx->roc_lock);
-        return -EINVAL;
-    }
-    if (TRUE != pRemainChanCtx->is_pending_roc_cancelled)
-    {
-       mutex_unlock(&pHddCtx->roc_lock);
-       /* wait until remain on channel ready event received
-        * for already issued remain on channel request */
-       status = wait_for_completion_interruptible_timeout(&pAdapter->rem_on_chan_ready_event,
-            msecs_to_jiffies(WAIT_REM_CHAN_READY));
-       if (0 >= status)
-       {
-           hddLog( LOGE,
-                   "%s: timeout waiting for remain on channel ready indication %d",
-                   __func__, status);
-           pRemainChanCtx->is_pending_roc_cancelled = TRUE;
-           return 0;
-
-       }
-        mutex_lock(&pHddCtx->roc_lock);
-    }
-    else
-    {
-        hddLog( LOG1, FL("Cancel ROC event is already pending, "
-                         "waiting for ready on channel indication.") );
-        mutex_unlock(&pHddCtx->roc_lock);
-        return 0;
-    }
-    if (NULL != cfgState->remain_on_chan_ctx)
-    {
-        vos_timer_stop(&cfgState->remain_on_chan_ctx->hdd_remain_on_chan_timer);
-        if (TRUE == pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress)
-        {
-            mutex_unlock(&pHddCtx->roc_lock);
-            hddLog( LOG1,
-                    FL("ROC timer cancellation in progress,"
-                       " wait for completion"));
-            status = wait_for_completion_interruptible_timeout(
-                                             &pAdapter->cancel_rem_on_chan_var,
-                                             msecs_to_jiffies(WAIT_CANCEL_REM_CHAN));
-            if (0 >= status)
-            {
-                hddLog( LOGE,
-                        "%s:wait on cancel_rem_on_chan_var failed %d",
-                        __func__, status);
-            }
-            return 0;
-        }
-        else
-            pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress = TRUE;
-    }
-    mutex_unlock(&pHddCtx->roc_lock);
-=======
         return -EINVAL;
     }
 
@@ -1118,7 +510,6 @@ int wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
                 "%s: timeout waiting for remain on channel ready indication",
                 __func__);
     }
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     INIT_COMPLETION(pAdapter->cancel_rem_on_chan_var);
     /* Issue abort remain on chan request to sme.
      * The remain on channel callback will make sure the remain_on_chan
@@ -1129,11 +520,7 @@ int wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
          ( WLAN_HDD_P2P_DEVICE == pAdapter->device_mode )
        )
     {
-<<<<<<< HEAD
-        tANI_U8 sessionId = pAdapter->sessionId;
-=======
         tANI_U8 sessionId = pAdapter->sessionId; 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         sme_CancelRemainOnChannel( WLAN_HDD_GET_HAL_CTX( pAdapter ),
                                             sessionId );
     }
@@ -1144,55 +531,12 @@ int wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
         WLANSAP_CancelRemainOnChannel(
                                 (WLAN_HDD_GET_CTX(pAdapter))->pvosContext);
     }
-<<<<<<< HEAD
-    else
-=======
     else 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     {
        hddLog(VOS_TRACE_LEVEL_ERROR, "%s: Invalid device_mode = %d",
                             __func__, pAdapter->device_mode);
        return -EIO;
     }
-<<<<<<< HEAD
-    status = wait_for_completion_interruptible_timeout(&pAdapter->cancel_rem_on_chan_var,
-            msecs_to_jiffies(WAIT_CANCEL_REM_CHAN));
-    if (0 >= status)
-    {
-        hddLog( LOGE,
-              "%s:wait on cancel_rem_on_chan_var failed %d", __func__, status);
-    }
-    hdd_allow_suspend();
-    return 0;
-}
-
-int wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-                                                struct wireless_dev *wdev,
-#else
-                                                struct net_device *dev,
-#endif
-                                                u64 cookie )
-{
-    int ret;
-
-    vos_ssr_protect(__func__);
-    ret = __wlan_hdd_cfg80211_cancel_remain_on_channel(wiphy,
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-                                                    wdev,
-#else
-                                                    dev,
-#endif
-                                                    cookie);
-    vos_ssr_unprotect(__func__);
-
-    return ret;
-}
-
-
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-int __wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct wireless_dev *wdev,
-=======
     wait_for_completion_interruptible_timeout(&pAdapter->cancel_rem_on_chan_var,
             msecs_to_jiffies(WAIT_CANCEL_REM_CHAN));
     return 0;
@@ -1200,7 +544,6 @@ int __wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct wireless_dev *wdev,
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
 int wlan_hdd_action( struct wiphy *wiphy, struct wireless_dev *wdev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan, bool offchan,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
                      enum nl80211_channel_type channel_type,
@@ -1210,32 +553,20 @@ int wlan_hdd_action( struct wiphy *wiphy, struct wireless_dev *wdev,
                      const u8 *buf, size_t len,  bool no_cck,
                      bool dont_wait_for_ack, u64 *cookie )
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
-<<<<<<< HEAD
-int __wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-=======
 int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan, bool offchan,
                      enum nl80211_channel_type channel_type,
                      bool channel_type_valid, unsigned int wait,
                      const u8 *buf, size_t len,  bool no_cck,
                      bool dont_wait_for_ack, u64 *cookie )
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-<<<<<<< HEAD
-int __wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-=======
 int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan, bool offchan,
                      enum nl80211_channel_type channel_type,
                      bool channel_type_valid, unsigned int wait,
                      const u8 *buf, size_t len, u64 *cookie )
 #else
-<<<<<<< HEAD
-int __wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-=======
 int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                      struct ieee80211_channel *chan,
                      enum nl80211_channel_type channel_type,
                      bool channel_type_valid,
@@ -1247,15 +578,6 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
 #endif
     hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR( dev );
     hdd_cfg80211_state_t *cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
-<<<<<<< HEAD
-    hdd_remain_on_chan_ctx_t *pRemainChanCtx = cfgState->remain_on_chan_ctx;
-    hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
-    tANI_U8 type = WLAN_HDD_GET_TYPE_FRM_FC(buf[0]);
-    tANI_U8 subType = WLAN_HDD_GET_SUBTYPE_FRM_FC(buf[0]);
-    tActionFrmType actionFrmType = WLAN_HDD_ACTION_FRM_TYPE_MAX;
-    bool noack = 0;
-    int status;
-=======
     hdd_context_t *pHddCtx = WLAN_HDD_GET_CTX( pAdapter );
     tANI_U16 extendedWait = 0;
     tANI_U8 type = WLAN_HDD_GET_TYPE_FRM_FC(buf[0]);
@@ -1266,18 +588,11 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
 #ifdef WLAN_FEATURE_11W
     tANI_U8 *pTxFrmBuf = (tANI_U8 *) buf; // For SA Query, we have to set protect bit
 #endif
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
     hdd_adapter_t *goAdapter;
 #endif
 
-<<<<<<< HEAD
-     MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                      TRACE_CODE_HDD_ACTION, pAdapter->sessionId,
-                      pAdapter->device_mode ));
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     status = wlan_hdd_validate_context(pHddCtx);
 
     if (0 != status)
@@ -1287,23 +602,12 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
         return status;
     }
 
-<<<<<<< HEAD
-    hddLog(VOS_TRACE_LEVEL_INFO, "%s: device_mode = %d type: %d",
-                            __func__, pAdapter->device_mode, type);
-
-
-=======
 #ifdef WLAN_FEATURE_P2P_DEBUG
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if ((type == SIR_MAC_MGMT_FRAME) &&
             (subType == SIR_MAC_MGMT_ACTION) &&
             (buf[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET] == WLAN_HDD_PUBLIC_ACTION_FRAME))
     {
         actionFrmType = buf[WLAN_HDD_PUBLIC_ACTION_FRAME_TYPE_OFFSET];
-<<<<<<< HEAD
-#ifdef WLAN_FEATURE_P2P_DEBUG
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         if(actionFrmType >= MAX_P2P_ACTION_FRAME_TYPE)
         {
             hddLog(VOS_TRACE_LEVEL_ERROR,"[P2P] unknown[%d] ---> OTA",
@@ -1328,13 +632,8 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
                              " completed state");
             }
         }
-<<<<<<< HEAD
-#endif
-    }
-=======
     }
 #endif
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
     noack = dont_wait_for_ack;
@@ -1345,12 +644,9 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
     if (offchan && !wait)
         wait = ACTION_FRAME_DEFAULT_WAIT;
 
-<<<<<<< HEAD
-=======
     hddLog(VOS_TRACE_LEVEL_INFO, "%s: device_mode = %d",
                             __func__,pAdapter->device_mode);
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     //Call sme API to send out a action frame.
     // OR can we send it directly through data path??
     // After tx completion send tx status back.
@@ -1362,15 +658,9 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
         {
             if (subType == SIR_MAC_MGMT_PROBE_RSP)
             {
-<<<<<<< HEAD
-                /* Drop Probe response recieved from supplicant, as for GO and
-                   SAP PE itself sends probe response
-                   */
-=======
                 /* Drop Probe response recieved from supplicant, as for GO and 
                    SAP PE itself sends probe response
                    */ 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 goto err_rem_channel;
             }
             else if ((subType == SIR_MAC_MGMT_DISASSOC) ||
@@ -1387,16 +677,10 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
                 memcpy(&dstMac, &buf[WLAN_HDD_80211_FRM_DA_OFFSET], ETH_ALEN);
                 hddLog(VOS_TRACE_LEVEL_INFO,
                         "%s: Deauth/Disassoc received for STA:"
-<<<<<<< HEAD
-                        MAC_ADDRESS_STR,
-                        __func__,
-                        MAC_ADDR_ARRAY(dstMac));
-=======
                         "%02x:%02x:%02x:%02x:%02x:%02x",
                         __func__,
                         dstMac[0], dstMac[1], dstMac[2],
                         dstMac[3], dstMac[4], dstMac[5]);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 goto err_rem_channel;
             }
         }
@@ -1418,15 +702,7 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
         }
     }
 
-<<<<<<< HEAD
-    if( subType == SIR_MAC_MGMT_ACTION)
-    {
-        hddLog( LOG1, "Action frame tx request : %s",
-            hdd_getActionString(buf[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET]));
-    }
-=======
     hddLog( LOG1, "Action frame tx request");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
     goAdapter = hdd_get_adapter( pAdapter->pHddCtx, WLAN_HDD_P2P_GO );
@@ -1436,13 +712,6 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
     if( goAdapter && ( ieee80211_frequency_to_channel(chan->center_freq)
                          == goAdapter->sessionCtx.ap.operatingChannel ) )
     {
-<<<<<<< HEAD
-        /*  if GO exist and is not off channel
-         *  wait time should be zero.
-         */
-        wait = 0;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         goto send_frame;
     }
 #endif
@@ -1451,81 +720,6 @@ int wlan_hdd_action( struct wiphy *wiphy, struct net_device *dev,
     if( offchan && wait)
     {
         int status;
-<<<<<<< HEAD
-        rem_on_channel_request_type_t req_type = OFF_CHANNEL_ACTION_TX;
-        // In case of P2P Client mode if we are already
-        // on the same channel then send the frame directly
-        mutex_lock(&pHddCtx->roc_lock);
-        if( (cfgState->remain_on_chan_ctx != NULL) &&
-            (cfgState->current_freq == chan->center_freq)
-          )
-        {
-            if ( VOS_TIMER_STATE_RUNNING == vos_timer_getCurrentState(
-                      &cfgState->remain_on_chan_ctx->hdd_remain_on_chan_timer) )
-            {
-               /* Some times FW is taking almost 500 msec for
-                * full 15 retries, which leads to ROC expiration
-                * by the time peer gets response from other peer.
-                * Therefore as part of temporary fix , in host
-                * ROC time is extended. For frames where we are
-                * expecting response from peer , its extended by
-                * 500 msec to make ROC wait time as 1 sec and
-                * in other cases its extended by 300 msec to make
-                * total ROC wait as 500 msec.
-                * TODO: FW needs to fix as why 15 retry is taking
-                *       such long time.
-                */
-                if ( actionFrmType == WLAN_HDD_INVITATION_REQ ||
-                     actionFrmType == WLAN_HDD_GO_NEG_REQ ||
-                     actionFrmType == WLAN_HDD_GO_NEG_RESP )
-                   wait = wait + ACTION_FRAME_RSP_WAIT;
-                else if ( actionFrmType == WLAN_HDD_GO_NEG_CNF ||
-                          actionFrmType == WLAN_HDD_INVITATION_RESP )
-                   wait = wait + ACTION_FRAME_ACK_WAIT;
-                vos_timer_stop(
-                      &cfgState->remain_on_chan_ctx->hdd_remain_on_chan_timer);
-                status = vos_timer_start(
-                       &cfgState->remain_on_chan_ctx->hdd_remain_on_chan_timer,
-                       wait);
-                if ( status != VOS_STATUS_SUCCESS )
-                {
-                    hddLog( LOGE, "Remain on Channel timer start failed");
-                }
-
-                hddLog(VOS_TRACE_LEVEL_INFO,
-                   "action frame: extending the wait time %u",
-                   wait);
-                mutex_unlock(&pHddCtx->roc_lock);
-                goto send_frame;
-            }
-            else
-            {
-                if ( TRUE ==
-                     pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress )
-                {
-                    mutex_unlock(&pHddCtx->roc_lock);
-                    hddLog(VOS_TRACE_LEVEL_INFO,
-                           "action frame tx: waiting for completion of ROC ");
-
-                    status = wait_for_completion_interruptible_timeout(
-                                       &pAdapter->cancel_rem_on_chan_var,
-                                       msecs_to_jiffies(WAIT_CANCEL_REM_CHAN));
-                    if (0 >= status)
-                    {
-                        hddLog( LOGE,
-                               "%s:wait on cancel_rem_on_chan_var failed %d",
-                                __func__, status);
-                    }
-                    goto bypass_lock;
-                }
-            }
-        }
-        mutex_unlock(&pHddCtx->roc_lock);
-bypass_lock:
-        hddLog(VOS_TRACE_LEVEL_INFO,
-               "action frame: Request ROC for wait time %u", wait);
-        INIT_COMPLETION(pAdapter->offchannel_tx_event);
-=======
 
         // In case of P2P Client mode if we are already
         // on the same channel then send the frame directly
@@ -1541,18 +735,13 @@ bypass_lock:
 
         INIT_COMPLETION(pAdapter->offchannel_tx_event);
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         status = wlan_hdd_request_remain_on_channel(wiphy, dev,
                                         chan,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
                                         channel_type,
 #endif
                                         wait, cookie,
-<<<<<<< HEAD
-                                        req_type);
-=======
                                         OFF_CHANNEL_ACTION_TX);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         if(0 != status)
         {
@@ -1563,28 +752,15 @@ bypass_lock:
             }
             goto err_rem_channel;
         }
-<<<<<<< HEAD
-=======
-        /* This will extend timer in LIM when sending Any action frame
-         * It will cover remain on channel timer till next action frame
-         * in rx direction.
-         */
-        extendedWait = (tANI_U16)wait;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+
         /* Wait for driver to be ready on the requested channel */
         status = wait_for_completion_interruptible_timeout(
                      &pAdapter->offchannel_tx_event,
                      msecs_to_jiffies(WAIT_CHANGE_CHANNEL_FOR_OFFCHANNEL_TX));
-<<<<<<< HEAD
-        if(0 >= status)
-        {
-            hddLog( LOGE, "wait on offchannel_tx_event failed %d", status);
-=======
         if(!status)
         {
             hddLog( LOGE, "Not able to complete remain on channel request"
                           " within timeout period");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             goto err_rem_channel;
         }
     }
@@ -1613,33 +789,18 @@ bypass_lock:
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
         if( cfgState->remain_on_chan_ctx )
         {
-<<<<<<< HEAD
-            mutex_lock(&pHddCtx->roc_lock);
             cfgState->action_cookie = cfgState->remain_on_chan_ctx->cookie;
             *cookie = cfgState->action_cookie;
-            mutex_unlock(&pHddCtx->roc_lock);
-=======
-            cfgState->action_cookie = cfgState->remain_on_chan_ctx->cookie;
-            *cookie = cfgState->action_cookie;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
         else
         {
 #endif
-<<<<<<< HEAD
-            *cookie = (uintptr_t) cfgState->buf;
-=======
             *cookie = (tANI_U32) cfgState->buf;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             cfgState->action_cookie = *cookie;
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
         }
 #endif
-<<<<<<< HEAD
-    }
-=======
     } 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if ( (WLAN_HDD_INFRA_STATION == pAdapter->device_mode) ||
          (WLAN_HDD_P2P_CLIENT == pAdapter->device_mode) ||
@@ -1653,32 +814,15 @@ bypass_lock:
                 (buf[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET] == WLAN_HDD_PUBLIC_ACTION_FRAME))
         {
             actionFrmType = buf[WLAN_HDD_PUBLIC_ACTION_FRAME_TYPE_OFFSET];
-<<<<<<< HEAD
-            hddLog(LOG1, "Tx Action Frame %u.", actionFrmType);
-            if (actionFrmType == WLAN_HDD_PROV_DIS_REQ)
-            {
-                cfgState->actionFrmState = HDD_PD_REQ_ACK_PENDING;
-                hddLog(LOG1, "%s: HDD_PD_REQ_ACK_PENDING.", __func__);
-=======
             hddLog(LOG1, "Tx Action Frame %u \n", actionFrmType);
             if (actionFrmType == WLAN_HDD_PROV_DIS_REQ)
             {
                 cfgState->actionFrmState = HDD_PD_REQ_ACK_PENDING;
                 hddLog(LOG1, "%s: HDD_PD_REQ_ACK_PENDING \n", __func__);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             }
             else if (actionFrmType == WLAN_HDD_GO_NEG_REQ)
             {
                 cfgState->actionFrmState = HDD_GO_NEG_REQ_ACK_PENDING;
-<<<<<<< HEAD
-                hddLog(LOG1, "%s: HDD_GO_NEG_REQ_ACK_PENDING.", __func__);
-            }
-        }
-
-        if (eHAL_STATUS_SUCCESS !=
-               sme_sendAction( WLAN_HDD_GET_HAL_CTX(pAdapter),
-                               sessionId, buf, len, wait, noack))
-=======
                 hddLog(LOG1, "%s: HDD_GO_NEG_REQ_ACK_PENDING \n", __func__);
             }
         }
@@ -1696,7 +840,6 @@ bypass_lock:
         if (eHAL_STATUS_SUCCESS !=
                sme_sendAction( WLAN_HDD_GET_HAL_CTX(pAdapter),
                                sessionId, buf, len, extendedWait, noack))
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         {
             VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                      "%s: sme_sendAction returned fail", __func__);
@@ -1725,11 +868,7 @@ err:
     }
     return 0;
 err_rem_channel:
-<<<<<<< HEAD
-    *cookie = (uintptr_t)cfgState;
-=======
     *cookie = (tANI_U32)cfgState;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     cfg80211_mgmt_tx_status(
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
                             pAdapter->dev->ieee80211_ptr,
@@ -1740,133 +879,20 @@ err_rem_channel:
     return 0;
 }
 
-<<<<<<< HEAD
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct wireless_dev *wdev,
-                     struct ieee80211_channel *chan, bool offchan,
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
-                     enum nl80211_channel_type channel_type,
-                     bool channel_type_valid,
-#endif
-                     unsigned int wait,
-                     const u8 *buf, size_t len,  bool no_cck,
-                     bool dont_wait_for_ack, u64 *cookie )
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-                     struct ieee80211_channel *chan, bool offchan,
-                     enum nl80211_channel_type channel_type,
-                     bool channel_type_valid, unsigned int wait,
-                     const u8 *buf, size_t len,  bool no_cck,
-                     bool dont_wait_for_ack, u64 *cookie )
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-                     struct ieee80211_channel *chan, bool offchan,
-                     enum nl80211_channel_type channel_type,
-                     bool channel_type_valid, unsigned int wait,
-                     const u8 *buf, size_t len, u64 *cookie )
-#else
-int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
-                     struct ieee80211_channel *chan,
-                     enum nl80211_channel_type channel_type,
-                     bool channel_type_valid,
-                     const u8 *buf, size_t len, u64 *cookie )
-#endif //LINUX_VERSION_CODE
-{
-    int ret;
-
-    vos_ssr_protect(__func__);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-    ret =  __wlan_hdd_mgmt_tx(wiphy, wdev,
-                              chan, offchan,
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(3,8,0))
-                              channel_type,
-                              channel_type_valid,
-#endif
-                              wait,
-                              buf, len, no_cck,
-                              dont_wait_for_ack, cookie);
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
-    ret = __wlan_hdd_mgmt_tx(wiphy, dev, chan, offchan,
-                             channel_type, channel_type_valid, wait,
-                             buf, len,  no_cck,
-                             dont_wait_for_ack, cookie);
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-    ret = __wlan_hdd_mgmt_tx(wiphy, dev, chan, offchan,
-                     channel_type, channel_type_valid, wait,
-                     buf, len, cookie);
-#else
-    ret = __wlan_hdd_mgmt_tx(wiphy, dev, chan, channel_type,
-                             channel_type_valid, buf, len, cookie);
-#endif //LINUX_VERSION_CODE
-    vos_ssr_unprotect(__func__);
-
-    return ret;
-}
-
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-int __wlan_hdd_cfg80211_mgmt_tx_cancel_wait(struct wiphy *wiphy,
-                                          struct wireless_dev *wdev,
-                                          u64 cookie)
-{
-    u64 cookie_dummy;
-    cookie_dummy = cookie << 32;
-    MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                     TRACE_CODE_HDD_MGMT_TX_CANCEL_WAIT, NO_SESSION, cookie_dummy));
-    return wlan_hdd_cfg80211_cancel_remain_on_channel( wiphy, wdev, cookie );
-}
-#else
-int __wlan_hdd_cfg80211_mgmt_tx_cancel_wait(struct wiphy *wiphy,
-                                          struct net_device *dev,
-                                          u64 cookie)
-{
-    u64 cookie_dummy;
-    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR( dev );
-    cookie_dummy = cookie << 32;
-    MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                     TRACE_CODE_HDD_MGMT_TX_CANCEL_WAIT,
-                     pAdapter->sessionId, cookie_dummy));
-    return wlan_hdd_cfg80211_cancel_remain_on_channel( wiphy, dev, cookie );
-}
-#endif
-#endif
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
 int wlan_hdd_cfg80211_mgmt_tx_cancel_wait(struct wiphy *wiphy,
                                           struct wireless_dev *wdev,
                                           u64 cookie)
 {
-<<<<<<< HEAD
-    int ret;
-
-    vos_ssr_protect(__func__);
-    ret = __wlan_hdd_cfg80211_mgmt_tx_cancel_wait(wiphy, wdev, cookie);
-    vos_ssr_unprotect(__func__);
-
-    return ret;
-=======
     return wlan_hdd_cfg80211_cancel_remain_on_channel( wiphy, wdev, cookie );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 #else
 int wlan_hdd_cfg80211_mgmt_tx_cancel_wait(struct wiphy *wiphy,
                                           struct net_device *dev,
                                           u64 cookie)
 {
-<<<<<<< HEAD
-    int ret;
-
-    vos_ssr_protect(__func__);
-    ret = __wlan_hdd_cfg80211_mgmt_tx_cancel_wait(wiphy, dev, cookie);
-    vos_ssr_unprotect(__func__);
-
-    return ret;
-=======
     return wlan_hdd_cfg80211_cancel_remain_on_channel( wiphy, dev, cookie );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 }
 #endif
 #endif
@@ -1932,19 +958,11 @@ void hdd_sendActionCnf( hdd_adapter_t *pAdapter, tANI_BOOLEAN actionSendSuccess 
  * hdd_setP2pNoa
  *
  *FUNCTION:
-<<<<<<< HEAD
- * This function is called from hdd_hostapd_ioctl function when Driver
- * get P2P_SET_NOA comand from wpa_supplicant using private ioctl
- *
- *LOGIC:
- * Fill NoA Struct According to P2P Power save Option and Pass it to SME layer
-=======
  * This function is called from hdd_hostapd_ioctl function when Driver 
  * get P2P_SET_NOA comand from wpa_supplicant using private ioctl
  *
  *LOGIC:
  * Fill NoA Struct According to P2P Power save Option and Pass it to SME layer 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  *ASSUMPTIONS:
  *
@@ -1952,11 +970,7 @@ void hdd_sendActionCnf( hdd_adapter_t *pAdapter, tANI_BOOLEAN actionSendSuccess 
  *NOTE:
  *
  * @param  dev         Pointer to net device structure
-<<<<<<< HEAD
- * @param  command     Pointer to command
-=======
  * @param  command     Pointer to command 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * @return Status
  */
@@ -1969,29 +983,6 @@ int hdd_setP2pNoa( struct net_device *dev, tANI_U8 *command )
     tP2pPsConfig NoA;
     int count, duration, start_time;
     char *param;
-<<<<<<< HEAD
-    tANI_U8 ret = 0;
-
-    param = strnchr(command, strlen(command), ' ');
-    if (param == NULL)
-    {
-        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-               "%s: strnchr failed to find delimeter",__func__);
-          return -EINVAL;
-    }
-    param++;
-    ret = sscanf(param, "%d %d %d", &count, &start_time, &duration);
-    if (ret < 3)
-    {
-        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-               "%s: P2P_SET GO NoA: fail to read param "
-               "count=%d duration=%d interval=%d \n",
-                __func__, count, start_time, duration);
-        return -EINVAL;
-    }
-    VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
-               "%s: P2P_SET GO NoA: count=%d duration=%d interval=%d",
-=======
 
     param = strnchr(command, strlen(command), ' ');
     if (param == NULL)
@@ -2000,7 +991,6 @@ int hdd_setP2pNoa( struct net_device *dev, tANI_U8 *command )
     sscanf(param, "%d %d %d", &count, &start_time, &duration);
     VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                "%s: P2P_SET GO NoA: count=%d duration=%d interval=%d \n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 __func__, count, start_time, duration);
     duration = MS_TO_MUS(duration);
     /* PS Selection
@@ -2028,11 +1018,7 @@ int hdd_setP2pNoa( struct net_device *dev, tANI_U8 *command )
     VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                 "%s: P2P_PS_ATTR:oppPS %d ctWindow %d duration %d "
                 "interval %d count %d single noa duration %d "
-<<<<<<< HEAD
-                "PsSelection %x", __func__, NoA.opp_ps,
-=======
                 "PsSelection %x \n", __func__, NoA.opp_ps, 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 NoA.ctWindow, NoA.duration, NoA.interval, 
                 NoA.count, NoA.single_noa_duration,
                 NoA.psSelection);
@@ -2070,29 +1056,6 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
     tP2pPsConfig NoA;
     char *param;
     int legacy_ps, opp_ps, ctwindow;
-<<<<<<< HEAD
-    tANI_U8 ret = 0;
-
-    param = strnchr(command, strlen(command), ' ');
-    if (param == NULL)
-    {
-        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-               "%s: strnchr failed to find delimeter",__func__);
-        return -EINVAL;
-    }
-    param++;
-    ret = sscanf(param, "%d %d %d", &legacy_ps, &opp_ps, &ctwindow);
-    if (ret < 3)
-    {
-        VOS_TRACE (VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                 "%s: P2P_SET GO PS: fail to read param "
-                 " legacy_ps=%d opp_ps=%d ctwindow=%d \n",
-                 __func__, legacy_ps, opp_ps, ctwindow);
-        return -EINVAL;
-    }
-    VOS_TRACE (VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
-                 "%s: P2P_SET GO PS: legacy_ps=%d opp_ps=%d ctwindow=%d",
-=======
 
     param = strnchr(command, strlen(command), ' ');
     if (param == NULL)
@@ -2101,7 +1064,6 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
     sscanf(param, "%d %d %d", &legacy_ps, &opp_ps, &ctwindow);
     VOS_TRACE (VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                  "%s: P2P_SET GO PS: legacy_ps=%d opp_ps=%d ctwindow=%d \n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                  __func__, legacy_ps, opp_ps, ctwindow);
 
     /* PS Selection
@@ -2110,40 +1072,23 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
 
     /* From wpa_cli user need to use separate command to set ctWindow and Opps
      * When user want to set ctWindow during that time other parameters
-<<<<<<< HEAD
-     * values are coming from wpa_supplicant as -1.
-     * Example : User want to set ctWindow with 30 then wpa_cli command :
-     * P2P_SET ctwindow 30
-     * Command Received at hdd_hostapd_ioctl is as below:
-     * P2P_SET_PS -1 -1 30 (legacy_ps = -1, opp_ps = -1, ctwindow = 30)
-     */
-=======
      * values are coming from wpa_supplicant as -1. 
      * Example : User want to set ctWindow with 30 then wpa_cli command : 
      * P2P_SET ctwindow 30 
      * Command Received at hdd_hostapd_ioctl is as below: 
      * P2P_SET_PS -1 -1 30 (legacy_ps = -1, opp_ps = -1, ctwindow = 30)
      */ 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if (ctwindow != -1)
     {
 
         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
-<<<<<<< HEAD
-                    "Opportunistic Power Save is %s",
-=======
                     "Opportunistic Power Save is %s \n", 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                     (TRUE == pAdapter->ops) ? "Enable" : "Disable" );
 
         if (ctwindow != pAdapter->ctw)
         {
             pAdapter->ctw = ctwindow;
-<<<<<<< HEAD
-
-=======
         
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             if(pAdapter->ops)
             {
                 NoA.opp_ps = pAdapter->ops;
@@ -2154,19 +1099,11 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
                 NoA.count = 0;
                 NoA.psSelection = P2P_POWER_SAVE_TYPE_OPPORTUNISTIC;
                 NoA.sessionid = pAdapter->sessionId;
-<<<<<<< HEAD
-
-                VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
-                            "%s: P2P_PS_ATTR:oppPS %d ctWindow %d duration %d "
-                            "interval %d count %d single noa duration %d "
-                            "PsSelection %x", __func__, NoA.opp_ps,
-=======
  
                 VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                             "%s: P2P_PS_ATTR:oppPS %d ctWindow %d duration %d "
                             "interval %d count %d single noa duration %d "
                             "PsSelection %x \n", __func__, NoA.opp_ps, 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                             NoA.ctWindow, NoA.duration, NoA.interval, 
                             NoA.count, NoA.single_noa_duration,
                             NoA.psSelection);
@@ -2181,11 +1118,7 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
     {
         pAdapter->ops = opp_ps;
 
-<<<<<<< HEAD
-        if ((opp_ps != -1) && (pAdapter->ctw))
-=======
         if ((opp_ps != -1) && (pAdapter->ctw)) 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         {
             NoA.opp_ps = opp_ps;
             NoA.ctWindow = pAdapter->ctw;
@@ -2199,11 +1132,7 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
             VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
                         "%s: P2P_PS_ATTR:oppPS %d ctWindow %d duration %d "
                         "interval %d count %d single noa duration %d "
-<<<<<<< HEAD
-                        "PsSelection %x", __func__, NoA.opp_ps,
-=======
                         "PsSelection %x \n", __func__, NoA.opp_ps, 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                         NoA.ctWindow, NoA.duration, NoA.interval, 
                         NoA.count, NoA.single_noa_duration,
                         NoA.psSelection);
@@ -2265,26 +1194,11 @@ static tANI_U8 wlan_hdd_get_session_type( enum nl80211_iftype type )
 }
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,0))
-<<<<<<< HEAD
-struct wireless_dev* __wlan_hdd_add_virtual_intf(
-=======
 struct wireless_dev* wlan_hdd_add_virtual_intf(
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   struct wiphy *wiphy, const char *name,
                   enum nl80211_iftype type,
                   u32 *flags, struct vif_params *params )
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-<<<<<<< HEAD
-struct wireless_dev* __wlan_hdd_add_virtual_intf(
-                  struct wiphy *wiphy, char *name, enum nl80211_iftype type,
-                  u32 *flags, struct vif_params *params )
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-struct net_device* __wlan_hdd_add_virtual_intf(
-                  struct wiphy *wiphy, char *name, enum nl80211_iftype type,
-                  u32 *flags, struct vif_params *params )
-#else
-int __wlan_hdd_add_virtual_intf( struct wiphy *wiphy, char *name,
-=======
 struct wireless_dev* wlan_hdd_add_virtual_intf(
                   struct wiphy *wiphy, char *name, enum nl80211_iftype type,
                   u32 *flags, struct vif_params *params )
@@ -2294,31 +1208,11 @@ struct net_device* wlan_hdd_add_virtual_intf(
                   u32 *flags, struct vif_params *params )
 #else
 int wlan_hdd_add_virtual_intf( struct wiphy *wiphy, char *name,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                                enum nl80211_iftype type,
                                u32 *flags, struct vif_params *params )
 #endif
 {
     hdd_context_t *pHddCtx = (hdd_context_t*) wiphy_priv(wiphy);
-<<<<<<< HEAD
-    hdd_adapter_t *pAdapter = NULL;
-    hdd_scaninfo_t *pScanInfo = NULL;
-    ENTER();
-
-    MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                     TRACE_CODE_HDD_ADD_VIRTUAL_INTF, NO_SESSION, type));
-    if (WLAN_HDD_P2P_CLIENT != wlan_hdd_get_session_type(type) &&
-            WLAN_HDD_INFRA_STATION != wlan_hdd_get_session_type(type) &&
-            hdd_get_adapter(pHddCtx, wlan_hdd_get_session_type(type)) != NULL)
-    {
-       hddLog(VOS_TRACE_LEVEL_ERROR,"%s: Interface type %d already exists. Two"
-                     "interfaces of same type are not supported currently.",__func__, type);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-       return ERR_PTR(-EINVAL);
-#else
-       return -EAGAIN;
-#endif
-=======
     hdd_adapter_t* pAdapter = NULL;
 
     ENTER();
@@ -2328,7 +1222,6 @@ int wlan_hdd_add_virtual_intf( struct wiphy *wiphy, char *name,
        hddLog(VOS_TRACE_LEVEL_ERROR,"%s: Interface type %d already exists. Two"
                      "interfaces of same type are not supported currently.",__func__, type);
        return NULL;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     if (pHddCtx->isLogpInProgress)
@@ -2336,57 +1229,26 @@ int wlan_hdd_add_virtual_intf( struct wiphy *wiphy, char *name,
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
                 "%s:LOGP in Progress. Ignore!!!", __func__);
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-<<<<<<< HEAD
-       return ERR_PTR(-EINVAL);
-=======
        return NULL;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #else
        return -EAGAIN;
 #endif
     }
-<<<<<<< HEAD
-
-    pAdapter = hdd_get_adapter(pHddCtx, WLAN_HDD_INFRA_STATION);
-    pScanInfo =  &pHddCtx->scan_info;
-    if ((pScanInfo != NULL) && (pAdapter != NULL) &&
-        (pHddCtx->scan_info.mScanPending))
-    {
-        hdd_abort_mac_scan(pHddCtx, pAdapter->sessionId,
-                           eCSR_SCAN_ABORT_DEFAULT);
-        hddLog(VOS_TRACE_LEVEL_INFO,
-               "%s: Abort Scan while adding virtual interface",__func__);
-    }
-
-    pAdapter = NULL;
-    if (pHddCtx->cfg_ini->isP2pDeviceAddrAdministrated &&
-        ((NL80211_IFTYPE_P2P_GO == type) ||
-         (NL80211_IFTYPE_P2P_CLIENT == type)))
-    {
-=======
     if ( pHddCtx->cfg_ini->isP2pDeviceAddrAdministrated )
     {
         if( (NL80211_IFTYPE_P2P_GO == type) || 
             (NL80211_IFTYPE_P2P_CLIENT == type) )
         {
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             /* Generate the P2P Interface Address. this address must be
              * different from the P2P Device Address.
              */
             v_MACADDR_t p2pDeviceAddress = pHddCtx->p2pDeviceAddress;
             p2pDeviceAddress.bytes[4] ^= 0x80;
-<<<<<<< HEAD
-            pAdapter = hdd_open_adapter( pHddCtx,
-                                         wlan_hdd_get_session_type(type),
-                                         name, p2pDeviceAddress.bytes,
-                                         VOS_TRUE );
-=======
             pAdapter = hdd_open_adapter( pHddCtx, 
                                          wlan_hdd_get_session_type(type),
                                          name, p2pDeviceAddress.bytes,
                                          VOS_TRUE );
         }
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
     else
     {
@@ -2398,11 +1260,7 @@ int wlan_hdd_add_virtual_intf( struct wiphy *wiphy, char *name,
     {
         hddLog(VOS_TRACE_LEVEL_ERROR,"%s: hdd_open_adapter failed",__func__);
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-<<<<<<< HEAD
-        return ERR_PTR(-EINVAL);
-=======
         return NULL;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #else
         return -EINVAL;
 #endif
@@ -2417,79 +1275,20 @@ int wlan_hdd_add_virtual_intf( struct wiphy *wiphy, char *name,
 #endif
 }
 
-<<<<<<< HEAD
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,0))
-struct wireless_dev* wlan_hdd_add_virtual_intf(
-                  struct wiphy *wiphy, const char *name,
-                  enum nl80211_iftype type,
-                  u32 *flags, struct vif_params *params )
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-struct wireless_dev* wlan_hdd_add_virtual_intf(
-                  struct wiphy *wiphy, char *name, enum nl80211_iftype type,
-                  u32 *flags, struct vif_params *params )
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-struct net_device* wlan_hdd_add_virtual_intf(
-                  struct wiphy *wiphy, char *name, enum nl80211_iftype type,
-                  u32 *flags, struct vif_params *params )
-#else
-int wlan_hdd_add_virtual_intf( struct wiphy *wiphy, char *name,
-                               enum nl80211_iftype type,
-                               u32 *flags, struct vif_params *params )
-#endif
-{
-#if ((LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0)))
-    struct wireless_dev* wdev;
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-    struct net_device* ndev;
-#else
-    int ret;
-#endif
-    vos_ssr_protect(__func__);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-    wdev = __wlan_hdd_add_virtual_intf(wiphy, name, type, flags, params);
-    vos_ssr_unprotect(__func__);
-    return wdev;
-#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,38))
-    ndev = __wlan_hdd_add_virtual_intf(wiphy, name, type, flags, params);
-    vos_ssr_unprotect(__func__);
-    return ndev;
-#else
-    ret  = __wlan_hdd_add_virtual_intf(wiphy, name, type, flags, params);
-    vos_ssr_unprotect(__func__);
-    return ret;
-#endif
-}
-
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-int __wlan_hdd_del_virtual_intf( struct wiphy *wiphy, struct wireless_dev *wdev )
-#else
-int __wlan_hdd_del_virtual_intf( struct wiphy *wiphy, struct net_device *dev )
-=======
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
 int wlan_hdd_del_virtual_intf( struct wiphy *wiphy, struct wireless_dev *wdev )
 #else
 int wlan_hdd_del_virtual_intf( struct wiphy *wiphy, struct net_device *dev )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 {
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
     struct net_device *dev = wdev->netdev;
 #endif
     hdd_context_t *pHddCtx = (hdd_context_t*) wiphy_priv(wiphy);
-<<<<<<< HEAD
-    hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR( dev );
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     hdd_adapter_t *pVirtAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
     int status;
     ENTER();
 
-<<<<<<< HEAD
-    MTRACE(vos_trace(VOS_MODULE_ID_HDD,
-                     TRACE_CODE_HDD_DEL_VIRTUAL_INTF,
-                     pAdapter->sessionId, pAdapter->device_mode));
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     hddLog(VOS_TRACE_LEVEL_INFO, "%s: device_mode = %d",
            __func__,pVirtAdapter->device_mode);
 
@@ -2505,46 +1304,16 @@ int wlan_hdd_del_virtual_intf( struct wiphy *wiphy, struct net_device *dev )
     wlan_hdd_release_intf_addr( pHddCtx,
                                  pVirtAdapter->macAddressCurrent.bytes );
 
-<<<<<<< HEAD
-    hdd_stop_adapter( pHddCtx, pVirtAdapter, VOS_TRUE);
-=======
     hdd_stop_adapter( pHddCtx, pVirtAdapter );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     hdd_close_adapter( pHddCtx, pVirtAdapter, TRUE );
     EXIT();
     return 0;
 }
 
-<<<<<<< HEAD
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-int wlan_hdd_del_virtual_intf( struct wiphy *wiphy, struct wireless_dev *wdev )
-#else
-int wlan_hdd_del_virtual_intf( struct wiphy *wiphy, struct net_device *dev )
-#endif
-{
-    int ret;
-
-    vos_ssr_protect(__func__);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-    ret = __wlan_hdd_del_virtual_intf(wiphy, wdev);
-#else
-    ret = __wlan_hdd_del_virtual_intf(wiphy, dev);
-#endif
-    vos_ssr_unprotect(__func__);
-
-    return ret;
-}
-
-void hdd_sendMgmtFrameOverMonitorIface( hdd_adapter_t *pMonAdapter,
-                                        tANI_U32 nFrameLength,
-                                        tANI_U8* pbFrames,
-                                        tANI_U8 frameType )
-=======
 void hdd_sendMgmtFrameOverMonitorIface( hdd_adapter_t *pMonAdapter,
                                         tANI_U32 nFrameLength,
                                         tANI_U8* pbFrames,
                                         tANI_U8 frameType )  
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 {
     //Indicate a Frame over Monitor Intf.
     int rxstat;
@@ -2614,46 +1383,25 @@ void hdd_sendMgmtFrameOverMonitorIface( hdd_adapter_t *pMonAdapter,
          hddLog( LOG1, FL("Success"));
      }
      else
-<<<<<<< HEAD
-         hddLog( LOGE, FL("Failed %d"), rxstat);
-=======
          hddLog( LOGE, FL("Failed %d"), rxstat);                   
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
      return ;
 }
 
 void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
-<<<<<<< HEAD
-                            tANI_U32 nFrameLength,
-=======
                             tANI_U32 nFrameLength, 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                             tANI_U8* pbFrames,
                             tANI_U8 frameType,
                             tANI_U32 rxChan,
                             tANI_S8 rxRssi )
 {
     tANI_U16 freq;
-<<<<<<< HEAD
-    tANI_U16 extend_time;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_U8 type = 0;
     tANI_U8 subType = 0;
     tActionFrmType actionFrmType;
     hdd_cfg80211_state_t *cfgState = NULL;
-<<<<<<< HEAD
-    hdd_scaninfo_t *pScanInfo = NULL;
-    hdd_context_t *pHddCtx = NULL;
-    VOS_STATUS status;
-    hdd_remain_on_chan_ctx_t* pRemainChanCtx = NULL;
-
-    hddLog(VOS_TRACE_LEVEL_INFO, "%s: Frame Type = %d Frame Length = %d",
-=======
 
     hddLog(VOS_TRACE_LEVEL_INFO, "%s: Frame Type = %d Frame Length = %d\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             __func__, frameType, nFrameLength);
 
     if (NULL == pAdapter)
@@ -2692,11 +1440,7 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
                                MAC_ADDRESS_STR ,
                                MAC_ADDR_ARRAY(&pbFrames[WLAN_HDD_80211_FRM_DA_OFFSET]));
              hddLog(VOS_TRACE_LEVEL_FATAL, "%s: Frame Type = %d Frame Length = %d"
-<<<<<<< HEAD
-                              " subType = %d",__func__,frameType,nFrameLength,subType);
-=======
                               " subType = %d \n",__func__,frameType,nFrameLength,subType);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
              return;
          }
     }
@@ -2714,16 +1458,6 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
         return;
     }
 
-<<<<<<< HEAD
-    pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
-    if (NULL == pHddCtx)
-    {
-         hddLog(VOS_TRACE_LEVEL_FATAL,"%s: HDD Context Null Pointer", __func__);
-         return;
-    }
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     if ((WLAN_HDD_SOFTAP == pAdapter->device_mode) ||
         (WLAN_HDD_P2P_GO == pAdapter->device_mode ))
     {
@@ -2753,14 +1487,8 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
     }
 
     cfgState = WLAN_HDD_GET_CFG_STATE_PTR( pAdapter );
-<<<<<<< HEAD
-    pRemainChanCtx = cfgState->remain_on_chan_ctx;
-
-    if ((type == SIR_MAC_MGMT_FRAME) &&
-=======
     
     if ((type == SIR_MAC_MGMT_FRAME) && 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         (subType == SIR_MAC_MGMT_ACTION))
     {
         if(pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET] == WLAN_HDD_PUBLIC_ACTION_FRAME)
@@ -2771,11 +1499,7 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
             // P2P action frames
             {
                 actionFrmType = pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_TYPE_OFFSET];
-<<<<<<< HEAD
-                hddLog(LOG1, "Rx Action Frame %u", actionFrmType);
-=======
                 hddLog(LOG1, "Rx Action Frame %u \n", actionFrmType);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef WLAN_FEATURE_P2P_DEBUG
                 if(actionFrmType >= MAX_P2P_ACTION_FRAME_TYPE)
                 {
@@ -2809,76 +1533,6 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
                     }
                 }
 #endif
-<<<<<<< HEAD
-             if (pRemainChanCtx != NULL && VOS_TIMER_STATE_RUNNING
-                                 == vos_timer_getCurrentState(&pRemainChanCtx->hdd_remain_on_chan_timer))
-             {
-                 if ( actionFrmType == WLAN_HDD_GO_NEG_REQ ||
-                      actionFrmType == WLAN_HDD_GO_NEG_RESP ||
-                      actionFrmType == WLAN_HDD_INVITATION_REQ ||
-                      actionFrmType == WLAN_HDD_DEV_DIS_REQ ||
-                      actionFrmType == WLAN_HDD_PROV_DIS_REQ )
-                 {
-                      hddLog( LOG1, "Extend RoC timer on reception of"
-                              " Action Frame");
-                      if ((actionFrmType == WLAN_HDD_GO_NEG_REQ)
-                                  || (actionFrmType == WLAN_HDD_GO_NEG_RESP))
-                              extend_time = 2 * ACTION_FRAME_DEFAULT_WAIT;
-                      else
-                              extend_time = ACTION_FRAME_DEFAULT_WAIT;
-                      if (completion_done(&pAdapter->rem_on_chan_ready_event))
-                      {
-                          vos_timer_stop(
-                                    &pRemainChanCtx->hdd_remain_on_chan_timer);
-                          status = vos_timer_start(
-                                     &pRemainChanCtx->hdd_remain_on_chan_timer,
-                                     extend_time);
-                          if (status != VOS_STATUS_SUCCESS)
-                          {
-                              hddLog( LOGE, "ROC timer start failed");
-                          }
-                      }
-                      else
-                      {
-                        // Buffer Packet
-                          if (pRemainChanCtx->action_pkt_buff.frame_length == 0)
-                          {
-                              pRemainChanCtx->action_pkt_buff.frame_length =
-                                                                  nFrameLength;
-                              pRemainChanCtx->action_pkt_buff.freq = freq;
-                              pRemainChanCtx->action_pkt_buff.frame_ptr
-                                                = vos_mem_malloc(nFrameLength);
-                              vos_mem_copy(
-                                     pRemainChanCtx->action_pkt_buff.frame_ptr,
-                                     pbFrames, nFrameLength);
-                              hddLog( LOGE,"%s:"
-                                "Action Pkt Cached successfully !!!", __func__);
-                          }
-                          else
-                          {
-                              hddLog( LOGE,"%s:"
-                                      "Frames are pending. dropping frame !!!",
-                                      __func__);
-                          }
-                          return;
-                      }
-                 }
-             }
-             if (pRemainChanCtx != NULL &&
-                  VOS_TIMER_STATE_RUNNING != vos_timer_getCurrentState(
-                      &cfgState->remain_on_chan_ctx->hdd_remain_on_chan_timer))
-                 hddLog( LOG1, "%s:"
-                         "Rcvd action frame after timer expired ", __func__);
-
-             if (((actionFrmType == WLAN_HDD_PROV_DIS_RESP) &&
-                   (cfgState->actionFrmState == HDD_PD_REQ_ACK_PENDING)) ||
-                  ((actionFrmType == WLAN_HDD_GO_NEG_RESP) &&
-                   (cfgState->actionFrmState == HDD_GO_NEG_REQ_ACK_PENDING)))
-             {
-                  hddLog(LOG1, "%s: ACK_PENDING and But received RESP for Action frame ",
-                         __func__);
-                  hdd_sendActionCnf(pAdapter, TRUE);
-=======
 
                 if (((actionFrmType == WLAN_HDD_PROV_DIS_RESP) &&
                             (cfgState->actionFrmState == HDD_PD_REQ_ACK_PENDING)) ||
@@ -2888,7 +1542,6 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
                     hddLog(LOG1, "%s: ACK_PENDING and But received RESP for Action frame ",
                             __func__);
                     hdd_sendActionCnf(pAdapter, TRUE);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 }
             }
 #ifdef FEATURE_WLAN_TDLS
@@ -2904,19 +1557,6 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
             }
 #endif
         }
-<<<<<<< HEAD
-
-         pScanInfo =  &pHddCtx->scan_info;
-         if ((pScanInfo != NULL) && (pHddCtx->scan_info.mScanPending))
-         {
-             hddLog(LOGE,"Action frame received when Scanning is in"
-                          " progress. Abort Scan.");
-             hdd_abort_mac_scan(pAdapter->pHddCtx,
-                                pScanInfo->sessionId,
-                                eCSR_SCAN_ABORT_DEFAULT);
-         }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #ifdef WLAN_FEATURE_TDLS_DEBUG
         if(pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET] == WLAN_HDD_TDLS_ACTION_FRAME)
         {
@@ -2933,15 +1573,6 @@ void hdd_indicateMgmtFrame( hdd_adapter_t *pAdapter,
             }
         }
 #endif
-<<<<<<< HEAD
-        if((pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET] == WLAN_HDD_QOS_ACTION_FRAME)&&
-             (pbFrames[WLAN_HDD_PUBLIC_ACTION_FRAME_OFFSET+1] == WLAN_HDD_QOS_MAP_CONFIGURE) )
-        {
-            sme_UpdateDSCPtoUPMapping(pHddCtx->hHal,
-                pAdapter->hddWmmDscpToUpMap, pAdapter->sessionId);
-        }
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     }
 
     //Indicate Frame Over Normal Interface
@@ -2994,11 +1625,7 @@ static int hdd_wlan_add_rx_radiotap_hdr (
         pos++;
     put_unaligned_le16(rx_flags, pos);
     pos += 2;
-<<<<<<< HEAD
-
-=======
     
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     // actually push the data
     memcpy(skb_push(skb, rtap_len), &rtap_temp[0], rtap_len);
 
@@ -3038,11 +1665,7 @@ static void hdd_wlan_tx_complete( hdd_adapter_t* pAdapter,
 
     if (data == NULL)
     {
-<<<<<<< HEAD
-        hddLog( LOGE, FL("Not Able to Push %zu byte to skb"), cfgState->len);
-=======
         hddLog( LOGE, FL("Not Able to Push %d byte to skb"), cfgState->len);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         kfree_skb( cfgState->skb );
         return;
     }
@@ -3093,5 +1716,31 @@ static void hdd_wlan_tx_complete( hdd_adapter_t* pAdapter,
     /* Enable Queues which we have disabled earlier */
     netif_tx_start_all_queues( pAdapter->dev );
 
+}
+
+void hdd_start_p2p_go_connection_in_progress_timer( hdd_adapter_t *pAdapter )
+{
+
+    hdd_context_t *pHddCtx;
+    VOS_STATUS vos_status;
+
+    pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
+
+    if (WLAN_HDD_P2P_GO == pAdapter->device_mode)
+    {
+        vos_status = vos_timer_start(&pHddCtx->hdd_p2p_go_conn_is_in_progress,
+                        WAIT_TIME_FOR_P2PGO_CONNECTION);
+        if ( !VOS_IS_STATUS_SUCCESS(vos_status))
+        {
+             VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
+                  FL("Starting hdd_p2p_go_conn_is_in_progress timer failed %s"), __func__);
+        }
+    }
+}
+
+v_VOID_t wlan_hdd_p2p_go_connection_in_progresscb (v_PVOID_t userData )
+{
+     VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
+              "%s: Connection is in progress", __func__);
 }
 

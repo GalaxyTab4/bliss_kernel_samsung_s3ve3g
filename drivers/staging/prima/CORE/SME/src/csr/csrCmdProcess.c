@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,17 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/** ------------------------------------------------------------------------- * 
-    -------------------------------------------------------------------------
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -58,7 +43,6 @@
     ------------------------------------------------------------------------- *  
  
     Copyright (C) 2006 Airgo Networks, Incorporated
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    ---------------------------------------------------------------------------*
 */
@@ -69,11 +53,7 @@
 #include "csrInsideApi.h"
 #include "smeInside.h"
 #include "smsDebug.h"
-<<<<<<< HEAD
-#include "macTrace.h"
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 
@@ -82,19 +62,10 @@ eHalStatus csrMsgProcessor( tpAniSirGlobal pMac,  void *pMsgBuf )
     eHalStatus status = eHAL_STATUS_SUCCESS;
     tSirSmeRsp *pSmeRsp = (tSirSmeRsp *)pMsgBuf;
 
-<<<<<<< HEAD
-    smsLog(pMac, LOG2, FL("Message %d[0x%04X] received in curState %s"
-           "and substate %s"),
-           pSmeRsp->messageType, pSmeRsp->messageType,
-           macTraceGetcsrRoamState(pMac->roam.curState[pSmeRsp->sessionId]),
-           macTraceGetcsrRoamSubState(
-           pMac->roam.curSubState[pSmeRsp->sessionId]));
-=======
     smsLog( pMac, LOG2, "  Message %d[0x%04X] received in curState %d and substate %d",
                 pSmeRsp->messageType, pSmeRsp->messageType, 
                 pMac->roam.curState[pSmeRsp->sessionId],
                 pMac->roam.curSubState[pSmeRsp->sessionId] );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // Process the message based on the state of the roaming states...
     

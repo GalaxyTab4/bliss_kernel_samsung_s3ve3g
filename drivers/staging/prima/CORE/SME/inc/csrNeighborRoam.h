@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /** ------------------------------------------------------------------------- * 
@@ -59,18 +47,14 @@
   
     Exports and types for the neighbor roaming algorithm which is sepcifically 
     designed for Android.
-<<<<<<< HEAD
-=======
   
    Copyright (C) 2006 Airgo Networks, Incorporated
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    
 ========================================================================== */
 #ifndef CSR_NEIGHBOR_ROAM_H
 #define CSR_NEIGHBOR_ROAM_H
 
 #ifdef WLAN_FEATURE_NEIGHBOR_ROAMING
-#include "sme_Api.h"
 
 /* Enumeration of various states in neighbor roam algorithm */
 typedef enum
@@ -101,10 +85,6 @@ typedef struct sCsrNeighborRoamCfgParams
     tANI_U32        maxChannelScanTime;
     tANI_U16        neighborResultsRefreshPeriod;
     tANI_U16        emptyScanRefreshPeriod;
-<<<<<<< HEAD
-    tANI_U8         neighborInitialForcedRoamTo5GhEnable;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tCsrNeighborRoamCfgParams, *tpCsrNeighborRoamCfgParams;
 
 #define CSR_NEIGHBOR_ROAM_INVALID_CHANNEL_INDEX    255
@@ -130,10 +110,6 @@ typedef struct sCsrNeighborRoamBSSInfo
 #define MAX_NUM_PREAUTH_FAIL_LIST_ADDRESS       10 //Max number of MAC addresses with which the pre-auth was failed
 #define MAX_BSS_IN_NEIGHBOR_RPT                 15
 #define CSR_NEIGHBOR_ROAM_MAX_NUM_PREAUTH_RETRIES 3
-<<<<<<< HEAD
-#define INITIAL_FORCED_ROAM_TO_5G_TIMER_PERIOD    5000 //in msecs
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /* Black listed APs. List of MAC Addresses with which the Preauthentication was failed. */
 typedef struct sCsrPreauthFailListInfo
@@ -218,13 +194,8 @@ typedef struct sCsrNeighborRoamControlInfo
     tANI_BOOLEAN                is11rAssoc;
     tCsr11rAssocNeighborInfo    FTRoamInfo;
 #endif /* WLAN_FEATURE_VOWIFI_11R */
-<<<<<<< HEAD
-#ifdef FEATURE_WLAN_ESE
-    tANI_BOOLEAN                isESEAssoc;
-=======
 #ifdef FEATURE_WLAN_CCX    
     tANI_BOOLEAN                isCCXAssoc;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
     tANI_BOOLEAN                isVOAdmitted;
     tANI_U32                    MinQBssLoadRequired;
 #endif
@@ -244,13 +215,6 @@ typedef struct sCsrNeighborRoamControlInfo
                                                    reassoc */
 #endif
 #endif
-    tSmeFastRoamTrigger         cfgRoamEn;
-    tSirMacAddr                 cfgRoambssId;
-<<<<<<< HEAD
-    vos_timer_t                 forcedInitialRoamTo5GHTimer;
-    tANI_U8                     isForcedInitialRoamTo5GH;
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 } tCsrNeighborRoamControlInfo, *tpCsrNeighborRoamControlInfo;
 
 
@@ -265,11 +229,7 @@ void csrNeighborRoamPurgePreauthFailedList(tpAniSirGlobal pMac);
 VOS_STATUS csrNeighborRoamTransitToCFGChanScan(tpAniSirGlobal pMac);
 VOS_STATUS csrNeighborRoamTransitionToPreauthDone(tpAniSirGlobal pMac);
 eHalStatus csrNeighborRoamPrepareScanProfileFilter(tpAniSirGlobal pMac, tCsrScanResultFilter *pScanFilter);
-<<<<<<< HEAD
-tANI_BOOLEAN csrNeighborRoamGetHandoffAPInfo(tpAniSirGlobal pMac, tpCsrNeighborRoamBSSInfo pHandoffNode);
-=======
 void csrNeighborRoamGetHandoffAPInfo(tpAniSirGlobal pMac, tpCsrNeighborRoamBSSInfo pHandoffNode);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 eHalStatus csrNeighborRoamPreauthRspHandler(tpAniSirGlobal pMac, tSirRetStatus limStatus);
 #ifdef WLAN_FEATURE_VOWIFI_11R
 tANI_BOOLEAN csrNeighborRoamIs11rAssoc(tpAniSirGlobal pMac);
@@ -281,35 +241,14 @@ tANI_BOOLEAN csrNeighborRoamScanRspPending(tHalHandle hHal);
 tANI_BOOLEAN csrNeighborMiddleOfRoaming(tHalHandle hHal);
 VOS_STATUS csrNeighborRoamSetLookupRssiThreshold(tpAniSirGlobal pMac, v_U8_t neighborLookupRssiThreshold);
 VOS_STATUS csrNeighborRoamUpdateFastRoamingEnabled(tpAniSirGlobal pMac, const v_BOOL_t fastRoamEnabled);
-<<<<<<< HEAD
-VOS_STATUS csrNeighborRoamUpdateEseModeEnabled(tpAniSirGlobal pMac, const v_BOOL_t eseMode);
-VOS_STATUS csrNeighborRoamChannelsFilterByBand(
-=======
 VOS_STATUS csrNeighborRoamUpdateCcxModeEnabled(tpAniSirGlobal pMac, const v_BOOL_t ccxMode);
 VOS_STATUS csrNeighborRoamChannelsFilterByCurrentBand(
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                       tpAniSirGlobal pMac,
                       tANI_U8*  pInputChannelList,
-                      tANI_U8   inputNumOfChannels,
+                      int       inputNumOfChannels,
                       tANI_U8*  pOutputChannelList,
-<<<<<<< HEAD
-                      tANI_U8*  pMergedOutputNumOfChannels,
-                      tSirRFBand band
-=======
-                      tANI_U8*  pMergedOutputNumOfChannels
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
+                      int*      pMergedOutputNumOfChannels
                       );
-VOS_STATUS csrNeighborRoamReassocIndCallback(v_PVOID_t pAdapter,
-                                             v_U8_t trafficStatus,
-                                             v_PVOID_t pUserCtxt,
-                                             v_S7_t   avgRssi);
-VOS_STATUS csrNeighborRoamMergeChannelLists(tpAniSirGlobal pMac,
-                                            tANI_U8  *pInputChannelList,
-                                            tANI_U8  inputNumOfChannels,
-                                            tANI_U8  *pOutputChannelList,
-                                            tANI_U8  outputNumOfChannels,
-                                            tANI_U8  *pMergedOutputNumOfChannels);
-
 #ifdef WLAN_FEATURE_ROAM_SCAN_OFFLOAD
 #define ROAM_SCAN_OFFLOAD_START                     1
 #define ROAM_SCAN_OFFLOAD_STOP                      2
@@ -321,11 +260,7 @@ VOS_STATUS csrNeighborRoamMergeChannelLists(tpAniSirGlobal pMac,
 #define REASON_LOOKUP_THRESH_CHANGED                3
 #define REASON_DISCONNECTED                         4
 #define REASON_RSSI_DIFF_CHANGED                    5
-<<<<<<< HEAD
-#define REASON_ESE_INI_CFG_CHANGED                  6
-=======
 #define REASON_CCX_INI_CFG_CHANGED                  6
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #define REASON_NEIGHBOR_SCAN_REFRESH_PERIOD_CHANGED 7
 #define REASON_VALID_CHANNEL_LIST_CHANGED           8
 #define REASON_FLUSH_CHANNEL_LIST                   9
@@ -337,37 +272,13 @@ VOS_STATUS csrNeighborRoamMergeChannelLists(tpAniSirGlobal pMac,
 #define REASON_OS_REQUESTED_ROAMING_NOW             15
 #define REASON_SCAN_CH_TIME_CHANGED                 16
 #define REASON_SCAN_HOME_TIME_CHANGED               17
-<<<<<<< HEAD
-#define REASON_INITIAL_FORCED_ROAM_TO_5G            18
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 eHalStatus csrRoamOffloadScan(tpAniSirGlobal pMac, tANI_U8 command, tANI_U8 reason);
 eHalStatus csrNeighborRoamCandidateFoundIndHdlr(tpAniSirGlobal pMac, void* pMsg);
 eHalStatus csrNeighborRoamHandoffReqHdlr(tpAniSirGlobal pMac, void* pMsg);
 eHalStatus csrNeighborRoamProceedWithHandoffReq(tpAniSirGlobal pMac);
 eHalStatus csrNeighborRoamSssidScanDone(tpAniSirGlobal pMac, eHalStatus status);
-<<<<<<< HEAD
-eHalStatus csrNeighborRoamStartLfrScan(tpAniSirGlobal pMac, tANI_U8 OffloadCmdStopReason);
-#endif
-
-#if defined(FEATURE_WLAN_ESE) && defined(FEATURE_WLAN_ESE_UPLOAD)
-=======
 eHalStatus csrNeighborRoamStartLfrScan(tpAniSirGlobal pMac);
 #endif
-
-#if defined(FEATURE_WLAN_CCX) && defined(FEATURE_WLAN_CCX_UPLOAD)
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
-VOS_STATUS csrSetCCKMIe(tpAniSirGlobal pMac, const tANI_U8 sessionId,
-                            const tANI_U8 *pCckmIe,
-                            const tANI_U8 ccKmIeLen);
-VOS_STATUS csrRoamReadTSF(tpAniSirGlobal pMac, tANI_U8 *pTimestamp);
-
-
-<<<<<<< HEAD
-#endif /*FEATURE_WLAN_ESE && FEATURE_WLAN_ESE_UPLOAD */
-=======
-#endif /*FEATURE_WLAN_CCX && FEATURE_WLAN_CCX_UPLOAD */
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 #endif /* WLAN_FEATURE_NEIGHBOR_ROAMING */

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**========================================================================
@@ -444,21 +432,13 @@ static VOS_STATUS WLANBAP_STAFetchPktCB
     WLANTL_MetaInfoType TlMetaInfo;
     pctx = &BslClientCtx[0];
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "WLANBAP_STAFetchPktCB" );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "WLANBAP_STAFetchPktCB\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // sanity checking
     if( pHddHdl == NULL || vosDataBuff == NULL ||
             tlMetaInfo == NULL || ucAC >= WLANTL_MAX_AC || ucAC < 0 )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STAFetchPktCB bad input" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STAFetchPktCB bad input\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_E_FAILURE;
     }
 
@@ -516,20 +496,12 @@ static VOS_STATUS WLANBAP_STAFetchPktCB
     if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
     {
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STAFetchPktCB vos_pkt_wrap_data_packet "
-<<<<<<< HEAD
-             "failed status =%d", VosStatus );
-=======
              "failed status =%d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         kfree_skb(skb);  
         return VosStatus;
     }
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO, "%s: pVosPkt(vos_pkt_t *)=%p", __func__,
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO, "%s: pVosPkt(vos_pkt_t *)=%p\n", __func__,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                pVosPkt );
 
     VosStatus = WLANBAP_XlateTxDataPkt( pctx->bapHdl, pPhyCtx->PhyLinkHdl,
@@ -538,11 +510,7 @@ static VOS_STATUS WLANBAP_STAFetchPktCB
     if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
     {
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STAFetchPktCB WLANBAP_XlateTxDataPkt "
-<<<<<<< HEAD
-             "failed status =%d", VosStatus );
-=======
              "failed status =%d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         // return the packet
         VosStatus = vos_pkt_return_packet( pVosPkt );
@@ -557,11 +525,7 @@ static VOS_STATUS WLANBAP_STAFetchPktCB
     // provide the meta-info BAP provided previously
     *tlMetaInfo = TlMetaInfo;
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "%s: *vosDataBuff(vos_pkt_t *)=%p", __func__, *vosDataBuff );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "%s: *vosDataBuff(vos_pkt_t *)=%p\n", __func__, *vosDataBuff );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     return(VOS_STATUS_SUCCESS);
 } // WLANBAP_STAFetchPktCB()
@@ -597,20 +561,12 @@ static VOS_STATUS WLANBAP_STARxCB
     vos_pkt_t* pVosPacket;
     vos_pkt_t* pNextVosPacket;
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "WLANBAP_STARxCB" );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "WLANBAP_STARxCB\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // sanity checking
     if ( pHddHdl == NULL || vosDataBuff == NULL || pRxMetaInfo == NULL )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STARxCB bad input" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STARxCB bad input\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         if(NULL != vosDataBuff)
         {
             VosStatus = vos_pkt_return_packet( vosDataBuff );
@@ -623,11 +579,7 @@ static VOS_STATUS WLANBAP_STARxCB
 
     if( NULL == ppctx )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STARxCB ClientCtx is NULL" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_STARxCB ClientCtx is NULL\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         VosStatus = vos_pkt_return_packet( vosDataBuff );
         return VOS_STATUS_E_FAILURE;
     }
@@ -654,11 +606,7 @@ static VOS_STATUS WLANBAP_STARxCB
        if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
        {
            VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_FATAL, "WLANBAP_STARxCB WLANBAP_XlateRxDataPkt "
-<<<<<<< HEAD
-           "failed status = %d", VosStatus );
-=======
            "failed status = %d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
            VosStatus = VOS_STATUS_E_FAILURE;
 
@@ -671,11 +619,7 @@ static VOS_STATUS WLANBAP_STARxCB
        if(!VOS_IS_STATUS_SUCCESS( VosStatus ))
        {
            VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "%s: Failure extracting skb from vos pkt. "
-<<<<<<< HEAD
-             "VosStatus = %d", __func__, VosStatus );
-=======
              "VosStatus = %d\n", __func__, VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
            VosStatus = VOS_STATUS_E_FAILURE;
 
@@ -738,11 +682,7 @@ static VOS_STATUS WLANBAP_TxCompCB
     BslClientCtxType* ppctx;
     static int num_packets;
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO, "WLANBAP_TxCompCB. vosDataBuff(vos_pkt_t *)=%p", vosDataBuff );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO, "WLANBAP_TxCompCB. vosDataBuff(vos_pkt_t *)=%p\n", vosDataBuff );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // be aware that pHddHdl can be NULL or can point to the per association
     // BSL context from the register data plane. In either case it does not
@@ -752,11 +692,7 @@ static VOS_STATUS WLANBAP_TxCompCB
     // sanity checking
     if ( vosDataBuff == NULL )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_TxCompCB bad input" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_TxCompCB bad input\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_E_FAILURE;
     }
 
@@ -786,11 +722,7 @@ static VOS_STATUS WLANBAP_TxCompCB
     num_packets = (num_packets + 1) % 4;
     if (num_packets == 0 )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO, "%s: Sending up number of completed packets.  num_packets = %d.", __func__, num_packets );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO, "%s: Sending up number of completed packets.  num_packets = %d.\n", __func__, num_packets );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         WLANBAP_TxPacketMonitorHandler ( (v_PVOID_t) ppctx->bapHdl ); // our handle in BAP
     }
 
@@ -855,17 +787,10 @@ static void BslReleasePhyCtx
     BslPhyLinkCtxType* pPhyCtx
 )
 {
-<<<<<<< HEAD
-    uintptr_t OldMapVal;
-    VOS_STATUS VosStatus = VOS_STATUS_SUCCESS;
-
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslReleasePhyCtx" );
-=======
     v_U32_t OldMapVal;
     VOS_STATUS VosStatus = VOS_STATUS_SUCCESS;
 
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslReleasePhyCtx\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     pPhyCtx->used = FALSE;
 
@@ -874,13 +799,8 @@ static void BslReleasePhyCtx
 
 
     // update the phy link handle based map so TX data is stopped from flowing through
-<<<<<<< HEAD
-    OldMapVal = vos_atomic_set( (uintptr_t *) (BslPhyLinkMap[pPhyCtx->PhyLinkHdl].ptr),
-                                    (uintptr_t) 0 );
-=======
     OldMapVal = vos_atomic_set_U32( (v_U32_t *) (BslPhyLinkMap[pPhyCtx->PhyLinkHdl].ptr),
                                     (v_U32_t) 0 );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // clear out the Tx Queues
     VosStatus =  BslFlushTxQueues(pPhyCtx);
@@ -957,20 +877,12 @@ static VOS_STATUS WLANBAP_EventCB
     // sanity checking
     if ( pBapHCIEvent == NULL )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB bad input" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB bad input\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_E_FAILURE;
     }
 
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "WLANBAP_EventCB event=%d "
-<<<<<<< HEAD
-       "assoc_specific=%d", pBapHCIEvent->bapHCIEventCode, AssocSpecificEvent );
-=======
        "assoc_specific=%d\n", pBapHCIEvent->bapHCIEventCode, AssocSpecificEvent );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if ( pHddHdl == NULL )
     {
@@ -988,11 +900,7 @@ static VOS_STATUS WLANBAP_EventCB
         }
         else
         {
-<<<<<<< HEAD
-            VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_FATAL, "WLANBAP_EventCB bad input" );
-=======
             VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_FATAL, "WLANBAP_EventCB bad input\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             return VOS_STATUS_E_FAILURE;
         }
     }
@@ -1026,11 +934,7 @@ static VOS_STATUS WLANBAP_EventCB
     if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
     {
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB vos_pkt_get_packet "
-<<<<<<< HEAD
-          "failed status=%d", VosStatus );
-=======
           "failed status=%d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return(VosStatus);
     }
 
@@ -1314,23 +1218,14 @@ static VOS_STATUS WLANBAP_EventCB
             if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
             {
                 VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB WLANBAP_RegisterDataPlane "
-<<<<<<< HEAD
-                  "failed status = %d", VosStatus );
-=======
                   "failed status = %d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 // we still want to send the event upto app so do not bail
             }
             else
             {
                 // update the phy link handle based map so TX data can start flowing through
-<<<<<<< HEAD
-                OldMapVal = vos_atomic_set( (uintptr_t*)BslPhyLinkMap+pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.phy_link_handle,
-                                                (uintptr_t) pHddHdl );
-=======
                 OldMapVal = vos_atomic_set_U32( (v_U32_t *)BslPhyLinkMap+pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.phy_link_handle,
                                                 (v_U32_t) pHddHdl );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 //                  VOS_ASSERT( OldMapVal == 0 );//Commented to test reconnect
             }
@@ -1345,13 +1240,8 @@ static VOS_STATUS WLANBAP_EventCB
         {
             //We need to update the phy link handle here to be able to reissue physical link accept
             // update the phy link handle based map so TX data can start flowing through
-<<<<<<< HEAD
-            OldMapVal = vos_atomic_set( (uintptr_t*)BslPhyLinkMap+pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.phy_link_handle,
-                                            (uintptr_t) pHddHdl );
-=======
             OldMapVal = vos_atomic_set_U32( (v_U32_t *)BslPhyLinkMap+pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.phy_link_handle,
                                             (v_U32_t) pHddHdl );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 //                  VOS_ASSERT( OldMapVal == 0 );//Commented to test reconnect
 
@@ -1362,13 +1252,8 @@ static VOS_STATUS WLANBAP_EventCB
         {
             //We need to update the phy link handle here to be able to reissue physical link /create/accept
             // update the phy link handle based map so TX data can start flowing through
-<<<<<<< HEAD
-            OldMapVal = vos_atomic_set( (uintptr_t*)BslPhyLinkMap+pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.phy_link_handle,
-                                            (uintptr_t) pHddHdl );
-=======
             OldMapVal = vos_atomic_set_U32( (v_U32_t *)BslPhyLinkMap+pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.phy_link_handle,
                                             (v_U32_t) pHddHdl );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 //                  VOS_ASSERT( OldMapVal == 0 );//Commented to test reconnect
 
             BslReleasePhyCtx( (BslPhyLinkCtxType *)pHddHdl );
@@ -1396,11 +1281,7 @@ static VOS_STATUS WLANBAP_EventCB
         else
         {
             VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB unexpected HCI Phy Link Comp Evt "
-<<<<<<< HEAD
-               "status =%d", pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.status );
-=======
                "status =%d\n", pBapHCIEvent->u.btampPhysicalLinkCompleteEvent.status );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         }
 
         break;
@@ -1452,11 +1333,7 @@ static VOS_STATUS WLANBAP_EventCB
         else
         {
             VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB unexpected HCI Dis Phy Link Comp Evt "
-<<<<<<< HEAD
-               "status =%d reason =%d", pBapHCIEvent->u.btampDisconnectPhysicalLinkCompleteEvent.status,
-=======
                "status =%d reason =%d\n", pBapHCIEvent->u.btampDisconnectPhysicalLinkCompleteEvent.status,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                        pBapHCIEvent->u.btampDisconnectPhysicalLinkCompleteEvent.reason );
         }
 
@@ -1578,11 +1455,7 @@ static VOS_STATUS WLANBAP_EventCB
     }
     default:
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB unexpected event" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB unexpected event\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         VosStatus = vos_pkt_return_packet( pVosPkt );
 
@@ -1601,11 +1474,7 @@ static VOS_STATUS WLANBAP_EventCB
         if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
         {
             VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_EventCB vos_pkt_push_head "
-<<<<<<< HEAD
-          "status =%d", VosStatus );
-=======
           "status =%d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
             // return the packet
             VosStatus = vos_pkt_return_packet( pVosPkt );
@@ -1620,11 +1489,7 @@ static VOS_STATUS WLANBAP_EventCB
     if(!VOS_IS_STATUS_SUCCESS( VosStatus ))
     {
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "%s: Failure extracting skb from vos pkt. "
-<<<<<<< HEAD
-          "VosStatus = %d", __func__, VosStatus );
-=======
           "VosStatus = %d\n", __func__, VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         // return the packet
         VosStatus = vos_pkt_return_packet( pVosPkt );
@@ -1696,11 +1561,7 @@ static BOOL BslFindAndInitClientCtx
     BslClientCtxType* pctx;
     v_U8_t i;
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslFindAndInitClientCtx" );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslFindAndInitClientCtx\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
     {
@@ -1722,11 +1583,7 @@ static BOOL BslFindAndInitClientCtx
     {
         // no more clients can be supported
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "BslFindAndInitClientCtx no more "
-<<<<<<< HEAD
-          "clients can be supported MAX=%d", BSL_MAX_CLIENTS );
-=======
           "clients can be supported MAX=%d\n", BSL_MAX_CLIENTS );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return FALSE;
     }
 
@@ -1789,11 +1646,7 @@ static void BslReleaseClientCtx
     vos_list_node_t* pLink;
     BslPhyLinksNodeType *pPhyNode;
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslReleaseClientCtx" );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslReleaseClientCtx\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // an app can do this without cleaning up after itself i.e. it can have active associations and
     // data pending, we need to cleanup its mess
@@ -1875,11 +1728,7 @@ static BOOL BslFindAndInitPhyCtx
     vos_list_node_t* pLink;
     BslPhyLinksNodeType *pNode;
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslFindAndInitPhyCtx" );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslFindAndInitPhyCtx\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     for ( i=0; i<BSL_MAX_PHY_LINKS; i++ )
     {
@@ -1929,11 +1778,7 @@ static BOOL BslFindAndInitPhyCtx
         {
             // this could happen due to pool not being big enough, etc
             VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslFindAndInitPhyCtx failed to "
-<<<<<<< HEAD
-             "get node from BslPhyLinksDescPool vstatus=%d", VosStatus );
-=======
              "get node from BslPhyLinksDescPool vstatus=%d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
             BslReleasePhyCtx( *ppPhyCtx );
             return FALSE;
         }
@@ -2002,17 +1847,10 @@ static BOOL BslProcessHCICommand
         cmdOpcode = ( cmdOpcode & 0xFF ) << 8 | ( cmdOpcode & 0xFF00 ) >> 8;
     }
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslProcessHCICommand: cmdOpcode = %hx", cmdOpcode );
-
-    for(i=0; i<4; i++)
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslProcessHCICommand: *pBuf before advancepTmp[%x] = %x", i,pTmp[i] );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslProcessHCICommand: cmdOpcode = %hx\n", cmdOpcode );
 
     for(i=0; i<4; i++)
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslProcessHCICommand: *pBuf before advancepTmp[%x] = %x\n", i,pTmp[i] );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     pBuf+=CMD_TLV_TYPE_AND_LEN_SIZE;
 
@@ -2050,11 +1888,7 @@ static BOOL BslProcessHCICommand
         Status = BslFindAndInitPhyCtx( pctx, CreatePhysicalLinkCmd.phy_link_handle,
                                        &pPhyCtx );
 
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "CreatePhysicalLinkCmd.phy_link_handle=%d",CreatePhysicalLinkCmd.phy_link_handle);
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "CreatePhysicalLinkCmd.phy_link_handle=%d\n",CreatePhysicalLinkCmd.phy_link_handle);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         if ( !Status )
         {
@@ -2122,11 +1956,7 @@ static BOOL BslProcessHCICommand
         Status = BslFindAndInitPhyCtx( pctx, AcceptPhysicalLinkCmd.phy_link_handle,
                                        &pPhyCtx );
 
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "AcceptPhysicalLinkCmd.phy_link_handle=%d",AcceptPhysicalLinkCmd.phy_link_handle);
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "AcceptPhysicalLinkCmd.phy_link_handle=%d\n",AcceptPhysicalLinkCmd.phy_link_handle);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         if ( !Status )
         {
@@ -2169,11 +1999,7 @@ static BOOL BslProcessHCICommand
         Count = Count - 3;//Type and length field lengths are not needed
         pTmp = pBuf;
         for(i=0; i<4; i++)
-<<<<<<< HEAD
-            VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslProcessHCICommand: *pBuf in Disconnect phy link pTmp[%x] = %x", i,pTmp[i] );
-=======
             VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_HIGH, "BslProcessHCICommand: *pBuf in Disconnect phy link pTmp[%x] = %x\n", i,pTmp[i] );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         // unpack
         UnpackStatus = btampUnpackTlvHCI_Disconnect_Physical_Link_Cmd( NULL,
                        pBuf, Count, &DisconnectPhysicalLinkCmd );
@@ -3720,11 +3546,7 @@ static BOOL BslProcessACLDataTx
     static int num_packets;
 #endif
 
-<<<<<<< HEAD
-    VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslProcessACLDataTx" );
-=======
     VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_INFO_LOW, "BslProcessACLDataTx\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
     // need to find the PHY link for this ACL data pkt based on phy_link_handle
     // TODO need some endian-ness check?
@@ -3748,11 +3570,7 @@ static BOOL BslProcessACLDataTx
         if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
         {
             VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "BslProcessACLDataTx WLANBAP_GetAcFromTxDataPkt "
-<<<<<<< HEAD
-                 "failed status =%d", VosStatus );
-=======
                  "failed status =%d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
             Ac = WLANTL_AC_BE;
         }
@@ -3784,11 +3602,7 @@ static BOOL BslProcessACLDataTx
             if ( !VOS_IS_STATUS_SUCCESS( VosStatus ) )
             {
                 VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "BslProcessACLDataTx WLANBAP_STAPktPending "
-<<<<<<< HEAD
-                "failed status =%d", VosStatus );
-=======
                 "failed status =%d\n", VosStatus );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                 VOS_ASSERT(0);
             }
         }
@@ -3798,11 +3612,7 @@ static BOOL BslProcessACLDataTx
     else
     {
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "BslProcessACLDataTx attempting to send "
-<<<<<<< HEAD
-          "data for a non-existant assocation" );
-=======
           "data for a non-existant assocation\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
         return(FALSE);
     }
@@ -4004,11 +3814,7 @@ int BSL_Init ( v_PVOID_t  pvosGCtx )
     if (err < 0)
     {
         VOS_TRACE(VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                  "Unable to register HCI device, err=%d", err);
-=======
                   "Unable to register HCI device, err=%d\n", err);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         pctx->hdev = NULL;
         hci_free_dev(hdev);
         return -ENODEV;
@@ -4530,11 +4336,7 @@ VOS_STATUS WLANBAP_SetConfig
     // sanity checking
     if ( pConfig == NULL )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_SetConfig bad input" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_SetConfig bad input\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_E_FAILURE;
     }
     pctx = gpBslctx;
@@ -4549,11 +4351,7 @@ VOS_STATUS WLANBAP_SetConfig
     status = WLANBAP_GetNewHndl(&pctx->bapHdl);
     if ( !VOS_IS_STATUS_SUCCESS( status ) )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_SetConfig can't get BAP handle" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_SetConfig can't get BAP handle\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_E_FAILURE;
     }
 
@@ -4561,11 +4359,7 @@ VOS_STATUS WLANBAP_SetConfig
     status = WLAN_BAPSetConfig(pctx->bapHdl, pConfig);
     if ( !VOS_IS_STATUS_SUCCESS( status ) )
     {
-<<<<<<< HEAD
-        VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_SetConfig can't set BAP config" );
-=======
         VOS_TRACE( VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR, "WLANBAP_SetConfig can't set BAP config\n" );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_E_FAILURE;
     }
 
@@ -4598,11 +4392,7 @@ VOS_STATUS WLANBAP_RegisterWithHCI(hdd_adapter_t *pAdapter)
     if(NULL != pctx->hdev)
     {
         VOS_TRACE(VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_WARN,
-<<<<<<< HEAD
-                  "Already registered as HCI device");
-=======
                   "Already registered as HCI device\n");
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         return VOS_STATUS_SUCCESS;
     }
 
@@ -4675,11 +4465,7 @@ VOS_STATUS WLANBAP_RegisterWithHCI(hdd_adapter_t *pAdapter)
     if (err < 0)
     {
         VOS_TRACE(VOS_MODULE_ID_BAP, VOS_TRACE_LEVEL_ERROR,
-<<<<<<< HEAD
-                  "Unable to register HCI device, err=%d", err);
-=======
                   "Unable to register HCI device, err=%d\n", err);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
         pctx->hdev = NULL;
         hci_free_dev(hdev);
         return VOS_STATUS_E_FAULT;

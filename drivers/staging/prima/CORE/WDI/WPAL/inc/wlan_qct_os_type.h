@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( __WLAN_QCT_OS_TYPE_H )
@@ -68,29 +56,6 @@
   
   ========================================================================*/
 
-<<<<<<< HEAD
-#include <linux/types.h>
-
-typedef u32 wpt_uint32;
-
-typedef s32 wpt_int32;
-
-typedef u16 wpt_uint16;
-
-typedef s16 wpt_int16;
-
-typedef u8 wpt_uint8;
-
-typedef wpt_uint8 wpt_byte;
-
-typedef s8 wpt_int8;
-
-typedef wpt_uint8 wpt_boolean;
-
-typedef u64 wpt_uint64;
-
-typedef s64 wpt_int64;
-=======
 
 typedef unsigned long wpt_uint32;
 
@@ -111,7 +76,6 @@ typedef wpt_uint8 wpt_boolean;
 typedef unsigned long long wpt_uint64;
 
 typedef long long wpt_int64;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #define WPT_INLINE __inline__
 #define WPT_STATIC static

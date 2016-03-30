@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /******************************************************************************
@@ -88,11 +76,8 @@
 #define PMC_IS_CHIP_ACCESSIBLE(pmcState) ( (IMPS != (pmcState)) && (REQUEST_IMPS != (pmcState)) && \
        (STANDBY != (pmcState)) && (REQUEST_STANDBY != (pmcState)) )
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* Power events that are signaled to PMC. */
 
 typedef enum ePmcPowerEvent
@@ -212,10 +197,7 @@ typedef enum ePmcState
 
 } tPmcState;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /* Which beacons should be forwarded to the host. */
 
 typedef enum ePmcBeaconsToForward
@@ -249,16 +231,8 @@ typedef enum ePmcSmpsMode
 
 } tPmcSmpsMode;
 
-<<<<<<< HEAD
-typedef enum
-{
-    eWOWL_EXIT_USER,
-    eWOWL_EXIT_WAKEIND
-}tWowlExitSource;
-=======
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /* Configuration parameters for Idle Mode Power Save (IMPS). */
 
@@ -339,10 +313,7 @@ typedef struct sPmcSmpsConfigParams
 
 
 /* Routine definitions. */
-<<<<<<< HEAD
-=======
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 extern eHalStatus pmcOpen (tHalHandle hHal);
 
 extern eHalStatus pmcStart (tHalHandle hHal);
@@ -465,11 +436,7 @@ extern eHalStatus pmcEnterWowl (
 #endif // WLAN_WAKEUP_EVENTS
     tpSirSmeWowlEnterParams wowlEnterParams, tANI_U8 sessionId);
 
-<<<<<<< HEAD
-extern eHalStatus pmcExitWowl (tHalHandle hHal, tWowlExitSource wowlExitSrc);
-=======
 extern eHalStatus pmcExitWowl (tHalHandle hHal);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 extern eHalStatus pmcSetHostOffload (tHalHandle hHal, tpSirHostOffloadReq pRequest,
@@ -535,68 +502,6 @@ extern eHalStatus pmcGetGTKOffload(tHalHandle hHal,
                                    GTKOffloadGetInfoCallback callbackRoutine,
                                    void *callbackContext, tANI_U8 sessionId);
 #endif // WLAN_FEATURE_GTK_OFFLOAD
-
-#ifdef FEATURE_WLAN_BATCH_SCAN
-/*Set batch scan request Cb declaration*/
-typedef void(*hddSetBatchScanReqCallback)(void *callbackContext,
-     tSirSetBatchScanRsp *pRsp);
-
-/*Trigger batch scan result indication Cb declaration*/
-typedef void(*hddTriggerBatchScanResultIndCallback)(void *callbackContext,
-     void *pRsp);
-
-/* -----------------------------------------------------------------------------
-    \fn pmcSetBatchScanReq
-    \brief  Setting batch scan request in FW
-    \param  hHal - The handle returned by macOpen.
-    \param  sessionId - session id
-    \param  callbackRoutine - Pointer to set batch scan request callback routine
-    \param  calbackContext - callback context
-    \return eHalStatus
-             eHAL_STATUS_FAILURE  Cannot set batch scan request
-             eHAL_STATUS_SUCCESS  Request accepted.
- -----------------------------------------------------------------------------*/
-extern eHalStatus pmcSetBatchScanReq(tHalHandle hHal, tSirSetBatchScanReq
-       *pRequest, tANI_U8 sessionId, hddSetBatchScanReqCallback callbackRoutine,
-       void *callbackContext);
-
-/* -----------------------------------------------------------------------------
-    \fn pmcTriggerBatchScanResultInd
-    \brief  API to pull batch scan result from FW
-    \param  hHal - The handle returned by macOpen.
-    \param  sessionId - session id
-    \param  callbackRoutine - Pointer to get batch scan request callback routine
-    \param  calbackContext - callback context
-    \return eHalStatus
-             eHAL_STATUS_FAILURE  Cannot set batch scan request
-             eHAL_STATUS_SUCCESS  Request accepted.
- -----------------------------------------------------------------------------*/
-extern eHalStatus pmcTriggerBatchScanResultInd
-(
-    tHalHandle hHal, tSirTriggerBatchScanResultInd *pRequest, tANI_U8 sessionId,
-    hddTriggerBatchScanResultIndCallback callbackRoutine, void *callbackContext
-);
-
-
-/* -----------------------------------------------------------------------------
-    \fn pmcStopBatchScanInd
-    \brief  Stoping batch scan request in FW
-    \param  hHal - The handle returned by macOpen.
-    \param  pInd - Pointer to stop batch scan indication
-    \return eHalStatus
-             eHAL_STATUS_FAILURE  Cannot set batch scan request
-             eHAL_STATUS_SUCCESS  Request accepted.
- -----------------------------------------------------------------------------*/
-
-extern eHalStatus pmcStopBatchScanInd
-(
-    tHalHandle hHal,
-    tSirStopBatchScanInd *pInd,
-    tANI_U8 sessionId
-);
-
-#endif // FEATURE_WLAN_BATCH_SCAN
-
 
 #endif
 

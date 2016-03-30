@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**========================================================================= 
@@ -132,11 +120,7 @@ static bool suspend_notify_sent;
 ----------------------------------------------------------------------------*/
 static int wlan_suspend(hdd_context_t* pHddCtx)
 {
-<<<<<<< HEAD
-   long rc = 0;
-=======
    int rc = 0;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
    pVosSchedContext vosSchedContext = NULL;
 
@@ -169,31 +153,6 @@ static int wlan_suspend(hdd_context_t* pHddCtx)
    /* Wait for Suspend Confirmation from Tx Thread */
    rc = wait_for_completion_interruptible_timeout(&pHddCtx->tx_sus_event_var, msecs_to_jiffies(200));
 
-<<<<<<< HEAD
-   if (rc <= 0)
-   {
-      VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
-           "%s: TX Thread: timeout while suspending %ld"
-           , __func__, rc);
-      /* There is a race condition here, where the TX Thread can process the
-       * SUSPEND_EVENT even after the wait_for_completion has timed out.
-       * Check the SUSPEND_EVENT_MASK, if it is already cleared by the TX
-       * Thread then it means it is going to suspend, so do not return failure
-       * from here.
-       */
-      if (!test_and_clear_bit(TX_SUSPEND_EVENT_MASK,
-                              &vosSchedContext->txEventFlag))
-      {
-         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                   "%s: TX Thread: will still suspend", __func__);
-         goto tx_suspend;
-      }
-
-      return -ETIME;
-   }
-
-tx_suspend:
-=======
    if(!rc)
    {
       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s: Not able to suspend TX thread timeout happened", __func__);
@@ -201,7 +160,6 @@ tx_suspend:
 
       return -ETIME;
    }
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /* Set the Tx Thread as Suspended */
    pHddCtx->isTxThreadSuspended = TRUE;
 
@@ -215,31 +173,11 @@ tx_suspend:
    /* Wait for Suspend Confirmation from Rx Thread */
    rc = wait_for_completion_interruptible_timeout(&pHddCtx->rx_sus_event_var, msecs_to_jiffies(200));
 
-<<<<<<< HEAD
-   if (rc <= 0)
-   {
-       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
-            "%s: RX Thread: timeout while suspending %ld", __func__, rc);
-       /* There is a race condition here, where the RX Thread can process the
-        * SUSPEND_EVENT even after the wait_for_completion has timed out.
-        * Check the SUSPEND_EVENT_MASK, if it is already cleared by the RX
-        * Thread then it means it is going to suspend, so do not return failure
-        * from here.
-        */
-       if (!test_and_clear_bit(RX_SUSPEND_EVENT_MASK,
-                               &vosSchedContext->rxEventFlag))
-       {
-           VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                     "%s: RX Thread: will still suspend", __func__);
-           goto rx_suspend;
-       }
-=======
    if(!rc)
    {
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s: Not able to suspend Rx thread timeout happened", __func__);
 
        clear_bit(RX_SUSPEND_EVENT_MASK, &vosSchedContext->rxEventFlag);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
        /* Indicate Tx Thread to Resume */
        complete(&vosSchedContext->ResumeTxEvent);
@@ -250,10 +188,6 @@ tx_suspend:
        return -ETIME;
    }
 
-<<<<<<< HEAD
-rx_suspend:
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /* Set the Rx Thread as Suspended */
    pHddCtx->isRxThreadSuspended = TRUE;
 
@@ -269,28 +203,9 @@ rx_suspend:
 
    if(!rc)
    {
-<<<<<<< HEAD
-       VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
-            "%s: MC Thread: timeout while suspending %ld",
-            __func__, rc);
-       /* There is a race condition here, where the MC Thread can process the
-        * SUSPEND_EVENT even after the wait_for_completion has timed out.
-        * Check the SUSPEND_EVENT_MASK, if it is already cleared by the MC
-        * Thread then it means it is going to suspend, so do not return failure
-        * from here.
-        */
-       if (!test_and_clear_bit(MC_SUSPEND_EVENT_MASK,
-                               &vosSchedContext->mcEventFlag))
-       {
-           VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                     "%s: MC Thread: will still suspend", __func__);
-           goto mc_suspend;
-       }
-=======
        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL, "%s: Not able to suspend MC thread timeout happened", __func__);
 
        clear_bit(MC_SUSPEND_EVENT_MASK, &vosSchedContext->mcEventFlag);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
        /* Indicate Rx Thread to Resume */
        complete(&vosSchedContext->ResumeRxEvent);
@@ -307,10 +222,6 @@ rx_suspend:
        return -ETIME;
    }
 
-<<<<<<< HEAD
-mc_suspend:
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
    /* Set the Mc Thread as Suspended */
    pHddCtx->isMcThreadSuspended = TRUE;
    

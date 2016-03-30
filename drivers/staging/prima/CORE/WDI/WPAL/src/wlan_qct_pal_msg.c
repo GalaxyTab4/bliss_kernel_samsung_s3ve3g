@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 /**=========================================================================
@@ -91,20 +79,7 @@ wpt_status wpalPostCtrlMsg(void *pPalContext, wpt_msg *pMsg)
       return status;
    }
 
-   if ((WPAL_MC_MSG_SMD_NOTIF_OPEN_SIG == pMsg->type) ||
-       (WPAL_MC_MSG_SMD_NOTIF_DATA_SIG == pMsg->type))
-   {
-      /* SMD NOTIFY MSG has none 0 vos MSG type
-       * If VOS MC MSG flush procedure detect this,
-       * Do not free MSG body */
-      msg.type = pMsg->type;
-   }
-   else
-   {
-      /* Default MSG type
-       * VOS MC MSG flush procedure will free MSG body */
-      msg.type = 0;
-   }
+   msg.type = 0;  //This field is not used because VOSS doesn't check it.
    msg.reserved = 0;
    msg.bodyval = 0;
    msg.bodyptr = pMsg;
@@ -114,11 +89,7 @@ wpt_status wpalPostCtrlMsg(void *pPalContext, wpt_msg *pMsg)
    }
    else
    {
-<<<<<<< HEAD
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s fail to post msg %d",
-=======
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s fail to post msg %d\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   __func__, pMsg->type);
    }
 
@@ -156,11 +127,7 @@ wpt_status wpalPostTxMsg(void *pPalContext, wpt_msg *pMsg)
    }
    else
    {
-<<<<<<< HEAD
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s fail to post msg %d",
-=======
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s fail to post msg %d\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   __func__, pMsg->type);
    }
 
@@ -197,11 +164,7 @@ wpt_status wpalPostRxMsg(void *pPalContext, wpt_msg *pMsg)
    }
    else
    {
-<<<<<<< HEAD
-      WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s fail to post msg %d",
-=======
       WPAL_TRACE(eWLAN_MODULE_PAL, eWLAN_PAL_TRACE_LEVEL_ERROR, "%s fail to post msg %d\n",
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
                   __func__, pMsg->type);
    }
 

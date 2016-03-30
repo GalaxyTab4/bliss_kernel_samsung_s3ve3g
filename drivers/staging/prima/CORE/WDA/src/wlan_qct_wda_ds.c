@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,18 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-
-
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -55,7 +39,6 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 /*===========================================================================
 
 
@@ -100,6 +83,8 @@ when        who          what, where, why
 #include "tlDebug.h"
 
 #define WDA_DS_DXE_RES_COUNT   (WDA_TLI_MIN_RES_DATA + 20)
+
+#define VOS_TO_WPAL_PKT(_vos_pkt) ((wpt_packet*)_vos_pkt)
 
 /* macro's for acessing TL API/data structures */
 #define WDA_TL_SET_TX_XMIT_PENDING(a) WLANTL_SetTxXmitPending(a)
@@ -387,15 +372,9 @@ WDA_DS_FinishULA
              "Serializing WDA_DS_FinishULA event" );
 
   vos_mem_zero( &sMessage, sizeof(vos_msg_t) );
-<<<<<<< HEAD
-  sMessage.bodyptr  = callbackContext;
-  sMessage.callback = callbackRoutine;
-  sMessage.bodyval  = 0;
-=======
 
   sMessage.bodyval  = (v_U32_t)callbackContext;
   sMessage.bodyptr  = callbackRoutine;
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   sMessage.type     = WDA_DS_FINISH_ULA;
 
   return vos_tx_mq_serialize(VOS_MQ_ID_TL, &sMessage);
@@ -455,11 +434,7 @@ WDA_DS_BuildTxPacketInfo
   v_U8_t          typeSubtype,
   v_PVOID_t       pAddr2,
   v_U8_t          uTid,
-<<<<<<< HEAD
-  v_U32_t          txFlag,
-=======
   v_U8_t          txFlag,
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   v_U32_t         timeStamp,
   v_U8_t          ucIsEapol,
   v_U8_t          ucUP
@@ -541,12 +516,7 @@ WDA_DS_BuildTxPacketInfo
                     WLANTL_MAC_ADDR_ALIGN( ucDisableFrmXtl ),
                     (v_PVOID_t)pvDestMacAddr,
                     &usMacAddrSize );
-<<<<<<< HEAD
-  if ((VOS_STATUS_SUCCESS != vosStatus) ||
-          (usMacAddrSize != VOS_MAC_ADDR_SIZE))
-=======
   if ( VOS_STATUS_SUCCESS != vosStatus )
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   {
     VOS_TRACE( VOS_MODULE_ID_TL, VOS_TRACE_LEVEL_ERROR,
                "WDA:Failed while attempting to extract MAC Addr %d",
@@ -555,11 +525,8 @@ WDA_DS_BuildTxPacketInfo
     return VOS_STATUS_E_FAULT;
   }
 
-<<<<<<< HEAD
-=======
   VOS_ASSERT(usMacAddrSize == VOS_MAC_ADDR_SIZE);
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
   vos_copy_macaddr( (v_MACADDR_t*)pTxMetaInfo->fSTAMACAddress, pvDestMacAddr );
 
   // ADDR2

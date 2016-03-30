@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #if !defined( __VOS_API_H )
@@ -97,8 +85,8 @@
 #include <vos_trace.h>
 #include <vos_event.h>
 #include <vos_lock.h>
-#include <vos_nvitem.h>
 #include <vos_mq.h>
+#include <vos_nvitem.h>
 #include <vos_packet.h>
 #include <vos_threads.h>
 #include <vos_timer.h>
@@ -138,11 +126,7 @@ VOS_STATUS vos_preClose( v_CONTEXT_t *pVosContext );
 VOS_STATUS vos_preStart( v_CONTEXT_t vosContext );
 
 
-<<<<<<< HEAD
-VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, void *devHandle );
-=======
 VOS_STATUS vos_open( v_CONTEXT_t *pVosContext, v_SIZE_t hddContextSize );
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 
 
@@ -202,12 +186,8 @@ v_CONTEXT_t vos_get_global_context( VOS_MODULE_ID moduleId,
 
 v_U8_t vos_is_logp_in_progress(VOS_MODULE_ID moduleId, v_VOID_t *moduleContext);
 void vos_set_logp_in_progress(VOS_MODULE_ID moduleId, v_U8_t value);
-
 v_U8_t vos_is_load_unload_in_progress(VOS_MODULE_ID moduleId, v_VOID_t *moduleContext);
 void vos_set_load_unload_in_progress(VOS_MODULE_ID moduleId, v_U8_t value);
-
-v_U8_t vos_is_reinit_in_progress(VOS_MODULE_ID moduleId, v_VOID_t *moduleContext);
-void vos_set_reinit_in_progress(VOS_MODULE_ID moduleId, v_U8_t value);
 
 /**---------------------------------------------------------------------------
   
@@ -286,11 +266,7 @@ VOS_STATUS vos_free_context( v_VOID_t *pVosContext, VOS_MODULE_ID moduleID,
                              v_VOID_t *pModuleContext );
                              
 v_BOOL_t vos_is_apps_power_collapse_allowed(void* pHddCtx);
-<<<<<<< HEAD
-void vos_abort_mac_scan(tANI_U8 sessionId);
-=======
 void vos_abort_mac_scan(void);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 /**
   @brief vos_wlanShutdown() - This API will shutdown WLAN driver
@@ -360,12 +336,4 @@ VOS_STATUS vos_wlanRestart(void);
 */
 v_VOID_t vos_fwDumpReq(tANI_U32 cmd, tANI_U32 arg1, tANI_U32 arg2,
                         tANI_U32 arg3, tANI_U32 arg4);
-<<<<<<< HEAD
-
-v_U64_t vos_get_monotonic_boottime(void);
-
-VOS_STATUS vos_randomize_n_bytes(void *mac_addr, tANI_U32 n);
-
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif // if !defined __VOS_NVITEM_H

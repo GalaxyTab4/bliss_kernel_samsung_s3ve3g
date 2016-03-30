@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,15 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -53,7 +40,6 @@
  */
 
 
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #if !defined( __SMEQOSINTERNAL_H )
 #define __SMEQOSINTERNAL_H
 
@@ -275,15 +261,8 @@ v_U8_t sme_QosGetACMMask(tpAniSirGlobal pMac, tSirBssDescription *pSirBssDesc, t
 */
 sme_QosStatusType sme_QosTriggerUapsdChange( tpAniSirGlobal pMac );
 
-<<<<<<< HEAD
-void sme_QoSUpdateUapsdBTEvent(tpAniSirGlobal pMac);
-
-#ifdef FEATURE_WLAN_ESE
-v_U8_t sme_QosESERetrieveTspecInfo(tpAniSirGlobal pMac, v_U8_t sessionId, tTspecInfo *pTspecInfo);
-=======
 #ifdef FEATURE_WLAN_CCX
 v_U8_t sme_QosCCxRetrieveTspecInfo(tpAniSirGlobal pMac, v_U8_t sessionId, tTspecInfo *pTspecInfo);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
 #endif
 

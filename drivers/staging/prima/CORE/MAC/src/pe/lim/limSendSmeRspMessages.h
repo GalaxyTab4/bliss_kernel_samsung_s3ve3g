@@ -1,33 +1,4 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2014 The Linux Foundation. All rights reserved.
- *
- * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
- *
- *
- * Permission to use, copy, modify, and/or distribute this software for
- * any purpose with or without fee is hereby granted, provided that the
- * above copyright notice and this permission notice appear in all
- * copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
- * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
- * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
- * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
- * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
- * PERFORMANCE OF THIS SOFTWARE.
- */
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
- */
-
-/*
-=======
   * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
   *
   * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
@@ -49,7 +20,6 @@
 */
 /*
  * Airgo Networks, Inc proprietary. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  * This file limSendSmeRspMessages.h contains the definitions for
  * sending SME response/notification messages to applications above
  * MAC software.
@@ -110,19 +80,8 @@ void limSendSmeDeltsInd(tpAniSirGlobal pMac, tpSirDeltsReqInfo delts, tANI_U16 a
 void limSendSmeStatsRsp(tpAniSirGlobal pMac, tANI_U16 msgtype, void * stats);
 
 void limSendSmePEStatisticsRsp(tpAniSirGlobal pMac, tANI_U16 msgtype, void * stats);
-<<<<<<< HEAD
-#if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
-void limSendSmePEGetRoamRssiRsp(tpAniSirGlobal pMac, tANI_U16 msgtype, void * stats);
-#endif
-#ifdef FEATURE_WLAN_ESE_UPLOAD
-void limSendSmePEEseTsmRsp(tpAniSirGlobal pMac, tAniGetTsmStatsRsp *pStats);
-=======
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_CCX || defined(FEATURE_WLAN_LFR)
 void limSendSmePEGetRoamRssiRsp(tpAniSirGlobal pMac, tANI_U16 msgtype, void * stats);
-#endif
-#ifdef FEATURE_WLAN_CCX_UPLOAD
-void limSendSmePECcxTsmRsp(tpAniSirGlobal pMac, tAniGetTsmStatsRsp *pStats);
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 void limSendSmeRemoveKeyRsp(tpAniSirGlobal pMac, tSirMacAddr peerMacAddr, tSirResultCodes resultCode,tpPESession,tANI_U8,tANI_U16);
 
@@ -147,12 +106,6 @@ void limSendSmeTdlsTeardownRsp(tpAniSirGlobal pMac, tSirResultCodes statusCode, 
 void limSendSmeTdlsLinkEstablishReqRsp(tpAniSirGlobal pMac,
                                        tANI_U8 sessionId, tSirMacAddr peerMac, tDphHashNode   *pStaDs,
                                        tANI_U8 status);
-<<<<<<< HEAD
-void limSendSmeTdlsChanSwitchReqRsp(tpAniSirGlobal pMac,
-                                    tANI_U8 sessionId, tSirMacAddr peerMac, tDphHashNode   *pStaDs,
-                                    tANI_U8 status);
-=======
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 #endif
 
 #endif /* __LIM_SEND_SME_RSP_H */

@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012-2013 The Linux Foundation. All rights reserved.
-=======
  * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -22,13 +18,6 @@
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
  */
-<<<<<<< HEAD
-
-/*
- * This file was originally distributed by Qualcomm Atheros, Inc.
- * under proprietary terms before Copyright ownership was assigned
- * to the Linux Foundation.
-=======
 /*
  * Copyright (c) 2012, The Linux Foundation. All rights reserved.
  *
@@ -48,7 +37,6 @@
  * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
  * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
  * PERFORMANCE OF THIS SOFTWARE.
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
  */
 
 #ifndef WLAN_QCT_DXE_H
@@ -435,16 +423,9 @@ wpt_uint32 WLANDXE_GetFreeTxDataResNumber
 
   @  Parameters
     displaySnapshot : Display DXE snapshot option
-<<<<<<< HEAD
-    debugFlags      : Enable stall detect features
-                      defined by WPAL_DeviceDebugFlags
-                      These features may effect
-                      data performance.
-=======
     enableStallDetect : Enable stall detect feature
                         This feature will take effect to data performance
                         Not integrate till fully verification
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 
   @  Return
     NONE
@@ -453,11 +434,7 @@ wpt_uint32 WLANDXE_GetFreeTxDataResNumber
 void WLANDXE_ChannelDebug
 (
    wpt_boolean    displaySnapshot,
-<<<<<<< HEAD
-   wpt_uint8      debugFlags
-=======
    wpt_boolean    enableStallDetect   
->>>>>>> d6ceb2b... staging: prima: Add prima wlan driver
 );
 
 #ifdef WLANDXE_TEST_CHANNEL_ENABLE
